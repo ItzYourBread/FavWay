@@ -3,8 +3,6 @@ module.exports = {
     
     async execute(guild) {
     
-    const channel = guild.channels.cache.find(channel => channel.type === ChannelType.GuildText)
-    
-    channel.send("Thank you for inviting me!")
+    guild.systemChannel.send(`Hello, I'm LMAOBOT. Thanks for inviting me, here are a list of all my commands! :alien:`)
     }
 };
