@@ -8,7 +8,7 @@ module.exports = {
     type: Discord.ApplicationCommandType.ChatInput,
     Admin: false,
     
-    run: async (client, interaction, args, message) => {
+    run: async (client, interaction, args) => {
         const { guild } = interaction;
         
         var ping = Date.now() - interaction.createdTimestamp;
