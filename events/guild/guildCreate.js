@@ -1,8 +1,16 @@
+const config = require("../../config.json");
+const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
+
 module.exports = {
     name: 'guildCreate',
     
-    async execute(guild) {
+    async execute(client, guild) {
+
+    const joinMessage = new EmbedBuilder()
+        .setTitle("Hello")
+        .setDescription("hello two")
     
-    guild.systemChannel.send(`Hello, I'm LMAOBOT. Thanks for inviting me, here are a list of all my commands! :alien:`)
+    guild.systemChannel.send({ embeds: [joinMessage] });
     }
 };
