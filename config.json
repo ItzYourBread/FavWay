@@ -1,0 +1,47 @@
+{
+    "channelID": {
+        "errorLog": "1013783362139336714"
+    },
+
+    "logs": {
+        "utilitiesLog": "1017546307159728139",
+        "marketLog": "1017716697257488425",
+        "roleplayLog": "1017720387997532210",
+        "depositLog": "1017727444322623489",
+        "withdrawLog": "1017727475389833267",
+        "buyLog": "1017762530212454410",
+        "sellLog": "1017762579650711562"
+    },
+    
+    "bot": {
+        "token": "OTQzODU1NzcyNDE1MTkzMTE4.GVXcjS.Kj1gwmJzi7hKiwUSVeZxIjColdlBqgIo9Xqius",
+        "name": "Voatt",
+        "clientID": "943855772415193118",
+        "secretclientID": "3z2FFc0KJbhbtowSBFgYHRPW_ck113Nc"
+    },
+    
+    "colours": {
+         "embed": "0x7783af",
+         "logger": "0xdfffd8",
+         "receipt": "0xffd753",
+         "error": "0xff8d8d",
+         "success": "0x8dff99"
+    },
+
+     "emojis": {
+          "currency": "$",
+          "wood": "<:woods:1014123058874826813>",
+          "stone": "<:stone:1014124413014249502>"
+    },
+    
+     "database": {
+        "mongoDB": "mongodb+srv://Sweet:djarif100@sweet-mongo.qvysg.mongodb.net/?retryWrites=true&w=majority"
+     },
+    
+      "links": {
+         "server": "https://discord.gg/rNn5tt7ZbG",
+         "invite": "link",
+         "vote": "heheh",
+         "website": "https://voatt.cf"
+     }
+}
