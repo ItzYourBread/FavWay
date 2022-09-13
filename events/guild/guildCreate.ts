@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
+const config = require("../../config.json")
 
 module.exports = {
     name: 'guildCreate',
@@ -9,6 +10,7 @@ module.exports = {
         const joinEmbed = new EmbedBuilder()
          .setTitle("Thanks for Inviting me")
          .setDescription("Message")
+         .setColor(config.colours.embed)
 
     guild.systemChannel.send({ embeds: [joinEmbed] })
     }
