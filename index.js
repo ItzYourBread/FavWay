@@ -9,17 +9,12 @@ const client = new Discord.Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildMessageReactions,
         GatewayIntentBits.GuildPresences,
-        GatewayIntentBits.GuildVoiceStates,
-        GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.DirectMessageReactions,
-        GatewayIntentBits.DirectMessageTyping,
+        GatewayIntentBits.DirectMessages
     ],
     partials: [ 
         Partials.Message, 
         Partials.Channel, 
-        Partials.Reaction, 
         Partials.User 
     ],
 })
