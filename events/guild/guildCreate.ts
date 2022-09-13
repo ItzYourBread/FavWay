@@ -6,6 +6,10 @@ module.exports = {
     
     async execute(guild, client) {
 
-    guild.systemChannel.send({ content: "Hola im here and joined"})
+        const joinEmbed = new EmbedBuilder()
+         .setTitle("Thanks for Inviting me")
+         .setDescription("Message")
+
+    guild.systemChannel.send({ embeds: [joinEmbed] })
     }
 };
