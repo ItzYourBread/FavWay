@@ -18,6 +18,7 @@
     "bot": {
         "token": "OTQzODU1NzcyNDE1MTkzMTE4.GVXcjS.Kj1gwmJzi7hKiwUSVeZxIjColdlBqgIo9Xqius",
         "name": "Voatt",
+        "inviteLink": "https://discord.com/api/oauth2/authorize?client_id=943855772415193118&permissions=8&scope=bot%20applications.commands",
         "clientID": "943855772415193118",
         "secretclientID": "3z2FFc0KJbhbtowSBFgYHRPW_ck113Nc"
     },
@@ -42,8 +43,8 @@
     
       "links": {
          "server": "https://discord.gg/rNn5tt7ZbG",
-         "invite": "link",
-         "vote": "heheh",
+         "invite": "https://voatt.cf/invite",
+         "vote": "https://voatt.cf/vote",
          "website": "https://voatt.cf"
      }
 }

@@ -36,7 +36,7 @@ const loadEvents = async function (client) {
     for (const folder of commandFolders) {
         const commandFiles = fs
         .readdirSync(`./commands/${folder}`)
-        .filter((file) => file.endsWith(".js"));
+        .filter((file) => file.endsWith(".ts"));
         
         for (const file of commandFiles) {
             const command = require(`../commands/${folder}/${file}`);
