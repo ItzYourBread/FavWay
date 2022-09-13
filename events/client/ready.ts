@@ -21,7 +21,7 @@ module.exports = {
     client.userSettings.set(user.Id, user);
   }
         
-  require('../../handlers/clientPremium.js')(client)
+  require('../../handlers/clientPremium.ts')(client)
     setTimeout(async function() {
         console.log(chalk.yellow(`\n[Premium System] Loading...`))
     }, ms("0.3s"));

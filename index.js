@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js");
 const config = require("./config.json");
-const handler = require("./handlers/index.js");
+const handler = require("./handlers/index.ts");
 
 const client = new Discord.Client({
     intents: [
@@ -36,7 +36,7 @@ handler.loadEvents(client);
 handler.loadCommands(client);
 handler.loadAdminCommands(client);
 
-require("./handlers/mongoose.js")(client);
+require("./handlers/mongoose.ts")(client);
 
 // error handling
 process.on("unhandledRejection", (reason, promise) => {
