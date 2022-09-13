@@ -44,5 +44,5 @@ process.on("unhandledRejection", (reason, promise) => {
  });
 
 // client login
-client.login(process.env.TOKEN);
+client.login("OTQzODU1NzcyNDE1MTkzMTE4.GdNmC6.rZeMVxNSLQ7f4EPBafLGkclH8zDE8On8TaDnoI");
 console.log("Index Loaded 🟢")
