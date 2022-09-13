@@ -30,10 +30,10 @@ module.exports = {
         await interaction.reply({ embeds: [balance] });
         const logChannel = client.channels.cache.get(config.logs.roleplayLog)
         
-        const logger = new Discord.EmbedBuilder()
+        const logger = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Balance Command] run by **${interaction.user.tag}**`)
+            .setDescription(`**[Balance Command]** run by **${interaction.user.tag}**`)
             .addFields(
                 { name: "Value:", value: `**Pocket:** ${userData.coins}\n**Bank:** ${userData.bank}\n**Total:** ${userData.coins + userData.bank}\n\n` },
                 { name: "Guild:", value: `${guild.name}` }

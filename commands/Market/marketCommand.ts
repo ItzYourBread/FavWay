@@ -60,28 +60,28 @@ module.exports = {
 
         const logChannel = client.channels.cache.get(config.logs.marketLog)
         
-        const logger = new Discord.EmbedBuilder()
+        const logger = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Market Command] run by **${interaction.user.tag}**`)
+            .setDescription(`**[Market Command]** run by **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();
 
-        let viewMarket = new Discord.EmbedBuilder()
+        let viewMarket = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Market Command] viewing market again **${interaction.user.tag}**`)
+            .setDescription(`**[Market Command]* viewing market again **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();
 
-        let viewRes = new Discord.EmbedBuilder()
+        let viewRes = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Market Command] viewing resources market **${interaction.user.tag}**`)
+            .setDescription(`**[Market Command]** viewing resources market **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )

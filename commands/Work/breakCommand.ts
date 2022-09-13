@@ -1,4 +1,5 @@
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ComponentType, Client } = require('discord.js');
+const { ApplicationCommandOptionType } = require("discord.js");
 const { User } = require("../../database/game/profile");
 const Discord = require("discord.js");
 const config = require("../../config.json");
@@ -14,7 +15,7 @@ module.exports = {
     options: [{
       name: 'tree',
       description: 'break some trees and get woods, require: axe',
-      type: Discord.ApplicationCommandOptionType.Subcommand,
+      type: ApplicationCommandOptionType.Subcommand,
     }],
     
     run: async (client, interaction) => {

@@ -97,10 +97,11 @@ module.exports = {
       ],
     });
         const logChannel = client.channels.cache.get(config.logs.withdrawLog)
-        const logger = new Discord.EmbedBuilder()
+        
+        const logger = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Withdraw Command] run by **${interaction.user.tag}**`)
+            .setDescription(`**[Withdraw Command]** run by **${interaction.user.tag}**`)
             .addFields(
                 { name: "Value", value: `Withdrawn: \`${amount}\`${config.emojis.currency} from the bank account` },
                 { name: "Guild:", value: `${guild.name}` }

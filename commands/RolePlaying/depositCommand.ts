@@ -96,10 +96,11 @@ module.exports = {
       ],
     });
         const logChannel = client.channels.cache.get(config.logs.depositLog)
-        const logger = new Discord.EmbedBuilder()
+        
+        const logger = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Deposit Command] run by **${interaction.user.tag}**`)
+            .setDescription(`**[Deposit Command]** run by **${interaction.user.tag}**`)
             .addFields(
                 { name: "Value", value: `Deposited: \`${amount}\`${config.emojis.currency} to the bank account` },
                 { name: "Guild:", value: `${guild.name}` }

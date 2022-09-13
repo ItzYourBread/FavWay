@@ -1,18 +1,19 @@
 const Discord = require("discord.js");
+const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
 const config = require("../../config.json")
 
 module.exports = {
     name: "ping",
     category: "info",
     description: "Shows the bot's latency",
-    type: Discord.ApplicationCommandType.ChatInput,
+    type: ApplicationCommandType.ChatInput,
     Admin: false,
     
     run: async (client, interaction, args) => {
         const { guild } = interaction;
         
         var ping = Date.now() - interaction.createdTimestamp;
-        const embed = new Discord.EmbedBuilder()
+        const embed = new EmbedBuilder()
             .setAuthor({ name: `${config.bot.name}`})
             .setColor(config.colours.embed)
             .setDescription(`Latency: **${ping}**ms \nAPI Latency: **${Math.round(client.ws.ping)}**ms`)
@@ -22,10 +23,10 @@ module.exports = {
 
         const logChannel = client.channels.cache.get(config.logs.utilitiesLog)
         
-        const logger = new Discord.EmbedBuilder()
+        const logger = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Ping Command] run by **${interaction.user.tag}**`)
+            .setDescription(`**[Ping Command]** run by **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )

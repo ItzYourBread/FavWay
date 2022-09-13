@@ -68,28 +68,28 @@ module.exports = {
 
         const logChannel = client.channels.cache.get(config.logs.roleplayLog)
         
-        const logger = new Discord.EmbedBuilder()
+        const logger = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Inventory Command] run by ${interaction.user.tag}`)
+            .setDescription(`**[Inventory Command]** run by ${interaction.user.tag}`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();
 
-        let viewRes = new Discord.EmbedBuilder()
+        let viewRes = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Inventory Command] viewing resources **${interaction.user.tag}**`)
+            .setDescription(`**[Inventory Command]** viewing resources **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();
 
-        let viewWeapons = new Discord.EmbedBuilder()
+        let viewWeapons = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`[Inventory Command] viewing weapons **${interaction.user.tag}**`)
+            .setDescription(`**[Inventory Command]** viewing weapons **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )
