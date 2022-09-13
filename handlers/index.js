@@ -7,7 +7,7 @@ const loadEvents = async function (client) {
     for (const folder of eventFolders) {
         const eventFiles = fs
         .readdirSync(`./events/${folder}`)
-        .filter((file) => file.endsWith(".js"));
+        .filter((file) => file.endsWith(".ts"));
         
         for (const file of eventFiles) {
             const event = require(`../events/${folder}/${file}`);
@@ -69,7 +69,7 @@ const loadAdminCommands = async function (client) {
     for (const folder of commandFolders) {
         const commandFiles = fs
         .readdirSync(`./adminCommands/${folder}`)
-        .filter((file) => file.endsWith(".js"));
+        .filter((file) => file.endsWith(".ts"));
         
         for (const file of commandFiles) {
             const command = require(`../adminCommands/${folder}/${file}`);
