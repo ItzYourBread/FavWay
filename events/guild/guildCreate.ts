@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
-const config = require("../../config.json")
+const config = require("../../config.json");
+const { printly, c } = require("printly.js");
 
 module.exports = {
     name: 'guildCreate',

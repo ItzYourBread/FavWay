@@ -1,7 +1,7 @@
 const { GatewayIntentBits, ActivityType } = require("discord.js");
 const { Client } = require("discord.js");
 const User = require("../../database/premium/user");
-const chalk = require("chalk");
+const { printly, c } = require("printly.js");
 const ms = require("ms");
 
 module.exports = {
@@ -23,18 +23,18 @@ module.exports = {
         
   require('../../handlers/clientPremium.ts')(client)
     setTimeout(async function() {
-        console.log(chalk.yellow(`\n[Premium System] Loading...`))
+        printly(c.yellow(`\n[Premium System] Loading...`))
     }, ms("0.3s"));
     setTimeout(async function() {
-        console.log(chalk.green(`[Premium System] Successfully Loaded`))
+        printly(c.green(`[Premium System] Successfully Loaded`))
     }, ms("0.6s"));
         
         
 	setTimeout(async function() {
-        console.log(chalk.yellow(`\n[Discord API] Connecting...`))
+        printly(c.yellow(`\n[Discord API] Connecting...`))
     }, ms("0.7s"));
     setTimeout(async function() {
-        console.log(chalk.green(`[Discord API] Successfully connected to ${client.user.tag}`))
+        printly(c.green(`[Discord API] Successfully connected to ${client.user.tag}`))
     }, ms("1.5s"));
         
 	},

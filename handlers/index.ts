@@ -1,6 +1,5 @@
 const fs = require("fs");
-const chalk = require("chalk");
-
+const { printly, c } = require("printly.js");
 
 const loadEvents = async function (client) {
     const eventFolders = fs.readdirSync("./events");
@@ -13,9 +12,9 @@ const loadEvents = async function (client) {
             const event = require(`../events/${folder}/${file}`);
             
             if (event.name) {
-                console.log(`[Event] ${file} is loaded `);
+                printly(`[Event] ${file} is loaded `);
             } else {
-                console.log(chalk.red(`❌ [Event] ${file} is not loaded something wrong there`));
+                printly(c.red(`❌ [Event] ${file} is not loaded something wrong there`));
                 continue;
             }
             
@@ -44,9 +43,9 @@ const loadEvents = async function (client) {
             if (command.name) {
                 client.slash.set(command.name, command);
                 slash.push(command)
-                console.log(`[Command] ${file} is loaded `);
+                printly(`[Command] ${file} is loaded `);
             } else {
-                console.log(chalk.red(`❌ [Command] ${file} is not loaded something wrong there`));
+                printly(c.red(`❌ [Command] ${file} is not loaded something wrong there`));
                 continue;
             }
         }
@@ -77,9 +76,9 @@ const loadAdminCommands = async function (client) {
             if (command.name) {
                 client.slash.set(command.name, command);
                 slash.push(command)
-                console.log(`[Admin Command] ${file} is loaded `);
+                printly(`[Admin Command] ${file} is loaded `);
             } else {
-                console.log(chalk.red(`❌ [Admin Command] ${file} is not loaded something wrong there`));
+                printly(c.red(`❌ [Admin Command] ${file} is not loaded something wrong there`));
                 continue;
             }
         }
