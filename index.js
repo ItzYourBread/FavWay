@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js");
 const config = require("./config.json");
 const handler = require("./handlers/index.ts");
-const { printly, c } = require("printly.js");
+const { printly, colour } = require("printly.js");
 
 const client = new Discord.Client({
     intents: [
@@ -47,4 +47,4 @@ process.on("unhandledRejection", (reason, promise) => {
 // client login
 client.login(process.env.TOKEN);
 
-printly(c.green("Index Loaded 🟢"));
+printly(colour.green("Index Loaded 🟢"));

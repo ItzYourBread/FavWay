@@ -2,7 +2,7 @@ const config = require("../../config.json");
 const User = require("../../database/premium/user");
 const Discord = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
-const { printly, c } = require("printly.js");
+const { printly, colour } = require("printly.js");
 
 module.exports = {
     name: 'interactionCreate',

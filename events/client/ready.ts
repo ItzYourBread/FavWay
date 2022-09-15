@@ -1,8 +1,7 @@
 const { GatewayIntentBits, ActivityType } = require("discord.js");
 const { Client } = require("discord.js");
 const User = require("../../database/premium/user");
-const { printly, c } = require("printly.js");
-const ms = require("ms");
+const { printly, colour, pms } = require("printly.js");
 
 module.exports = {
 	name: 'ready',
@@ -23,19 +22,19 @@ module.exports = {
         
   require('../../handlers/clientPremium.ts')(client)
     setTimeout(async function() {
-        printly(c.yellow(`\n[Premium System] Loading...`))
-    }, ms("0.3s"));
+        printly(colour.yellow(`\n[Premium System] Loading...`))
+    }, pms("0.3s"));
     setTimeout(async function() {
-        printly(c.green(`[Premium System] Successfully Loaded`))
-    }, ms("0.6s"));
+        printly(colour.green(`[Premium System] Successfully Loaded`))
+    }, pms("0.6s"));
         
         
 	setTimeout(async function() {
-        printly(c.yellow(`\n[Discord API] Connecting...`))
-    }, ms("0.7s"));
+        printly(colour.yellow(`\n[Discord API] Connecting...`))
+    }, pms("0.7s"));
     setTimeout(async function() {
-        printly(c.green(`[Discord API] Successfully connected to ${client.user.tag}`))
-    }, ms("1.5s"));
+        printly(colour.green(`[Discord API] Successfully connected to ${client.user.tag}`))
+    }, pms("1.5s"));
         
 	},
 };

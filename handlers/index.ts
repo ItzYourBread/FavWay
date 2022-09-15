@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { printly, c } = require("printly.js");
+const { printly, colour } = require("printly.js");
 
 const loadEvents = async function (client) {
     const eventFolders = fs.readdirSync("./events");
@@ -14,7 +14,7 @@ const loadEvents = async function (client) {
             if (event.name) {
                 printly(`[Event] ${file} is loaded `);
             } else {
-                printly(c.red(`❌ [Event] ${file} is not loaded something wrong there`));
+                printly(colour.red(`❌ [Event] ${file} is not loaded something wrong there`));
                 continue;
             }
             
@@ -45,7 +45,7 @@ const loadEvents = async function (client) {
                 slash.push(command)
                 printly(`[Command] ${file} is loaded `);
             } else {
-                printly(c.red(`❌ [Command] ${file} is not loaded something wrong there`));
+                printly(colour.red(`❌ [Command] ${file} is not loaded something wrong there`));
                 continue;
             }
         }
@@ -78,7 +78,7 @@ const loadAdminCommands = async function (client) {
                 slash.push(command)
                 printly(`[Admin Command] ${file} is loaded `);
             } else {
-                printly(c.red(`❌ [Admin Command] ${file} is not loaded something wrong there`));
+                printly(colour.red(`❌ [Admin Command] ${file} is not loaded something wrong there`));
                 continue;
             }
         }
