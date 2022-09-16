@@ -10,7 +10,7 @@ let manager = new ShardingManager('./index.js', {
 });
 
 manager.on('shardCreate', shard => {
-    printly(colour.grey(`[Shard ${shard.id + 1}] Ready!`));
+    printly(colour.blackBright(`[Shard ${shard.id + 1}] Ready!`));
 })
 
 manager.spawn();
