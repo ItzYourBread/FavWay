@@ -20,14 +20,8 @@ module.exports = {
     client.userSettings.set(user.Id, user);
   }
         
-  require('../../handlers/clientPremium.ts')(client)
-        
-    printly.timeout(colour.yellow(`\n[Premium System] Loading...`), 
-        2000);
-        
-    printly.timeout(colour.green(`[Premium System] Successfully Loaded`),
-        3000);
-        
+  require('../../handlers/clientPremium.ts')(client);
+                                             
         
     printly.timeout(colour.yellow(`\n[Discord API] Connecting...`), 
         4000);

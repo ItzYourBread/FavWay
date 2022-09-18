@@ -1,5 +1,6 @@
 const User = require("../database/premium/user");
 const cron = require("node-cron");
+const { printly, colour } = require("printly.js");
 
 // set the schedule, find the user in the database.
 module.exports = async (client) => {
@@ -24,4 +25,9 @@ module.exports = async (client) => {
       }
     });
   });
+    printly.timeout(colour.yellow(`\n[Premium System] Loading...`), 
+        2000);
+        
+    printly.timeout(colour.green(`[Premium System] Successfully Loaded`),
+        3000);
 };
