@@ -2,7 +2,8 @@ const Discord = require("discord.js");
 const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js");
 const config = require("./config.json");
 const handler = require("./handlers/index.ts");
-const { printly, colour } = require("printly.js");
+const { printly, colour } = require("printly.js"); 
+require('dotenv').config()
 
 const client = new Discord.Client({
     intents: [

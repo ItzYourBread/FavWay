@@ -1,6 +1,7 @@
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ComponentType, Client } = require('discord.js');
 const { Profile } = require("../../database/game/profile");
 const Discord = require("discord.js");
+const fetch = require("node-fetch");
 const config = require("../../config.json");
 const randoms = require("../../api/balanceText.json")
 const tips = require('../../tips.json');
