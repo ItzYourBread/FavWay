@@ -20,7 +20,7 @@ module.exports = {
     client.userSettings.set(user.Id, user);
   }
         
-  require('../../handlers/clientPremium.ts')(client);
+  require('../../handlers/clientPremium.js')(client);
                                              
         
     printly.timeout(colour.yellow(`\n[Discord API] Connecting...`), 

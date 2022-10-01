@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js");
 const config = require("./config.json");
-const handler = require("./handlers/index.ts");
+const handler = require("./handlers/index.js");
 const { colour } = require("printly.js"); 
 require('dotenv').config();
 
@@ -39,7 +39,7 @@ handler.loadEvents(client);
 handler.loadCommands(client);
 handler.loadAdminCommands(client);
 
-require("./handlers/mongoose.ts")(client);
+require("./handlers/mongoose.js")(client);
 
 // error handling
 process.on("unhandledRejection", (reason, promise) => {
