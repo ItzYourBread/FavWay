@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const config = require('../config.json');
-const { printly, colour } = require("printly.js");
+const { colour } = require("printly.js");
+
+function println() {
+  return console.log.apply(console, arguments)
+}
 
 module.exports = async () => {
     mongoose.connect(config.database.mongoDB, {
@@ -8,8 +12,8 @@ module.exports = async () => {
         keepAlive: true,
         useUnifiedTopology: true
     }).then(()=>{
-        printly(colour.green(`\n[Database] Mongoose successfully connected to the server`))
+        println(colour.green(`\n[Database] Mongoose successfully connected to the server`))
     }).catch((err) =>{
-        printly(err)
+        println(err)
     });
 }

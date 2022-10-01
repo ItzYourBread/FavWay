@@ -8,8 +8,14 @@ const Profile = new mongoose.Schema({
     stones: { type: Number, default: 0 },
     cooldowns: {
         breaktree: { type: Date },
-        breakrock: { type: Date },
+        minerock: { type: Date },
         daily: { type: Date }
+    },
+    equips: {
+        axe: {
+          wooden: { type: Number, default: 0 },
+          stone: { type: Number, default: 0 }
+        }
     }
 })
 

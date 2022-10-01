@@ -1,6 +1,10 @@
 const { ShardingManager } = require('discord.js');
 const config = require("../config.json");
-const { printly, colour } = require("printly.js");
+const { colour } = require("printly.js");
+
+function println() {
+  return console.log.apply(console, arguments)
+}
 
 let manager = new ShardingManager('./index.js', {
     token: process.env.TOKEN,
@@ -10,7 +14,7 @@ let manager = new ShardingManager('./index.js', {
 });
 
 manager.on('shardCreate', shard => {
-    printly(colour.blackBright(`[Shard ${shard.id + 1}] Ready!`));
+    println(colour.blackBright(`[Shard ${shard.id + 1}] Ready!`));
 })
 
 manager.spawn();

@@ -12,7 +12,8 @@
         "depositLog": "1017727444322623489",
         "withdrawLog": "1017727475389833267",
         "buyLog": "1017762530212454410",
-        "sellLog": "1017762579650711562"
+        "sellLog": "1017762579650711562",
+        "workLog": "1025728325785759744"
     },
     
     "bot": {
@@ -27,6 +28,7 @@
          "embed": "0x7783af",
          "logger": "0xdfffd8",
          "receipt": "0xffd753",
+         "work": "0x8affac",
          "error": "0xff8d8d",
          "success": "0x8dff99"
     },

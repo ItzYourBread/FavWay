@@ -1,5 +1,9 @@
 const fs = require("fs");
-const { printly, colour } = require("printly.js");
+const { colour } = require("printly.js");
+
+function println() {
+  return console.log.apply(console, arguments)
+}
 
 const loadEvents = async function (client) {
     const eventFolders = fs.readdirSync("./events");
@@ -12,9 +16,9 @@ const loadEvents = async function (client) {
             const event = require(`../events/${folder}/${file}`);
             
             if (event.name) {
-                printly(`[Event] ${file} is loaded `);
+                println(`[Event] ${file} is loaded `);
             } else {
-                printly(colour.red(`❌ [Event] ${file} is not loaded something wrong there`));
+                println(colour.red(`❌ [Event] ${file} is not loaded something wrong there`));
                 continue;
             }
             
@@ -43,9 +47,9 @@ const loadEvents = async function (client) {
             if (command.name) {
                 client.slash.set(command.name, command);
                 slash.push(command)
-                printly(`[Command] ${file} is loaded `);
+                println(`[Command] ${file} is loaded `);
             } else {
-                printly(colour.red(`❌ [Command] ${file} is not loaded something wrong there`));
+                println(colour.red(`❌ [Command] ${file} is not loaded something wrong there`));
                 continue;
             }
         }
@@ -76,9 +80,9 @@ const loadAdminCommands = async function (client) {
             if (command.name) {
                 client.slash.set(command.name, command);
                 slash.push(command)
-                printly(`[Admin Command] ${file} is loaded `);
+                println(`[Admin Command] ${file} is loaded `);
             } else {
-                printly(colour.red(`❌ [Admin Command] ${file} is not loaded something wrong there`));
+                println(colour.red(`❌ [Admin Command] ${file} is not loaded something wrong there`));
                 continue;
             }
         }
