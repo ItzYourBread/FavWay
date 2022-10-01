@@ -1,6 +1,7 @@
 const { ShardingManager } = require('discord.js');
 const config = require("../config.json");
 const { colour } = require("printly.js");
+require('dotenv').config();
 
 function println() {
   return console.log.apply(console, arguments)

@@ -3,7 +3,7 @@ const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js"
 const config = require("./config.json");
 const handler = require("./handlers/index.ts");
 const { colour } = require("printly.js"); 
-require('dotenv').config()
+require('dotenv').config();
 
 function println() {
   return console.log.apply(console, arguments)
@@ -33,9 +33,6 @@ module.exports = client;
 client.discord = Discord;
 client.slash = new Collection();
 client.userSettings = new Collection();
-
-global.success = "<here is>"
-global.error = "<HERE IS>"
 
 // Handlers
 handler.loadEvents(client);
