@@ -68,7 +68,7 @@ module.exports = {
         embeds: [
             embed
             .setTitle(`Not enough balance`)
-            .setDescription(`You only have \`${userData.bank}\`${config.emojis.currency} in your bank account.`)
+            .setDescription(`You only have ${config.emojis.currency}\`${userData.bank.toLocaleString()}\` in your bank account.`)
             .setColor(config.colours.error)
             .setTimestamp()
         ],
@@ -81,7 +81,7 @@ module.exports = {
         
     let receipt = new EmbedBuilder()
     .setTitle("Receipt of withdrawn")
-    .setDescription(`You withdrawn \`${amount}\`${config.emojis.currency} from the your bank account\n\n**Receipt ID:**\n\`${codes}\` `)
+    .setDescription(`You withdrawn ${config.emojis.currency}\`${amount.toLocaleString()}\` from the your bank account\n\n**Receipt ID:**\n\`${codes}\` `)
     .setColor(config.colours.receipt)
     .setFooter({ text: `Expires - ${moment(time).format("dddd, MMMM Do YYYY")}` })
     .setTimestamp();
@@ -91,7 +91,7 @@ module.exports = {
     await interaction.reply({
       embeds: [
         embed
-          .setDescription(`You have withdrawn \`${amount}\`${config.emojis.currency} from your bank account and you will receive a message in DMs soon`)
+          .setDescription(`You have withdrawn ${config.emojis.currency}\`${amount.toLocaleString()}\` from your bank account and you will receive a message in DMs soon`)
           .setColor(config.colours.embed)
           .setTimestamp()
       ],
@@ -103,7 +103,7 @@ module.exports = {
             .setTitle("Command log")
             .setDescription(`**[Withdraw Command]** run by **${interaction.user.tag}**`)
             .addFields(
-                { name: "Value", value: `Withdrawn: \`${amount}\`${config.emojis.currency} from the bank account` },
+                { name: "Value", value: `Withdrawn: ${config.emojis.currency}\`${amount.toLocaleString()}\` from the bank account` },
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();

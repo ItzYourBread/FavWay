@@ -15,7 +15,7 @@ module.exports = {
     name: "sell",
     description: "SubCommand of Sell",
     botPerm: [""],
-    category: "Work",
+    category: "RolePlay",
     options: [{
       name: 'resources',
       description: 'Sell your resources to market and get some coins',
@@ -48,32 +48,47 @@ module.exports = {
       const user = interaction.member.user;
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
-        
-      let amount2 = amount * 5;
 
-        if (userData.woods < amount)
+        
+      if (interaction.options.get('resource').value === "woods") {
+        choice = userData.resources.woods;
+        amount2 = amount * 3;
+        amount3 = amount * 5;
+      }
+      if (interaction.options.get('resource').value === "stones") {
+        choice = userData.resources.stones;
+        amount2 = amount * 6;
+        amount3 = amount * 25;
+      }
+        
+        if (choice < amount)
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setDescription("You don't have enough resources to sell in market")
+                .setDescription(`You don't have enough ${res} to sell, you only have ${choice}${config.emojis.wood}${res} in your inventory..!`)
                 .setColor(config.colours.error)
                 .setTimestamp(),
             ],
           });
         
-        userData.coins += amount2;
-        userData.woods -= amount;
+        userData.coins += amount2; 
+        userData.cents += amount3;
+        if (interaction.options.get('resource').value === "woods") {
+        userData.resources.woods -= amount;
+        }
+        if (interaction.options.get('resource').value === "stones") {
+        userData.resources.stones -= amount;
+        }
         userData.save();
 
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You sold ${amount} ${res} and got ${amount2}CN`)
+              .setDescription(`You sold ${amount.toLocaleString()} ${res} and got ${amount2}${config.emojis.currency}`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
         });
-        
        }
     }
 }

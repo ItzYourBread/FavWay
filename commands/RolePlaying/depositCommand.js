@@ -67,7 +67,7 @@ module.exports = {
         embeds: [
             embed
             .setTitle(`Not enough balance`)
-            .setDescription(`You only have \`${userData.coins}\`${config.emojis.currency} in your pocket.`)
+            .setDescription(`You only have ${confif.emojis.currency}\`${userData.coins.toLocaleString()}\` in your pocket.`)
             .setColor(config.colours.error)
             .setTimestamp()
         ],
@@ -80,7 +80,7 @@ module.exports = {
 
     let receipt = new EmbedBuilder()
     .setTitle("Receipt of Deposit")
-    .setDescription(`You deposited \`${amount}\`${config.emojis.currency} yo the bank\n\n**Receipt ID:**\n\`${codes}\` `)
+    .setDescription(`You deposited ${config.emojis.currency}\`${amount.toLocaleString()}\` to the bank\n\n**Receipt ID:**\n\`${codes}\` `)
     .setColor(config.colours.receipt)
     .setFooter({ text: `Expires - ${moment(time).format("dddd, MMMM Do YYYY")}` })
     .setTimestamp();
@@ -90,7 +90,7 @@ module.exports = {
     await interaction.reply({
       embeds: [
         embed
-          .setDescription(`You have deposited \`${amount}\`${config.emojis.currency} to your bank account and you will receive a message in DMs soon`)
+          .setDescription(`You have deposited ${config.emojis.currency}\`${amount.toLocaleString()}\` to your bank account and you will receive a message in DMs soon`)
           .setColor(config.colours.embed)
           .setTimestamp()
       ],
@@ -102,7 +102,7 @@ module.exports = {
             .setTitle("Command log")
             .setDescription(`**[Deposit Command]** run by **${interaction.user.tag}**`)
             .addFields(
-                { name: "Value", value: `Deposited: \`${amount}\`${config.emojis.currency} to the bank account` },
+                { name: "Value", value: `Deposited: \`${amount.toLocaleString()}\`${config.emojis.currency} to the bank account` },
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();

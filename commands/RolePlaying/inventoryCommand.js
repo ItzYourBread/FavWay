@@ -27,8 +27,8 @@ module.exports = {
         .setTitle(`${user.username}'s Inventory`)
         .setDescription("Not Always Good")
         .addFields(
-		{ name: `${config.emojis.wood}Wood`, value: `${userData.woods}` },
-		{ name: `${config.emojis.stone}Stone`, value: `${userData.stones}` },
+		{ name: `${config.emojis.wood}Wood`, value: `${userData.resources.woods.toLocaleString()}` },
+		{ name: `${config.emojis.stone}Stone`, value: `${userData.resources.stones.toLocaleString()}` },
 	)
         .setColor(config.colours.embed)
         .setThumbnail(user.displayAvatarURL())

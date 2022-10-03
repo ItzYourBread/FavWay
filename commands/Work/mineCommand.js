@@ -1,6 +1,6 @@
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ComponentType, Client } = require('discord.js');
 const { ApplicationCommandOptionType } = require("discord.js");
-const { Profile } = require("../../database/game/profile");
+const { Profile } = require("../../database/game/profile"); 
 const { Equips } = require("../../database/game/equips");
 const Discord = require("discord.js");
 const moment = require("moment");
@@ -12,49 +12,47 @@ const wait = require('node:timers/promises').setTimeout;
 require('moment-duration-format');
 
 module.exports = {
-    name: "break",
-    description: "SubCommand of work",
+    name: "mine",
+    description: "SubCommand of Mine",
     botPerm: [""],
     category: "Work",
     options: [{
-      name: 'tree',
-      description: 'break some trees and get woods, require: axe',
+      name: 'rock',
+      description: 'mine some rocks and get stones, require: pickaxe',
       type: ApplicationCommandOptionType.Subcommand,
     }],
     
     run: async (client, interaction) => {
-      if (interaction.options.getSubcommand() === "tree") {
+      if (interaction.options.getSubcommand() === "rock") {
 
     const { guild } = interaction;
     const user = interaction.member.user;
         
-    const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
-        
+    const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id }) 
     const userEquips = await Equips.findOne({ id: user.id }) || new Equips({ id: user.id })
 
-    if (!userEquips.axe) {
+    if (!userEquips.axe)
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setTitle("Error: axe required")
+            .setTitle("Error: pickaxe required")
             .setColor(config.colours.error)
-            .setDescription("You dont have axe to break trees"),
+            .setDescription("You dont have pickaxe to mine rocks"),
         ],
       });
-    };
     
     const duration = moment
-        .duration(userData.cooldowns.breaktree - Date.now())
+        .duration(userData.cooldowns.minerock - Date.now())
         .format("m[m], s[s]");
 
-    if (userData.cooldowns.breaktree > Date.now())
+    if (userData.cooldowns.minerock > Date.now())
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
             .setTitle("Please be patient...")
             .setColor(config.colours.work)
             .setDescription(
-              `⌛ You can break trees again in **\`${duration}\`**`
+              `⌛ You can mine rocks again in **\`${duration}\`**`
             ),
         ],
       });
@@ -62,29 +60,28 @@ module.exports = {
     if (userEquips.axe) 
     amount = Math.floor((Math.random() * 7) + 2);
 
-    userData.resources.woods += amount;
-    userData.cooldowns.breaktree = Date.now() + ms("2m");
+    userData.resources.stones += amount;
+    userData.cooldowns.minerock = Date.now() + ms("2m");
     userData.save();
 
-    if (userEquips.axe) {
+    if (userEquips.axe)
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setTitle("Working hard..")
-            .setDescription(`You cropped trees and you gots ${amount}${config.emojis.wood}Woods!`)
+            .setTitle("Working Hard..")
+            .setDescription(`You got ${amount}${config.emojis.stone}Stones from mining some rocks`)
             .setColor(config.colours.work),
         ],
       });
-    };
 
       const logChannel = client.channels.cache.get(config.logs.workLog)
         
       const logger = new EmbedBuilder()
        .setColor(config.colours.logger)
        .setTitle("Command log")
-       .setDescription(`**[Break Tree SubCommand]** run by **${interaction.user.tag}**`)
+       .setDescription(`**[Mine Rock SubCommand]** run by **${interaction.user.tag}**`)
        .addFields(
-          { name: "Value", value: `Got ${amount} woods from cropping some tree` },
+          { name: "Value", value: `Got ${amount} stones from rocks` },
           { name: "Guild:", value: `${guild.name}` }
         )
        .setTimestamp();

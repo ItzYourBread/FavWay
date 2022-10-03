@@ -34,7 +34,8 @@
     },
 
      "emojis": {
-          "currency": "$",
+          "currency": "£",
+          "currencyCents": "¥",
           "wood": "<:woods:1014123058874826813>",
           "stone": "<:stone:1014124413014249502>"
     },

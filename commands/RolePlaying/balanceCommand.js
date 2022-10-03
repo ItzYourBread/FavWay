@@ -18,13 +18,13 @@ module.exports = {
         const { guild } = interaction;
         const user = interaction.member.user
         
-        const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+        const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id }) 
         
         let random = randoms.random[Math.floor((Math.random() * randoms.random.length))];
         
         const balance = new EmbedBuilder()
         .setTitle(`${user.username}'s Balance`)
-        .setDescription(`**Pocket:** ${config.emojis.currency}${userData.coins}\n**Bank:** ${config.emojis.currency}${userData.bank}\n**Total:** ${config.emojis.currency}${userData.coins + userData.bank}`)
+        .setDescription(`**Pocket:** ${config.emojis.currency} ${userData.coins.toLocaleString()}\n**Bank:** ${config.emojis.currency} ${userData.bank.toLocaleString()}\n**Cents:** ${config.emojis.currencyCents} ${userData.cents.toLocaleString()}`)
         .setColor(config.colours.embed)
         .setFooter({ text: `${random}`})
         
@@ -36,7 +36,7 @@ module.exports = {
             .setTitle("Command log")
             .setDescription(`**[Balance Command]** run by **${interaction.user.tag}**`)
             .addFields(
-                { name: "Value:", value: `**Pocket:** ${userData.coins}\n**Bank:** ${userData.bank}\n**Total:** ${userData.coins + userData.bank}\n\n` },
+                { name: "Value:", value: `**Pocket:** ${userData.coins.toLocaleString()}\n**Bank:** ${userData.bank.toLocaleString()}\n**Cents:** ${userData.cents.toLocaleString()}\n\n` },
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();

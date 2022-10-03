@@ -19,12 +19,12 @@ module.exports = {
      .setColor(config.colours.embed)
      .addFields(
          { name: `${config.emojis.wood}Wood 20x`, 
-           value: `Selling at: 100CN\nBuying at: 70CN`,
+           value: `Selling at: ${config.emojis.currency} 100\nBuying at: 70CN`,
            inline: false
          },
          {
            name: `${config.emojis.stone}Stone 20x`,
-           value: `Selling at: 150CN\nBuying at: 125CN`,
+           value: `Selling at: ${config.emojis.currency} 150\nBuying at: 125CN`,
            inline: false
          }
      )
@@ -44,15 +44,21 @@ module.exports = {
 					.setPlaceholder('Travel to markets')
 					.addOptions(
 						{
-							label: 'Rescoures Market',
-							description: 'Visit Rescoures market',
+							label: 'Resources Market.',
+							description: 'Visit Resources Market.',
+              emoji: '',
 							value: 'resources',
 						},
-                        {
-                            label: 'Back to Market menu',
-                            description: 'Go back to market menu',
-                            value: 'market',
-                        },
+            {
+              label: 'Tools Shop',
+              description: 'Visit Tools Shop.',
+              value: 'tools',
+            },
+            {
+              label: 'Go Back.',
+              description: 'Go back to main menu of the market.',
+              value: 'market',
+            }
 					),
 			);
         
