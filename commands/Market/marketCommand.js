@@ -46,7 +46,6 @@ module.exports = {
 						{
 							label: 'Resources Market.',
 							description: 'Visit Resources Market.',
-              emoji: '',
 							value: 'resources',
 						},
             {
