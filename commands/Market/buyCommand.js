@@ -10,19 +10,18 @@ const { ms } = require('printly.js');
 const wait = require('node:timers/promises').setTimeout; 
 require('moment-duration-format');
 
-
 module.exports = {
-    name: "sell",
-    description: "SubCommand of Sell",
+    name: "buy",
+    description: "SubCommand of But",
     botPerm: [""],
     category: "RolePlay",
     options: [{
       name: 'resources',
-      description: 'Sell your resources to market and get some coins',
+      description: 'Buy resources from market which you needed!',
       type: ApplicationCommandOptionType.Subcommand,
       options: [{
         name: 'resource',
-        description: 'what type of resource do you like to sell?',
+        description: 'what type of resource do you want to but?',
         type: Discord.ApplicationCommandOptionType.String,
         required: true,
         choices: [
@@ -40,8 +39,8 @@ module.exports = {
     run: async (client, interaction) => {
       
       if (interaction.options.getSubcommand() === "resources") {
-        
-      const quantity = interaction.options.getNumber('quantity') || 20;
+
+      const quantity = interaction.options.getNumber('quantity') || '20';
       const res = interaction.options.get('resource').value;
 
       const { guild } = interaction;
@@ -51,44 +50,39 @@ module.exports = {
 
         
       if (interaction.options.get('resource').value === "woods") {
-        choice = userData.resources.woods;
-        amount2 = quantity * 3;
-        amount3 = quantity * 5;
+        amount2 = quantity * 5;
       }
       if (interaction.options.get('resource').value === "stones") {
-        choice = userData.resources.stones;
-        amount2 = quantity * 6;
-        amount3 = quantity * 25;
+        amount2 = quantity * 7;
       }
         
-        if (choice < quantity)
+        if (userData.coins < amount2)
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setDescription(`You don't have enough ${res} to sell, you only have ${choice}${config.emojis.wood}${res} in your inventory..!`)
+                .setDescription(`Sorry you dont have enough money to buy **${res}**`)
                 .setColor(config.colours.error)
                 .setTimestamp(),
             ],
           });
         
-        userData.coins += amount2; 
-        userData.cents += amount3;
+        userData.coins -= amount2; 
         if (interaction.options.get('resource').value === "woods") {
-        userData.resources.woods -= quantity;
+        userData.resources.woods += quantity;
         }
         if (interaction.options.get('resource').value === "stones") {
-        userData.resources.stones -= quantity;
+        userData.resources.stones += quantity;
         }
         userData.save();
 
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You sold ${quantity.toLocaleString()} ${res} and got ${config.emojis.currency} ${amount2} and here is your cents ${config.emojis.currencyCents} ${amount3}`)
+              .setDescription(`You bought ${quantity.toLocaleString()} **${res}**`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
         });
-       }
-    }
+      }
+   }
 }

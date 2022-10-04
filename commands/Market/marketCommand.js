@@ -19,12 +19,12 @@ module.exports = {
      .setColor(config.colours.embed)
      .addFields(
          { name: `${config.emojis.wood}Wood 20x`, 
-           value: `Selling at: ${config.emojis.currency} 100\nBuying at: 70CN`,
+           value: `Selling at: ${config.emojis.currency} 100\nBuying at: ${config.emojis.currency} 70`,
            inline: false
          },
          {
            name: `${config.emojis.stone}Stone 20x`,
-           value: `Selling at: ${config.emojis.currency} 150\nBuying at: 125CN`,
+           value: `Selling at: ${config.emojis.currency} 150\nBuying at: ${config.emojis.currency} 125`,
            inline: false
          }
      )
