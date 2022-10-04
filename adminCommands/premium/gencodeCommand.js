@@ -9,7 +9,7 @@ module.exports = {
   description: `gen premium codes`,
   type: Discord.ApplicationCommandType.ChatInput,
   admin: true,
-  category: "Premium",
+  category: "Admin",
   options: [
     {
       name: "plan",
