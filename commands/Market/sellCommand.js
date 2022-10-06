@@ -60,6 +60,14 @@ module.exports = {
         amount2 = quantity * 6;
         amount3 = quantity * 25;
       }
+
+      
+      if (interaction.options.get('resource').value === "woods") {
+        itemEmoji = config.emojis.wood;
+      }
+      if (interaction.options.get('resource').value === "stones") {
+        itemEmoji = config.emojis.stone;
+      }
         
         if (choice < quantity)
           return interaction.reply({
@@ -84,11 +92,27 @@ module.exports = {
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You sold ${quantity.toLocaleString()} ${res} and got ${config.emojis.currency} ${amount2} and here is your cents ${config.emojis.currencyCents} ${amount3}`)
+              .setDescription(`You sold **${quantity.toLocaleString()}** ${itemEmoji}**${res}** and got ${config.emojis.currency} **${amount2}** and here is your cents ${config.emojis.currencyCents} **${amount3}**`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
         });
+        
+        const logChannel = client.channels.cache.get(config.logs.sellLog)
+        
+        const logger = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Sell Resources SubCommand]** run by **${interaction.user.tag}**`)
+            .addFields(
+                {
+                  name: "Value:", value: `sold **${quantity}** ${itemEmoji}**${res}**`
+                },
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
+        
+        logChannel.send({ embeds: [logger] });
        }
     }
 }

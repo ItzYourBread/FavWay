@@ -1,18 +1,19 @@
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ComponentType, Client } = require('discord.js');
 const { ApplicationCommandOptionType } = require("discord.js");
 const { Profile } = require("../../database/game/profile");
+const { Equips } = require("../../database/game/equips")
 const Discord = require("discord.js");
 const moment = require("moment");
 const config = require("../../config.json");
 const emojis = require("../../api/emojis.json");
-const tips = require('../../tips.json');
-const { ms } = require('printly.js');
+const tips = require("../../tips.json");
+const { ms } = require("printly.js");
 const wait = require('node:timers/promises').setTimeout; 
 require('moment-duration-format');
 
 module.exports = {
     name: "buy",
-    description: "SubCommand of But",
+    description: "SubCommand of Buy",
     botPerm: [""],
     category: "RolePlay",
     options: [{
@@ -34,9 +35,23 @@ module.exports = {
           type: Discord.ApplicationCommandOptionType.Number,
           required: false,
       }],
+    }, {
+      name: 'tools',
+      description: 'Buy some tools to start your journey with Voatt!',
+      type: ApplicationCommandOptionType.Subcommand,
+      options: [{
+        name: 'tool',
+        description: 'what tool do you want to buy?',
+        type: Discord.ApplicationCommandOptionType.String,
+        required: true,
+        choices: [
+          { name: 'Axe', value: 'axe' },
+          { name: 'Pickaxe', value: 'pickaxe' }
+        ],
+      }], 
     }],
     
-    run: async (client, interaction) => {
+    run: async (client, interaction, args) => {
       
       if (interaction.options.getSubcommand() === "resources") {
 
@@ -54,6 +69,14 @@ module.exports = {
       }
       if (interaction.options.get('resource').value === "stones") {
         amount2 = quantity * 7;
+      }
+
+        
+      if (interaction.options.get('resource').value === "woods") {
+        itemEmoji = config.emojis.wood;
+      }
+      if (interaction.options.get('resource').value === "stones") {
+        itemEmoji = config.emojis.stone;
       }
         
         if (userData.coins < amount2)
@@ -78,11 +101,86 @@ module.exports = {
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You bought ${quantity.toLocaleString()} **${res}**`)
+              .setDescription(`You bought **${quantity.toLocaleString()}** ${itemEmoji}**${res}** at: ${config.emojis.currency} **${amount2}**`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
         });
+
+        const logChannel = client.channels.cache.get(config.logs.buyLog)
+        
+        const logger = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Buy Resources SubCommand]** run by **${interaction.user.tag}**`)
+            .addFields(
+                {
+                  name: "Value:", value: `bought **${quantity}** ${itemEmoji}**${res}**`
+                },
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
+        
+        logChannel.send({ embeds: [logger] });
+      
+    } else if (interaction.options.getSubcommand() === "tools") {
+        
+      const tools = interaction.options.get('tool').value;
+
+      const { guild } = interaction;
+      const user = interaction.member.user;
+        
+      const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+      const userEquips = await Equips.findOne({ id: user.id }) || new Equips({ id: user.id })
+        
+        if (userData.coins < 0)
+          return interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setDescription(`Sorry you dont have enough money to buy **${tools}**`)
+                .setColor(config.colours.error)
+                .setTimestamp(),
+            ],
+          });
+        
+
+        if (interaction.options.get('tool').value === "axe") {
+        userEquips.axe = true;
+        userData.coins -= 90;
+        }
+        if (interaction.options.get('tool').value === "pickaxe") {
+        userEquips.pickaxe = true;
+        userData.coins -= 120;
+        }
+        userData.save();
+
+        await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setDescription(`You bought ${tools}`)
+              .setColor(config.colours.success)
+              .setTimestamp(),
+          ],
+        });
+
+        const logChannel = client.channels.cache.get(config.logs.buyLog)
+        
+        const logger = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`Tools SubCommand]** run by **${interaction.user.tag}**`)
+            .addFields(
+                {
+                  name: "Value:", value: `Bought **${tools}**`
+                },
+                { 
+                  name: "Guild:", value: `${guild.name}`
+                }
+            )
+            .setTimestamp();
+        
+        logChannel.send({ embeds: [logger] });
       }
    }
 }

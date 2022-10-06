@@ -32,7 +32,7 @@ module.exports = {
         
     const userEquips = await Equips.findOne({ id: user.id }) || new Equips({ id: user.id })
 
-    if (!userEquips.axe) {
+    if (!user && userEquips.axe) {
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
@@ -59,14 +59,13 @@ module.exports = {
         ],
       });
 
-    if (userEquips.axe) 
-    amount = Math.floor((Math.random() * 7) + 2);
+    let amount = Math.floor((Math.random() * 7) + 2);
 
     userData.resources.woods += amount;
     userData.cooldowns.breaktree = Date.now() + ms("2m");
     userData.save();
 
-    if (userEquips.axe) {
+    if (user && userEquips.axe) {
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
