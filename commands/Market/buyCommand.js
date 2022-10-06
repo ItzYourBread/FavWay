@@ -161,7 +161,7 @@ module.exports = {
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You bought ${tools}`)
+              .setDescription(`You bought ${tools} and paid ${config.emojis.currency} **${price}**`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],

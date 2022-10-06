@@ -67,8 +67,9 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
             .setTitle("Working Hard..")
-            .setDescription(`You got ${amount}${config.emojis.stone}Stones from mining some rocks`)
-            .setColor(config.colours.work),
+            .setDescription(`You got **${amount}** ${config.emojis.stone}**Stones** from mining some rocks`)
+            .setColor(config.colours.work)
+            .setTimestamp(),
         ],
       });
 
