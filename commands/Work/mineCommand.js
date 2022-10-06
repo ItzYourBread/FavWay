@@ -1,7 +1,6 @@
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ComponentType, Client } = require('discord.js');
 const { ApplicationCommandOptionType } = require("discord.js");
 const { Profile } = require("../../database/game/profile"); 
-const { Equips } = require("../../database/game/equips");
 const Discord = require("discord.js");
 const moment = require("moment");
 const config = require("../../config.json");
@@ -29,9 +28,8 @@ module.exports = {
     const user = interaction.member.user;
         
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id }) 
-    const userEquips = await Equips.findOne({ id: user.id }) || new Equips({ id: user.id })
 
-    if (!userEquips.axe)
+    if (user && !userData.pickaxe.stone)
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
@@ -57,14 +55,14 @@ module.exports = {
         ],
       });
 
-    if (userEquips.axe) 
+    if (user && userData.pickaxe.stone) 
     amount = Math.floor((Math.random() * 7) + 2);
 
     userData.resources.stones += amount;
     userData.cooldowns.minerock = Date.now() + ms("2m");
     userData.save();
 
-    if (userEquips.axe)
+    if (user && userData.pickaxe.stone)
       return interaction.reply({
         embeds: [
           new EmbedBuilder()

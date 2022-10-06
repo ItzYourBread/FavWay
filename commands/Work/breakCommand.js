@@ -1,7 +1,6 @@
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ComponentType, Client } = require('discord.js');
 const { ApplicationCommandOptionType } = require("discord.js");
 const { Profile } = require("../../database/game/profile");
-const { Equips } = require("../../database/game/equips");
 const Discord = require("discord.js");
 const moment = require("moment");
 const config = require("../../config.json");
@@ -23,26 +22,14 @@ module.exports = {
     }],
     
     run: async (client, interaction) => {
-      if (interaction.options.getSubcommand() === "tree") {
+      
+    if (interaction.options.getSubcommand() === "tree") {
 
     const { guild } = interaction;
     const user = interaction.member.user;
         
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
         
-    const userEquips = await Equips.findOne({ id: user.id }) || new Equips({ id: user.id })
-
-    if (!user && userEquips.axe) {
-      return interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setTitle("Error: axe required")
-            .setColor(config.colours.error)
-            .setDescription("You dont have axe to break trees"),
-        ],
-      });
-    };
-    
     const duration = moment
         .duration(userData.cooldowns.breaktree - Date.now())
         .format("m[m], s[s]");
@@ -58,24 +45,37 @@ module.exports = {
             ),
         ],
       });
-
-    let amount = Math.floor((Math.random() * 7) + 2);
-
-    userData.resources.woods += amount;
-    userData.cooldowns.breaktree = Date.now() + ms("2m");
-    userData.save();
-
-    if (user && userEquips.axe) {
+      
+    if (user && !userData.axe.stone) {
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
-            .setTitle("Working hard..")
-            .setDescription(`You cropped trees and you gots ${amount}${config.emojis.wood}Woods!`)
-            .setColor(config.colours.work),
+            .setTitle("Error: axe required")
+            .setColor(config.colours.error)
+            .setDescription("You dont have axe to break trees"),
         ],
       });
-    };
+    }
 
+    if (user && userData.axe.stone)
+    amount = Math.floor((Math.random() * 7) + 2);
+
+    userData.resources.woods += amount;
+    userData.cooldowns.breaktree = Date.now() + ms("10s");
+    userData.save();
+
+    if (user && userData.axe.stone) {
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+          .setTitle("Working hard..")
+          .setDescription(`You cropped trees and you gots **${amount}** ${config.emojis.wood}**Woods**`)
+          .setColor(config.colours.work)
+          .setTimestamp(),
+        ],
+      });
+    }
+      
       const logChannel = client.channels.cache.get(config.logs.workLog)
         
       const logger = new EmbedBuilder()
