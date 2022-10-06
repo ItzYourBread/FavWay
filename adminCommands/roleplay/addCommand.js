@@ -32,7 +32,7 @@ module.exports = {
       required: true,
     }, {
       name: "user",
-      description: `userrfrrrrr`,
+      description: 'usersisj ssss',
       type: Discord.ApplicationCommandOptionType.User,
       required: false,
     },
@@ -40,10 +40,10 @@ module.exports = {
     
     run: async (client, interaction, args) => {
 
-      const { guild, member } = interaction;
+      const { guild } = interaction;
         
       const amount = interaction.options.getNumber("amount");
-      const target = interaction.options.getUser("user") || member;
+      const user = interaction.options.getUser("user") || interaction.user;
       const choice = interaction.options.get("type").value;
 
       
@@ -61,7 +61,7 @@ module.exports = {
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You add ${amount.toLocaleString()} ${choice} to ${target}`)
+              .setDescription(`You add ${amount.toLocaleString()} ${choice} to ${user}`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
