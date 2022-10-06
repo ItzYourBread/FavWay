@@ -29,6 +29,23 @@ module.exports = {
          }
      )
      .setTimestamp();
+      
+    let tools = new EmbedBuilder()
+     .setTitle("Tools Shop")
+     .setDescription("Buy tools for your journey with Voatt")
+     .setColor(config.colours.embed)
+     .addFields(
+         { name: `Axe`, 
+           value: `Price: ${config.emojis.currency} 90`,
+           inline: false
+         },
+         {
+           name: `Pickaxe`,
+           value: `Price: ${config.emojis.currency} 120`,
+           inline: false
+         }
+     )
+     .setTimestamp();
 
     let market = new EmbedBuilder()
      .setTitle(`${config.bot.name}’s Market`)
@@ -91,6 +108,15 @@ module.exports = {
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();
+
+        let viewTools = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Market Command]** viewing resources market **${interaction.user.tag}**`)
+            .addFields(
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
         
         logChannel.send({ embeds: [logger] });
 
@@ -114,6 +140,12 @@ client.on('interactionCreate', async (interaction, client) => {
            await wait(100);
            await interaction.editReply({ embeds: [resources], components: [row] })
            await logChannel.send({ embeds: [viewRes] });
+            break;
+        case "tools":  
+           await interaction.deferUpdate();
+           await wait(100);
+           await interaction.editReply({ embeds: [tools], components: [row] })
+           await logChannel.send({ embeds: [viewTools] });
             break;
         case "market":  
            await interaction.deferUpdate();

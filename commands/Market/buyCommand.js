@@ -166,7 +166,7 @@ module.exports = {
         const logger = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`Tools SubCommand]** run by **${interaction.user.tag}**`)
+            .setDescription(`**[Tools SubCommand]** run by **${interaction.user.tag}**`)
             .addFields(
                 {
                   name: "Value:", value: `Bought **${tools}**`

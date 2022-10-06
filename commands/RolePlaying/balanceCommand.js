@@ -12,11 +12,17 @@ module.exports = {
     description: "Check your balance",
     botPerm: [""],
     category: "RolePlay",
+    options: [{
+      name: 'user',
+      description: 'please select a user which you want to see',
+      type: Discord.ApplicationCommandOptionType.User,
+      require: false,
+    }],
     
     run: async (client, interaction) => {
 
         const { guild } = interaction;
-        const user = interaction.member.user
+        const user = interaction.options.getUser("user") || interaction.user;
         
         const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id }) 
         
