@@ -130,8 +130,14 @@ module.exports = {
       const user = interaction.member.user;
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+      if (interaction.options.get('tool').value === 'axe')
+        price = 90;
+      if (interaction.options.get('tool').value === 'pickaxe')
+        price = 120;
+
         
-        if (userData.coins < 0)
+        if (userData.coins < price)
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
