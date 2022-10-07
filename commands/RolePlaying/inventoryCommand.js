@@ -1,4 +1,5 @@
-const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ComponentType, Client } = require('discord.js');
+const { ActionRowBuilder, SelectMenuBuilder, ComponentType, Client } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { Profile } = require("../../database/game/profile");
 const Discord = require("discord.js");
 const config = require("../../config.json");
@@ -12,7 +13,7 @@ module.exports = {
     botPerm: [""],
     category: "RolePlay",
     
-    run: async (client, interaction) => {
+    run: async (client, interaction, args) => {
         
         const user = interaction.member.user
         const { guild } = interaction;
@@ -23,25 +24,43 @@ module.exports = {
         
         let emoji = emojis.emoji[Math.floor((Math.random() * emojis.emoji.length))];
 
+
+      if (userData.resources.woods || userData.resources.stones) {
+        resourcesMessage = "Nice resources";
+      } else {
+        resourcesMessage = "You don't have any resources";
+      }
         let resources = new EmbedBuilder()
         .setTitle(`${user.username}'s Inventory`)
-        .setDescription("Not Always Good")
-        .addFields(
-		{ name: `${config.emojis.wood}Wood`, value: `${userData.resources.woods.toLocaleString()}` },
-		{ name: `${config.emojis.stone}Stone`, value: `${userData.resources.stones.toLocaleString()}` },
-	)
+        .setDescription(`${resourcesMessage}`)
         .setColor(config.colours.embed)
         .setThumbnail(user.displayAvatarURL())
-        .setFooter({ text: `${emoji} You have good amount of resources`})
-        .setTimestamp();
+        .setTimestamp()
+      if (userData.resources.woods) {
+        resources.addFields({ name: `${config.emojis.wood}Wood`, value: `${userData.resources.woods.toLocaleString()}` })
+      }
+      if (userData.resources.stones) {
+        resources.addFields({ name: `${config.emojis.stone}Stone`, value: `${userData.resources.stones.toLocaleString()}` })
+      }
 
-        let weapons = new EmbedBuilder()
+
+      if (userData.axe.stone || userData.pickaxe.stone) {
+        toolsMessage = "Nice tools";
+      } else {
+        toolsMessage = "You don't have any tools";
+      }
+        let tools = new EmbedBuilder()
         .setTitle(`${user.username}'s Inventory`)
-        .setDescription("Nothing to seek here")
+        .setDescription(`${toolsMessage}`)
         .setColor(config.colours.embed)
         .setThumbnail(user.displayAvatarURL())
-        .setFooter({ text: `${emoji} You have good amount of weapons`})
-        .setTimestamp();
+        .setTimestamp()
+      if (userData.axe.stone) {
+        tools.addFields({ name: `Axe`, value: `own` })
+      }
+      if (userData.pickaxe.stone) {
+        tools.addFields({ name: `Pickaxe`, value: `own` })
+      }
         
         
         const row = new ActionRowBuilder()
@@ -55,11 +74,11 @@ module.exports = {
 							description: 'View your resources',
 							value: 'resources',
 						},
-                        {
-                            label: 'Weapons',
-                            description: 'View your weapons',
-                            value: 'weapons',
-                        },
+            {
+              label: 'Tools',
+              description: 'View your tools',
+              value: 'tools',
+            },
 					),
 			);
       
@@ -86,10 +105,10 @@ module.exports = {
             )
             .setTimestamp();
 
-        let viewWeapons = new EmbedBuilder()
+        let viewTools = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`**[Inventory Command]** viewing weapons **${interaction.user.tag}**`)
+            .setDescription(`**[Inventory Command]** viewing tools **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )
@@ -113,11 +132,11 @@ client.on('interactionCreate', async (interaction, client) => {
     if (!interaction.isSelectMenu()) return;
             
     switch (interaction.values[0]) {
-        case "weapons":  
+        case "tools":  
            await interaction.deferUpdate();
            await wait(100);
-           await interaction.editReply({ embeds: [weapons], components: [row] })
-           await logChannel.send({ embeds: [viewWeapons] });
+           await interaction.editReply({ embeds: [tools], components: [row] })
+           await logChannel.send({ embeds: [viewTools] });
             break;
         case "resources":  
            await interaction.deferUpdate();
