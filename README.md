@@ -1,4 +1,4 @@
-# [Voatt](https://voatt.cf)
+# [FavWay](https://FavWay.cf)
 
-Discord bot
+It's a cute discord bot ever seen in my life
 
