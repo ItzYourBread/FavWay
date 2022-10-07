@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const { Profile } = require("../../database/game/profile");
 const { printly, ms } = require("printly.js");
 const config = require("../../config.json");
-//
+
 
 module.exports = {
     name: "statistics",

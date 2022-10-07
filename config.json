@@ -26,6 +26,7 @@
     
     "colours": {
          "embed": "0xcec6ff",
+         "reward": "0xff9e9e",
          "logger": "0xdfffd8",
          "receipt": "0xffd753",
          "work": "0x8affac",
