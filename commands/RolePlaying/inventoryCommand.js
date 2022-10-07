@@ -30,6 +30,7 @@ module.exports = {
       } else {
         resourcesMessage = "You don't have any resources";
       }
+      
         let resources = new EmbedBuilder()
         .setTitle(`${user.username}'s Inventory`)
         .setDescription(`${resourcesMessage}`)
@@ -41,6 +42,9 @@ module.exports = {
       }
       if (userData.resources.stones) {
         resources.addFields({ name: `${config.emojis.stone}Stone`, value: `${userData.resources.stones.toLocaleString()}` })
+      }
+      if (userData.resources.ironOres) {
+        resources.addFields({ name: `${config.emojis.ironOre}Iron Ore`, value: `${userData.resources.ironOres.toLocaleString()}` })
       }
 
 

@@ -26,7 +26,8 @@ module.exports = {
         required: true,
         choices: [
           { name: 'Wood', value: 'woods' },
-          { name: 'Stone', value: 'stones' }
+          { name: 'Stone', value: 'stones' },
+          { name: 'Iron Ore', value: 'ironOre' }
         ], 
       }, {
           name: 'quantity',
@@ -69,13 +70,22 @@ module.exports = {
       if (interaction.options.get('resource').value === "stones") {
         amount2 = quantity * 7;
       }
+      if (interaction.options.get('resource').value === "ironOre") {
+        amount2 = quantity * 15;
+      }
 
         
       if (interaction.options.get('resource').value === "woods") {
         itemEmoji = config.emojis.wood;
+        itemName = "Wood";
       }
       if (interaction.options.get('resource').value === "stones") {
         itemEmoji = config.emojis.stone;
+        itemName = "Stone";
+      }
+      if (interaction.options.get('resource').value === "ironOre") {
+        itemEmoji = config.emojis.ironOre;
+        itemName = "Iron Ore";
       }
         
         if (userData.coins < amount2)
@@ -88,19 +98,22 @@ module.exports = {
             ],
           });
         
-        userData.coins -= amount2; 
+          userData.coins -= amount2; 
         if (interaction.options.get('resource').value === "woods") {
-        userData.resources.woods += quantity;
+          userData.resources.woods += quantity;
         }
         if (interaction.options.get('resource').value === "stones") {
-        userData.resources.stones += quantity;
+          userData.resources.stones += quantity;
+        }
+        if (interaction.options.get('resource').value === "ironOre") {
+          userData.resources.ironOres += quantity;
         }
         userData.save();
 
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You bought **${quantity.toLocaleString()}** ${itemEmoji}**${res}** at: ${config.emojis.currency} **${amount2}**`)
+              .setDescription(`You bought **${quantity.toLocaleString()}** ${itemEmoji}**${itemName}** at: ${config.emojis.currency} **${amount2}**`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
@@ -114,7 +127,7 @@ module.exports = {
             .setDescription(`**[Buy Resources SubCommand]** run by **${interaction.user.tag}**`)
             .addFields(
                 {
-                  name: "Value:", value: `bought **${quantity}** ${itemEmoji}**${res}**`
+                  name: "Value:", value: `bought **${quantity}** ${itemEmoji}**${itemName}**`
                 },
                 { name: "Guild:", value: `${guild.name}` }
             )

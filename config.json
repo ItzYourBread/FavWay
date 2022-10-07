@@ -38,7 +38,8 @@
           "currency": "£",
           "currencyCents": "¥",
           "wood": "<:woods:1027682366874980353>",
-          "stone": "<:stone:1027682400999833620>"
+          "stone": "<:stone:1027682400999833620>",
+          "ironOre": "<:ironore:1028020196037894184>"
     },
     
      "database": {

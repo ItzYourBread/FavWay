@@ -27,7 +27,8 @@ module.exports = {
         required: true,
         choices: [
           { name: 'Wood', value: 'woods' },
-          { name: 'Stone', value: 'stones' }
+          { name: 'Stone', value: 'stones' },
+          { name: 'Iron Ore', value: 'ironOre'}
         ], 
       }, {
           name: 'quantity',
@@ -60,39 +61,53 @@ module.exports = {
         amount2 = quantity * 6;
         amount3 = quantity * 25;
       }
+      if (interaction.options.get('resource').value === "ironOre") {
+        choice = userData.resources.ironOres;
+        amount2 = quantity * 12;
+        amount3 = 100;
+      }
 
       
       if (interaction.options.get('resource').value === "woods") {
         itemEmoji = config.emojis.wood;
+        itemName = "Wood";
       }
       if (interaction.options.get('resource').value === "stones") {
         itemEmoji = config.emojis.stone;
+        itemName = "Stone"
+      }
+      if (interaction.options.get('resource').value === "ironOre") {
+        itemEmoji = config.emojis.ironOre;
+        itemName = "Iron Ore";
       }
         
         if (choice < quantity)
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setDescription(`You don't have enough ${res} to sell, you only have ${choice}${config.emojis.wood}${res} in your inventory..!`)
+                .setDescription(`You don't have enough ${itemName} to sell, you only have ${choice}${itemEmoji}${itemName} in your inventory..!`)
                 .setColor(config.colours.error)
                 .setTimestamp(),
             ],
           });
         
-        userData.coins += amount2; 
-        userData.cents += amount3;
+          userData.coins += amount2; 
+          userData.cents += amount3;
         if (interaction.options.get('resource').value === "woods") {
-        userData.resources.woods -= quantity;
+          userData.resources.woods -= quantity;
         }
         if (interaction.options.get('resource').value === "stones") {
-        userData.resources.stones -= quantity;
+          userData.resources.stones -= quantity;
+        }
+        if (interaction.options.get('resource').value === "ironOre") {
+          userData.resources.ironOres -= quantity;
         }
         userData.save();
 
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You sold **${quantity.toLocaleString()}** ${itemEmoji}**${res}** and got ${config.emojis.currency} **${amount2}** and here is your cents ${config.emojis.currencyCents} **${amount3}**`)
+              .setDescription(`You sold **${quantity.toLocaleString()}** ${itemEmoji}**${itemName}** and got ${config.emojis.currency} **${amount2}** and here is your cents ${config.emojis.currencyCents} **${amount3}**`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
@@ -106,7 +121,7 @@ module.exports = {
             .setDescription(`**[Sell Resources SubCommand]** run by **${interaction.user.tag}**`)
             .addFields(
                 {
-                  name: "Value:", value: `sold **${quantity}** ${itemEmoji}**${res}**`
+                  name: "Value:", value: `sold **${quantity}** ${itemEmoji}**${itemName}**`
                 },
                 { name: "Guild:", value: `${guild.name}` }
             )
