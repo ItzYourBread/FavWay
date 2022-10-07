@@ -10,7 +10,7 @@ module.exports = {
         
       client.user.setPresence({
       activities: [{ 
-      name: `https://voatt.cf`, 
+      name: `https://favway.cf`, 
       type: ActivityType.Playing }],
       status: 'online',
 });
