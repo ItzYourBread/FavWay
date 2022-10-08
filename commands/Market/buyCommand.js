@@ -27,7 +27,7 @@ module.exports = {
         choices: [
           { name: 'Wood', value: 'woods' },
           { name: 'Stone', value: 'stones' },
-          { name: 'Iron Ore', value: 'ironOre' }
+          { name: 'Iron Ore', value: 'ironOre' },
           { name: 'Iron', value: 'ironBrick' }
         ], 
       }, {
