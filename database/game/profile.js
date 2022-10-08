@@ -10,10 +10,14 @@ const Profile = new mongoose.Schema({
         minerock: { type: Date },
         daily: { type: Date }
     },
+    items: {
+      furnace: { type: Boolean, default: false }
+    },
     resources: {
         woods: { type: Number, default: 0 },
         stones: { type: Number, default: 0 },
-        ironOres: { type: Number, default: 0 }
+        ironOres: { type: Number, default: 0 },
+        ironBrick: { type: Number, default: 0 }
     },
     axe: {
       stone: { type: Boolean, default: false }

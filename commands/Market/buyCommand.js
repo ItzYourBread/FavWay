@@ -22,7 +22,7 @@ module.exports = {
       options: [{
         name: 'resource',
         description: 'what type of resource do you want to but?',
-        type: Discord.ApplicationCommandOptionType.String,
+        type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
           { name: 'Wood', value: 'woods' },
@@ -32,7 +32,7 @@ module.exports = {
       }, {
           name: 'quantity',
           description: 'please enter your resources quantity to sell it!',
-          type: Discord.ApplicationCommandOptionType.Number,
+          type: ApplicationCommandOptionType.Number,
           required: false,
       }],
     }, {

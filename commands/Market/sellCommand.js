@@ -42,7 +42,7 @@ module.exports = {
       
       if (interaction.options.getSubcommand() === "resources") {
         
-      const quantity = interaction.options.getNumber('quantity') || 20;
+      const quantity = interaction.options.getNumber('quantity') || '20';
       const res = interaction.options.get('resource').value;
 
       const { guild } = interaction;

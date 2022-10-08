@@ -5,7 +5,7 @@ const wait = require('node:timers/promises').setTimeout;
 
 module.exports = {
     name: "market",
-    description: "View our Shop!",
+    description: "View our Shops and Markets!",
     category: "RolePlay",
     
     run: async (client, interaction) => {
