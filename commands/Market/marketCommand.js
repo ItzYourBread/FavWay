@@ -19,39 +19,52 @@ module.exports = {
      .setColor(config.colours.embed)
      .addFields(
          { name: `${config.emojis.wood}Wood 20x`, 
-           value: `Selling at: ${config.emojis.currency} 100\nBuying at: ${config.emojis.currency} 70`,
+           value: `**Selling at:** ${config.emojis.currency} **100**\n**Buying at:** ${config.emojis.currency} **70**`,
            inline: false
          },
          {
            name: `${config.emojis.stone}Stone 20x`,
-           value: `Selling at: ${config.emojis.currency} 150\nBuying at: ${config.emojis.currency} 125`,
+           value: `**Selling at:** ${config.emojis.currency} **150**\n**Buying at:** ${config.emojis.currency} **125**`,
            inline: false
          },
          {
            name: `${config.emojis.ironOre}Iron Ore 20x`,
-           value: `Selling at: ${config.emojis.currency} 300\nBuying at: ${config.emojis.currency} 260`
+           value: `**Selling at:** ${config.emojis.currency} **300**\n**Buying at:** ${config.emojis.currency} **260**`
          },
          {
            name: `${config.emojis.ironBrick}Iron 20x`,
-           value: `Selling at: ${config.emojis.currency} 450\nBuying at: ${config.emojis.currency} 410`
+           value: `**Selling at:** ${config.emojis.currency} **450**\n**Buying at:** ${config.emojis.currency} **410**`
          }
      )
      .setTimestamp();
       
     let tools = new EmbedBuilder()
      .setTitle("Tools Shop")
-     .setDescription("Buy tools for your journey with Voatt")
+     .setDescription(`Buy tools to start your journey with ${config.bot.name}`)
      .setColor(config.colours.embed)
      .addFields(
          { name: `Axe`, 
-           value: `Price: ${config.emojis.currency} 90`,
+           value: `**Price:** ${config.emojis.currency} **90**`,
            inline: false
          },
          {
            name: `Pickaxe`,
-           value: `Price: ${config.emojis.currency} 120`,
+           value: `**Price:** ${config.emojis.currency} **120**`,
            inline: false
          }
+     )
+     .setTimestamp();
+
+    let foundry = new EmbedBuilder()
+     .setTitle("Foundry Workshop")
+     .setDescription(`Buy foundry items to start your journey with ${config.bot.name}`)
+     .setColor(config.colours.embed)
+     .addFields(
+       {
+         name: 'Furnace',
+         value: `**Price:** ${config.emojis.currency} **5999**`,
+         inline: false
+       }
      )
      .setTimestamp();
 
@@ -66,7 +79,7 @@ module.exports = {
 			.addComponents(
 				new SelectMenuBuilder()
 					.setCustomId('market')
-					.setPlaceholder('Travel to markets')
+					.setPlaceholder('Travel to markets, shops and many more.')
 					.addOptions(
 						{
 							label: 'Resources Market.',
@@ -77,6 +90,11 @@ module.exports = {
               label: 'Tools Shop',
               description: 'Visit Tools Shop.',
               value: 'tools',
+            },
+            {
+              label: 'Foundry Workshop',
+              description: 'Visit Foundry Workshop',
+              value: 'foundry',
             },
             {
               label: 'Go Back.',
@@ -120,7 +138,16 @@ module.exports = {
         let viewTools = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`**[Market Command]** viewing resources market **${interaction.user.tag}**`)
+            .setDescription(`**[Market Command]** viewing tools shop **${interaction.user.tag}**`)
+            .addFields(
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
+      
+        let viewFoundry = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Market Command]** viewing foundry workshop **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )
@@ -154,6 +181,12 @@ client.on('interactionCreate', async (interaction, client) => {
            await wait(100);
            await interaction.editReply({ embeds: [tools], components: [row] })
            await logChannel.send({ embeds: [viewTools] });
+            break;
+        case "foundry":  
+           await interaction.deferUpdate();
+           await wait(100);
+           await interaction.editReply({ embeds: [foundry], components: [row] })
+           await logChannel.send({ embeds: [viewFoundry] });
             break;
         case "market":  
            await interaction.deferUpdate();
