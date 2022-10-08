@@ -47,9 +47,10 @@ module.exports = {
 
     if (interaction.options.get('ore').value === 'ironOre') {
       itemName = "Iron Ore";
+      itemName2 = "Iron";
       itemEmoji = config.emojis.ironOre;
       itemEmoji2 = config.emojis.ironBrick;
-      choice = userData.resources.ironOre;
+      choice = userData.resources.ironOres;
     }
 
     if (user && userData.items.furnace) {
@@ -86,18 +87,20 @@ module.exports = {
           .setTimestamp(),
         ],
       });
-      await wait(1000);
+      
+      await wait(30000);
       
       if (interaction.options.get('ore').value === 'ironOre') {
-        userData.resources.ironOre -= quantity;
-        userData.resources.ironBrick += quantity;
+        userData.resources.ironOres -= quantity;
+        userData.resources.ironBricks += quantity;
       }
         
       await interaction.editReply({
         embeds: [
           new EmbedBuilder()
-          .setTitle("Done")
-          .setDescription("Done now")
+          .setTitle(`${itemName} Melted`)
+          .setColor(config.colours.success)
+          .setDescription(`${itemEmoji}**${itemName}** successfully melted it tooks 30 seconds\nHere is your **${quantity}** ${itemEmoji2}**${itemName2}**`)
           .setTimestamp(),
         ],
       });

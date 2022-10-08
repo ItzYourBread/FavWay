@@ -46,6 +46,9 @@ module.exports = {
       if (userData.resources.ironOres) {
         resources.addFields({ name: `${config.emojis.ironOre}Iron Ore`, value: `${userData.resources.ironOres.toLocaleString()}` })
       }
+      if (userData.resources.ironBricks) {
+        resources.addFields({ name: `${config.emojis.ironBrick}Iron`, value: `${userData.resources.ironBricks.toLocaleString()}` })
+      }
 
 
       if (userData.axe.stone || userData.pickaxe.stone) {
