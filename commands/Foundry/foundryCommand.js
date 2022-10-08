@@ -88,12 +88,13 @@ module.exports = {
         ],
       });
       
-      await wait(30000);
-      
+      await wait(2000);
+
       if (interaction.options.get('ore').value === 'ironOre') {
         userData.resources.ironOres -= quantity;
         userData.resources.ironBricks += quantity;
       }
+        userData.save();
         
       await interaction.editReply({
         embeds: [
@@ -105,7 +106,6 @@ module.exports = {
         ],
       });
     }
-
-      
+     
     }
 }

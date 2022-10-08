@@ -28,7 +28,8 @@ module.exports = {
         choices: [
           { name: 'Wood', value: 'woods' },
           { name: 'Stone', value: 'stones' },
-          { name: 'Iron Ore', value: 'ironOre'}
+          { name: 'Iron Ore', value: 'ironOre'},
+          { name: 'Iron', value: 'ironBrick' }
         ], 
       }, {
           name: 'quantity',
@@ -66,6 +67,11 @@ module.exports = {
         amount2 = quantity * 12;
         amount3 = 100;
       }
+      if (interaction.options.get('resource').value === "ironBrick") {
+        choice = userData.resources.ironBricks;
+        amount2 = quantity * 20;
+        amount3 = 5;
+      }
 
       
       if (interaction.options.get('resource').value === "woods") {
@@ -80,6 +86,11 @@ module.exports = {
         itemEmoji = config.emojis.ironOre;
         itemName = "Iron Ore";
       }
+      if (interaction.options.get('resource').value === "ironBrick") {
+        itemEmoji = config.emojis.ironBrick;
+        itemName = "Iron";
+      }
+        
         
         if (choice < quantity)
           return interaction.reply({
@@ -102,7 +113,10 @@ module.exports = {
         if (interaction.options.get('resource').value === "ironOre") {
           userData.resources.ironOres -= quantity;
         }
-        userData.save();
+        if (interaction.options.get('resource').value === "ironBricks") {
+          userData.resources.ironBricks -= quantity;
+        }
+          userData.save();
 
         await interaction.reply({
           embeds: [

@@ -30,6 +30,10 @@ module.exports = {
          {
            name: `${config.emojis.ironOre}Iron Ore 20x`,
            value: `Selling at: ${config.emojis.currency} 300\nBuying at: ${config.emojis.currency} 260`
+         },
+         {
+           name: `${config.emojis.ironBrick}Iron 20x`,
+           value: `Selling at: ${config.emojis.currency} 450\nBuying at: ${config.emojis.currency} 410`
          }
      )
      .setTimestamp();

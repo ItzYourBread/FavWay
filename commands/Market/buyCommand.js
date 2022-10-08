@@ -28,6 +28,7 @@ module.exports = {
           { name: 'Wood', value: 'woods' },
           { name: 'Stone', value: 'stones' },
           { name: 'Iron Ore', value: 'ironOre' }
+          { name: 'Iron', value: 'ironBrick' }
         ], 
       }, {
           name: 'quantity',
@@ -73,6 +74,9 @@ module.exports = {
       if (interaction.options.get('resource').value === "ironOre") {
         amount2 = quantity * 15;
       }
+      if (interaction.options.get('resource').value === "ironBrick") {
+        amount2 = quantity * 23;
+      }
 
         
       if (interaction.options.get('resource').value === "woods") {
@@ -86,6 +90,10 @@ module.exports = {
       if (interaction.options.get('resource').value === "ironOre") {
         itemEmoji = config.emojis.ironOre;
         itemName = "Iron Ore";
+      }
+      if (interaction.options.get('resource').value === "ironBrick") {
+        itemEmoji = config.emojis.ironBrick;
+        itemName = "Iron";
       }
         
         if (userData.coins < amount2)
@@ -107,6 +115,9 @@ module.exports = {
         }
         if (interaction.options.get('resource').value === "ironOre") {
           userData.resources.ironOres += quantity;
+        }
+        if (interaction.options.get('resource').value === "ironBricks") {
+          userData.resources.ironBricks += quantity;
         }
         userData.save();
 
