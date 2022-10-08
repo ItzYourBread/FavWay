@@ -13,28 +13,28 @@ module.exports = {
     const { guild } = interaction; 
     const user = interaction.member.user
 
-    let resources = new EmbedBuilder()
-     .setTitle("Resource's market")
-     .setDescription("Buy and sell resources from resource's market")
+    let woodworking = new EmbedBuilder()
+     .setTitle("Woodworking Workshop")
+     .setDescription("Buy and sell many types of woods")
      .setColor(config.colours.embed)
      .addFields(
          { name: `${config.emojis.wood}Wood 20x`, 
            value: `**Selling at:** ${config.emojis.currency} **100**\n**Buying at:** ${config.emojis.currency} **70**`,
            inline: false
-         },
-         {
-           name: `${config.emojis.stone}Stone 20x`,
-           value: `**Selling at:** ${config.emojis.currency} **150**\n**Buying at:** ${config.emojis.currency} **125**`,
-           inline: false
-         },
-         {
-           name: `${config.emojis.ironOre}Iron Ore 20x`,
-           value: `**Selling at:** ${config.emojis.currency} **300**\n**Buying at:** ${config.emojis.currency} **260**`
-         },
-         {
-           name: `${config.emojis.ironBrick}Iron 20x`,
-           value: `**Selling at:** ${config.emojis.currency} **450**\n**Buying at:** ${config.emojis.currency} **410**`
          }
+     )
+     .setTimestamp();
+
+    let lapidary = new EmbedBuilder()
+     .setTitle("Lapidary Shop")
+     .setDescription(`text ${config.bot.name}`)
+     .setColor(config.colours.embed)
+     .addFields(
+       {
+         name: `${config.emojis.stone}Stone 20x`,
+         value: `**Selling at:** ${config.emojis.currency} **150**\n**Buying at:** ${config.emojis.currency} **125**`,
+         inline: false
+       }
      )
      .setTimestamp();
       
@@ -82,10 +82,15 @@ module.exports = {
 					.setPlaceholder('Travel to markets, shops and many more.')
 					.addOptions(
 						{
-							label: 'Resources Market.',
-							description: 'Visit Resources Market.',
-							value: 'resources',
+							label: 'Woodworking Workshop.',
+							description: 'Visit Woodworking Workshop.',
+							value: 'woodworking',
 						},
+            {
+              label: 'Lapidary Shop',
+              description: 'Visit Lapidary Shop',
+              value: 'lapidary',
+            },
             {
               label: 'Tools Shop',
               description: 'Visit Tools Shop.',
@@ -126,10 +131,19 @@ module.exports = {
             )
             .setTimestamp();
 
-        let viewRes = new EmbedBuilder()
+        let viewWood = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`**[Market Command]** viewing resources market **${interaction.user.tag}**`)
+            .setDescription(`**[Market Command]** viewing woodworking workshop **${interaction.user.tag}**`)
+            .addFields(
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
+      
+        let viewLap = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Market Command]** viewing lapidary shop **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )
@@ -170,10 +184,16 @@ client.on('interactionCreate', async (interaction, client) => {
     if (!interaction.isSelectMenu()) return;
             
     switch (interaction.values[0]) {
-        case "resources":  
+        case "woodworking":  
+          // await interaction.deferUpdate();
+           await wait(100);
+           await interaction.editReply({ embeds: [woodworking], components: [row] })
+           await logChannel.send({ embeds: [viewWood] });
+            break;
+        case "lapidary":  
            await interaction.deferUpdate();
            await wait(100);
-           await interaction.editReply({ embeds: [resources], components: [row] })
+           await interaction.editReply({ embeds: [lapidary], components: [row] })
            await logChannel.send({ embeds: [viewRes] });
             break;
         case "tools":  
