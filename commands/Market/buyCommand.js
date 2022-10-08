@@ -155,17 +155,34 @@ module.exports = {
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
-      if (interaction.options.get('tool').value === 'axe')
+      if (interaction.options.get('tool').value === 'axe') {
         price = 90;
-      if (interaction.options.get('tool').value === 'pickaxe')
+        itemName = "Axe";
+        choice = userData.axe.stone
+      }
+      if (interaction.options.get('tool').value === 'pickaxe') {
         price = 120;
+        itemName = "Pickaxe";
+        choice = userData.pickaxe.stone;
+      }
 
+      if (user && choice) {
+        return interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+            .setTitle("Error: you already have")
+            .setColor(config.colours.error)
+            .setDescription(`Woohoo... You already have **${itemName}**\nYou don't need to buy anymore.`)
+            .setTimestamp(),
+          ],
+        });
+      }
         
         if (userData.coins < price)
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setDescription(`Sorry you dont have enough money to buy **${tools}**`)
+                .setDescription(`Sorry you dont have enough money to buy **${itemName}**`)
                 .setColor(config.colours.error)
                 .setTimestamp(),
             ],
@@ -185,7 +202,7 @@ module.exports = {
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You bought ${tools} and paid ${config.emojis.currency} **${price}**`)
+              .setDescription(`You bought ${itemName} for ${config.emojis.currency} **${price}**`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
