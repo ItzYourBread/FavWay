@@ -1,1 +1,1 @@
-git pull "https://NotRealArif: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@github.com/NotRealArif/FavWay.git" main
+git pull "https://NotRealArif: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@github.com/NotRealArif/FavWay.git" main
