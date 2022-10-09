@@ -222,7 +222,7 @@ module.exports = {
       if (interaction.options.get('item').value === 'furnace') {
         price = 5999;
         itemName = "Furance";
-        choice = userData.items.furance;
+        choice = userData.items.furnace;
       }
       if (interaction.options.get('item').value === 'ironBrick') {
         price = quantity * 22;
