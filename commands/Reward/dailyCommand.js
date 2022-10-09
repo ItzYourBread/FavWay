@@ -38,7 +38,7 @@ module.exports = {
       let amount = Math.floor((Math.random() * 150) + 115);
 
       userData.coins += amount;
-      userData.cooldowns.daily = Date.now() + ms("24h");
+      userData.cooldowns.daily = new Date().setUTCHours(0,0,0,0);
       userData.save();
 
       await interaction.reply({
