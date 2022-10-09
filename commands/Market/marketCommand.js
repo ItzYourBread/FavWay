@@ -25,6 +25,18 @@ module.exports = {
      )
      .setTimestamp();
 
+    let ore = new EmbedBuilder()
+     .setTitle("Ore Market")
+     .setDescription("Buy and sell many types of mineral and elemental ores from Ore Market")
+     .setColor(config.colours.embed)
+     .addFields(
+         { name: `${config.emojis.ironOre}Iron Ore 20x`, 
+           value: `**Selling at:** ${config.emojis.currency} **330**\n**Buying at:** ${config.emojis.currency} **310**`,
+           inline: false
+         }
+     )
+     .setTimestamp();
+
     let lapidary = new EmbedBuilder()
      .setTitle("Lapidary Shop")
      .setDescription(`text ${config.bot.name}`)
@@ -87,6 +99,11 @@ module.exports = {
 							value: 'woodworking',
 						},
             {
+              label: 'Ore Market.',
+              description: 'Visit Ore Market.',
+              value: 'ore'
+            },
+            {
               label: 'Lapidary Shop',
               description: 'Visit Lapidary Shop',
               value: 'lapidary',
@@ -135,6 +152,15 @@ module.exports = {
             .setColor(config.colours.logger)
             .setTitle("Command log")
             .setDescription(`**[Market Command]** viewing woodworking workshop **${interaction.user.tag}**`)
+            .addFields(
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
+
+        let viewOre = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Market Command]** viewing ore market **${interaction.user.tag}**`)
             .addFields(
                 { name: "Guild:", value: `${guild.name}` }
             )
@@ -189,6 +215,12 @@ client.on('interactionCreate', async (interaction, client) => {
            await wait(100);
            await interaction.editReply({ embeds: [woodworking], components: [row] })
            await logChannel.send({ embeds: [viewWood] });
+            break;
+        case "ore":  
+          await interaction.deferUpdate();
+           await wait(100);
+           await interaction.editReply({ embeds: [ore], components: [row] })
+           await logChannel.send({ embeds: [viewOre] });
             break;
         case "lapidary":  
            await interaction.deferUpdate();
