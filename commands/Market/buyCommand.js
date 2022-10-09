@@ -16,25 +16,22 @@ module.exports = {
     botPerm: [""],
     category: "RolePlay",
     options: [{
-      name: 'resources',
-      description: 'Buy resources from market which you needed!',
+      name: 'woodworking',
+      description: 'Buy stuffs from Woodworking workshop',
       type: ApplicationCommandOptionType.Subcommand,
       options: [{
-        name: 'resource',
-        description: 'what type of resource do you want to but?',
+        name: 'item',
+        description: 'what type of stuff do you want to but?',
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
-          { name: 'Wood', value: 'woods' },
-          { name: 'Stone', value: 'stones' },
-          { name: 'Iron Ore', value: 'ironOre' },
-          { name: 'Iron', value: 'ironBrick' }
+          { name: 'Wood', value: 'woods' }
         ], 
       }, {
           name: 'quantity',
           description: 'please enter your resources quantity to sell it!',
           type: ApplicationCommandOptionType.Number,
-          required: false,
+          required: false
       }],
     }, {
       name: 'tools',
@@ -54,10 +51,9 @@ module.exports = {
     
     run: async (client, interaction, args) => {
       
-      if (interaction.options.getSubcommand() === "resources") {
+      if (interaction.options.getSubcommand() === "woodworking") {
 
       const quantity = interaction.options.getNumber('quantity') || '20';
-      const res = interaction.options.get('resource').value;
 
       const { guild } = interaction;
       const user = interaction.member.user;
@@ -65,61 +61,30 @@ module.exports = {
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
         
-      if (interaction.options.get('resource').value === "woods") {
+      if (interaction.options.get('item').value === "woods") {
         amount2 = quantity * 5;
       }
-      if (interaction.options.get('resource').value === "stones") {
-        amount2 = quantity * 7;
-      }
-      if (interaction.options.get('resource').value === "ironOre") {
-        amount2 = quantity * 15;
-      }
-      if (interaction.options.get('resource').value === "ironBrick") {
-        amount2 = quantity * 23;
-      }
 
-        
-      if (interaction.options.get('resource').value === "woods") {
+      if (interaction.options.get('item').value === "woods") {
         itemEmoji = config.emojis.wood;
         itemName = "Wood";
-      }
-      if (interaction.options.get('resource').value === "stones") {
-        itemEmoji = config.emojis.stone;
-        itemName = "Stone";
-      }
-      if (interaction.options.get('resource').value === "ironOre") {
-        itemEmoji = config.emojis.ironOre;
-        itemName = "Iron Ore";
-      }
-      if (interaction.options.get('resource').value === "ironBrick") {
-        itemEmoji = config.emojis.ironBrick;
-        itemName = "Iron";
       }
         
         if (userData.coins < amount2)
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setDescription(`Sorry you dont have enough money to buy **${res}**`)
+                .setDescription(`Sorry you dont have enough money to buy **${itemName}**`)
                 .setColor(config.colours.error)
                 .setTimestamp(),
             ],
           });
         
           userData.coins -= amount2; 
-        if (interaction.options.get('resource').value === "woods") {
+        if (interaction.options.get('item').value === "woods") {
           userData.resources.woods += quantity;
         }
-        if (interaction.options.get('resource').value === "stones") {
-          userData.resources.stones += quantity;
-        }
-        if (interaction.options.get('resource').value === "ironOre") {
-          userData.resources.ironOres += quantity;
-        }
-        if (interaction.options.get('resource').value === "ironBricks") {
-          userData.resources.ironBricks += quantity;
-        }
-        userData.save();
+          userData.save();
 
         await interaction.reply({
           embeds: [
@@ -135,7 +100,7 @@ module.exports = {
         const logger = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`**[Buy Resources SubCommand]** run by **${interaction.user.tag}**`)
+            .setDescription(`**[Buy Workworking SubCommand]** run by **${interaction.user.tag}**`)
             .addFields(
                 {
                   name: "Value:", value: `bought **${quantity}** ${itemEmoji}**${itemName}**`
