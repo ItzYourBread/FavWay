@@ -185,7 +185,7 @@ client.on('interactionCreate', async (interaction, client) => {
             
     switch (interaction.values[0]) {
         case "woodworking":  
-          // await interaction.deferUpdate();
+          await interaction.deferUpdate();
            await wait(100);
            await interaction.editReply({ embeds: [woodworking], components: [row] })
            await logChannel.send({ embeds: [viewWood] });
