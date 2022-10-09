@@ -12,13 +12,13 @@ require('moment-duration-format');
 
 
 module.exports = {
-  name: 'add',
-  description: 'adding stuffs and coins to user profile',
+  name: 'remove',
+  description: 'removing stuffs and coins from the profile',
   category: 'Admin',
   admin: true,
   options: [{
     name: 'type',
-    description: 'what type of thing you want add to the user?',
+    description: 'what type of thing do you want to remove from the user?',
     type: Discord.ApplicationCommandOptionType.String,
     required: true,
     choices: [
@@ -53,23 +53,23 @@ module.exports = {
 
       
         if (interaction.options.get('type').value === "coins") {
-        userData.coins += amount;
+        userData.coins -= amount;
         }
         if (interaction.options.get('type').value === "cents") {
-        userData.cents += amount;
+        userData.cents -= amount;
         }
         if (interaction.options.get('type').value === "ironOre") {
-        userData.resources.ironOre += amount;
+        userData.resources.ironOre -= amount;
         }
         if (interaction.options.get('type').value === "ironBrick") {
-        userData.resources.ironBrick += amount;
+        userData.resources.ironBrick -= amount;
         }
         userData.save();
 
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You add ${amount.toLocaleString()} ${choice} to ${user}`)
+              .setDescription(`You removed ${amount.toLocaleString()} ${choice} from ${user}`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
