@@ -35,10 +35,18 @@ module.exports = {
           ],
         });
 
-      let amount = Math.floor((Math.random() * 150) + 115);
+      let amount = Math.floor((Math.random() * 150) + 115)
+
+      function DateUTC() {
+        const d = new Date, z = d.getTimezoneOffset();
+        d.setDate(d.getDate()+1); d.setHours(0); d.setSeconds(0); 
+        d.setMilliseconds(0); d.setMinutes(0+z);
+        return d.getTime()-Date.now();
+      }
+      let result = DateUTC();
 
       userData.coins += amount;
-      userData.cooldowns.daily = new Date().setUTCHours(0,0,0,0);
+      userData.cooldowns.daily = Date.now() + result;
       userData.save();
 
       await interaction.reply({
@@ -46,7 +54,7 @@ module.exports = {
           new EmbedBuilder()
           .setTitle("Daily Reward Claimed")
           .setColor(config.colours.reward)
-          .setDescription(`Awesome you claimed your daily reward\n\n**Coins:** ${config.emojis.currency}**${amount}**\n\nYour next daily reward will ready in\n**23h 59m 55s**`)
+          .setDescription(`Awesome you claimed your daily reward\n\n**Coins:** ${config.emojis.currency}**${amount}**\n\nYour next daily reward will ready in\n**${moment.duration(userData.cooldowns.daily - Date.now()).format("h[h] m[m], s[s]")}**`)
           .setTimestamp(),
         ],
       });
