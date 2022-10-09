@@ -12,10 +12,16 @@ module.exports = {
     description: "Check your Inventory",
     botPerm: [""],
     category: "RolePlay",
-    
+    options: [{
+      name: 'user',
+      description: 'Please enter a user to look their inventory.',
+      type: Discord.ApplicationCommandOptionType.User,
+      required: false
+    }],
+  
     run: async (client, interaction, args) => {
         
-        const user = interaction.member.user
+        const user = interaction.options.getUser('user') || interaction.user;
         const { guild } = interaction;
         
         const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
@@ -68,6 +74,22 @@ module.exports = {
       if (userData.pickaxe.stone) {
         tools.addFields({ name: `Pickaxe`, value: `own` })
       }
+
+      
+      if (userData.items.furnace) {
+        toolsMessage = "Nice items";
+      } else {
+        toolsMessage = "You don't have any items";
+      }
+        let items = new EmbedBuilder()
+        .setTitle(`${user.username}'s Inventory`)
+        .setDescription(`${toolsMessage}`)
+        .setColor(config.colours.embed)
+        .setThumbnail(user.displayAvatarURL())
+        .setTimestamp()
+      if (userData.items.furnace) {
+        items.addFields({ name: `Furnace`, value: `own` })
+      }
         
         
         const row = new ActionRowBuilder()
@@ -86,6 +108,11 @@ module.exports = {
               description: 'View your tools',
               value: 'tools',
             },
+            {
+              label: 'Items', 
+              description: 'View your items',
+              value: 'items'
+            }
 					),
 			);
       
@@ -120,6 +147,15 @@ module.exports = {
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();
+      
+        let viewItems = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Inventory Command]** viewing items **${interaction.user.tag}**`)
+            .addFields(
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
         
         logChannel.send({ embeds: [logger] });
         
@@ -139,6 +175,12 @@ client.on('interactionCreate', async (interaction, client) => {
     if (!interaction.isSelectMenu()) return;
             
     switch (interaction.values[0]) {
+        case "items":  
+           await interaction.deferUpdate();
+           await wait(100);
+           await interaction.editReply({ embeds: [items], components: [row] })
+           await logChannel.send({ embeds: [viewItems] });
+            break;
         case "tools":  
            await interaction.deferUpdate();
            await wait(100);
