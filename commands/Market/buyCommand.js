@@ -21,7 +21,7 @@ module.exports = {
       type: ApplicationCommandOptionType.Subcommand,
       options: [{
         name: 'item',
-        description: 'what type of stuff do you want to but?',
+        description: 'What type of stuff do you want to but?',
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
@@ -29,24 +29,43 @@ module.exports = {
         ], 
       }, {
           name: 'quantity',
-          description: 'please enter your resources quantity to sell it!',
+          description: 'Please enter your item quantity to buy it.',
           type: ApplicationCommandOptionType.Number,
           required: false
       }],
     }, {
       name: 'tools',
-      description: 'Buy some tools to start your journey with Voatt!',
+      description: 'Buy some tools to start your journey with FavWay!',
       type: ApplicationCommandOptionType.Subcommand,
       options: [{
         name: 'tool',
-        description: 'what tool do you want to buy?',
-        type: Discord.ApplicationCommandOptionType.String,
+        description: 'What tool do you want to buy?',
+        type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
           { name: 'Axe', value: 'axe' },
           { name: 'Pickaxe', value: 'pickaxe' }
         ],
       }], 
+    }, {
+      name: 'foundry',
+      description: 'Buy foundry items from Foundry Workshop.',
+      type: ApplicationCommandOptionType.Subcommand,
+      options: [{
+        name: 'item',
+        description: 'What foundry item do you want?',
+        type: ApplicationCommandOptionType.String,
+        required: true,
+        choices: [
+          { name: 'Furnace', value: 'furnace' },
+          { name: 'Iron', value: 'ironBrick' }
+        ],
+      }, {
+        name: 'quantity',
+        description: 'Please enter your item quatity.',
+        type: ApplicationCommandOptionType.Number,
+        required: false
+      }],
     }],
     
     run: async (client, interaction, args) => {
@@ -178,10 +197,93 @@ module.exports = {
         const logger = new EmbedBuilder()
             .setColor(config.colours.logger)
             .setTitle("Command log")
-            .setDescription(`**[Tools SubCommand]** run by **${interaction.user.tag}**`)
+            .setDescription(`**[Buy Tools SubCommand]** run by **${interaction.user.tag}**`)
             .addFields(
                 {
                   name: "Value:", value: `Bought **${tools}**`
+                },
+                { 
+                  name: "Guild:", value: `${guild.name}`
+                }
+            )
+            .setTimestamp();
+        
+        logChannel.send({ embeds: [logger] });
+        
+    } else if (interaction.options.getSubcommand() === "foundry") {
+
+      const quantity = interaction.options.getNumber('quantity') || '20';
+        
+      const { guild } = interaction;
+      const user = interaction.member.user;
+        
+      const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+      if (interaction.options.get('item').value === 'furnace') {
+        price = 5999;
+        itemName = "Furance";
+        choice = userData.furance;
+      }
+      if (interaction.options.get('item').value === 'ironBrick') {
+        price = quantity * 22;
+        itemName = "Iron";
+        itemEmoji = config.emojis.ironBrick;
+        choice = null;
+      }
+
+      if (user && choice) {
+        return interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+            .setTitle("Error: you already have")
+            .setColor(config.colours.error)
+            .setDescription(`Woohoo... You already have **${itemName}**\nYou don't need to buy anymore.`)
+            .setTimestamp(),
+          ],
+        });
+      }
+        
+        if (userData.coins < price )
+          return interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setDescription(`Sorry you dont have enough money to buy **${itemName}**`)
+                .setColor(config.colours.error)
+                .setTimestamp(),
+            ],
+          });
+
+        if (interaction.options.get('item').value === "furnace") {
+          userData.axe.stone = true;
+          userData.coins -= price;
+        }
+        if (interaction.options.get('item').value === "ironBrick") {
+          userData.resources.ironBrick = quantity;
+          userData.coins -= price;
+        }
+          userData.save();
+
+        const success = new EmbedBuilder()
+         .setColor(config.colours.success)
+         .setTimestamp();
+        
+        if (user && choice) {
+          success.setDescription(`You bought **${itemName}** for ${config.emojis.currency} **${price}**`)
+        } else {
+          success.setDescription(`You bought **${quantity}** ${itemEmoji}**${itemName}** for ${config.emojis.currency} **${price}**`)
+        }
+
+        interaction.reply({ embeds: [success] });
+
+        const logChannel = client.channels.cache.get(config.logs.buyLog)
+        
+        const logger = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Buy Foundry SubCommand]** run by **${interaction.user.tag}**`)
+            .addFields(
+                {
+                  name: "Value:", value: `Bought **${itemName}**`
                 },
                 { 
                   name: "Guild:", value: `${guild.name}`
