@@ -65,12 +65,12 @@ module.exports = {
       if (interaction.options.get('resource').value === "ironOre") {
         choice = userData.resources.ironOres;
         amount2 = quantity * 12;
-        amount3 = 100;
+        amount3 = quantity * 100;
       }
       if (interaction.options.get('resource').value === "ironBrick") {
         choice = userData.resources.ironBricks;
         amount2 = quantity * 20;
-        amount3 = 5;
+        amount3 = quantity * 5;
       }
 
       
