@@ -68,11 +68,17 @@ module.exports = {
         .setColor(config.colours.embed)
         .setThumbnail(user.displayAvatarURL())
         .setTimestamp()
+      if (userData.axe.iron) {
+        tools.addFields({ name: `Iron Axe`, value: `own` })
+      }
+      if (userData.pickaxe.iron) {
+        tools.addFields({ name: `Iron Pickaxe`, value: `own` })
+      }
       if (userData.axe.stone) {
-        tools.addFields({ name: `Axe`, value: `own` })
+        tools.addFields({ name: `Stone Axe`, value: `own` })
       }
       if (userData.pickaxe.stone) {
-        tools.addFields({ name: `Pickaxe`, value: `own` })
+        tools.addFields({ name: `Stone Pickaxe`, value: `own` })
       }
 
       

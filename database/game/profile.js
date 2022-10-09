@@ -20,10 +20,12 @@ const Profile = new mongoose.Schema({
         ironBricks: { type: Number, default: 0 }
     },
     axe: {
-      stone: { type: Boolean, default: false }
+      stone: { type: Boolean, default: false },
+      iron: { type: Boolean, default: false }
     },
     pickaxe: {
-      stone: { type: Boolean, default: false }
+      stone: { type: Boolean, default: false },
+      iron: { type: Boolean, default: false }
     },
 })
 

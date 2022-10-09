@@ -43,8 +43,10 @@ module.exports = {
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
-          { name: 'Axe', value: 'axe' },
-          { name: 'Pickaxe', value: 'pickaxe' }
+          { name: 'Stone Axe', value: 'stoneAxe' },
+          { name: 'Stone Pickaxe', value: 'stonePickaxe' },
+          { name: 'Iron Axe', value: 'ironAxe' },
+          { name: 'Iron Pickaxe', value: 'ironPickaxe' }
         ],
       }], 
     }, {
@@ -139,15 +141,25 @@ module.exports = {
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
-      if (interaction.options.get('tool').value === 'axe') {
+      if (interaction.options.get('tool').value === 'stoneAxe') {
         price = 90;
-        itemName = "Axe";
+        itemName = "Stone Axe";
         choice = userData.axe.stone
       }
-      if (interaction.options.get('tool').value === 'pickaxe') {
+      if (interaction.options.get('tool').value === 'stonePickaxe') {
         price = 120;
-        itemName = "Pickaxe";
+        itemName = "Stone Pickaxe";
         choice = userData.pickaxe.stone;
+      }
+      if (interaction.options.get('tool').value === 'ironAxe') {
+        price = 450;
+        itemName = "Iron Axe";
+        choice = userData.pickaxe.iron;
+      }
+      if (interaction.options.get('tool').value === 'stonePickaxe') {
+        price = 570;
+        itemName = "Iron Pickaxe";
+        choice = userData.pickaxe.iron;
       }
 
       if (user && choice) {
@@ -173,13 +185,21 @@ module.exports = {
           });
         
 
-        if (interaction.options.get('tool').value === "axe") {
+        if (interaction.options.get('tool').value === "stoneAxe") {
         userData.axe.stone = true;
-        userData.coins -= 90;
+        userData.coins -= price;
         }
-        if (interaction.options.get('tool').value === "pickaxe") {
+        if (interaction.options.get('tool').value === "stonePickaxe") {
         userData.pickaxe.stone = true;
-        userData.coins -= 120;
+        userData.coins -= price;
+        }
+        if (interaction.options.get('tool').value === "ironAxe") {
+        userData.axe.iron = true;
+        userData.coins -= price;
+        }
+        if (interaction.options.get('tool').value === "ironPickaxe") {
+        userData.pickaxe.iron = true;
+        userData.coins -= price;
         }
         userData.save();
 

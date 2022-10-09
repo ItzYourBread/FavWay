@@ -55,13 +55,22 @@ module.exports = {
      .setDescription(`Buy tools to start your journey with ${config.bot.name}`)
      .setColor(config.colours.embed)
      .addFields(
-         { name: `Axe`, 
+         { name: `Stone Axe`, 
            value: `**Price:** ${config.emojis.currency} **90**`,
            inline: false
          },
          {
-           name: `Pickaxe`,
+           name: `Stone Pickaxe`,
            value: `**Price:** ${config.emojis.currency} **120**`,
+           inline: false
+         },
+         { name: `Iron Axe`, 
+           value: `**Price:** ${config.emojis.currency} **450**`,
+           inline: false
+         },
+         {
+           name: `Iron Pickaxe`,
+           value: `**Price:** ${config.emojis.currency} **570**`,
            inline: false
          }
      )
