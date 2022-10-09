@@ -222,13 +222,12 @@ module.exports = {
       if (interaction.options.get('item').value === 'furnace') {
         price = 5999;
         itemName = "Furance";
-        choice = userData.furance;
+        choice = userData.items.furance;
       }
       if (interaction.options.get('item').value === 'ironBrick') {
         price = quantity * 22;
         itemName = "Iron";
         itemEmoji = config.emojis.ironBrick;
-        choice = null;
       }
 
       if (user && choice) {
@@ -254,7 +253,7 @@ module.exports = {
           });
 
         if (interaction.options.get('item').value === "furnace") {
-          userData.axe.stone = true;
+          userData.items.furnace = true;
           userData.coins -= price;
         }
         if (interaction.options.get('item').value === "ironBrick") {
@@ -267,7 +266,7 @@ module.exports = {
          .setColor(config.colours.success)
          .setTimestamp();
         
-        if (user && choice) {
+        if (interaction.options.get('item').value === "furnace") {
           success.setDescription(`You bought **${itemName}** for ${config.emojis.currency} **${price}**`)
         } else {
           success.setDescription(`You bought **${quantity}** ${itemEmoji}**${itemName}** for ${config.emojis.currency} **${price}**`)

@@ -53,7 +53,7 @@ module.exports = {
       choice = userData.resources.ironOres;
     }
 
-    if (user && userData.items.furnace) {
+    if (user && !userData.items.furnace) {
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
@@ -77,7 +77,7 @@ module.exports = {
       });
     }
 
-    if (user && !userData.items.furnace) {
+    if (user && userData.items.furnace) {
       await interaction.reply({
         embeds: [
           new EmbedBuilder()
