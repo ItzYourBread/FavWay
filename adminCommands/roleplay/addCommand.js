@@ -59,10 +59,10 @@ module.exports = {
         userData.cents += amount;
         }
         if (interaction.options.get('type').value === "ironOre") {
-        userData.resources.ironOre += amount;
+        userData.resources.ironOres += amount;
         }
         if (interaction.options.get('type').value === "ironBrick") {
-        userData.resources.ironBrick += amount;
+        userData.resources.ironBricks += amount;
         }
         userData.save();
 
