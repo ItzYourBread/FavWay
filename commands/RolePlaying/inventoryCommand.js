@@ -104,7 +104,7 @@ module.exports = {
       }
         
         
-        const row = new ActionRowBuilder()
+      const row = new ActionRowBuilder()
 			.addComponents(
 				new SelectMenuBuilder()
 					.setCustomId('inventory')
