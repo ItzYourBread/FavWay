@@ -12,15 +12,13 @@ module.exports = {
     
     run: async (client, interaction, args) => {
         const { guild } = interaction;
-
-      let test = await fetch('https://endpoint.satify.cf/api/food/fruits').then(r => r.json());
         
         var ping = Date.now() - interaction.createdTimestamp;
         const embed = new EmbedBuilder()
             .setAuthor({ name: `${config.bot.name}`})
             .setColor(config.colours.embed)
             .setDescription(`Latency: **${ping}**ms \nAPI Latency: **${Math.round(client.ws.ping)}**ms`)
-            .setFooter({ text: `${interaction.user.username}, ${test.name} ${test.emoji}`, iconURL: `${interaction.user.displayAvatarURL({ dynamic: true })}` })
+            .setFooter({ text: `${interaction.user.username}`, iconURL: `${interaction.user.displayAvatarURL({ dynamic: true })}` })
             .setTimestamp();
         interaction.reply({ embeds: [embed] });
 
