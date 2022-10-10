@@ -31,7 +31,7 @@ module.exports = {
         let emoji = emojis.emoji[Math.floor((Math.random() * emojis.emoji.length))];
 
 
-      if (userData.resources.woods || userData.resources.stones) {
+      if (userData.resources.woods || userData.resources.stones || userData.resources.ironOres || userData.resources.ironNuggets || userData.resources.ironBricks) {
         resourcesMessage = "Nice resources";
       } else {
         resourcesMessage = "You don't have any resources";
@@ -60,7 +60,7 @@ module.exports = {
       }
 
 
-      if (userData.axe.stone || userData.pickaxe.stone) {
+      if (userData.axe.stone || userData.pickaxe.stone || userData.axe.iron || userData.pickaxe.iron) {
         toolsMessage = "Nice tools";
       } else {
         toolsMessage = "You don't have any tools";
@@ -85,7 +85,7 @@ module.exports = {
       }
 
       
-      if (userData.items.furnace) {
+      if (userData.items.furnace || userData.items.forge) {
         toolsMessage = "Nice items";
       } else {
         toolsMessage = "You don't have any items";
@@ -98,6 +98,9 @@ module.exports = {
         .setTimestamp()
       if (userData.items.furnace) {
         items.addFields({ name: `Furnace`, value: `own` })
+      }
+      if (userData.items.forge) {
+        items.addFields({ name: `Forge`, value: `own` })
       }
         
         
