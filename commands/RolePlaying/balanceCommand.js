@@ -3,7 +3,6 @@ const { Profile } = require("../../database/game/profile");
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
 const config = require("../../config.json");
-const randoms = require("../../api/balanceText.json")
 const tips = require('../../tips.json');
 const wait = require('node:timers/promises').setTimeout;
 
@@ -26,13 +25,17 @@ module.exports = {
         
         const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id }) 
         
-        let random = randoms.random[Math.floor((Math.random() * randoms.random.length))];
+        if (userData.coins > 100000) {
+          status = "Being Rich!!";
+        } else {
+          status = "Eh what a noob";
+        }
         
         const balance = new EmbedBuilder()
         .setTitle(`${user.username}'s Balance`)
         .setDescription(`**Pocket:** ${config.emojis.currency} ${userData.coins.toLocaleString()}\n**Bank:** ${config.emojis.currency} ${userData.bank.toLocaleString()}\n**Cents:** ${config.emojis.currencyCents} ${userData.cents.toLocaleString()}`)
         .setColor(config.colours.embed)
-        .setFooter({ text: `${random}`})
+        .setFooter({ text: `${status}`})
         
         await interaction.reply({ embeds: [balance] });
         const logChannel = client.channels.cache.get(config.logs.roleplayLog)
