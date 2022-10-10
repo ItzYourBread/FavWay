@@ -8,6 +8,7 @@ const Profile = new mongoose.Schema({
     cooldowns: {
         breaktree: { type: Date },
         minerock: { type: Date },
+        mineore: { type: Date },
         daily: { type: Date }
     },
     items: {
