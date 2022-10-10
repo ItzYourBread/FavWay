@@ -107,7 +107,7 @@ module.exports = {
         ],
       });
       
-      await wait(2000);
+      await wait(30000);
      
       let amount = quantity * 12;
 
@@ -179,7 +179,7 @@ module.exports = {
         ],
       });
 
-      await wait(3000);
+      await wait(240000);
 
       let amount = quantity * 8;
 
