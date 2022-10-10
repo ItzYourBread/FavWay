@@ -60,7 +60,7 @@ module.exports = {
         required: true,
         choices: [
           { name: 'Furnace', value: 'furnace' },
-          { name: 'Iron', value: 'ironBrick' }
+          { name: 'Iron Brick', value: 'ironBrick' }
         ],
       }, {
         name: 'quantity',
@@ -246,7 +246,7 @@ module.exports = {
       }
       if (interaction.options.get('item').value === 'ironBrick') {
         price = quantity * 22;
-        itemName = "Iron";
+        itemName = "Iron Brick";
         itemEmoji = config.emojis.ironBrick;
       }
 

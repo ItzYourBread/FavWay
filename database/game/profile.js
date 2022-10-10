@@ -11,12 +11,14 @@ const Profile = new mongoose.Schema({
         daily: { type: Date }
     },
     items: {
-      furnace: { type: Boolean, default: false }
+      furnace: { type: Boolean, default: false },
+      forge: { type: Boolean, default: false }
     },
     resources: {
         woods: { type: Number, default: 0 },
         stones: { type: Number, default: 0 },
         ironOres: { type: Number, default: 0 },
+        ironNuggets: { type: Number, default: 0 },
         ironBricks: { type: Number, default: 0 }
     },
     axe: {
