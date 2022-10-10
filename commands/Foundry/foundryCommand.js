@@ -45,6 +45,11 @@ module.exports = {
         choices: [
           { name: 'Iron Nugget', value: 'ironNugget' }
         ],
+      }, {
+        name: 'quantity',
+        description: 'How much do you want to convert nuggets into brick???',
+        type: ApplicationCommandOptionType.Number,
+        required: false
       }],
     }],
     

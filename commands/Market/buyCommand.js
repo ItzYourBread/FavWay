@@ -60,6 +60,7 @@ module.exports = {
         required: true,
         choices: [
           { name: 'Furnace', value: 'furnace' },
+          { name: 'Forge', value: 'forge' },
           { name: 'Iron Brick', value: 'ironBrick' }
         ],
       }, {
@@ -244,6 +245,11 @@ module.exports = {
         itemName = "Furance";
         choice = userData.items.furnace;
       }
+      if (interaction.options.get('item').value === 'forge') {
+        price = 9000;
+        itemName = "Forge";
+        choice = userData.items.forge;
+      }
       if (interaction.options.get('item').value === 'ironBrick') {
         price = quantity * 22;
         itemName = "Iron Brick";
@@ -276,6 +282,10 @@ module.exports = {
           userData.items.furnace = true;
           userData.coins -= price;
         }
+        if (interaction.options.get('item').value === "forge") {
+          userData.items.forge = true;
+          userData.coins -= price;
+        }
         if (interaction.options.get('item').value === "ironBrick") {
           userData.resources.ironBrick = quantity;
           userData.coins -= price;
@@ -286,7 +296,7 @@ module.exports = {
          .setColor(config.colours.success)
          .setTimestamp();
         
-        if (interaction.options.get('item').value === "furnace") {
+        if (interaction.options.get('item').value === "furnace" || "forge") {
           success.setDescription(`You bought **${itemName}** for ${config.emojis.currency} **${price}**`)
         } else {
           success.setDescription(`You bought **${quantity}** ${itemEmoji}**${itemName}** for ${config.emojis.currency} **${price}**`)
