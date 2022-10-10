@@ -179,7 +179,7 @@ module.exports = {
         ],
       });
 
-      await wait(ms('4m'));
+      await wait(3000);
 
       let amount = quantity * 8;
 

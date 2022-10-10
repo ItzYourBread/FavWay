@@ -52,8 +52,11 @@ module.exports = {
       if (userData.resources.ironOres) {
         resources.addFields({ name: `${config.emojis.ironOre}Iron Ore`, value: `${userData.resources.ironOres.toLocaleString()}` })
       }
+      if (userData.resources.ironNuggets) {
+        resources.addFields({ name: `${config.emojis.ironNugget}Iron Nugget`, value: `${userData.resources.ironNuggets.toLocaleString()}` })
+      }
       if (userData.resources.ironBricks) {
-        resources.addFields({ name: `${config.emojis.ironBrick}Iron`, value: `${userData.resources.ironBricks.toLocaleString()}` })
+        resources.addFields({ name: `${config.emojis.ironBrick}Iron Brick`, value: `${userData.resources.ironBricks.toLocaleString()}` })
       }
 
 
