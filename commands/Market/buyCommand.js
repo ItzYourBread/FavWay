@@ -254,6 +254,7 @@ module.exports = {
         price = quantity * 22;
         itemName = "Iron Brick";
         itemEmoji = config.emojis.ironBrick;
+        choice = null;
       }
 
       if (user && choice) {
