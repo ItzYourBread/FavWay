@@ -2,12 +2,9 @@ const Discord = require("discord.js");
 const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js");
 const config = require("./config.json");
 const handler = require("./handlers/index.js");
-const { colour } = require("printly.js"); 
+const { printly, colour } = require("printly.js"); 
 require('dotenv').config();
 
-function println() {
-  return console.log.apply(console, arguments)
-}
 
 const client = new Discord.Client({
     intents: [
@@ -25,7 +22,7 @@ const client = new Discord.Client({
     ],
 })
 
-println("Loading Index...");
+printly("Loading Index...");
 
 module.exports = client;
 
@@ -43,10 +40,10 @@ require("./handlers/mongoose.js")(client);
 
 // error handling
 process.on("unhandledRejection", (reason, promise) => {
-     println("[FATAL] Possibly Unhandled Rejection at: Promise ", promise, " reason: ", reason.message);
+     printly("[FATAL] Possibly Unhandled Rejection at: Promise ", promise, " reason: ", reason.message);
  });
 
 // client login
 client.login(process.env.TOKEN);
 
-println(colour.green("Index Loaded 🟢"));
+printly(colour.green("Index Loaded 🟢"));

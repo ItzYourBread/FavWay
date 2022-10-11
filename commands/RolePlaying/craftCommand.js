@@ -1,4 +1,4 @@
-const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ComponentType, Client } = require('discord.js');
+const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ButtonBuilder, ComponentType, Client } = require('discord.js');
 const { ApplicationCommandOptionType } = require("discord.js");
 const { Profile } = require("../../database/game/profile");
 const Discord = require("discord.js");
@@ -29,7 +29,20 @@ module.exports = {
       .setDescription(`**---Welcome to Crafting Menu---**\nUse select menu for crafting item which you wants.!`)
       .setTimestamp();
 
-      const row = new ActionRowBuilder()
+      let craftFurnace = new EmbedBuilder()
+      .setTitle("Craft Furnace")
+      .setColor(config.colours.embed)
+      .setDescription(`Fuck Repices`)
+      .setTimestamp();
+
+      let craftForge = new EmbedBuilder()
+      .setTitle("Craft Forge")
+      .setColor(config.colours.embed)
+      .setDescription(`Fuck Repices`)
+      .setTimestamp();
+
+
+      const selectMenu = new ActionRowBuilder()
 			.addComponents(
 				new SelectMenuBuilder()
 					.setCustomId('craftMenu')
@@ -53,6 +66,41 @@ module.exports = {
 					),
 			);
 
-      interaction.reply({ embeds: [craft], components: [row], fetchReply: true });
+      let message = await interaction.reply({ embeds: [craft], components: [selectMenu], fetchReply: true });
+    
+
+const collectorMenu = message.createMessageComponentCollector({ 
+            filter: fn => fn,
+            componentType: ComponentType.SelectMenu, 
+            time: 20000
+        });
+
+collectorMenu.on('collect', i => {
+	if (i.user.id === interaction.user.id) 
+		return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
+});
+        
+        
+client.on('interactionCreate', async (interaction, client) => {
+    if (!interaction.isSelectMenu()) return;
+            
+    switch (interaction.values[0]) {
+        case "menu":  
+           await interaction.deferUpdate();
+           await wait(100);
+           await interaction.editReply({ embeds: [craft], components: [selectMenu] })
+            break;
+        case "furnace":  
+           await interaction.deferUpdate();
+           await wait(100);
+           await interaction.editReply({ embeds: [craftFurnace], components: [selectMenu] })
+            break;
+        case "forge":  
+           await interaction.deferUpdate();
+           await wait(100);
+           await interaction.editReply({ embeds: [craftForge], components: [selectMenu] })
+            break;
+    };                
+});
     }
 }

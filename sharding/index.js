@@ -3,9 +3,6 @@ const config = require("../config.json");
 const { printly, colour } = require("printly.js");
 require('dotenv').config();
 
-function println() {
-  return console.log.apply(console, arguments)
-}
 
 let manager = new ShardingManager('./index.js', {
     token: process.env.TOKEN,
@@ -16,7 +13,7 @@ let manager = new ShardingManager('./index.js', {
 
 manager.on('shardCreate', shard => {
     printly.clear();
-    println(colour.blackBright(`[Shard ${shard.id + 1}] Ready!`));
+    printly(colour.blackBright(`[Shard ${shard.id + 1}] Ready!`));
 })
 
 manager.spawn();

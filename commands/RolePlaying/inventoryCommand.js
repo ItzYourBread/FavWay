@@ -174,7 +174,7 @@ module.exports = {
         const collector = message.createMessageComponentCollector({ 
             filter: fn => fn,
             componentType: ComponentType.SelectMenu, 
-            time: 2000 
+            time: 20000
         });
 
 collector.on('collect', i => {
