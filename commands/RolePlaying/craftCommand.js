@@ -85,13 +85,13 @@ module.exports = {
       let message = await interaction.reply({ embeds: [craft], components: [selectMenu], fetchReply: true });
     
 
-const collectorMenu = message.createMessageComponentCollector({ 
+const collector = message.createMessageComponentCollector({ 
             filter: fn => fn,
-            componentType: ComponentType.SelectMenu, 
+            // componentType: ComponentType.SelectMenu, 
             time: 20000
         });
 
-collectorMenu.on('collect', i => {
+collector.on('collect', i => {
 	if (i.user.id === interaction.user.id) 
 		return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
 });
@@ -110,19 +110,23 @@ client.on('interactionCreate', async (interaction, client) => {
         case "forge":  
            await interaction.update({ embeds: [craftForge], components: [selectMenu, forgeButton] })
             break;
-    };                
+    }
 });
 
+
+client.on('interactionCreate', async (interaction, client) => {
+	if (!interaction.isButton()) return;
+
+  if (interaction.customId === 'furnaceButton') {
+    await interaction.reply({ content: "Hello its working" });
+  }
+
+  if (interaction.customId === 'forgeButton') {
+    await interaction.reply({ content: "Working fine"})
+  }
+  
+});
+    
       
-const collectorButton = message.createMessageComponentCollector({ 
-            filter: fn => fn,
-            componentType: ComponentType.Button, 
-            time: 20000
-        });
-
-collectorButton.on('collect', i => {
-	if (i.user.id === interaction.user.id) 
-		return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
-});
     }
 }
