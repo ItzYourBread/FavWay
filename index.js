@@ -40,7 +40,7 @@ require("./handlers/mongoose.js")(client);
 
 // error handling
 process.on("unhandledRejection", (reason, promise) => {
-     printly("[FATAL] Possibly Unhandled Rejection at: Promise ", promise, " reason: ", reason.message);
+     console.log("[FATAL] Possibly Unhandled Rejection at: Promise ", promise, " reason: ", reason.message);
  });
 
 // client login

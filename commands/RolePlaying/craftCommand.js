@@ -1,4 +1,4 @@
-const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ButtonBuilder, ComponentType, Client } = require('discord.js');
+const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ButtonBuilder, ButtonStyle, ComponentType, Client } = require('discord.js');
 const { ApplicationCommandOptionType } = require("discord.js");
 const { Profile } = require("../../database/game/profile");
 const Discord = require("discord.js");
@@ -66,6 +66,22 @@ module.exports = {
 					),
 			);
 
+      const furnaceButton = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId('furnaceButton')
+					.setLabel('Craft')
+					.setStyle(ButtonStyle.Success),
+			);
+
+      const forgeButton = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId('forgeButton')
+					.setLabel('Craft')
+					.setStyle(ButtonStyle.Success),
+			);
+
       let message = await interaction.reply({ embeds: [craft], components: [selectMenu], fetchReply: true });
     
 
@@ -93,14 +109,26 @@ client.on('interactionCreate', async (interaction, client) => {
         case "furnace":  
            await interaction.deferUpdate();
            await wait(100);
-           await interaction.editReply({ embeds: [craftFurnace], components: [selectMenu] })
+           await interaction.editReply({ embeds: [craftFurnace], components: [selectMenu, furnaceButton] })
             break;
         case "forge":  
            await interaction.deferUpdate();
            await wait(100);
-           await interaction.editReply({ embeds: [craftForge], components: [selectMenu] })
+           await interaction.editReply({ embeds: [craftForge], components: [selectMenu, forgeButton] })
             break;
     };                
+});
+
+      
+const collectorButton = message.createMessageComponentCollector({ 
+            filter: fn => fn,
+            componentType: ComponentType.Button, 
+            time: 20000
+        });
+
+collectorButton.on('collect', i => {
+	if (i.user.id === interaction.user.id) 
+		return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
 });
     }
 }
