@@ -24,9 +24,9 @@ module.exports = {
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
       let craft = new EmbedBuilder()
-      .setTitle("Craft Menu")
+      .setTitle("**--Welcome to Crafting Menu--**")
       .setColor(config.colours.embed)
-      .setDescription(`**---Welcome to Crafting Menu---**\nUse select menu for crafting item which you wants.!`)
+      .setDescription(`Use select menu for crafting item which you wants.!`)
       .setTimestamp();
 
       let craftFurnace = new EmbedBuilder()
@@ -102,19 +102,13 @@ client.on('interactionCreate', async (interaction, client) => {
             
     switch (interaction.values[0]) {
         case "menu":  
-           await interaction.deferUpdate();
-           await wait(100);
-           await interaction.editReply({ embeds: [craft], components: [selectMenu] })
+           await interaction.update({ embeds: [craft], components: [selectMenu] })
             break;
         case "furnace":  
-           await interaction.deferUpdate();
-           await wait(100);
-           await interaction.editReply({ embeds: [craftFurnace], components: [selectMenu, furnaceButton] })
+           await interaction.update({ embeds: [craftFurnace], components: [selectMenu, furnaceButton] })
             break;
         case "forge":  
-           await interaction.deferUpdate();
-           await wait(100);
-           await interaction.editReply({ embeds: [craftForge], components: [selectMenu, forgeButton] })
+           await interaction.update({ embeds: [craftForge], components: [selectMenu, forgeButton] })
             break;
     };                
 });

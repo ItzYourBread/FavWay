@@ -141,33 +141,6 @@ module.exports = {
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();
-
-        let viewRes = new EmbedBuilder()
-            .setColor(config.colours.logger)
-            .setTitle("Command log")
-            .setDescription(`**[Inventory Command]** viewing resources **${interaction.user.tag}**`)
-            .addFields(
-                { name: "Guild:", value: `${guild.name}` }
-            )
-            .setTimestamp();
-
-        let viewTools = new EmbedBuilder()
-            .setColor(config.colours.logger)
-            .setTitle("Command log")
-            .setDescription(`**[Inventory Command]** viewing tools **${interaction.user.tag}**`)
-            .addFields(
-                { name: "Guild:", value: `${guild.name}` }
-            )
-            .setTimestamp();
-      
-        let viewItems = new EmbedBuilder()
-            .setColor(config.colours.logger)
-            .setTitle("Command log")
-            .setDescription(`**[Inventory Command]** viewing items **${interaction.user.tag}**`)
-            .addFields(
-                { name: "Guild:", value: `${guild.name}` }
-            )
-            .setTimestamp();
         
         logChannel.send({ embeds: [logger] });
         
@@ -188,22 +161,13 @@ client.on('interactionCreate', async (interaction, client) => {
             
     switch (interaction.values[0]) {
         case "items":  
-           await interaction.deferUpdate();
-           await wait(100);
-           await interaction.editReply({ embeds: [items], components: [row] })
-           await logChannel.send({ embeds: [viewItems] });
+           await interaction.update({ embeds: [items], components: [row] })
             break;
         case "tools":  
-           await interaction.deferUpdate();
-           await wait(100);
-           await interaction.editReply({ embeds: [tools], components: [row] })
-           await logChannel.send({ embeds: [viewTools] });
+           await interaction.update({ embeds: [tools], components: [row] })
             break;
         case "resources":  
-           await interaction.deferUpdate();
-           await wait(100);
-           await interaction.editReply({ embeds: [resources], components: [row] })
-           await logChannel.send({ embeds: [viewRes] });
+           await interaction.update({ embeds: [resources], components: [row] })
             break;
     };                
 });
