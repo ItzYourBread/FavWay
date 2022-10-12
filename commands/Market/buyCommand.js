@@ -21,7 +21,7 @@ module.exports = {
       type: ApplicationCommandOptionType.Subcommand,
       options: [{
         name: 'item',
-        description: 'What type of stuff do you want to but?',
+        description: 'What type of stuff do you want to buy?',
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
@@ -32,6 +32,24 @@ module.exports = {
           description: 'Please enter your item quantity to buy it.',
           type: ApplicationCommandOptionType.Number,
           required: false
+      }],
+    }, {
+      name: 'lapidary',
+      description: 'Buy stones, gems and many more from Lapidary shop',
+      type: ApplicationCommandOptionType.Subcommand,
+      options: [{
+        name: 'item',
+        description: 'What type of stuff do you want to buy?',
+        type: ApplicationCommandOptionType.String,
+        required: true,
+        choices: [
+          { name: 'Stone', value: 'stone' },
+        ]
+      }, {
+        name: 'quantity',
+        description: 'Please enter your item quantity to buy it.',
+        type: ApplicationCommandOptionType.Number,
+        required: false
       }],
     }, {
       name: 'tools',
