@@ -82,9 +82,18 @@ module.exports = {
      .setColor(config.colours.embed)
      .addFields(
        {
-         name: 'Furnace',
+         name: `${config.emojis.idleFurnace}Furnace`,
          value: `**Price:** ${config.emojis.currency} **5999**`,
          inline: false
+       },
+       {
+         name: `${config.emojis.forge}Forge`,
+         value: `**Price:** ${config.emojis.currency} **9000**`,
+         inline: false
+       },
+       {
+         name: `${config.emojis.ironBrick}Iron Brick 20x`,
+         value: `**Selling at:** ${config.emojis.currency} **440**\n**Buying:** ${config.emojis.currency} **400**`
        }
      )
      .setTimestamp();
