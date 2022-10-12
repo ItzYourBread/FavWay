@@ -162,7 +162,47 @@ client.on('interactionCreate', async (interaction, client) => {
   }
 
   if (interaction.customId === 'forgeButton') {
-    await interaction.reply({ content: "Working fine"})
+    
+    if (user && userData.items.forge) {
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+          .setTitle("You already have!")
+          .setColor(config.colours.embed)
+          .setDescription(`Looks like you already have **Forge**,\nYou don't have to craft one more.`)
+          .setTimestamp(),
+        ],
+        ephemeral: true
+      });
+    }
+
+    if (userData.resources.stones < 500 || userData.resources.ironOres < 50 || userData.resources.ironNuggets < 100) {
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+          .setTitle("Craft Error")
+          .setColor(config.colours.error)
+          .setDescription(`Sorry you don't have enough resources to craft **Forge**`)
+          .setTimestamp(),
+        ],
+        ephemeral: true
+      });
+    }
+    
+    userData.items.forge = true;
+    userData.resources.stones -= 500;
+    userData.resources.ironOres -= 50;
+    userData.resources.ironNuggets -= 100;
+    
+    await interaction.reply({
+      embeds: [
+        new EmbedBuilder()
+        .setTitle("Crafted Forge")
+        .setColor(config.colours.success)
+        .setDescription(`You successfully crafted **Forge**.`)
+        .setTimestamp(),
+      ],
+    });
   }
   
 });

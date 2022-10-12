@@ -125,6 +125,7 @@ module.exports = {
           .setDescription(`${itemEmoji}**${itemName}** successfully melted it tooks 30 seconds\nHere is your **${amount}** ${itemEmoji2}**${itemName2}**`)
           .setTimestamp(),
         ],
+        content: `${interaction.user}`
       });
     }
   } else if (interaction.options.getSubcommand() === "forge") {
@@ -197,6 +198,7 @@ module.exports = {
           .setDescription(`Successfully processed and here is your **${quantity}** ${itemEmoji2}**${itemName2}**`)
           .setTimestamp(),
         ],
+        content: `${interaction.user}`
       });
         
     }
