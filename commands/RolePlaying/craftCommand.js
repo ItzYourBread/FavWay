@@ -32,13 +32,13 @@ module.exports = {
       let craftFurnace = new EmbedBuilder()
       .setTitle("Craft Furnace")
       .setColor(config.colours.embed)
-      .setDescription(`**${userData.resources.stones}/200** ${config.emojis.stone}**Stone**.\n**${userData.resources.woods}/150** ${config.emojis.wood}**Wood**.\n**${userData.resources.ironOres}/7** ${config.emojis.ironOre}**Iron Ore**.`)
+      .setDescription(`**${userData.resources.stones}/100** ${config.emojis.stone}**Stone**.\n**${userData.resources.woods}/50** ${config.emojis.wood}**Wood**.\n**${userData.resources.ironOres}/2** ${config.emojis.ironOre}**Iron Ore**.`)
       .setTimestamp();
 
       let craftForge = new EmbedBuilder()
       .setTitle("Craft Forge")
       .setColor(config.colours.embed)
-      .setDescription(`Fuck Repices`)
+      .setDescription(`**${userData.resources.stones}/500** ${config.emojis.stone}**Stone**.\n**${userData.resources.ironOres}/50** ${config.emojis.ironOre}**Iron Ore**.\n**${userData.resources.ironNuggets}/100** ${config.emojis.ironNugget}**Iron Nugget**.`)
       .setTimestamp();
 
 
@@ -132,7 +132,7 @@ client.on('interactionCreate', async (interaction, client) => {
       });
     }
 
-    if (userData.resources.stones < 200 || userData.resources.woods < 160 || userData.resources.ironOres < 7) {
+    if (userData.resources.stones < 100 || userData.resources.woods < 50 || userData.resources.ironOres < 2) {
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
@@ -146,16 +146,16 @@ client.on('interactionCreate', async (interaction, client) => {
     }
     
     userData.items.furnace = true;
-    userData.resources.stones -= 200;
-    userData.resources.woods -= 150;
-    userData.resources.ironOres -= 7;
+    userData.resources.stones -= 100;
+    userData.resources.woods -= 50;
+    userData.resources.ironOres -= 2;
     
     await interaction.reply({
       embeds: [
         new EmbedBuilder()
         .setTitle("Crafted Furnace")
         .setColor(config.colours.success)
-        .setDescription(`Crafted Done`)
+        .setDescription(`You successfully crafted **Furnace**.`)
         .setTimestamp(),
       ],
     });
