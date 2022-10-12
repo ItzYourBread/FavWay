@@ -97,10 +97,10 @@ module.exports = {
         .setThumbnail(user.displayAvatarURL())
         .setTimestamp()
       if (userData.items.furnace) {
-        items.addFields({ name: `Furnace`, value: `own` })
+        items.addFields({ name: `${config.emojis.idleFurnace}Furnace`, value: `own` })
       }
       if (userData.items.forge) {
-        items.addFields({ name: `Forge`, value: `own` })
+        items.addFields({ name: `${config.emojis.forge}Forge`, value: `own` })
       }
         
         

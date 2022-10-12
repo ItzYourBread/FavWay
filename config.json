@@ -41,7 +41,9 @@
           "stone": "<:stone:1027682400999833620>",
           "ironOre": "<:ironore:1028020196037894184>",
           "ironNugget": "<:ironnugget:1028985856222036060>",
-          "ironBrick": "<:iron:1028022910411087884>"
+          "ironBrick": "<:iron:1028022910411087884>",
+          "idleFurnace": "<:idlefurnace:1029782301376254063>",
+          "forge": "<:forge:1029782354711040000>"
     },
     
      "database": {

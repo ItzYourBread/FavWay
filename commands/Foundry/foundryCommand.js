@@ -150,6 +150,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
           .setTitle("Error: forge required")
+          .setThumbnail('https://media.discordapp.net/attachments/964912846876049448/1029783913377321010/Forge.png')
           .setColor(config.colours.error)
           .setDescription(`You don't have **Forge** own,\nPlease buy a Forge or craft a Forge.`)
           .setTimestamp(),
@@ -162,6 +163,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
           .setTitle("Not enough resources")
+          .setThumbnail('https://media.discordapp.net/attachments/964912846876049448/1029783913377321010/Forge.png')
           .setColor(config.colours.error)
           .setDescription(`Sorry you dont have enough ${itemEmoji}**${itemName}** You only have **${choice}** ${itemEmoji}**${itemName}**`)
           .setTimestamp(),
@@ -174,6 +176,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
           .setTitle("Processing...")
+          .setThumbnail('https://media.discordapp.net/attachments/964912846876049448/1029783913377321010/Forge.png')
           .setColor(config.colours.work)
           .setDescription(`Oh yeah its doing you may have to wait longer\nAround **3-5** minutes because it will make the nuggets into brick`)
           .setTimestamp(),
@@ -194,6 +197,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
           .setTitle("Successfully Processed!")
+          .setThumbnail('https://media.discordapp.net/attachments/964912846876049448/1029783913377321010/Forge.png')
           .setColor(config.colours.success)
           .setDescription(`Successfully processed and here is your **${quantity}** ${itemEmoji2}**${itemName2}**`)
           .setTimestamp(),
