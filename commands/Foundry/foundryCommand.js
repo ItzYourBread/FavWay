@@ -89,6 +89,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
           .setTitle("Not enough resources")
+          .setThumbnail('https://media.discordapp.net/attachments/964912846876049448/1029783940636102706/idleFurnace.png')
           .setColor(config.colours.error)
           .setDescription(`Sorry you dont have enough ${itemEmoji}**${itemName}** You only have **${choice}** ${itemEmoji}**${itemName}**`)
           .setTimestamp(),
@@ -101,6 +102,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
           .setTitle("Melting...")
+          .setThumbnail('https://media.discordapp.net/attachments/964912846876049448/1029783940636102706/idleFurnace.png')
           .setColor(config.colours.work)
           .setDescription(`Please wait 30 seconds\nit's take time to be melt`)
           .setTimestamp(),
@@ -121,6 +123,7 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
           .setTitle(`${itemName} Melted`)
+          .setThumbnail('https://media.discordapp.net/attachments/964912846876049448/1029783940636102706/idleFurnace.png')
           .setColor(config.colours.success)
           .setDescription(`${itemEmoji}**${itemName}** successfully melted it tooks 30 seconds\nHere is your **${amount}** ${itemEmoji2}**${itemName2}**`)
           .setTimestamp(),
@@ -150,7 +153,6 @@ module.exports = {
         embeds: [
           new EmbedBuilder()
           .setTitle("Error: forge required")
-          .setThumbnail('https://media.discordapp.net/attachments/964912846876049448/1029783913377321010/Forge.png')
           .setColor(config.colours.error)
           .setDescription(`You don't have **Forge** own,\nPlease buy a Forge or craft a Forge.`)
           .setTimestamp(),
