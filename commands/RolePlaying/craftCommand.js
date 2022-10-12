@@ -32,7 +32,7 @@ module.exports = {
       let craftFurnace = new EmbedBuilder()
       .setTitle("Craft Furnace")
       .setColor(config.colours.embed)
-      .setDescription(`Fuck Repices`)
+      .setDescription(`**${userData.resources.stones}/200** ${config.emojis.stone}**Stone**.\n**${userData.resources.woods}/150** ${config.emojis.wood}**Wood**.\n**${userData.resources.ironOres}/7** ${config.emojis.ironOre}**Iron Ore**.`)
       .setTimestamp();
 
       let craftForge = new EmbedBuilder()
@@ -118,7 +118,47 @@ client.on('interactionCreate', async (interaction, client) => {
 	if (!interaction.isButton()) return;
 
   if (interaction.customId === 'furnaceButton') {
-    await interaction.reply({ content: "Hello its working" });
+
+    if (user && userData.items.furnace) {
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+          .setTitle("You already have!")
+          .setColor(config.colours.embed)
+          .setDescription(`Looks like you already have **Furnace**,\nYou don't have to craft one more.`)
+          .setTimestamp(),
+        ],
+        ephemeral: true
+      });
+    }
+
+    if (userData.resources.stones < 200 || userData.resources.woods < 160 || userData.resources.ironOres < 7) {
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+          .setTitle("Craft Error")
+          .setColor(config.colours.error)
+          .setDescription(`Sorry you don't have enough resources to craft **Furnace**`)
+          .setTimestamp(),
+        ],
+        ephemeral: true
+      });
+    }
+    
+    userData.items.furnace = true;
+    userData.resources.stones -= 200;
+    userData.resources.woods -= 150;
+    userData.resources.ironOres -= 7;
+    
+    await interaction.reply({
+      embeds: [
+        new EmbedBuilder()
+        .setTitle("Crafted Furnace")
+        .setColor(config.colours.success)
+        .setDescription(`Crafted Done`)
+        .setTimestamp(),
+      ],
+    });
   }
 
   if (interaction.customId === 'forgeButton') {
@@ -127,6 +167,5 @@ client.on('interactionCreate', async (interaction, client) => {
   
 });
     
-      
     }
 }
