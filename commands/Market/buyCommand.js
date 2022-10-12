@@ -288,7 +288,7 @@ module.exports = {
           userData.coins -= price;
         }
         if (interaction.options.get('item').value === "ironBrick") {
-          userData.resources.ironBrick = quantity;
+          userData.resources.ironBricks = quantity;
           userData.coins -= price;
         }
           userData.save();
