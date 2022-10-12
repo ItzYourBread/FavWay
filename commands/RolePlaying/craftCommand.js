@@ -149,6 +149,7 @@ client.on('interactionCreate', async (interaction, client) => {
     userData.resources.stones -= 100;
     userData.resources.woods -= 50;
     userData.resources.ironOres -= 2;
+    userData.save();
     
     await interaction.reply({
       embeds: [
@@ -193,6 +194,7 @@ client.on('interactionCreate', async (interaction, client) => {
     userData.resources.stones -= 500;
     userData.resources.ironOres -= 50;
     userData.resources.ironNuggets -= 100;
+    userData.save();
     
     await interaction.reply({
       embeds: [
