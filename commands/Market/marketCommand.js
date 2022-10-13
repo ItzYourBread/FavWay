@@ -44,7 +44,7 @@ module.exports = {
      .addFields(
        {
          name: `${config.emojis.stone}Stone 20x`,
-         value: `**Selling at:** ${config.emojis.currency} **150**\n**Buying at:** ${config.emojis.currency} **125**`,
+         value: `**Selling at:** ${config.emojis.currency} **160**\n**Buying at:** ${config.emojis.currency} **130**`,
          inline: false
        }
      )

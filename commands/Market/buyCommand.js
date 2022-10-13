@@ -25,7 +25,7 @@ module.exports = {
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
-          { name: 'Wood', value: 'woods' }
+          { name: 'Wood', value: 'wood' }
         ], 
       }, {
           name: 'quantity',
@@ -43,7 +43,7 @@ module.exports = {
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
-          { name: 'Stone', value: 'stone' },
+          { name: 'Stone', value: 'stones' },
         ]
       }, {
         name: 'quantity',
@@ -101,11 +101,11 @@ module.exports = {
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
         
-      if (interaction.options.get('item').value === "woods") {
+      if (interaction.options.get('item').value === "wood") {
         amount2 = quantity * 5;
       }
 
-      if (interaction.options.get('item').value === "woods") {
+      if (interaction.options.get('item').value === "wood") {
         itemEmoji = config.emojis.wood;
         itemName = "Wood";
       }
@@ -121,7 +121,7 @@ module.exports = {
           });
         
           userData.coins -= amount2; 
-        if (interaction.options.get('item').value === "woods") {
+        if (interaction.options.get('item').value === "wood") {
           userData.resources.woods += quantity;
         }
           userData.save();
@@ -340,6 +340,64 @@ module.exports = {
             .setTimestamp();
         
         logChannel.send({ embeds: [logger] });
+        
+      } else if (interaction.options.getSubcommand() === "lapidary") {
+
+      const quantity = interaction.options.getNumber('quantity') || '20';
+
+      const { guild } = interaction;
+      const user = interaction.member.user;
+        
+      const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+        
+      if (interaction.options.get('item').value === "stone") {
+        price = quantity * 7;
+        itemName = "Stone";
+        itemEmoji = config.emojis.stone;
+      }
+        
+        if (userData.coins < price)
+          return interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setDescription(`Sorry you don't have enough money to buy ${itemEmoji}**${itemName}**`)
+                .setColor(config.colours.error)
+                .setTimestamp(),
+            ],
+          });
+        
+        if (interaction.options.get('item').value === "stone") {
+          userData.coins -= price;
+          userData.resources.stones += quantity;
+        }
+          userData.save();
+
+        await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setDescription(`You bought **${quantity.toLocaleString()}** ${itemEmoji}**${itemName}** at: ${config.emojis.currency} **${price}**`)
+              .setColor(config.colours.success)
+              .setTimestamp(),
+          ],
+        });
+
+        const logChannel = client.channels.cache.get(config.logs.buyLog)
+        
+        const logger = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Buy Lapidary SubCommand]** run by **${interaction.user.tag}**`)
+            .addFields(
+                {
+                  name: "Value:", value: `bought **${quantity}** ${itemEmoji}**${itemName}**`
+                },
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
+        
+        logChannel.send({ embeds: [logger] });
+        
       }
    }
 }

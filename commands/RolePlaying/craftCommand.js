@@ -38,7 +38,7 @@ module.exports = {
       let craftForge = new EmbedBuilder()
       .setTitle("Craft Forge")
       .setColor(config.colours.embed)
-      .setDescription(`**${userData.resources.stones}/500** ${config.emojis.stone}**Stone**.\n**${userData.resources.ironOres}/50** ${config.emojis.ironOre}**Iron Ore**.\n**${userData.resources.ironNuggets}/100** ${config.emojis.ironNugget}**Iron Nugget**.`)
+      .setDescription(`**${userData.resources.ironOres}/300** ${config.emojis.ironOre}**Iron Ore**.\n**${userData.resources.ironNuggets}/150** ${config.emojis.ironNugget}**Iron Nugget**.`)
       .setTimestamp();
 
 
@@ -177,7 +177,7 @@ client.on('interactionCreate', async (interaction, client) => {
       });
     }
 
-    if (userData.resources.stones < 500 || userData.resources.ironOres < 50 || userData.resources.ironNuggets < 100) {
+    if (userData.resources.ironOres < 300 || userData.resources.ironNuggets < 150) {
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
@@ -191,9 +191,8 @@ client.on('interactionCreate', async (interaction, client) => {
     }
     
     userData.items.forge = true;
-    userData.resources.stones -= 500;
-    userData.resources.ironOres -= 50;
-    userData.resources.ironNuggets -= 100;
+    userData.resources.ironOres -= 300;
+    userData.resources.ironNuggets -= 150;
     userData.save();
     
     await interaction.reply({
