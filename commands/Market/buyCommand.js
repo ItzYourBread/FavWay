@@ -200,7 +200,18 @@ module.exports = {
           });
         
 
-        choice = true;
+        if (interaction.options.get('tool').value === "stoneAxe") {
+        userData.axe.stone = true;
+        }
+        if (interaction.options.get('tool').value === "ironAxe") {
+        userData.axe.iron = true;
+        }
+        if (interaction.options.get('tool').value === "stonePickaxe") {
+        userData.pickaxe.stone = true;
+        }
+        if (interaction.options.get('tool').value === "ironPickaxe") {
+        userData.pickaxe.iron = true;
+        } 
         userData.coins -= price;
         userData.save();
 
