@@ -173,7 +173,7 @@ module.exports = {
       if (interaction.options.get('tool').value === 'ironAxe') {
         price = 450;
         itemName = "Iron Axe";
-        choice = userData.pickaxe.iron;
+        choice = userData.axe.iron;
       }
       if (interaction.options.get('tool').value === 'stonePickaxe') {
         price = 570;
