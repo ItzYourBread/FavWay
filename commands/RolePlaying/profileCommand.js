@@ -86,7 +86,7 @@ module.exports = {
       .setTitle(`${user.username}’s Profile`)
       .setThumbnail(user.displayAvatarURL())
       .setColor(config.colours.embed)
-      .setDescription(`Code will be here`)
+      .setDescription(`Bio: just a FavWay User`)
       .setTimestamp()
       
       if (user && userData.coins) {
