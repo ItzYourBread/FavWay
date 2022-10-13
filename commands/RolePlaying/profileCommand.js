@@ -22,8 +22,41 @@ module.exports = {
 
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id }) 
 
+      if (userData.resources.woods) {
+        woodsCount = userData.resources.woods;
+      } else {
+        woodsCount = 0;
+      }
+
+      if (userData.resources.stones) {
+        stonesCount = userData.resources.stones;
+      } else {
+        stonesCount = 0;
+      }
+
+      if (userData.resources.ironOres) {
+        ironOresCount = userData.resources.ironOres;
+      } else {
+        ironOresCount = 0;
+      }
+
+      if (userData.resources.ironNuggets) {
+        ironNuggetsCount = userData.resources.ironNuggets;
+      } else {
+        ironNuggetsCount = 0;
+      }
+
+      if (userData.resources.ironBricks) {
+        ironBricksCount = userData.resources.ironBricks;
+      } else {
+        ironBricksCount = 0;
+      }
+
+      let totalRes = `${woodsCount + stonesCount + ironOresCount + ironNuggetsCount + ironBricksCount}`
+
       const profile = new EmbedBuilder()
       .setTitle(`${user.username}’s Profile`)
+      .setThumbnail(user.displayAvatarURL())
       .setColor(config.colours.embed)
       .setDescription(`Code will be here`)
       .setTimestamp()
@@ -32,12 +65,23 @@ module.exports = {
         profile.addFields(
           { name: 'Pocket:', value: `${userData.coins.toLocaleString()}` }
         )
-      }
+      };
+      
       if (user && userData.bank) {
         profile.addFields(
           { name: 'Bank:', value: `${userData.bank.toLocaleString()}` }
         )
-      }
+      };
+  
+      if (user && totalRes > 1) {
+        profile.addFields(
+          { name: 'Resources Count:', value: `${totalRes.toLocaleString()}`}
+        )
+      } else {
+        profile.addFields(
+          { name: 'Resources Count:', value: `User don't have any resources in their inventory.`}
+        )
+      };
 
       await interaction.reply({ embeds: [profile] });
       
