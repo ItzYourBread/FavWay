@@ -52,7 +52,35 @@ module.exports = {
         ironBricksCount = 0;
       }
 
-      let totalRes = `${woodsCount + stonesCount + ironOresCount + ironNuggetsCount + ironBricksCount}`
+      let totalRes = `${woodsCount + stonesCount + ironOresCount + ironNuggetsCount + ironBricksCount}`;
+
+
+      if (user && userData.axe.stone) {
+        axeStone = 1;
+      } else {
+        axeStone = 0;
+      }
+
+      if (user && userData.axe.iron) {
+        axeIron = 1;
+      } else {
+        axeIron = 0;
+      }
+
+      if (user && userData.pickaxe.stone) {
+        pickaxeStone = 1;
+      } else {
+        pickaxeStone = 0;
+      }
+
+      if (user && userData.pickaxe.iron) {
+        pickaxeIron = 1;
+      } else {
+        pickaxeIron = 0;
+      }
+
+      let totalTools = `${axeStone + axeIron + pickaxeStone + pickaxeIron}`;
+      
 
       const profile = new EmbedBuilder()
       .setTitle(`${user.username}’s Profile`)
@@ -75,13 +103,23 @@ module.exports = {
   
       if (user && totalRes > 1) {
         profile.addFields(
-          { name: 'Resources Count:', value: `${totalRes.toLocaleString()}`}
+          { name: 'Resources Count:', value: `${totalRes.toLocaleString()}` }
         )
       } else {
         profile.addFields(
-          { name: 'Resources Count:', value: `User don't have any resources in their inventory.`}
+          { name: 'Resources Count:', value: `User don't have any resources in their inventory.` }
         )
       };
+
+      if (user && totalTools > 1) {
+        profile.addFields(
+          { name: 'Tools Count:', value: `${totalTools}`}
+        )
+      } else {
+        profile.addFields(
+          { name: 'Tools Count:', value: `User don't have any tools in their inventory.` }
+        )
+      }
 
       await interaction.reply({ embeds: [profile] });
       
