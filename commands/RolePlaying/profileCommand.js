@@ -55,25 +55,25 @@ module.exports = {
       let totalRes = `${woodsCount + stonesCount + ironOresCount + ironNuggetsCount + ironBricksCount}`;
 
 
-      if (user && userData.axe.stone) {
+      if (userData.axe.stone) {
         axeStone = 1;
       } else {
         axeStone = 0;
       }
 
-      if (user && userData.axe.iron) {
+      if (userData.axe.iron) {
         axeIron = 1;
       } else {
         axeIron = 0;
       }
 
-      if (user && userData.pickaxe.stone) {
+      if (userData.pickaxe.stone) {
         pickaxeStone = 1;
       } else {
         pickaxeStone = 0;
       }
 
-      if (user && userData.pickaxe.iron) {
+      if (userData.pickaxe.iron) {
         pickaxeIron = 1;
       } else {
         pickaxeIron = 0;
@@ -113,13 +113,14 @@ module.exports = {
 
       if (user && totalTools > 1) {
         profile.addFields(
-          { name: 'Tools Count:', value: `${totalTools}`}
+          { name: 'Tools Count:', value: `${totalTools.toLocaleString()}` }
         )
       } else {
         profile.addFields(
           { name: 'Tools Count:', value: `User don't have any tools in their inventory.` }
         )
-      }
+      };
+      
 
       await interaction.reply({ embeds: [profile] });
       

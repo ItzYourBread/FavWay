@@ -102,13 +102,15 @@ module.exports = {
 
         
       if (interaction.options.get('item').value === "wood") {
-        price = quantity * 5;
-        itemName = "Wood";
-        itemEmoji = config.emojis.wood;
-        choice = userData.resources.woods
+        amount2 = quantity * 5;
       }
 
-        if (userData.coins < price)
+      if (interaction.options.get('item').value === "wood") {
+        itemEmoji = config.emojis.wood;
+        itemName = "Wood";
+      }
+        
+        if (userData.coins < amount2)
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
@@ -118,14 +120,16 @@ module.exports = {
             ],
           });
         
-        choice += quantity;
-        userData.coins -= price;
-        userData.save();
+          userData.coins -= amount2; 
+        if (interaction.options.get('item').value === "wood") {
+          userData.resources.woods += quantity;
+        }
+          userData.save();
 
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You bought **${quantity.toLocaleString()}** ${itemEmoji}**${itemName}** at: ${config.emojis.currency} **${price}**`)
+              .setDescription(`You bought **${quantity.toLocaleString()}** ${itemEmoji}**${itemName}** at: ${config.emojis.currency} **${amount2}**`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
@@ -202,17 +206,20 @@ module.exports = {
 
         if (interaction.options.get('tool').value === "stoneAxe") {
         userData.axe.stone = true;
-        }
-        if (interaction.options.get('tool').value === "ironAxe") {
-        userData.axe.iron = true;
+        userData.coins -= price;
         }
         if (interaction.options.get('tool').value === "stonePickaxe") {
         userData.pickaxe.stone = true;
+        userData.coins -= price;
+        }
+        if (interaction.options.get('tool').value === "ironAxe") {
+        userData.axe.iron = true;
+        userData.coins -= price;
         }
         if (interaction.options.get('tool').value === "ironPickaxe") {
         userData.pickaxe.iron = true;
-        } 
         userData.coins -= price;
+        }
         userData.save();
 
         await interaction.reply({
@@ -348,7 +355,6 @@ module.exports = {
         price = quantity * 7;
         itemName = "Stone";
         itemEmoji = config.emojis.stone;
-        choice = userData.resources.stones
       }
         
         if (userData.coins < price)
@@ -361,9 +367,11 @@ module.exports = {
             ],
           });
         
-        userData.coins -= price;
-        choice = quantity;
-        userData.save();
+        if (interaction.options.get('item').value === "stone") {
+          userData.coins -= price;
+          userData.resources.stones += quantity;
+        }
+          userData.save();
 
         await interaction.reply({
           embeds: [
