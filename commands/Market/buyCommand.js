@@ -43,7 +43,7 @@ module.exports = {
         type: ApplicationCommandOptionType.String,
         required: true,
         choices: [
-          { name: 'Stone', value: 'stones' },
+          { name: 'Stone', value: 'stone' },
         ]
       }, {
         name: 'quantity',
