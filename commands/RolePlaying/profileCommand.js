@@ -52,7 +52,7 @@ module.exports = {
         ironBricksCount = 0;
       }
 
-      let totalRes = `${woodsCount + stonesCount + ironOresCount + ironNuggetsCount + ironBricksCount}`;
+      var totalRes = `${woodsCount + stonesCount + ironOresCount + ironNuggetsCount + ironBricksCount}`;
 
 
       if (userData.axe.stone) {
@@ -79,7 +79,22 @@ module.exports = {
         pickaxeIron = 0;
       }
 
-      let totalTools = `${axeStone + axeIron + pickaxeStone + pickaxeIron}`;
+      var totalTools = axeStone + axeIron + pickaxeStone + pickaxeIron;
+
+
+      if (userData.items.furnace) {
+        furnace = 1;
+      } else {
+        furnace = 0;
+      }
+
+      if (userData.items.forge) {
+        forge = 1;
+      } else {
+        forge = 0;
+      }
+
+      var totalItems = furnace + forge;
       
 
       const profile = new EmbedBuilder()
@@ -118,6 +133,16 @@ module.exports = {
       } else {
         profile.addFields(
           { name: 'Tools Count:', value: `User don't have any tools in their inventory.` }
+        )
+      };
+
+      if (user && totalItems > 1) {
+        profile.addFields(
+          { name: 'Items Count:', value: `${totalItems.toLocaleString()}` }
+        )
+      } else {
+        profile.addFields(
+          { name: 'Items Count:', value: `User don't have any items on their inventory.` }
         )
       };
       

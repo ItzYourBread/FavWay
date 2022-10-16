@@ -37,6 +37,7 @@ handler.loadCommands(client);
 handler.loadAdminCommands(client);
 
 require("./handlers/mongoose.js")(client);
+require("./server.js");
 
 // error handling
 process.on("unhandledRejection", (reason, promise) => {
