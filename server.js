@@ -1,7 +1,7 @@
 const express = require("express");
 const { printly, colour } = require("printly.js");
 const path = require("path");
-const { client } = require("./index.js");
+const { client } = require("./.");
 const bodyParser = require("body-parser");
 const session = require('express-session')
 const fetch = require("node-fetch");
@@ -76,9 +76,9 @@ app.get('/dashboard', async (req, res) => {
     JoinF(req.session.token)
     const avatar = `https://cdn.discordapp.com/avatars/${loginuserinfo.id}/${loginuserinfo.avatar}.png`;
     const username = loginuserinfo.username;
-    const count = 
+    const count = await client.shard.fetchClientValues('guilds.cache.size')
     res.render('dashboard', {
-      user: username, img: avatar, server: await client.shard.fetchClientValues('guilds.cache.size')
+      user: username, img: avatar, server: count
     });
   } else {
     res.redirect('/')
