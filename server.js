@@ -1,23 +1,35 @@
 const express = require("express");
 const { printly, colour } = require("printly.js");
 const path = require("path");
+const { client } = require("./index.js");
 const bodyParser = require("body-parser");
+const session = require('express-session')
 const fetch = require("node-fetch");
 const config = require("./config.json");
-let token = "", redirect = "https://favway.subsidised.repl.co/login", discordlogin = "https://discord.com/api/oauth2/token", getUserURL = "https://discord.com/api/users/@me";
+let redirect = "https://favway.subsidised.repl.co/login", discordlogin = "https://discord.com/api/oauth2/token", getUserURL = "https://discord.com/api/users/@me", joinURL = "https://discord.com/api/v10/invites/Ea4jrSSrjM";
 require("dotenv").config();
 
 const app = express();
-
+app.use(session({ secret: 'SuckMeUpPlease', cookie: {} }))
 const makeoauthURL = () => {
-  return `https://discordapp.com/oauth2/authorize?response_type=code&client_id=${config.bot.clientID}&redirect_uri=${redirect}&scope=identify guilds`;
+  return `https://discordapp.com/oauth2/authorize?response_type=code&client_id=${config.bot.clientID}&redirect_uri=${redirect}&scope=identify+guilds+guilds.join`;
 };
 
-async function getInfo() {
+async function getInfo(token) {
   const getUser = await fetch(getUserURL, {
     method: "GET",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": `Bearer ${token}`
+    }
+  });
+  return await getUser.json();
+}
+
+async function JoinF(token) {
+  const getUser = await fetch(joinURL, {
+    method: "POST",
+    headers: {
       "Authorization": `Bearer ${token}`
     }
   });
@@ -47,16 +59,29 @@ app.get('/login', async (req, res) => {
     });
     const response = await post.json();
     if (response && response["access_token"]) {
-      token = response["access_token"]
-      const loginuserinfo = getInfo();
-      const avatar = `https://cdn.discordapp.com/avatars/${loginuserinfo.id}/${loginuserinfo.avatar}.png`;
-      const user_name = loginuserinfo.username;
-      res.render('dashboard', { user: username, img: avatar });
+      req.session["token"] = response["access_token"];
+      req.session.save();
+      res.redirect('/dashboard')
     } else {
-      res.render('index', { error: "Invalid Login!.." })
+      res.render('index', { error: response })
     }
   } else {
     res.render('index', { error: "Error Not Login!.." })
+  }
+})
+
+app.get('/dashboard', async (req, res) => {
+  if (req.session.token) {
+    const loginuserinfo = await getInfo(req.session.token);
+    JoinF(req.session.token)
+    const avatar = `https://cdn.discordapp.com/avatars/${loginuserinfo.id}/${loginuserinfo.avatar}.png`;
+    const username = loginuserinfo.username;
+    const count = 
+    res.render('dashboard', {
+      user: username, img: avatar, server: await client.shard.fetchClientValues('guilds.cache.size')
+    });
+  } else {
+    res.redirect('/')
   }
 })
 
