@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js");
+const { ActionRowBuilder, SelectMenuBuilder, ComponentType, Client } = require("discord.js");
 const config = require("../../config.json");
 const { Profile } = require("../../database/game/profile");
 
@@ -14,11 +15,11 @@ module.exports = {
       required: true,
       choices: [
         { name: 'Support', value: 'support' },
-        { name: 'RolePlay', value: 'roleplay' }
+        { name: 'Command List', value: 'commands' }
       ]
     }],
 
-    run: async (client, interaction, args) => {
+    run: async (client, interaction) => {
 
       const { user, guild } = interaction;
 
@@ -39,17 +40,67 @@ module.exports = {
         });
       };
 
-      if (interaction.options.get('type').value === "roleplay") {
-        return interaction.reply({
-          embeds: [
-            new EmbedBuilder()
-            .setTitle("RolePlay Commands")
-            .setColor(config.colours.embed)
-            .setDescription(`Hello Nothing to see here`)
-            .setTimestamp(),
-          ],
-        });
+      if (interaction.options.get('type').value === "commands") {
+
+        const utilities = new EmbedBuilder()
+        .setTitle(`Utilities Commands`)
+        .setColor(config.colours.embed)
+        .setDescription(`Here is the full list of Utilities Commands`)
+        .setTimestamp();
+
+        const roleplay = new EmbedBuilder()
+        .setTitle(`RolePlay Commands`)
+        .setColor(config.colours.embed)
+        .setDescription(`Here is the full list of RolePlay Commands`)
+        .setTimestamp();
+
+        
+      const row = new ActionRowBuilder()
+			.addComponents(
+				new SelectMenuBuilder()
+					.setCustomId('help')
+					.setPlaceholder('Select for more')
+					.addOptions(
+						{
+							label: 'Utilities',
+							description: 'View Utilities Commands',
+							value: 'utilities',
+						},
+            {
+              label: 'RolePlay',
+              description: 'View RolePlay Commands',
+              value: 'roleplay',
+            }
+				 ),
+			);
+
+        let message = await interaction.reply({ embeds: [utilities], components: [row] });
+        
       };
       
+const collector = message.createMessageComponentCollector({ 
+            filter: fn => fn,
+            componentType: ComponentType.SelectMenu, 
+            time: 20000
+        });
+
+collector.on('collect', i => {
+	if (i.user.id === interaction.user.id) 
+		return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
+});
+        
+        
+client.on('interactionCreate', async (interaction, client) => {
+    if (!interaction.isSelectMenu()) return;
+            
+    switch (interaction.values[0]) {
+        case "utilities":  
+           await interaction.update({ embeds: [utilities], components: [row] })
+            break;
+        case "roleplay":  
+           await interaction.update({ embeds: [roleplay], components: [row] })
+            break;
+    };                
+});
     }
 }

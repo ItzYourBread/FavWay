@@ -3,7 +3,6 @@ const config = require("../config.json");
 const { printly, colour } = require("printly.js");
 require('dotenv').config();
 
-
 let manager = new ShardingManager('./index.js', {
     token: process.env.TOKEN,
     totalShards: 1,
