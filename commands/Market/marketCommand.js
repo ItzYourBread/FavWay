@@ -11,7 +11,12 @@ module.exports = {
     run: async (client, interaction) => {
 
     const { guild } = interaction; 
-    const user = interaction.member.user
+    const user = interaction.member.user;
+
+    const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+    userData.commandRans += 1;
+    userData.save();
 
     let woodworking = new EmbedBuilder()
      .setTitle("Woodworking Workshop")

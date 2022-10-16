@@ -14,6 +14,13 @@ module.exports = {
     
     run: async (client, interaction) => {
 
+      const { user } = interaction;
+
+      const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+        userData.commandRans += 1;
+        userData.save();
+
       await interaction.reply({
         embeds: [
           new EmbedBuilder()

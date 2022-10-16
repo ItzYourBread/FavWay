@@ -23,6 +23,9 @@ module.exports = {
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
+        userData.commandRans += 1;
+        userData.save();
+
       let craft = new EmbedBuilder()
       .setTitle("**--Welcome to Crafting Menu--**")
       .setColor(config.colours.embed)

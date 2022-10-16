@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
 const config = require("../../config.json");
 const fetch = require("node-fetch");
+const { Profile } = require("../../database/game/profile");
 
 module.exports = {
     name: "ping",
@@ -11,9 +12,15 @@ module.exports = {
     Admin: false,
     
     run: async (client, interaction, args) => {
-        const { guild } = interaction;
-        
+      
+        const { user, guild } = interaction;
+        const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+        userData.commandRans += 1;
+        userData.save();
+      
         var ping = Date.now() - interaction.createdTimestamp;
+      
         const embed = new EmbedBuilder()
             .setAuthor({ name: `${config.bot.name}`})
             .setColor(config.colours.embed)

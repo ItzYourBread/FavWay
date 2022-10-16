@@ -20,7 +20,10 @@ module.exports = {
       const { guild } = interaction;
       const user = interaction.options.getUser('user') || interaction.user;
 
-      const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id }) 
+      const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+        userData.commandRans += 1;
+        userData.save();
 
       if (userData.resources.woods) {
         woodsCount = userData.resources.woods;
@@ -104,6 +107,7 @@ module.exports = {
       .setDescription(`Bio: just a FavWay User`)
       .setTimestamp()
       
+        
       if (user && userData.coins) {
         profile.addFields(
           { name: 'Pocket:', value: `${userData.coins.toLocaleString()}` }
@@ -145,8 +149,14 @@ module.exports = {
           { name: 'Items Count:', value: `User don't have any items on their inventory.` }
         )
       };
-      
 
+      if (user && userData.commandRans) {
+        profile.addFields(
+          { name: 'Commands Ran:', value: `${userData.commandRans.toLocaleString()}`}
+        )
+      };
+
+      
       await interaction.reply({ embeds: [profile] });
       
 

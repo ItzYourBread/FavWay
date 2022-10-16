@@ -61,6 +61,7 @@ module.exports = {
     amount = Math.floor((Math.random() * 7) + 2);
 
     userData.resources.woods += amount;
+    userData.commandRans += 1;
     userData.cooldowns.breaktree = Date.now() + ms("10s");
     userData.save();
 

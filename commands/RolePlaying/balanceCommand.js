@@ -22,6 +22,11 @@ module.exports = {
 
         const { guild } = interaction;
         const user = interaction.options.getUser("user") || interaction.user;
+
+        const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+        userData.commandRans += 1;
+        userData.save();
         
         const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id }) 
         

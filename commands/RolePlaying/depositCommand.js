@@ -74,6 +74,7 @@ module.exports = {
         ephemeral: true,
       });
 
+    userData.commandRans += 1;
     userData.coins -= amount;
     userData.bank += amount;
     userData.save();

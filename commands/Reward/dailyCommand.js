@@ -45,6 +45,7 @@ module.exports = {
       }
       let result = DateUTC();
 
+      userData.commandRans += 1;
       userData.coins += amount;
       userData.cooldowns.daily = Date.now() + result;
       userData.save();

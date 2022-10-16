@@ -51,6 +51,8 @@ module.exports = {
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
+      userData.commandRans += 1;
+      userData.save();
         
       if (interaction.options.get('resource').value === "woods") {
         choice = userData.resources.woods;

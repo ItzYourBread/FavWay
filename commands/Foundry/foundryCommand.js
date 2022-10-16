@@ -64,6 +64,9 @@ module.exports = {
         
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
+    userData.commandRans += 1;
+    userData.save();
+
     if (interaction.options.get('ore').value === 'ironOre') {
       itemName = "Iron Ore";
       itemName2 = "Iron Nuggets";
@@ -139,6 +142,9 @@ module.exports = {
     const user = interaction.member.user;
         
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+    userData.commandRans += 1;
+    userData.save();
 
     if (interaction.options.get('nugget').value === "ironNugget") {
       itemName = "Iron Nugget";

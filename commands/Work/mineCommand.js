@@ -64,6 +64,7 @@ module.exports = {
     amount = Math.floor((Math.random() * 10) + 5);
 
     userData.resources.stones += amount;
+    userData.commandRans += 1;
     userData.cooldowns.minerock = Date.now() + ms("2m");
     userData.save();
 

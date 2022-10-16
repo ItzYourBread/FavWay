@@ -100,6 +100,8 @@ module.exports = {
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
+      userData.commandRans += 1;
+      userData.save();
         
       if (interaction.options.get('item').value === "wood") {
         amount2 = quantity * 5;
@@ -159,6 +161,9 @@ module.exports = {
       const user = interaction.member.user;
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+      userData.commandRans += 1;
+      userData.save();
 
       if (interaction.options.get('tool').value === 'stoneAxe') {
         price = 90;
@@ -258,6 +263,9 @@ module.exports = {
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
+      userData.commandRans += 1;
+      userData.save();
+
       if (interaction.options.get('item').value === 'furnace') {
         price = 5999;
         itemName = "Furance";
@@ -350,6 +358,8 @@ module.exports = {
         
       const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
+      userData.commandRans += 1;
+      userData.save();
         
       if (interaction.options.get('item').value === "stone") {
         price = quantity * 7;
