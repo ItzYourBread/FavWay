@@ -28,8 +28,6 @@ module.exports = {
         userData.commandRans += 1;
         userData.save();
         
-        const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id }) 
-        
         if (userData.coins > 100000) {
           status = "Being Rich!!";
         } else {
