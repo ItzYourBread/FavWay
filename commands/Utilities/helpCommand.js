@@ -89,6 +89,11 @@ module.exports = {
             name: `/profile`,
             value: `View your or others profile.`,
             inline: true,
+          },
+          {
+            name: `/daily`,
+            value: `Get free daily rewards`,
+            inline: true
           }
         )
         .setTimestamp();
