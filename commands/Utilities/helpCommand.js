@@ -75,9 +75,8 @@ module.exports = {
 			);
 
         let message = await interaction.reply({ embeds: [utilities], components: [row] });
+
         
-      };
-      
 const collector = message.createMessageComponentCollector({ 
             filter: fn => fn,
             componentType: ComponentType.SelectMenu, 
@@ -102,5 +101,8 @@ client.on('interactionCreate', async (interaction, client) => {
             break;
     };                
 });
+        
+      };
+      
     }
 }

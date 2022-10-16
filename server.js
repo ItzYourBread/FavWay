@@ -4,7 +4,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const fetch = require("node-fetch");
 const config = require("./config.json");
-const token = "", redirect = "https://favway.subsidised.repl.co/login", discordlogin = "https://discord.com/api/oauth2/token", getUserURL = "https://discord.com/api/users/@me";
+let token = "", redirect = "https://favway.subsidised.repl.co/login", discordlogin = "https://discord.com/api/oauth2/token", getUserURL = "https://discord.com/api/users/@me";
 require("dotenv").config();
 
 const app = express();
