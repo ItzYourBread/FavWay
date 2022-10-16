@@ -1,7 +1,8 @@
 const express = require("express");
 const { printly, colour } = require("printly.js");
 const path = require("path");
-const { client } = require("./.");
+const client = require("./index.js");
+const { Client } = require("discord.js")
 const bodyParser = require("body-parser");
 const session = require('express-session')
 const fetch = require("node-fetch");
@@ -77,14 +78,16 @@ app.get('/dashboard', async (req, res) => {
     const avatar = `https://cdn.discordapp.com/avatars/${loginuserinfo.id}/${loginuserinfo.avatar}.png`;
     const username = loginuserinfo.username;
     const count = await client.shard.fetchClientValues('guilds.cache.size')
+    const users = await client.shard.fetchClientValues('users.cache.size')
+    const online = "";
     res.render('dashboard', {
-      user: username, img: avatar, server: count
+      user: username, img: avatar, server: count, allmembers: users[0], online: online
     });
   } else {
     res.redirect('/')
   }
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, async () => {
   printly(colour.green("[Dashboard] FavWay dashboard is online!"));
 });
