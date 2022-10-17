@@ -31,6 +31,9 @@ const Profile = new mongoose.Schema({
       stone: { type: Boolean, default: false },
       iron: { type: Boolean, default: false }
     },
+    achievements: {
+      tinyPlayer: { type: Boolean, default: false }
+    },
 })
 
 module.exports = { Profile: mongoose.model("Profile", Profile) }

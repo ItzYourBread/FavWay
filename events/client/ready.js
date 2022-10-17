@@ -21,8 +21,8 @@ module.exports = {
   }
         
   require('../../handlers/clientPremium.js')(client);
+  require('../../handlers/achievements.js')(client);
                                              
-        
     printly.timeout(colour.yellow(`\n[Discord API] Connecting...`), 
         4000);
         
