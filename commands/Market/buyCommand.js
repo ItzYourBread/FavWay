@@ -87,6 +87,24 @@ module.exports = {
         type: ApplicationCommandOptionType.Number,
         required: false
       }],
+    }, {
+      name: 'ore',
+      description: 'Buy types of ores from Ore Market.',
+      type: ApplicationCommandOptionType.Subcommand,
+      options: [{
+        name: 'ore',
+        description: 'What ore do you want?',
+        type: ApplicationCommandOptionType.String,
+        required: true,
+        choices: [
+          { name: 'Iron Ore', value: 'ironOre' }
+        ],
+      }, {
+        name: 'quantity',
+        description: 'How much do you want to buy?',
+        type: ApplicationCommandOptionType.Number,
+        require: false
+      }],
     }],
     
     run: async (client, interaction, args) => {
@@ -102,27 +120,24 @@ module.exports = {
 
       userData.commandRans += 1;
       userData.save();
-        
-      if (interaction.options.get('item').value === "wood") {
-        amount2 = quantity * 5;
-      }
 
       if (interaction.options.get('item').value === "wood") {
         itemEmoji = config.emojis.wood;
         itemName = "Wood";
+        price = quantity * 5;
       }
         
-        if (userData.coins < amount2)
+        if (userData.coins < price)
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
-                .setDescription(`Sorry you dont have enough money to buy **${itemName}**`)
+                .setDescription(`Sorry you don't have enough money to buy **${itemName}**`)
                 .setColor(config.colours.error)
                 .setTimestamp(),
             ],
           });
         
-          userData.coins -= amount2; 
+          userData.coins -= price; 
         if (interaction.options.get('item').value === "wood") {
           userData.resources.woods += quantity;
         }
@@ -131,7 +146,7 @@ module.exports = {
         await interaction.reply({
           embeds: [
             new EmbedBuilder()
-              .setDescription(`You bought **${quantity.toLocaleString()}** ${itemEmoji}**${itemName}** at: ${config.emojis.currency} **${amount2}**`)
+              .setDescription(`You bought **${quantity.toLocaleString()}** ${itemEmoji}**${itemName}** at: ${config.emojis.currency} **${price}**`)
               .setColor(config.colours.success)
               .setTimestamp(),
           ],
@@ -407,6 +422,8 @@ module.exports = {
             .setTimestamp();
         
         logChannel.send({ embeds: [logger] });
+        
+      } else if (interaction.options.getSubcommand() === "ore") {
         
       }
    }
