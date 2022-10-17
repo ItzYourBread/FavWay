@@ -28,5 +28,5 @@ module.exports = async (client, message) => {
       }
     });
   }, 5000);
-  printly(colour.greenBright("[Auto] Achievements loadded"));
+  printly(colour.greenBright("\n[Auto] Achievements Successfully Loaded"));
 }
