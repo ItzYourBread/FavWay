@@ -424,7 +424,63 @@ module.exports = {
         logChannel.send({ embeds: [logger] });
         
       } else if (interaction.options.getSubcommand() === "ore") {
+
+        const quantity = interaction.options.getNumber('quantity') || '20';
+
+        const { guild } = interaction;
+        const user = interaction.member.user;
         
+        const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+
+        userData.commandRans += 1;
+        userData.save();
+
+        if (interaction.optionss.get('ore').value === "ironOre") {
+          price = quantity * 16;
+          itemName = "Iron Ore";
+          itemEmoji = config.emojis.ironOre;
+        }
+
+        if (userData.coins < price)
+          return interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setDescription(`Sorry you don't have enough money to buy ${itemEmoji}**${itemName}**`)
+                .setColor(config.colours.error)
+                .setTimestamp(),
+            ],
+          });
+
+        if (interaction.options.get('ore').value === "ironOre") {
+          userData.coins -= price;
+          userData.resources.ironOres += quantity;
+        }
+          userData.save();
+
+        await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setDescription(`You bought **${quantity.toLocaleString()}** ${itemEmoji}**${itemName}** at: ${config.emojis.currency} **${price}**`)
+              .setColor(config.colours.success)
+              .setTimestamp(),
+          ],
+        });
+
+        const logChannel = client.channels.cache.get(config.logs.buyLog)
+        
+        const logger = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Buy Ore SubCommand]** run by **${interaction.user.tag}**`)
+            .addFields(
+                {
+                  name: "Value:", value: `bought **${quantity}** ${itemEmoji}**${itemName}**`
+                },
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
+        
+        logChannel.send({ embeds: [logger] });
       }
    }
 }
