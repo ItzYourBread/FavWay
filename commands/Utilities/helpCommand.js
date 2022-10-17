@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js");
-const { ActionRowBuilder, SelectMenuBuilder, ComponentType, Client } = require("discord.js");
+const { ActionRowBuilder, SelectMenuBuilder, ButtonStyle, ButtonBuilder, ComponentType, Client } = require("discord.js");
 const config = require("../../config.json");
 const { Profile } = require("../../database/game/profile");
 
@@ -82,7 +82,7 @@ module.exports = {
           },
           {
             name: `/withdraw`,
-            value: `Withdraw your money if you don'tbave any fear of robbers.`,
+            value: `Withdraw your money if you don't have any fear of robbers.`,
             inline: true
           },
           {
@@ -91,9 +91,36 @@ module.exports = {
             inline: true,
           },
           {
-            name: `/daily`,
-            value: `Get free daily rewards`,
+            name: `/craft`,
+            value: `Craft items from your resources.`,
             inline: true
+          },
+          {
+            name: `/daily`,
+            value: `Get daily rewards.`,
+            inline: true
+          },
+          {
+            name: `/weekly`,
+            value: `Get weekly rewards.`,
+            inline: true
+          }
+        )
+        .setTimestamp();
+
+        const roleplay2 = new EmbedBuilder()
+        .setTitle(`RolePlay Commands`)
+        .setColor(config.colours.embed)
+        .setDescription(`Here is the full list of RolePlay Commands`)
+        .addFields(
+          {
+            name: `/market`,
+            value: `Look up market to buy some items for your journey with ${config.bot.name}.`,
+            inline: true
+          },
+          {
+            name: `/buy woodworking`,
+            value: `Buy woods stuffs from Woodworking workshop.`
           }
         )
         .setTimestamp();
@@ -116,6 +143,18 @@ module.exports = {
               value: 'roleplay',
             }
 				 ),
+			);
+
+      const roleplayButtons = new ActionRowBuilder()
+			.addComponents(
+				new ButtonBuilder()
+					.setCustomId('currency')
+					.setLabel('Currency')
+					.setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId('market')
+          .setLabel('Market')
+          .setStyle(ButtonStyle.Primary),
 			);
 
         let message = await interaction.reply({ embeds: [utilities], components: [row] });
@@ -141,12 +180,38 @@ client.on('interactionCreate', async (interaction, client) => {
            await interaction.update({ embeds: [utilities], components: [row] })
             break;
         case "roleplay":  
-           await interaction.update({ embeds: [roleplay], components: [row] })
+           await interaction.update({ embeds: [roleplay], components: [row, roleplayButtons] })
             break;
     };                
 });
+
+client.on('interactionCreate', async (interaction, client) => {
+	if (!interaction.isButton()) return;
+
+  if (interaction.customId === "currency") {
+    await interaction.update({ embeds: [roleplay], components: [roleplayButtons] })
+  }
+
+  if (interaction.customId === "market") {
+    await interaction.update({ embeds: [roleplay2], components: [roleplayButtons] })
+  }
+ 
+});
         
       };
+
+      const logChannel = client.channels.cache.get(config.logs.roleplayLog)
+        
+        const logger = new EmbedBuilder()
+            .setColor(config.colours.logger)
+            .setTitle("Command log")
+            .setDescription(`**[Help Command]** run by **${interaction.user.tag}**`)
+            .addFields(
+                { name: "Guild:", value: `${guild.name}` }
+            )
+            .setTimestamp();
+        
+        logChannel.send({ embeds: [logger] }); 
       
     }
 }

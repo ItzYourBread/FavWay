@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const { ActionRowBuilder, EmbedBuilder, SelectMenuBuilder, ComponentType, Client } = require('discord.js');
 const config = require("../../config.json");
+const { Profile } = require("../../database/game/profile");
 const wait = require('node:timers/promises').setTimeout;
 
 module.exports = {
