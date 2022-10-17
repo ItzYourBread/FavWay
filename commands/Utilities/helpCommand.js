@@ -120,7 +120,28 @@ module.exports = {
           },
           {
             name: `/buy woodworking`,
-            value: `Buy woods stuffs from Woodworking workshop.`
+            value: `Buy woods stuffs from Woodworking Workshop.`,
+            inline: true
+          },
+          {
+            name: `/buy lapidary`,
+            value: `Buy stonnes and gems from Lapidary Shop.`,
+            inline: true
+          },
+          {
+            name: `/buy tools`,
+            value: `Buy tools from Tools Shop to use in your daily life with ${config.bot.name}`,
+            inline: true
+          },
+          {
+            name: `/buy ore`,
+            value: `Buy ores from Ore Market and then melt iand use it to craft items.`,
+            inline: true
+          },
+          {
+            name: `/buy foundry`,
+            value: `Buy some shiny items from Foundry Workshop and make yourself rich.`,
+            inline: true
           }
         )
         .setTimestamp();
