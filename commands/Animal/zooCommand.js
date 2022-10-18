@@ -115,6 +115,16 @@ module.exports = {
         )
       };
 
+      if (user && userData.animal.pig > 1) {
+        zoo.addFields(
+          {
+            name: `Pig 🐖`,
+            value: `${userData.animal.pig}`,
+            inline: true
+          }
+        )
+      };
+
       await interaction.editReply({ embeds: [zoo] });
     };
     

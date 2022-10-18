@@ -1,0 +1,15 @@
+{
+  "random": 14,
+  "animals": [
+    {
+      "name": "Cow",
+      "emoji": "🐄",
+      "db": "cow"
+    },
+    {
+      "name": "Pig",
+      "emoji": "🐖",
+      "db": "pig"
+    }
+  ]
+}
