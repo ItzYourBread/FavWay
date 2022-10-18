@@ -17,7 +17,8 @@ const Profile = new mongoose.Schema({
         zoo: { type: Boolean, default: false }
     },
     animal: {
-        cow: { type: Number, default: 0 }
+        cow: { type: Number, default: 0 },
+        pig: { type: Number, default: 0 }
     },
     items: {
       furnace: { type: Boolean, default: false },
