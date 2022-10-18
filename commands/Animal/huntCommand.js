@@ -3,7 +3,7 @@ const { Profile } = require("../../database/game/profile");
 const Discord = require("discord.js");
 const moment = require("moment");
 const config = require("../../config.json");
-const { animals, random } = require("../../animals.json");
+const { animals } = require("../../animals.json");
 
 module.exports = {
   name: "hunt",
@@ -15,7 +15,7 @@ module.exports = {
     const { user, guild } = interaction;
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
     
-    let _random = Math.floor(Math.random() * random);
+    let random = Math.floor(Math.random() * 14);
     
     const animal = animals[Math.floor(Math.random() * animals.length) ]
     
@@ -43,9 +43,9 @@ module.exports = {
         ],
       });
       if(userData.animal[animal.db]){
-        userData.animal[animal.db] += _random;
+        userData.animal[animal.db] += random;
       }else{
-        userData.animal[animal.db] += _random;
+        userData.animal[animal.db] += random;
       }
       userData.save();
     }
