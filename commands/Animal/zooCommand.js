@@ -7,6 +7,7 @@ const config = require("../../config.json");
 const emojis = require("../../api/emojis.json");
 const tips = require("../../tips.json");
 const { ms } = require("printly.js");
+const { animals } = require("../../animals.json");
 const wait = require('node:timers/promises').setTimeout;
 require('moment-duration-format');
 
@@ -100,33 +101,24 @@ module.exports = {
 
     if (user && userData.property.zoo) {
       const zoo = new EmbedBuilder()
-      .setTitle(`${user.username}'s Zoo`)
-      .setColor(config.colours.embed)
-      .setDescription("EMPTY ZOO")
-      .setTimestamp();
-
-      if (user && userData.animal.cow > 1) {
-        zoo.addFields(
-          {
-            name: `Cow 🐄`,
-            value: `${userData.animal.cow}`,
-            inline: true
-          }
-        )
-      };
-
-      if (user && userData.animal.pig > 1) {
-        zoo.addFields(
-          {
-            name: `Pig 🐖`,
-            value: `${userData.animal.pig}`,
-            inline: true
-          }
-        )
-      };
+        .setTitle(`${user.username}'s Zoo`)
+        .setColor(config.colours.embed)
+        .setDescription("EMPTY ZOO")
+        .setTimestamp();
+      animals.find(el => {
+        if (user && userData.animal[el.value] && userData.animal[el.value] > 1) {
+          zoo.addFields(
+            {
+              name: `${el.name} ${el.emoji}`,
+              value: `${userData.animal[el.value]}`,
+              inline: true
+            }
+          )
+        }
+      });
 
       await interaction.editReply({ embeds: [zoo] });
     };
-    
+
   }
 }

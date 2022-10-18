@@ -3,6 +3,7 @@ const config = require("../../config.json");
 const { EmbedBuilder, ApplicationCommandOptionType } = require("discord.js");
 const { Profile } = require("../../database/game/profile");
 const { ms } = require("printly.js");
+const { animals } = require("../../animals.json");
 
 module.exports = {
   name: "trade",
@@ -34,10 +35,7 @@ module.exports = {
     description: 'Select a animal',
     type: ApplicationCommandOptionType.String,
     required: false,
-    choices: [
-      { name: 'Cow', value: 'cow' },
-      { name: 'Pig', value: 'pig' }
-    ],
+    choices: animals,
   }],
 
   run: async (client, interaction) => {
@@ -45,36 +43,25 @@ module.exports = {
     const user1 = interaction.user;
     const quantity = interaction.options.getNumber('quantity');
     const user2 = interaction.options.getUser('user');
-    const animal = interaction.options.get('animal').value;
-
-    if (animal === "cow") {
-      name = "Cow";
-      emoji = "🐄";
-    }
-    if (animal === "pig") {
-      name = "Pig";
-      emoji = "🐖";
-    }
-
+    const animal = animals.find(el => el.value === interaction.options.get('animal').value);
     const UserData1 = await Profile.findOne({ id: user1.id }); // You
     const UserData2 = await Profile.findOne({ id: user2.id }); // Other
-    if (UserData1 && UserData2) {
-      // check if user have zoo also have this animal hunted and is count is more or = to quantity
-      if (UserData1.property.zoo && UserData1.animal[animal] && UserData1.animal[animal] > 0) {
-        if (UserData1.animal[animal] >= quantity) {
-          UserData1.animal[animal] -= quantity;
-          UserData2.animal[animal] += quantity;
+    if (UserData1 && UserData2 && animal) {
+      if (UserData1.property.zoo && UserData1.animal[animal.value] && UserData1.animal[animal.value] > 0) {
+        if (UserData1.animal[animal.value] >= quantity) {
+          UserData1.animal[animal.value] -= quantity;
+          UserData2.animal[animal.value] += quantity;
           UserData1.save();
           UserData2.save();
           user2.send({
-            content: `Hello ${user2.tag} You Recerver ${quantity} ${emoji}${name} Form ${user1.tag}!`
+            content: `Hello ${user2.tag} You Recerver ${quantity} ${animal.emoji}${animal.name} Form ${user1.tag}!`
           })
           await interaction.editReply({
             embeds: [
               new EmbedBuilder()
                 .setTitle("Trade Successful!")
                 .setColor(config.colours.success)
-                .setDescription(`You give **${quantity} ${emoji}${name}**`)
+                .setDescription(`You give **${quantity} ${animal.emoji}${animal.name}**`)
                 .setTimestamp(),
             ],
           });
@@ -84,7 +71,7 @@ module.exports = {
               new EmbedBuilder()
                 .setTitle("Error: animals required")
                 .setColor(config.colours.error)
-                .setDescription(`You don't have **${quantity} ${emoji}${name}** to trade.`)
+                .setDescription(`You don't have **${quantity} ${animal.emoji}${animal.name}** to trade.`)
                 .setTimestamp(),
             ]
           });
@@ -95,7 +82,7 @@ module.exports = {
             new EmbedBuilder()
               .setTitle("Error: zoo or animals required")
               .setColor(config.colours.error)
-              .setDescription(`You don't have zoo or animals\nYou need to buy zoo or hunt ${animal} before you trade.`)
+              .setDescription(`You don't have zoo or animals\nYou need to buy zoo or hunt ${animal.name} before you trade.`)
               .setTimestamp(),
           ]
         });

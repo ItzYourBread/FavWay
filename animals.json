@@ -3,12 +3,22 @@
     {
       "name": "Cow",
       "emoji": "🐄",
-      "db": "cow"
+      "value": "cow"
     },
     {
       "name": "Pig",
       "emoji": "🐖",
-      "db": "pig"
+      "value": "pig"
+    },
+    {
+      "name": "Chicken",
+      "emoji": "🐓",
+      "value": "chicken"
+    },
+    {
+      "name": "Sheep",
+      "emoji": "🐑",
+      "value": "sheep"
     }
   ]
 }

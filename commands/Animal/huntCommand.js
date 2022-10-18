@@ -17,7 +17,7 @@ module.exports = {
     
     let random = Math.floor(Math.random() * 14);
     
-    const animal = animals[Math.floor(Math.random() * animals.length) ]
+    const animal = animals[Math.floor(Math.random() * animals.length)]
     
     if (user && !userData.property.zoo) {
       return interaction.editReply({
@@ -42,10 +42,10 @@ module.exports = {
           .setTimestamp(),
         ],
       });
-      if(userData.animal[animal.db]){
-        userData.animal[animal.db] += random;
+      if(userData.animal[animal.value]){
+        userData.animal[animal.value] += random;
       }else{
-        userData.animal[animal.db] += random;
+        userData.animal[animal.value] += random;
       }
       userData.save();
     }
