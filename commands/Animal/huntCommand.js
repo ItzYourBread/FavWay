@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const moment = require("moment");
 const config = require("../../config.json");
 const { animals } = require("../../animals.json");
+const { ma } = require("printly.js");
 
 module.exports = {
   name: "hunt",
@@ -15,7 +16,7 @@ module.exports = {
     const { user, guild } = interaction;
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
     
-    let random = Math.floor(Math.random() * 12);
+    let random = Math.floor(Math.random() * 8);
     
     const animal = animals[Math.floor(Math.random() * animals.length)]
     
@@ -38,7 +39,7 @@ module.exports = {
           new EmbedBuilder()
           .setTitle("Hunting...!")
           .setColor(config.colours.work)
-          .setDescription(`You found **${random} ${emoji}${name}**`)
+          .setDescription(`You found **${random} ${animal.emoji}${animal.name}**`)
           .setTimestamp(),
         ],
       });
