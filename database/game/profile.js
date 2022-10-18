@@ -13,6 +13,12 @@ const Profile = new mongoose.Schema({
         mineore: { type: Date },
         daily: { type: Date }
     },
+    property: {
+        zoo: { type: Boolean, default: false }
+    },
+    animal: {
+        cow: { type: Number, default: 0 }
+    },
     items: {
       furnace: { type: Boolean, default: false },
       forge: { type: Boolean, default: false }
