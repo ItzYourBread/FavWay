@@ -11,6 +11,7 @@ const Profile = new mongoose.Schema({
         breaktree: { type: Date },
         minerock: { type: Date },
         mineore: { type: Date },
+        hunt: { type: Date },
         daily: { type: Date }
     },
     property: {

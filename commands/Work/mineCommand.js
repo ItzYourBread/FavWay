@@ -65,7 +65,7 @@ module.exports = {
 
     userData.resources.stones += amount;
     userData.commandRans += 1;
-    userData.cooldowns.minerock = Date.now() + ms("2m");
+    userData.cooldowns.minerock = Date.now() + ms("1m");
     userData.save();
 
     if (user && userData.pickaxe.stone || userData.pickaxe.iron)
@@ -130,7 +130,7 @@ module.exports = {
     amount = Math.floor((Math.random() * 18) + 7);
 
     userData.resources.ironOres += amount;
-    userData.cooldowns.mineore = Date.now() + ms("3m");
+    userData.cooldowns.mineore = Date.now() + ms("2m");
     userData.save();
 
     if (user && userData.pickaxe.iron)

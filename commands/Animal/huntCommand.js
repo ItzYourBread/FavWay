@@ -15,7 +15,7 @@ module.exports = {
     const { user, guild } = interaction;
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
     
-    let random = Math.floor(Math.random() * 14);
+    let random = Math.floor(Math.random() * 12);
     
     const animal = animals[Math.floor(Math.random() * animals.length)]
     
@@ -47,6 +47,7 @@ module.exports = {
       }else{
         userData.animal[animal.value] += random;
       }
+      userData.cooldown.hunt = Date.now() + ms("30s");
       userData.save();
     }
 

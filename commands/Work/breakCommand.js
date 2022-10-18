@@ -62,7 +62,7 @@ module.exports = {
 
     userData.resources.woods += amount;
     userData.commandRans += 1;
-    userData.cooldowns.breaktree = Date.now() + ms("10s");
+    userData.cooldowns.breaktree = Date.now() + ms("30s");
     userData.save();
 
     if (user && userData.axe.stone) {

@@ -435,7 +435,7 @@ module.exports = {
         userData.commandRans += 1;
         userData.save();
 
-        if (interaction.optionss.get('ore').value === "ironOre") {
+        if (interaction.options.get('ore').value === "ironOre") {
           price = quantity * 16;
           itemName = "Iron Ore";
           itemEmoji = config.emojis.ironOre;

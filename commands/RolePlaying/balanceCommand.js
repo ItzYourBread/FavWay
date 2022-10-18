@@ -27,7 +27,7 @@ module.exports = {
 
         userData.commandRans += 1;
         userData.save();
-        
+      
         if (userData.coins > 100000) {
           status = "Being Rich!!";
         } else {
