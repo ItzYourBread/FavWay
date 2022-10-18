@@ -36,9 +36,9 @@ module.exports = {
       await interaction.editReply({
         embeds: [
           new EmbedBuilder()
-          .setTitle("Hunting...")
+          .setTitle("Hunting...!")
           .setColor(config.colours.work)
-          .setDescription(`You hunted a ${animal.name} ${animal.emoji}`)
+          .setDescription(`You found **${random} ${emoji}${name}**`)
           .setTimestamp(),
         ],
       });
