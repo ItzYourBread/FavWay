@@ -146,6 +146,24 @@ module.exports = {
         )
         .setTimestamp();
 
+        const roleplay3 = new EmbedBuilder()
+        .setTitle(`RolePlay Commands`)
+        .setColor(config.colours.embed)
+        .setDescription(`Here is the full list of RolePlay Commands`)
+        .addFields(
+          {
+            name: `/zoo`,
+            value: `Look your or others zoo.`,
+            inline: true
+          },
+          {
+            name: `/hunt`,
+            value: `Hunt and found some animals.`,
+            inline: true
+          }
+       )
+        .setTimestamp();
+
         
       const row = new ActionRowBuilder()
 			.addComponents(
@@ -175,6 +193,10 @@ module.exports = {
         new ButtonBuilder()
           .setCustomId('market')
           .setLabel('Market')
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId('animal')
+          .setLabel('Animal')
           .setStyle(ButtonStyle.Primary),
 			);
 
@@ -215,6 +237,9 @@ client.on('interactionCreate', async (interaction, client) => {
 
   if (interaction.customId === "market") {
     await interaction.update({ embeds: [roleplay2], components: [roleplayButtons] })
+  }
+  if (interaction.customId === "animal") {
+    await interaction.update({ embeds: [roleplay3], components: [roleplayButtons] })
   }
  
 });
