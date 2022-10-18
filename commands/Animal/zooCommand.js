@@ -99,9 +99,11 @@ module.exports = {
 
     };
 
+    animals.find(el => {
     if (user && userData.animal[el.value] && userData.animal[el.value] > 1) {
       zooText = "You have alots of animals in your zoo!"
     }
+    });
 
     if (user && userData.property.zoo) {
       const zoo = new EmbedBuilder()
