@@ -149,6 +149,7 @@ client.on('interactionCreate', async (interaction, client) => {
     }
     
     userData.items.furnace = true;
+    userData.craftCount += 1;
     userData.resources.stones -= 100;
     userData.resources.woods -= 50;
     userData.resources.ironOres -= 2;
@@ -194,6 +195,7 @@ client.on('interactionCreate', async (interaction, client) => {
     }
     
     userData.items.forge = true;
+    userData.craftCount += 1;
     userData.resources.ironOres -= 300;
     userData.resources.ironNuggets -= 150;
     userData.save();

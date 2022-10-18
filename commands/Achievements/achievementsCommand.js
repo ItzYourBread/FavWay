@@ -28,7 +28,7 @@ module.exports = {
     userData.save();
     
     const page1 = new EmbedBuilder()
-      .setTitle("Achievements Page 1")
+      .setTitle(`${user.username}'s Achievements Progress`)
       .setColor(config.colours.embed)
       .setDescription(`Here you can see your achievements`)
       .setTimestamp();
@@ -36,15 +36,35 @@ module.exports = {
     if (user && userData.achievements.tinyPlayer) {
       page1.addFields(
         {
-          name: `TinyPlayer`,
-          value: `Completed ⭐️`
+          name: `Run commands 500 times!`,
+          value: `Completed 500/500\n**Rewards:**\n${config.emojis.currency}2,000\n${config.emojis.currencyCents}700\nTinyPlayer(Title)`,
+          inline: true
         }
       )
     } else {
       page1.addFields(
         {
-          name: `TinyPlayer`,
-          value: `Incompleted 500/${userData.commandRans}`
+          name: `Run commands 500 times!`,
+          value: `In progress ${userData.commandRans}/500\n**Rewards:**\n${config.emojis.currency}2,000\n${config.emojis.currencyCents}700\nTinyPlayer(Title)`,
+          inline: true
+        }
+      )
+    };
+
+    if (user && userData.achievements.firstCraft) {
+      page1.addFields(
+        {
+          name: `Craft an item!`,
+          value: `Completed 1/1\n**Rewards:**\n${config.emojis.currency}3,500\n${config.emojis.ironBrick}15`,
+          inline: true
+        }
+      )
+    } else {
+      page1.addFields(
+        {
+          name: `Craft an item!`,
+          value: `In progress ${userData.craftCount}/1\n**Rewards:**\n${config.emojis.currency}3,500\n${config.emojis.ironBrick}15`,
+          inline: true
         }
       )
     };

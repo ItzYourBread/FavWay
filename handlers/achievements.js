@@ -22,7 +22,31 @@ module.exports = async (client, message) => {
             ],
           });
           user.coins += 2000;
+          user.cents += 700;
           user.achievements.tinyPlayer = true;
+          user.save();
+        }
+      }
+    });
+  }, 5000);
+
+  setInterval(() => {
+    client.users.cache.map(async (member) => {
+      const user = await Profile.findOne({ id: member.id });
+      if (user) {
+        if (!user.achievements.firstCraft && user.craftCount == 1) {
+          await member.send({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("Achievements Unlocked..!")
+                .setColor(config.colours.embed)
+                .setDescription(`Congo for unlocking a achievements!`)
+                .setTimestamp(),
+            ],
+          });
+          user.coins += 3500;
+          user.resources.ironBricks += 15;
+          user.achievements.firstCraft = true;
           user.save();
         }
       }

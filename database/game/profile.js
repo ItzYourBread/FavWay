@@ -6,6 +6,7 @@ const Profile = new mongoose.Schema({
     cents: { type: Number, default: 0 },
     bank: { type: Number, default: 0 },
     commandRans: { type: Number, default: 0 },
+    craftCount: { type: Number, default: 0 },
     cooldowns: {
         breaktree: { type: Date },
         minerock: { type: Date },
@@ -32,7 +33,8 @@ const Profile = new mongoose.Schema({
       iron: { type: Boolean, default: false }
     },
     achievements: {
-      tinyPlayer: { type: Boolean, default: false }
+      tinyPlayer: { type: Boolean, default: false },
+      firstCraft: { type: Boolean, default: false }
     },
 })
 
