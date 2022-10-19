@@ -6,7 +6,7 @@ const config = require("../../config.json");
 const emojis = require("../../api/emojis.json");
 const tips = require('../../tips.json');
 const wait = require('node:timers/promises').setTimeout;
-const { resource } = require("../../inventory.json");
+const { resource, food } = require("../../inventory.json");
 
 module.exports = {
   name: "inventory",
@@ -22,7 +22,8 @@ module.exports = {
 
   run: async (client, interaction) => {
     await interaction.deferReply();
-    var inventoryRes =  `You don't have any resources!`;
+    var inventoryRes =  "";
+    var inventoryFoods = "";
     const user = interaction.options.getUser('user') || interaction.user;
     const { guild } = interaction;
 
@@ -32,11 +33,13 @@ module.exports = {
     userData.save();
     
     resource.map(el => { 
-      if (user && userData.resources[el.value] && userData.resources[el.value] > 1) {
+      if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
       inventoryRes += `${config.emojis[el.emoji]}**${el.name}** — ${userData.resources[el.value]}\n${el.category}\n\n`;
       }
     });
-    
+    if(!inventoryRes){
+      inventoryRes = `You don't have any resources!`;
+    }
     let resources = new EmbedBuilder()
       .setTitle(`${user.username}'s Inventory`)
       .setColor(config.colours.embed)
@@ -87,6 +90,20 @@ module.exports = {
       items.addFields({ name: `${config.emojis.forge}Forge`, value: `own` })
     }
 
+    food.map(el => { 
+      if (user && userData.foods[el.value] && userData.foods[el.value] >= 1) {
+      inventoryFoods += `${el.emoji}**${el.name}** — ${userData.foods[el.value]}\n${el.category}\n\n`;
+      }
+    });
+    if(!inventoryFoods){
+      inventoryFoods = `You don't have any foods!`;
+    }
+    let foods = new EmbedBuilder()
+      .setTitle(`${user.username}'s Inventory`)
+      .setColor(config.colours.embed)
+      .setThumbnail(user.displayAvatarURL())
+      .setDescription(inventoryFoods)
+      .setTimestamp();
 
     const row = new ActionRowBuilder()
       .addComponents(
@@ -108,13 +125,18 @@ module.exports = {
               label: 'Items',
               description: 'View your items',
               value: 'items'
+            },
+            {
+              label: 'Foods',
+              description: 'View your foods',
+              value: 'foods',
             }
           ),
-      );
+        );
 
 
     let message = await interaction.editReply({ embeds: [resources], components: [row], fetchReply: true });
-items = "";
+
     const logChannel = client.channels.cache.get(config.logs.roleplayLog)
 
     const logger = new EmbedBuilder()
@@ -144,6 +166,9 @@ items = "";
       if (!interaction.isSelectMenu()) return;
 
       switch (interaction.values[0]) {
+        case "foods":
+          await interaction.update({ embeds: [foods], components: [row] })
+          break;
         case "items":
           await interaction.update({ embeds: [items], components: [row] })
           break;

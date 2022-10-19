@@ -30,5 +30,23 @@
       "category": "Foundry",
       "value": "ironBricks"
     }
+  ],
+
+  "item": [
+    {
+      "label": "Bucket",
+      "emoji": "🪣",
+      "category": "Item",
+      "value": "buckets"
+    }
+  ],
+
+  "food": [
+    {
+      "name": "Milk Bucket",
+      "emoji": "🥛",
+      "category": "Drink",
+      "value": "milkBuckets"
+    }
   ]
 }
