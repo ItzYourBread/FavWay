@@ -287,19 +287,20 @@ module.exports = {
       }
 
       if (interaction.customId === "cutterButton") {
+        
         if (userData && userData.items.cutter) {
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
                 .setTitle("Craft error")
                 .setColor(config.colours.error)
-                .setDescription(`You have craft **Cutter** him have ${userData.health.cutter} health!`)
+                .setDescription(`Looks like you already have **Cutter**,\nYou don't have to craft one more.`)
                 .setTimetamp(),
             ],
             ephemeral: true
           });
         }
-        if (userData.resources.ironBricks < 1 && userData.resources.woods < 2) {
+        if (userData.resources.ironBricks < 1 || userData.resources.woods < 2) {
           return interaction.reply({
             embeds: [
               new EmbedBuilder()

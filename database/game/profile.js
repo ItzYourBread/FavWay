@@ -40,6 +40,8 @@ const Profile = new mongoose.Schema({
   },
   foods: {
     milkBuckets: { type: Number, default: 0 },
+    eggs: { type: Number, default: 0 },
+    butters: { type: Number, default: 0 },
     cakeNormal: { type: Number, default: 0 }
   },
   axe: {

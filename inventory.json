@@ -29,15 +29,33 @@
       "emoji": "ironBrick",
       "category": "Foundry",
       "value": "ironBricks"
+    },
+    {
+      "name": "Wool",
+      "emoji": "wool",
+      "category": "Cloth",
+      "value": "wools"
     }
   ],
 
   "item": [
     {
-      "label": "Bucket",
-      "emoji": "🪣",
-      "category": "Item",
-      "value": "buckets"
+      "name": "Furnace",
+      "emoji": "idleFurnace",
+      "category": "Foundry",
+      "value": "furnace"
+    },
+    {
+      "name": "Forge",
+      "emoji": "forge",
+      "category": "Foundry",
+      "value": "forge"
+    },
+    {
+     "name": "Bucket",
+     "emoji": "🪣",
+     "category": "Tools",
+     "value": "buckets"
     }
   ],
 

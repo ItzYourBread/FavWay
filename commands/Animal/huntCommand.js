@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 const moment = require("moment");
 const config = require("../../config.json");
 const { animals } = require("../../animals.json");
-const { ma } = require("printly.js");
+const { ms } = require("printly.js");
 
 module.exports = {
   name: "hunt",
@@ -33,6 +33,14 @@ module.exports = {
     }
 
     if (user && userData.property.zoo) {
+
+      if(userData.animal[animal.value]){
+        userData.animal[animal.value] += random;
+      }else{
+        userData.animal[animal.value] += random;
+      }
+      userData.cooldowns.hunt = Date.now() + ms("30s");
+      userData.save();
       
       await interaction.editReply({
         embeds: [
@@ -43,15 +51,6 @@ module.exports = {
           .setTimestamp(),
         ],
       });
-      if(userData.animal[animal.value]){
-        userData.animal[animal.value] += random;
-      }else{
-        userData.animal[animal.value] += random;
-      }
-      userData.cooldown.hunt = Date.now() + ms("30s");
-      userData.save();
     }
-
-
   }
 }

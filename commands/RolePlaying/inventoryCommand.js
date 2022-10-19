@@ -6,7 +6,7 @@ const config = require("../../config.json");
 const emojis = require("../../api/emojis.json");
 const tips = require('../../tips.json');
 const wait = require('node:timers/promises').setTimeout;
-const { resource, food } = require("../../inventory.json");
+const { resource, food, item } = require("../../inventory.json");
 
 module.exports = {
   name: "inventory",
@@ -24,6 +24,7 @@ module.exports = {
     await interaction.deferReply();
     var inventoryRes =  "";
     var inventoryFoods = "";
+    var inventoryItems = "";
     const user = interaction.options.getUser('user') || interaction.user;
     const { guild } = interaction;
 
@@ -72,23 +73,21 @@ module.exports = {
     }
 
 
-    if (userData.items.furnace || userData.items.forge) {
-      toolsMessage = "Nice items";
-    } else {
-      toolsMessage = "You don't have any items";
+   item.map(el => { 
+      if (user && userData.items[el.value] && userData.items[el.value] >= 1) {
+      inventoryItems += `${config.emojis[el.emoji]}**${el.name}** — ${userData.items[el.value]}\n${el.category}\n\n`;
+      }
+    });
+    if(!inventoryItems){
+      inventoryItems = `You don't have any items!`;
     }
     let items = new EmbedBuilder()
       .setTitle(`${user.username}'s Inventory`)
-      .setDescription(`${toolsMessage}`)
+      .setDescription(inventoryItems)
       .setColor(config.colours.embed)
       .setThumbnail(user.displayAvatarURL())
-      .setTimestamp()
-    if (userData.items.furnace) {
-      items.addFields({ name: `${config.emojis.idleFurnace}Furnace`, value: `own` })
-    }
-    if (userData.items.forge) {
-      items.addFields({ name: `${config.emojis.forge}Forge`, value: `own` })
-    }
+      .setTimestamp();
+    
 
     food.map(el => { 
       if (user && userData.foods[el.value] && userData.foods[el.value] >= 1) {

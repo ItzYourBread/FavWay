@@ -98,17 +98,11 @@ module.exports = {
 
     };
 
-    animals.find(el => {
-    if (user && userData.animal[el.value] && userData.animal[el.value] > 1) {
-      zooText = "You have alots of animals in your zoo!"
-    }
-    });
-
     if (user && userData.property.zoo) {
       const zoo = new EmbedBuilder()
         .setTitle(`${user.username}'s Zoo`)
         .setColor(config.colours.embed)
-        .setDescription(`${zooText}`)
+        .setDescription(`well ok`)
         .setTimestamp();
       animals.find(el => {
         if (user && userData.animal[el.value] && userData.animal[el.value] > 1) {
