@@ -47,7 +47,13 @@ module.exports = {
     let craftBucket = new EmbedBuilder()
       .setTitle("Craft Bucket")
       .setColor(config.colours.embed)
-      .setDescription(`**${userData.resources.ironNuggets}/5** ${config.emojis.ironNugget}`)
+      .setDescription(`**${userData.resources.ironNuggets}/5** ${config.emojis.ironNugget}**Iron Nugget**.`)
+      .setTimestamp();
+
+    let craftCutter = new EmbedBuilder()
+      .setTitle("Craft Cutter")
+      .setColor(config.colours.embed)
+      .setDescription(`**${userData.resources.woods}/2** ${config.emojis.wood}**Wood**.\n**${userData.resources.ironBricks}/1** ${config.emojis.ironBrick}**Iron Brick**`)
       .setTimestamp();
 
 
@@ -71,6 +77,11 @@ module.exports = {
               label: 'Bucket',
               description: 'Craft buckets for collecting liquid things',
               value: 'bucket'
+            },
+            {
+              label: 'Cutter',
+              description: 'Craft cutter for collecting wools and many more.',
+              value: 'cutter'
             },
             {
               label: 'Go Back',
@@ -100,6 +111,14 @@ module.exports = {
       .addComponents(
         new ButtonBuilder()
           .setCustomId('bucketButton')
+          .setLabel('Craft')
+          .setStyle(ButtonStyle.Success),
+      );
+
+    const cutterButton = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('cutterButton')
           .setLabel('Craft')
           .setStyle(ButtonStyle.Success),
       );
@@ -134,6 +153,9 @@ module.exports = {
           break;
         case "bucket":
           await interaction.update({ embeds: [craftBucket], components: [selectMenu, bucketButton] })
+          break;
+        case "cutter":
+          await interaction.update({ embeds: [craftCutter], components: [selectMenu, cutterButton] })
           break;
       }
     });
@@ -235,7 +257,7 @@ module.exports = {
 
       if (interaction.customId === "bucketButton") {
 
-        if (user && userData.resources.ironNuggets < 5) {
+        if (userData.resources.ironNuggets < 5) {
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
@@ -244,6 +266,7 @@ module.exports = {
                 .setDescription(`Sorry you don't have enough resources to craft **Bucket**`)
                 .setTimetamp(),
             ],
+            ephemeral: true
           });
         }
 
@@ -261,9 +284,52 @@ module.exports = {
               .setTimestamp(),
           ],
         });
-      } 
-     
-});
+      }
+
+      if (interaction.customId === "cutterButton") {
+        if (userData && userData.items.cutters) {
+          return interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("Craft error")
+                .setColor(config.colours.error)
+                .setDescription(`You have craft **Cutter** him have ${userData.health.cutters} health!`)
+                .setTimetamp(),
+            ],
+            ephemeral: true
+          });
+        }
+        if (userData.resources.ironBricks < 1 && userData.resources.woods < 2) {
+          return interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("Craft error")
+                .setColor(config.colours.error)
+                .setDescription(`Sorry you don't have enough resources to craft **Cutter**`)
+                .setTimetamp(),
+            ],
+            ephemeral: true
+          });
+        }
+        userData.resources.woods -= 2;
+        userData.resources.ironBricks -= 1;
+        userData.craftCount += 1;
+        userData.items.cutters = true;
+        userData.health.cutters += 5;
+        userData.save();
+
+        await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle("Crafted Cutter")
+              .setColor(config.colours.success)
+              .setDescription(`You successfully crafted a **Cutter**.`)
+              .setTimestamp(),
+          ],
+        });
+      }
+
+    });
 
   }
 }

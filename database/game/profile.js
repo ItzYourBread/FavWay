@@ -7,6 +7,7 @@ const Profile = new mongoose.Schema({
   bank: { type: Number, default: 0 },
   commandRans: { type: Number, default: 0 },
   craftCount: { type: Number, default: 0 },
+  bakeCount: { type: Number, default: 0 },
   cooldowns: {
     breaktree: { type: Date },
     minerock: { type: Date },
@@ -26,7 +27,8 @@ const Profile = new mongoose.Schema({
   items: {
     furnace: { type: Boolean, default: false },
     forge: { type: Boolean, default: false },
-    buckets: { type: Number, default: 0 }
+    buckets: { type: Number, default: 0 },
+    cutter: { type: Boolean, default: false }
   },
   resources: {
     woods: { type: Number, default: 0 },
@@ -37,10 +39,7 @@ const Profile = new mongoose.Schema({
   },
   foods: {
     milkBuckets: { type: Number, default: 0 },
-    cake: {
-      count: { type: Number, default: 0 },
-      normal: { type: Number, default: 0 }
-    }
+    cakeNormal: { type: Number, default: 0 }
   },
   axe: {
     stone: { type: Boolean, default: false },
@@ -54,6 +53,9 @@ const Profile = new mongoose.Schema({
     tinyPlayer: { type: Boolean, default: false },
     firstCraft: { type: Boolean, default: false }
   },
+  health: {
+    cutters: { type: Number, default: 0 }
+  }
 })
 
 module.exports = { Profile: mongoose.model("Profile", Profile) }
