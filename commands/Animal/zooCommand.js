@@ -25,7 +25,6 @@ module.exports = {
   run: async (client, interaction) => {
 
     await interaction.deferReply();
-    let reply = '';
 
     const user = interaction.options.getUser('user') || interaction.user;
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })

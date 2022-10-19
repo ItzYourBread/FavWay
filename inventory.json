@@ -1,0 +1,34 @@
+{
+  "resource": [
+    {
+      "name": "Wood",
+      "emoji": "wood",
+      "category": "Woodworking",
+      "value": "woods"
+    },
+    {
+      "name": "Stone",
+      "emoji": "stone",
+      "category": "Lapidary",
+      "value": "stones"
+    },
+    {
+      "name": "Iron Ore",
+      "emoji": "ironOre",
+      "category": "Mineral",
+      "value": "ironOres"
+    },
+    {
+      "name": "Iron Nugget",
+      "emoji": "ironNugget",
+      "category": "Foundry",
+      "value": "ironNuggets"
+    },
+    {
+      "name": "Iron Brick",
+      "emoji": "ironBrick",
+      "category": "Foundry",
+      "value": "ironBricks"
+    }
+  ]
+}

@@ -27,7 +27,7 @@ const Profile = new mongoose.Schema({
       furnace: { type: Boolean, default: false },
       forge: { type: Boolean, default: false }
     },
-    resources: {
+    resources: { 
         woods: { type: Number, default: 0 },
         stones: { type: Number, default: 0 },
         ironOres: { type: Number, default: 0 },
