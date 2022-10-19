@@ -287,13 +287,13 @@ module.exports = {
       }
 
       if (interaction.customId === "cutterButton") {
-        if (userData && userData.items.cutters) {
+        if (userData && userData.items.cutter) {
           return interaction.reply({
             embeds: [
               new EmbedBuilder()
                 .setTitle("Craft error")
                 .setColor(config.colours.error)
-                .setDescription(`You have craft **Cutter** him have ${userData.health.cutters} health!`)
+                .setDescription(`You have craft **Cutter** him have ${userData.health.cutter} health!`)
                 .setTimetamp(),
             ],
             ephemeral: true
@@ -314,8 +314,8 @@ module.exports = {
         userData.resources.woods -= 2;
         userData.resources.ironBricks -= 1;
         userData.craftCount += 1;
-        userData.items.cutters = true;
-        userData.health.cutters += 5;
+        userData.health.cutters = 10;
+        userData.items.cutter = true;
         userData.save();
 
         await interaction.reply({

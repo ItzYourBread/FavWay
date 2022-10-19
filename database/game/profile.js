@@ -35,7 +35,8 @@ const Profile = new mongoose.Schema({
     stones: { type: Number, default: 0 },
     ironOres: { type: Number, default: 0 },
     ironNuggets: { type: Number, default: 0 },
-    ironBricks: { type: Number, default: 0 }
+    ironBricks: { type: Number, default: 0 },
+    wools: { type: Number, default: 0 }
   },
   foods: {
     milkBuckets: { type: Number, default: 0 },
