@@ -47,6 +47,12 @@
       "emoji": "🥛",
       "category": "Drink",
       "value": "milkBuckets"
+    },
+    {
+      "name": "Cake",
+      "emoji": "🎂",
+      "category": "Food",
+      "value": "cake.normal"
     }
   ]
 }
