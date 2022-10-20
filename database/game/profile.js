@@ -13,6 +13,8 @@ const Profile = new mongoose.Schema({
     minerock: { type: Date },
     mineore: { type: Date },
     hunt: { type: Date },
+    milk: { type: Date },
+    wool: { type: Date },
     daily: { type: Date }
   },
   property: {

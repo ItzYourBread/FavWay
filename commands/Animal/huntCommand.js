@@ -5,6 +5,7 @@ const moment = require("moment");
 const config = require("../../config.json");
 const { animals } = require("../../animals.json");
 const { ms } = require("printly.js");
+require("moment-duration-format");
 
 module.exports = {
   name: "hunt",
@@ -16,7 +17,7 @@ module.exports = {
     const { user, guild } = interaction;
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
     
-    let random = Math.floor(Math.random() * 8);
+    let random = Math.floor(Math.random() * 4);
     
     const animal = animals[Math.floor(Math.random() * animals.length)]
     
@@ -32,6 +33,22 @@ module.exports = {
       });
     }
 
+    const duration = moment
+        .duration(userData.cooldowns.hunt - Date.now())
+        .format("m[m], s[s]");
+    // check cooldown
+    if (userData.cooldowns.hunt > Date.now())
+      return interaction.editReply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("Please be patient...")
+            .setColor(config.colours.work)
+            .setDescription(
+              `⌛ You can hunt again in **\`${duration}\`**`
+            ),
+        ],
+      });
+
     if (user && userData.property.zoo) {
 
       if(userData.animal[animal.value]){
@@ -39,7 +56,7 @@ module.exports = {
       }else{
         userData.animal[animal.value] += random;
       }
-      userData.cooldowns.hunt = Date.now() + ms("30s");
+      userData.cooldowns.hunt = Date.now() + ms("1m");
       userData.save();
       
       await interaction.editReply({

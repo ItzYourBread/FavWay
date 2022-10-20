@@ -5,7 +5,9 @@ const config = require("../../config.json");
 const emojis = require("../../api/emojis.json");
 const tips = require('../../tips.json');
 const wait = require('node:timers/promises').setTimeout;
-
+const { ms } = require("printly.js");
+const moment = require("moment");
+require('moment-duration-format');
 
 module.exports = {
   name: "milk",
@@ -40,6 +42,21 @@ module.exports = {
         ],
       });
     }
+    const duration = moment
+        .duration(userData.cooldowns.milk - Date.now())
+        .format("m[m], s[s]");
+    // check cooldown
+    if (userData.cooldowns.milk > Date.now())
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("Please be patient...")
+            .setColor(config.colours.work)
+            .setDescription(
+              `⌛ You can get milk from cow again in **\`${duration}\`**`
+            ),
+        ],
+      });
     // check bucket
     if (user && userData.items.buckets < 1) {
       return interaction.reply({
@@ -54,9 +71,12 @@ module.exports = {
     }
     // milked
     if (userData && userData.animal.cow >= 1 && userData.items.buckets >= 1) {
+
+      userData.cooldowns.milk = Date.now() + ms("3m");
       userData.foods.milkBuckets += 1;
       userData.items.buckets -= 1;
       userData.save();
+      
       await interaction.reply({
         embeds: [
           new EmbedBuilder()

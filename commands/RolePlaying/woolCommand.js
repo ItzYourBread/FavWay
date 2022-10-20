@@ -5,6 +5,9 @@ const config = require("../../config.json");
 const emojis = require("../../api/emojis.json");
 const tips = require('../../tips.json');
 const wait = require('node:timers/promises').setTimeout;
+const { ms } = require("printly.js");
+const moment = require("moment");
+require('moment-duration-format');
 
 module.exports = {
   name: "wool",
@@ -61,8 +64,25 @@ module.exports = {
         ],
       });
     }
+    const duration = moment
+        .duration(userData.cooldowns.wool - Date.now())
+        .format("m[m], s[s]");
+    
+    if (userData.cooldowns.wool > Date.now())
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("Please be patient...")
+            .setColor(config.colours.work)
+            .setDescription(
+              `⌛ You can get wool from sheep again in **\`${duration}\`**`
+            ),
+        ],
+      });
+    
     if (userData.health.cutters > 0) {
       userData.health.cutters -= 1;
+      userData.cooldowns.wool = Date.now() + ms("5m");
       userData.resources.wools += Math.floor(Math.random() * 8);
       if (userData.health.cutters == 0) {
         userData.items.cutter = false;

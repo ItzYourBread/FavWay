@@ -43,9 +43,14 @@ module.exports = {
           label: "Cake",
           description: "Bake a cake",
           value: "cake"
+        },
+        {
+          label: "Go back",
+          description: "Go back to kitchen",
+          value: "menu"
         }
-      )
-    )
+      ),
+    );
 
     const cakeButton = new ActionRowBuilder()
     .addComponents(
@@ -88,7 +93,7 @@ module.exports = {
 client.on('interactionCreate', async (interaction, client) => {
   if (!interaction.isButton()) return;
   
-  if (interaction.customId === "makeCake") {
+  if (interaction.customId === 'makeCake') {
     
     if (userData && userData.foods.milkBuckets < 2) {
       return interaction.reply({
