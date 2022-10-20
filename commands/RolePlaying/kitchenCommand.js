@@ -22,43 +22,43 @@ module.exports = {
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
     let main = new EmbedBuilder()
-    .setTitle("Kitchen Menu")
-    .setColor(config.colours.embed)
-    .setDescription(`${user.username} Here you can make foods for the day!`)
-    .setTimestamp();
+      .setTitle("Kitchen Menu")
+      .setColor(config.colours.embed)
+      .setDescription(`${user.username} Here you can make foods for the day!`)
+      .setTimestamp();
 
     let cake = new EmbedBuilder()
-    .setTitle("Cake Recipe")
-    .setColor(config.colours.embed)
-    .setDescription(`**${userData.foods.eggs}/10** ${config.emojis.egg}**Egg**\n**\n**${userData.foods.milkBuckets}/2** ${config.emojis.milkBucket}**Milk Bucket**`)
-    .setTimestamp();
+      .setTitle("Cake Recipe")
+      .setColor(config.colours.embed)
+      .setDescription(`**${userData.foods.eggs}/10** ${config.emojis.egg}**Egg**\n**\n**${userData.foods.milkBuckets}/2** ${config.emojis.milkBucket}**Milk Bucket**`)
+      .setTimestamp();
 
     const menu = new ActionRowBuilder()
-    .addComponents(
-      new SelectMenuBuilder()
-      .setCustomId("recipes")
-      .setPlaceholder("Select a recipe")
-      .addOptions(
-        {
-          label: "Cake",
-          description: "Bake a cake",
-          value: "cake"
-        },
-        {
-          label: "Go back",
-          description: "Go back to kitchen",
-          value: "menu"
-        }
-      ),
-    );
+      .addComponents(
+        new SelectMenuBuilder()
+          .setCustomId("recipes")
+          .setPlaceholder("Select a recipe")
+          .addOptions(
+            {
+              label: "Cake",
+              description: "Bake a cake",
+              value: "cake"
+            },
+            {
+              label: "Go back",
+              description: "Go back to kitchen",
+              value: "menu"
+            }
+          ),
+      );
 
     const cakeButton = new ActionRowBuilder()
-    .addComponents(
-      new ButtonBuilder()
-      .setCustomId("makeCake")
-      .setLabel("Bake")
-      .setStyle(ButtonStyle.Primary)
-    );
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId("makeCake")
+          .setLabel("Bake")
+          .setStyle(ButtonStyle.Primary)
+      );
 
     userData.commandRans += 1;
     userData.save();
@@ -67,7 +67,7 @@ module.exports = {
 
     const collector = message.createMessageComponentCollector({
       filter: fn => fn,
-      // componentType: ComponentType.SelectMenu, 
+      componentType: ComponentType.SelectMenu,
       time: 20000
     });
 
@@ -84,48 +84,46 @@ module.exports = {
         case "menu":
           await interaction.update({ embeds: [craft], components: [menu] })
           break;
-        case "furnace":
+        case "cake":
           await interaction.update({ embeds: [cake], components: [menu, cakeButton] })
           break;
       }
     });
-    
-client.on('interactionCreate', async (interaction, client) => {
-  if (!interaction.isButton()) return;
-  
-  if (interaction.customId === 'makeCake') {
-    
-    if (userData && userData.foods.milkBuckets < 2) {
-      return interaction.reply({
-        embeds: [
-          new EmbedBuilder()
-            .setTitle("The Baking Cake fail!")
-            .setColor(config.colours.error)
-            .setDescription(`You don't have enough ingredients to make cake`)
-            .setTimestamp(),
-        ],
-      });
-    }
 
-    userData.foods.milkBuckets -= 2;
-    userData.foods.cakeNormal += 1;
-    userData.items.buckets += 2;
-    userData.bakeCount += 1;
-    userData.save();
-    if (userData.foods.cakeNormal == 1) {
-      isFirst = "first ";
-    }
+    client.on('interactionCreate', async (interaction, client) => {
+      if (!interaction.isButton()) return;
 
-    await interaction.reply({
-      embeds: [
-        new EmbedBuilder()
-          .setTitle("Cake Successfully Baked")
-          .setColor(config.colours.success)
-          .setDescription(`OMG!! You baked your ${isFirst}cake! 🎂`)
-          .setTimestamp(),
-      ],
+      if (interaction.customId === 'makeCake') {
+
+        if (userData.foods.milkBuckets < 2 && userData.foods.eggs < 5) {
+          return interaction.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("The Baking Cake fail!")
+                .setColor(config.colours.error)
+                .setDescription(`You don't have enough ingredients to make cake`)
+                .setTimestamp(),
+            ],
+          });
+        }
+
+        userData.foods.milkBuckets -= 2;
+        userData.foods.cakeNormal += 1;
+        userData.foods.eggs -= 5;
+        userData.items.buckets += 2;
+        userData.bakeCount += 1;
+        userData.save();
+
+        await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle("Cake Successfully Baked")
+              .setColor(config.colours.success)
+              .setDescription(`OMG!! You baked your cake! 🎂`)
+              .setTimestamp(),
+          ],
+        });
+      }
     });
-   }
-  });
-}
+  }
 }

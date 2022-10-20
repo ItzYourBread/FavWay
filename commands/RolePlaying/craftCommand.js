@@ -56,6 +56,11 @@ module.exports = {
       .setDescription(`**${userData.resources.woods}/2** ${config.emojis.wood}**Wood**.\n**${userData.resources.ironBricks}/1** ${config.emojis.ironBrick}**Iron Brick**`)
       .setTimestamp();
 
+    let craftBasket = new EmbedBuilder()
+      .setTitle("Craft Basket")
+      .setColor(config.colours.embed)
+      .setDescription(`**${userData.resources.woods}/5** ${config.emojis.wood}**Wood**.`)
+      .setTimestamp();
 
     const selectMenu = new ActionRowBuilder()
       .addComponents(
@@ -84,14 +89,19 @@ module.exports = {
               value: 'cutter'
             },
             {
+              label: 'Basket',
+              description: 'Craft basket to collect stuffs.',
+              value: 'basket'
+            },
+            {
               label: 'Go Back',
-              description: 'Go to back to craft menu',
+              description: 'Go to back to craft menu.',
               value: 'menu'
             }
           ),
       );
 
-    const furnaceButton = new ActionRowBuilder()
+    let furnaceButton = new ActionRowBuilder()
       .addComponents(
         new ButtonBuilder()
           .setCustomId('furnaceButton')
@@ -99,7 +109,7 @@ module.exports = {
           .setStyle(ButtonStyle.Success),
       );
 
-    const forgeButton = new ActionRowBuilder()
+    let forgeButton = new ActionRowBuilder()
       .addComponents(
         new ButtonBuilder()
           .setCustomId('forgeButton')
@@ -107,7 +117,7 @@ module.exports = {
           .setStyle(ButtonStyle.Success),
       );
 
-    const bucketButton = new ActionRowBuilder()
+    let bucketButton = new ActionRowBuilder()
       .addComponents(
         new ButtonBuilder()
           .setCustomId('bucketButton')
@@ -115,59 +125,62 @@ module.exports = {
           .setStyle(ButtonStyle.Success),
       );
 
-    const cutterButton = new ActionRowBuilder()
+    let cutterButton = new ActionRowBuilder()
       .addComponents(
         new ButtonBuilder()
           .setCustomId('cutterButton')
           .setLabel('Craft')
           .setStyle(ButtonStyle.Success),
       );
-
-    let message = await interaction.reply({ embeds: [craft], components: [selectMenu], fetchReply: true });
-
-
-    const collector = message.createMessageComponentCollector({
-      filter: fn => fn,
-      // componentType: ComponentType.SelectMenu, 
-      time: 20000
-    });
-
-    collector.on('collect', i => {
-      if (i.user.id === interaction.user.id)
-        return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
-    });
-
+    
+    let basketButton = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setCustomId('basketButton')
+          .setLabel('Craft')
+          .setStyle(ButtonStyle.Success),
+      );
+    
+    await interaction.reply({ embeds: [craft], components: [selectMenu], fetchReply: true });
 
     client.on('interactionCreate', async (interaction, client) => {
       if (!interaction.isSelectMenu()) return;
 
       switch (interaction.values[0]) {
         case "menu":
-          await interaction.update({ embeds: [craft], components: [selectMenu] })
+          await interaction.deferUpdate();
+          await interaction.editReply({ embeds: [craft], components: [selectMenu] })
           break;
         case "furnace":
-          await interaction.update({ embeds: [craftFurnace], components: [selectMenu, furnaceButton] })
+          await interaction.deferUpdate();
+          await interaction.editReply({ embeds: [craftFurnace], components: [selectMenu, furnaceButton] })
           break;
         case "forge":
-          await interaction.update({ embeds: [craftForge], components: [selectMenu, forgeButton] })
+          await interaction.deferUpdate();
+          await interaction.editReply({ embeds: [craftForge], components: [selectMenu, forgeButton] })
           break;
         case "bucket":
-          await interaction.update({ embeds: [craftBucket], components: [selectMenu, bucketButton] })
+          await interaction.deferUpdate();
+          await interaction.editReply({ embeds: [craftBucket], components: [selectMenu, bucketButton] })
           break;
         case "cutter":
-          await interaction.update({ embeds: [craftCutter], components: [selectMenu, cutterButton] })
+          await interaction.deferUpdate();
+          await interaction.editReply({ embeds: [craftCutter], components: [selectMenu, cutterButton] })
+          break;
+        case "basket":
+          await interaction.deferUpdate();
+          await interaction.editReply({ embeds: [craftBasket], components: [selectMenu, basketButton] })
           break;
       }
     });
 
+    client.on('interactionCreate', async (i, client) => {
+      if (!i.isButton()) return;
 
-    client.on('interactionCreate', async (interaction, client) => {
-      if (!interaction.isButton()) return;
-
-      if (interaction.customId === 'furnaceButton') {
+      if (i.customId === 'furnaceButton') {
 
         if (user && userData.items.furnace) {
-          return interaction.reply({
+          return i.update({
             embeds: [
               new EmbedBuilder()
                 .setTitle("You already have!")
@@ -180,7 +193,7 @@ module.exports = {
         }
 
         if (userData.resources.stones < 100 || userData.resources.woods < 50 || userData.resources.ironOres < 2) {
-          return interaction.reply({
+          return i.update({
             embeds: [
               new EmbedBuilder()
                 .setTitle("Craft Error")
@@ -199,7 +212,7 @@ module.exports = {
         userData.resources.ironOres -= 2;
         userData.save();
 
-        await interaction.reply({
+        await i.reply({
           embeds: [
             new EmbedBuilder()
               .setTitle("Crafted Furnace")
@@ -208,12 +221,10 @@ module.exports = {
               .setTimestamp(),
           ],
         });
-      }
-
-      if (interaction.customId === 'forgeButton') {
+      } else if (i.customId === 'forgeButton') {
 
         if (user && userData.items.forge) {
-          return interaction.reply({
+          return i.reply({
             embeds: [
               new EmbedBuilder()
                 .setTitle("You already have!")
@@ -226,7 +237,7 @@ module.exports = {
         }
 
         if (userData.resources.ironOres < 300 || userData.resources.ironNuggets < 150) {
-          return interaction.reply({
+          return i.reply({
             embeds: [
               new EmbedBuilder()
                 .setTitle("Craft Error")
@@ -244,7 +255,7 @@ module.exports = {
         userData.resources.ironNuggets -= 150;
         userData.save();
 
-        await interaction.reply({
+        await i.editReply({
           embeds: [
             new EmbedBuilder()
               .setTitle("Crafted Forge")
@@ -253,18 +264,16 @@ module.exports = {
               .setTimestamp(),
           ],
         });
-      }
-
-      if (interaction.customId === "bucketButton") {
+      } else if (i.customId === "bucketButton") {
 
         if (userData.resources.ironNuggets < 5) {
-          return interaction.reply({
+          return i.reply({
             embeds: [
               new EmbedBuilder()
                 .setTitle("Craft error")
                 .setColor(config.colours.error)
                 .setDescription(`Sorry you don't have enough resources to craft **Bucket**`)
-                .setTimetamp(),
+                .setTimestamp(), 
             ],
             ephemeral: true
           });
@@ -275,7 +284,7 @@ module.exports = {
         userData.items.buckets += 1;
         userData.save();
 
-        await interaction.reply({
+        await i.reply({
           embeds: [
             new EmbedBuilder()
               .setTitle("Crafted Bucket")
@@ -284,30 +293,28 @@ module.exports = {
               .setTimestamp(),
           ],
         });
-      }
+      } else if (i.customId === "cutterButton") {
 
-      if (interaction.customId === "cutterButton") {
-        
-        if (userData && userData.items.cutter) {
-          return interaction.reply({
+        if (user && userData.items.cutter) {
+          return i.reply({
             embeds: [
               new EmbedBuilder()
                 .setTitle("Craft error")
                 .setColor(config.colours.error)
                 .setDescription(`Looks like you already have **Cutter**,\nYou don't have to craft one more.`)
-                .setTimetamp(),
+                .setTimestamp(),
             ],
             ephemeral: true
           });
         }
         if (userData.resources.ironBricks < 1 || userData.resources.woods < 2) {
-          return interaction.reply({
+          return i.reply({
             embeds: [
               new EmbedBuilder()
                 .setTitle("Craft error")
                 .setColor(config.colours.error)
                 .setDescription(`Sorry you don't have enough resources to craft **Cutter**`)
-                .setTimetamp(),
+                .setTimestamp(),
             ],
             ephemeral: true
           });
@@ -319,7 +326,7 @@ module.exports = {
         userData.items.cutter = true;
         userData.save();
 
-        await interaction.reply({
+        await i.reply({
           embeds: [
             new EmbedBuilder()
               .setTitle("Crafted Cutter")
@@ -328,9 +335,49 @@ module.exports = {
               .setTimestamp(),
           ],
         });
-      }
+      } else if (i.customId === "basketButton") {
 
+        if (user && userData.items.basket) {
+          return i.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("Craft error")
+                .setColor(config.colours.error)
+                .setDescription(`Looks like you already have **Basket**,\nYou don't have to craft one more.`)
+                .setTimestamp(),
+            ],
+            ephemeral: true
+          });
+        }
+        if (userData.resources.woods < 5) {
+          return i.reply({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle("Craft error")
+                .setColor(config.colours.error)
+                .setDescription(`Sorry you don't have enough resources to craft **Basket**`)
+                .setTimestamp(),
+            ],
+            ephemeral: true
+          });
+        }
+        
+        userData.resources.woods -= 5;
+        userData.craftCount += 1;
+        userData.health.buckets += 15;
+        userData.items.basket = true;
+        userData.save();
+
+        await i.reply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle("Crafted Basket")
+              .setColor(config.colours.success)
+              .setDescription(`You successfully crafted a **Basket**.`)
+              .setTimestamp(),
+          ],
+        });
+          }
     });
-
-  }
+}
 }

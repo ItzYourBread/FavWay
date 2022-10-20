@@ -15,6 +15,7 @@ const Profile = new mongoose.Schema({
     hunt: { type: Date },
     milk: { type: Date },
     wool: { type: Date },
+    egg: { type: Date },
     daily: { type: Date }
   },
   property: {
@@ -30,7 +31,8 @@ const Profile = new mongoose.Schema({
     furnace: { type: Boolean, default: false },
     forge: { type: Boolean, default: false },
     buckets: { type: Number, default: 0 },
-    cutter: { type: Boolean, default: false }
+    cutter: { type: Boolean, default: false },
+    basket: { type: Boolean, default: false }
   },
   resources: {
     woods: { type: Number, default: 0 },
@@ -59,7 +61,8 @@ const Profile = new mongoose.Schema({
     firstCraft: { type: Boolean, default: false }
   },
   health: {
-    cutters: { type: Number, default: 0 }
+    cutters: { type: Number, default: 0 },
+    baskets: { type: Number, default: 0 }
   }
 })
 
