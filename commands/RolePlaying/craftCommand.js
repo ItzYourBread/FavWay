@@ -132,7 +132,7 @@ module.exports = {
           .setLabel('Craft')
           .setStyle(ButtonStyle.Success),
       );
-    
+
     let basketButton = new ActionRowBuilder()
       .addComponents(
         new ButtonBuilder()
@@ -140,7 +140,7 @@ module.exports = {
           .setLabel('Craft')
           .setStyle(ButtonStyle.Success),
       );
-    
+
     await interaction.reply({ embeds: [craft], components: [selectMenu], fetchReply: true });
 
     client.on('interactionCreate', async (interaction, client) => {
@@ -273,7 +273,7 @@ module.exports = {
                 .setTitle("Craft error")
                 .setColor(config.colours.error)
                 .setDescription(`Sorry you don't have enough resources to craft **Bucket**`)
-                .setTimestamp(), 
+                .setTimestamp(),
             ],
             ephemeral: true
           });
@@ -361,7 +361,7 @@ module.exports = {
             ephemeral: true
           });
         }
-        
+
         userData.resources.woods -= 5;
         userData.craftCount += 1;
         userData.health.buckets += 15;
@@ -377,7 +377,7 @@ module.exports = {
               .setTimestamp(),
           ],
         });
-          }
+      }
     });
-}
+  }
 }
