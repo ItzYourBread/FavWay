@@ -28,223 +28,61 @@ module.exports = {
       userData.commandRans += 1;
       userData.save();
 
-      if (interaction.options.get('type').value === "support") {
+      if (interaction.options.get("type").value === 'support') {
         return interaction.reply({
           embeds: [
             new EmbedBuilder()
-            .setTitle("FavWay Support")
+            .setTitle('FavWay Support')
             .setColor(config.colours.embed)
-            .setDescription(`Text here **ARIF**`)
+            .setDescription('FavWay Support')
             .setTimestamp(),
           ],
         });
-      };
+      }
 
-      if (interaction.options.get('type').value === "commands") {
-
-        const utilities = new EmbedBuilder()
-        .setTitle(`Utilities Commands`)
-        .setColor(config.colours.embed)
-        .setDescription(`Here is the full list of Utilities Commands`)
-        .addFields(
-          {
-            name: `/ping`,
-            value: `Check ${config.bot.name}’s ping.`,
-            inline: true
-          },
-          {
-            name: `/help`,
-            value: `Get help from ${config.bot.name}.`,
-            inline: true
-          },
-          {
-            name: `/stats`,
-            value: `Get the current status of ${config.bot.name}.`,
-            inline: true,
-          }
-       )
-        .setTimestamp();
-
-        const roleplay = new EmbedBuilder()
-        .setTitle(`RolePlay Commands`)
-        .setColor(config.colours.embed)
-        .setDescription(`Here is the full list of RolePlay Commands`)
-        .addFields(
-          {
-            name: `/balance`,
-            value: `Get a look of your balance or others.`,
-            inline: true
-          },
-          {
-            name: `/deposit`,
-            value: `Deposit your money into bank so no one can rob you.`,
-            inline: true
-          },
-          {
-            name: `/withdraw`,
-            value: `Withdraw your money if you don't have any fear of robbers.`,
-            inline: true
-          },
-          {
-            name: `/profile`,
-            value: `View your or others profile.`,
-            inline: true,
-          },
-          {
-            name: `/craft`,
-            value: `Craft items from your resources.`,
-            inline: true
-          },
-          {
-            name: `/daily`,
-            value: `Get daily rewards.`,
-            inline: true
-          },
-          {
-            name: `/weekly`,
-            value: `Get weekly rewards.`,
-            inline: true
-          }
-        )
-        .setTimestamp();
-
-        const roleplay2 = new EmbedBuilder()
-        .setTitle(`RolePlay Commands`)
-        .setColor(config.colours.embed)
-        .setDescription(`Here is the full list of RolePlay Commands`)
-        .addFields(
-          {
-            name: `/market`,
-            value: `Look up market to buy some items for your journey with ${config.bot.name}.`,
-            inline: true
-          },
-          {
-            name: `/buy woodworking`,
-            value: `Buy woods stuffs from Woodworking Workshop.`,
-            inline: true
-          },
-          {
-            name: `/buy lapidary`,
-            value: `Buy stonnes and gems from Lapidary Shop.`,
-            inline: true
-          },
-          {
-            name: `/buy tools`,
-            value: `Buy tools from Tools Shop to use in your daily life with ${config.bot.name}`,
-            inline: true
-          },
-          {
-            name: `/buy ore`,
-            value: `Buy ores from Ore Market and then melt iand use it to craft items.`,
-            inline: true
-          },
-          {
-            name: `/buy foundry`,
-            value: `Buy some shiny items from Foundry Workshop and make yourself rich.`,
-            inline: true
-          }
-        )
-        .setTimestamp();
-
-        const roleplay3 = new EmbedBuilder()
-        .setTitle(`RolePlay Commands`)
-        .setColor(config.colours.embed)
-        .setDescription(`Here is the full list of RolePlay Commands`)
-        .addFields(
-          {
-            name: `/zoo`,
-            value: `Look your or others zoo.`,
-            inline: true
-          },
-          {
-            name: `/hunt`,
-            value: `Hunt and found some animals.`,
-            inline: true
-          }
-       )
-        .setTimestamp();
-
-        
-      const row = new ActionRowBuilder()
-			.addComponents(
-				new SelectMenuBuilder()
-					.setCustomId('help')
-					.setPlaceholder('Select for more')
-					.addOptions(
-						{
-							label: 'Utilities',
-							description: 'View Utilities Commands',
-							value: 'utilities',
-						},
-            {
-              label: 'RolePlay',
-              description: 'View RolePlay Commands',
-              value: 'roleplay',
-            }
-				 ),
-			);
-
-      const roleplayButtons = new ActionRowBuilder()
-			.addComponents(
-				new ButtonBuilder()
-					.setCustomId('currency')
-					.setLabel('Currency')
-					.setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId('market')
-          .setLabel('Market')
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId('animal')
-          .setLabel('Animal')
-          .setStyle(ButtonStyle.Primary),
-			);
-
-        let message = await interaction.reply({ embeds: [utilities], components: [row] });
-
-        
-const collector = message.createMessageComponentCollector({ 
-            filter: fn => fn,
-            componentType: ComponentType.SelectMenu, 
-            time: 20000
+      if (interaction.options.get("type").value === 'commands') {
+        return interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+            .setTitle('FavWay Commands')
+            .setColor(config.colours.embed)
+            .setDescription('FavWay list of commands! To use type `/<command name>` for example `/ping` if you still need help join our [Discord server](https://discord.gg/Ea4jrSSrjM).')
+            .addFields(
+              {
+                name: 'Utilities',
+                value: '`help`, `ping`, `stats`',
+                inline: false
+              },
+              {
+                name: 'Reward',
+                value: '`daily`',
+                inline: false
+              },
+              {
+                name: 'Statistics',
+                value: '`inventory`, `zoo`, `profile`',
+                inline: false
+              },
+              {
+                name: 'Currency',
+                value: '`balance`, `deposit`, `withdraw`',
+                inline: false
+              },
+              {
+                name: 'Market',
+                value: '`market`, `buy woodworking`, `buy lapidary`, `buy tools`, `buy ore`, `buy foundry`',
+                inline: false
+              },
+              {
+                name: 'Work',
+                value: '`chop`, `mine`, `hunt`, `fish`',
+                inline: false
+              }
+            )
+            .setTimestamp(),
+          ],
         });
-
-collector.on('collect', i => {
-	if (i.user.id === interaction.user.id) 
-		return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
-});
-        
-        
-client.on('interactionCreate', async (interaction, client) => {
-    if (!interaction.isSelectMenu()) return;
-            
-    switch (interaction.values[0]) {
-        case "utilities":  
-           await interaction.update({ embeds: [utilities], components: [row] })
-            break;
-        case "roleplay":  
-           await interaction.update({ embeds: [roleplay], components: [row, roleplayButtons] })
-            break;
-    };                
-});
-
-client.on('interactionCreate', async (interaction, client) => {
-	if (!interaction.isButton()) return;
-
-  if (interaction.customId === "currency") {
-    await interaction.update({ embeds: [roleplay], components: [roleplayButtons] })
-  }
-
-  if (interaction.customId === "market") {
-    await interaction.update({ embeds: [roleplay2], components: [roleplayButtons] })
-  }
-  if (interaction.customId === "animal") {
-    await interaction.update({ embeds: [roleplay3], components: [roleplayButtons] })
-  }
- 
-});
-        
-      };
+      }
 
       const logChannel = client.channels.cache.get(config.logs.roleplayLog)
         

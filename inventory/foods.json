@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Cake",
+    "emoji": "cakeNormal",
+    "value": "cakeNormal",
+    "category": "food"
+  },
+  {
+    "name": "Egg",
+    "emoji": "egg",
+    "value": "eggs",
+    "category": "food"
+  },
+  {
+    "name": "Milk Bucket",
+    "emoji": "milkBucket",
+    "value": "milkBuckets",
+    "category": "food"
+  }
+]

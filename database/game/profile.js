@@ -9,9 +9,8 @@ const Profile = new mongoose.Schema({
   craftCount: { type: Number, default: 0 },
   bakeCount: { type: Number, default: 0 },
   cooldowns: {
-    breaktree: { type: Date },
-    minerock: { type: Date },
-    mineore: { type: Date },
+    chop: { type: Date },
+    mine: { type: Date },
     hunt: { type: Date },
     milk: { type: Date },
     wool: { type: Date },
@@ -38,8 +37,7 @@ const Profile = new mongoose.Schema({
     woods: { type: Number, default: 0 },
     stones: { type: Number, default: 0 },
     ironOres: { type: Number, default: 0 },
-    ironNuggets: { type: Number, default: 0 },
-    ironBricks: { type: Number, default: 0 },
+    irons: { type: Number, default: 0 },
     wools: { type: Number, default: 0 }
   },
   foods: {

@@ -1,4 +1,4 @@
-const { ActionRowBuilder, SelectMenuBuilder, ComponentType, Client } = require("discord.js");
+const { ActionRowBuilder, Events, SelectMenuBuilder, ComponentType, Client } = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const { Profile } = require("../../database/game/profile");
 const Discord = require("discord.js");
@@ -6,7 +6,9 @@ const config = require("../../config.json");
 const emojis = require("../../api/emojis.json");
 const tips = require('../../tips.json');
 const wait = require('node:timers/promises').setTimeout;
-const { resource, food, item } = require("../../inventory.json");
+const resource = require("../../inventory/resources.json");
+const item = require("../../inventory/items.json");
+const food = require("../../inventory/foods.json");
 
 module.exports = {
   name: "inventory",
@@ -22,7 +24,7 @@ module.exports = {
 
   run: async (client, interaction) => {
     await interaction.deferReply();
-    var inventoryRes =  "";
+    var inventoryRes = "";
     var inventoryFoods = "";
     var inventoryItems = "";
     const user = interaction.options.getUser('user') || interaction.user;
@@ -32,13 +34,13 @@ module.exports = {
 
     userData.commandRans += 1;
     userData.save();
-    
-    resource.map(el => { 
+
+    resource.map(el => {
       if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-      inventoryRes += `${config.emojis[el.emoji]}**${el.name}** — ${userData.resources[el.value]}\n${el.category}\n\n`;
+        inventoryRes += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value]}\n${el.category}\n\n`;
       }
     });
-    if(!inventoryRes){
+    if (!inventoryRes) {
       inventoryRes = `You don't have any resources!`;
     }
     let resources = new EmbedBuilder()
@@ -48,37 +50,12 @@ module.exports = {
       .setDescription(inventoryRes)
       .setTimestamp();
 
-    if (userData.axe.stone || userData.pickaxe.stone || userData.axe.iron || userData.pickaxe.iron) {
-      toolsMessage = "Nice tools";
-    } else {
-      toolsMessage = "You don't have any tools";
-    }
-    let tools = new EmbedBuilder()
-      .setTitle(`${user.username}'s Inventory`)
-      .setDescription(`${toolsMessage}`)
-      .setColor(config.colours.embed)
-      .setThumbnail(user.displayAvatarURL())
-      .setTimestamp()
-    if (userData.axe.iron) {
-      tools.addFields({ name: `Iron Axe`, value: `own` })
-    }
-    if (userData.pickaxe.iron) {
-      tools.addFields({ name: `Iron Pickaxe`, value: `own` })
-    }
-    if (userData.axe.stone) {
-      tools.addFields({ name: `Stone Axe`, value: `own` })
-    }
-    if (userData.pickaxe.stone) {
-      tools.addFields({ name: `Stone Pickaxe`, value: `own` })
-    }
-
-
-   item.map(el => { 
+    item.map(el => {
       if (user && userData.items[el.value] && userData.items[el.value] >= 1) {
-      inventoryItems += `${config.emojis[el.emoji]}**${el.name}** — ${userData.items[el.value]}\n${el.category}\n\n`;
+        inventoryItems += `${config.emojis[el.emoji]}**${el.name}** — ${userData.items[el.value]}\n${el.category}\n\n`;
       }
     });
-    if(!inventoryItems){
+    if (!inventoryItems) {
       inventoryItems = `You don't have any items!`;
     }
     let items = new EmbedBuilder()
@@ -86,15 +63,14 @@ module.exports = {
       .setDescription(inventoryItems)
       .setColor(config.colours.embed)
       .setThumbnail(user.displayAvatarURL())
-      .setTimestamp();
-    
+      .setTimestamp()
 
-    food.map(el => { 
+    food.map(el => {
       if (user && userData.foods[el.value] && userData.foods[el.value] >= 1) {
-      inventoryFoods += `${el.emoji}**${el.name}** — ${userData.foods[el.value]}\n${el.category}\n\n`;
+        inventoryFoods += `${el.emoji}**${el.name}** — ${userData.foods[el.value]}\n${el.category}\n\n`;
       }
     });
-    if(!inventoryFoods){
+    if (!inventoryFoods) {
       inventoryFoods = `You don't have any foods!`;
     }
     let foods = new EmbedBuilder()
@@ -116,11 +92,6 @@ module.exports = {
               value: 'resources',
             },
             {
-              label: 'Tools',
-              description: 'View your tools',
-              value: 'tools',
-            },
-            {
               label: 'Items',
               description: 'View your items',
               value: 'items'
@@ -131,7 +102,7 @@ module.exports = {
               value: 'foods',
             }
           ),
-        );
+      );
 
 
     let message = await interaction.editReply({ embeds: [resources], components: [row], fetchReply: true });
@@ -155,29 +126,24 @@ module.exports = {
       time: 20000
     });
 
-    collector.on('collect', i => {
-      if (i.user.id === interaction.user.id)
-        return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
-    });
-
-
-    client.on('interactionCreate', async (interaction, client) => {
-      if (!interaction.isSelectMenu()) return;
-
-      switch (interaction.values[0]) {
-        case "foods":
-          await interaction.update({ embeds: [foods], components: [row] })
-          break;
-        case "items":
-          await interaction.update({ embeds: [items], components: [row] })
-          break;
-        case "tools":
-          await interaction.update({ embeds: [tools], components: [row] })
-          break;
-        case "resources":
-          await interaction.update({ embeds: [resources], components: [row] })
-          break;
-      };
+    collector.on('collect', async i => {
+      if (i.user.id === interaction.user.id) {
+        if (i.customId === 'inventory') {
+          await i.deferUpdate();
+          if (i.values[0] === 'resources') {
+            await wait(500)
+            await i.editReply({ embeds: [resources], components: [row], fetchReply: true });
+          } if (i.values[0] === 'items') {
+            await wait(500)
+            await i.editReply({ embeds: [items], components: [row], fetchReply: true });
+          } if (i.values[0] === 'foods') {
+            await wait(500)
+            await i.editReply({ embeds: [foods], components: [row], fetchReply: true });
+          } else {
+            return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
+          }
+        }
+      }
     });
   }
 }

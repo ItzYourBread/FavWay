@@ -40,7 +40,7 @@ module.exports = {
         ],
       });
     }
-    if (!userData.items.baskets) {
+    if (user && !userData.items.baskets) {
       return await interaction.reply({
         embeds: [
           new EmbedBuilder()
@@ -70,7 +70,7 @@ module.exports = {
     } if (userData.animal.chicken > 20) {
       randomEgg = Math.floor(Math.random() * 35)
     } else {
-      randomEgg = Math.floor(Math.random() * 5);
+      randomEgg = Math.floor(Math.random() * 3);
     }
 
     userData.foods.eggs += randomEgg;

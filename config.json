@@ -36,16 +36,15 @@
      "emojis": {
           "currency": "<:fwcurrrency:1028068851264540722>",
           "currencyCents": "<:fwcent:1028397302366355487>",
-          "wood": "<:woods:1027682366874980353>",
-          "stone": "<:stone:1027682400999833620>",
-          "ironOre": "<:ironore:1028020196037894184>",
-          "ironNugget": "<:ironnugget:1028985856222036060>",
-          "ironBrick": "<:iron:1028022910411087884>",
+          "wood": "<:wood:1033478999382437989>",
+          "stone": "<:stone:1033474289778823290>",
+          "ironOre": "<:ironore:1033679889057984533>",
+          "iron": "<:iron:1028022910411087884>",
           "idleFurnace": "<:idlefurnace:1029782301376254063>",
           "forge": "<:forge:1029782354711040000>",
           "cutter": "<:cutter:1032360586144661575>",
           "wool": "<:wool:1032361992146653224>"
-    },
+     },
     
      "database": {
         "mongoDB": "mongodb+srv://Sweet:djarif100@sweet-mongo.qvysg.mongodb.net/?retryWrites=true&w=majority"

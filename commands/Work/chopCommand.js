@@ -8,8 +8,8 @@ const moment = require("moment");
 require("moment-duration-format");
 
 module.exports = {
-  name: "mine",
-  description: "Let's do mining today!",
+  name: "chop",
+  description: "Let's collect some woods today!",
   category: "Work",
 
   run: async (client, interaction) => {
@@ -24,59 +24,57 @@ module.exports = {
     });
 
     const duration = moment 
-        .duration(userData.cooldowns.mine - Date.now())
+        .duration(userData.cooldowns.chop - Date.now())
         .format("m[m], s[s]");
 
-    if (user && userData.cooldowns.mine > Date.now()) {
+    if (userData.cooldowns.chop > Date.now()) {
       return interaction.editReply({
         embeds: [
           new EmbedBuilder()
           .setColor(config.colours.error)
-          .setDescription(`You can mine again in \`${duration}\` `)
+          .setDescription(`You can chop trees again in \`${duration}\` please be patient.\n\nFor premium user cooldown is \`20s\` `)
           .setTimestamp(),
         ],
       });
     }
-
-    if (user && userData.pickaxe.iron) {
+    
+    if (user && userData.axe.iron) {
       
     let amount = Math.floor(Math.random() * 40) + 15;
-    let amount2 = Math.floor(Math.random() * 18) + 7;
-      userData.resources.stones += amount;
-      userData.resources.ironOres += amount2;
+      userData.resources.woods += amount;
       if (user && premium.isPremium) {
-        userData.cooldowns.mine = Date.now() + ms("20s");
+        userData.cooldowns.chop = Date.now() + ms("20s");
       } else {
-        userData.cooldowns.mine = Date.now() + ms("3m");
+        userData.cooldowns.chop = Date.now() + ms("3m");
       }
       userData.save();
       
       await interaction.editReply({
         embeds: [
           new EmbedBuilder()
-         .setTitle("Mined!!")
+         .setTitle("Chopped!!")
          .setColor(config.colours.success)
-         .setDescription(`${user.username} found **${amount2} ${config.emojis.ironOre}Iron Ore** and **${amount} ${config.emojis.stone}Stone** from mining!`)
+         .setDescription(`${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**`)
          .setTimestamp(),
         ],
       });
-    } else if (user && userData.pickaxe.stone) {
+    } else if (user && userData.axe.stone) {
       
       let amount = Math.floor(Math.random() * 13) + 3;
-      userData.resources.stones += amount;
+      userData.resources.woods += amount;
       if (user && premium.isPremium) {
-        userData.cooldowns.mine = Date.now() + ms("20s");
+        userData.cooldowns.chop = Date.now() + ms("20s");
       } else {
-        userData.cooldowns.mine = Date.now() + ms("1m");
+        userData.cooldowns.chop = Date.now() + ms("1m");
       }
       userData.save();
       
       await interaction.editReply({
         embeds: [
           new EmbedBuilder()
-          .setTitle("Mined!!")
+          .setTitle("Chopped!!")
           .setColor(config.colours.success)
-          .setDescription(`${user.username} found **${amount} ${config.emojis.stone}Stone** from mining!`)
+          .setDescription(`${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**`)
           .setTimestamp(),
         ],
       });
@@ -84,9 +82,9 @@ module.exports = {
       await interaction.editReply({
         embeds: [
           new EmbedBuilder()
-         .setTitle("You don't have pickaxe")
+         .setTitle("You don't have a axe!")
          .setColor(config.colours.error)
-         .setDescription(`You need pickaxe for mining stones and ores\nType \`/market\` to buy a pickaxe!`)
+         .setDescription(`You need axe to chop trees!\nType \`/market\` to buy a axe.`)
          .setTimestamp(),
         ],
       });

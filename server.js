@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const session = require('express-session')
 const fetch = require("node-fetch");
 const config = require("./config.json");
-let redirect = "https://favway.subsidised.repl.co/login", discordlogin = "https://discord.com/api/oauth2/token", getUserURL = "https://discord.com/api/users/@me", joinURL = "https://discord.com/api/v10/invites/Ea4jrSSrjM";
+let redirect = "https://favway.botstack.cloud/login", discordlogin = "https://discord.com/api/oauth2/token", getUserURL = "https://discord.com/api/users/@me", joinURL = "https://discord.com/api/v10/invites/Ea4jrSSrjM";
 require("dotenv").config();
 
 const app = express();
