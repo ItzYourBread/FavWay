@@ -200,18 +200,6 @@ module.exports = {
         itemName = "Iron Pickaxe";
         choice = userData.pickaxe.iron;
       }
-
-      if (user && choice) {
-        return interaction.reply({
-          embeds: [
-            new EmbedBuilder()
-            .setTitle("Error: you already have")
-            .setColor(config.colours.error)
-            .setDescription(`Woohoo... You already have **${itemName}**\nYou don't need to buy anymore.`)
-            .setTimestamp(),
-          ],
-        });
-      }
         
         if (userData.coins < price)
           return interaction.reply({
@@ -225,19 +213,19 @@ module.exports = {
         
 
         if (interaction.options.get('tool').value === "stoneAxe") {
-        userData.axe.stone = true;
+        userData.axe.stone += 1;
         userData.coins -= price;
         }
         if (interaction.options.get('tool').value === "stonePickaxe") {
-        userData.pickaxe.stone = true;
+        userData.pickaxe.stone += 1;
         userData.coins -= price;
         }
         if (interaction.options.get('tool').value === "ironAxe") {
-        userData.axe.iron = true;
+        userData.axe.iron += 1;
         userData.coins -= price;
         }
         if (interaction.options.get('tool').value === "ironPickaxe") {
-        userData.pickaxe.iron = true;
+        userData.pickaxe.iron += 1;
         userData.coins -= price;
         }
         userData.save();

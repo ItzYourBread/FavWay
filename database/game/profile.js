@@ -30,8 +30,8 @@ const Profile = new mongoose.Schema({
     furnace: { type: Boolean, default: false },
     forge: { type: Boolean, default: false },
     buckets: { type: Number, default: 0 },
-    cutter: { type: Boolean, default: false },
-    basket: { type: Boolean, default: false }
+    cutters: { type: Number, default: 0 },
+    baskets: { type: Number, default: 0 }
   },
   resources: {
     woods: { type: Number, default: 0 },
@@ -47,20 +47,28 @@ const Profile = new mongoose.Schema({
     cakeNormal: { type: Number, default: 0 }
   },
   axe: {
-    stone: { type: Boolean, default: false },
-    iron: { type: Boolean, default: false }
+    stone: { type: Number, default: 0 },
+    iron: { type: Number, default: 0 }
   },
   pickaxe: {
-    stone: { type: Boolean, default: false },
-    iron: { type: Boolean, default: false }
+    stone: { type: Number, default: 0 },
+    iron: { type: Number, default: 0 }
   },
   achievements: {
     tinyPlayer: { type: Boolean, default: false },
     firstCraft: { type: Boolean, default: false }
   },
   health: {
-    cutters: { type: Number, default: 0 },
-    baskets: { type: Number, default: 0 }
+    cutter: { type: Number, default: 0 },
+    basket: { type: Number, default: 0 },
+    axe: {
+      stone: { type: Number, default: 0 },
+      iron: { type: Number, default: 0 }
+    },
+    pickaxe: {
+      stone: { type: Number, default: 0 },
+      iron: { type: Number, default: 0 }
+    }
   }
 })
 

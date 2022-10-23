@@ -38,14 +38,19 @@ module.exports = {
       });
     }
     
-    if (user && userData.axe.iron) {
+    if (user && userData.axe.iron >= 1) {
       
     let amount = Math.floor(Math.random() * 40) + 15;
       userData.resources.woods += amount;
+      userData.health.axe.iron += 1;
       if (user && premium.isPremium) {
         userData.cooldowns.chop = Date.now() + ms("20s");
       } else {
         userData.cooldowns.chop = Date.now() + ms("3m");
+      }
+      if (userData.health.axe.iron == 2) {
+        userData.health.axe.iron -= 2;
+        userData.axe.iron -= 1;
       }
       userData.save();
       
@@ -58,7 +63,7 @@ module.exports = {
          .setTimestamp(),
         ],
       });
-    } else if (user && userData.axe.stone) {
+    } else if (user && userData.axe.stone >= 1) {
       
       let amount = Math.floor(Math.random() * 13) + 3;
       userData.resources.woods += amount;
