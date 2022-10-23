@@ -5,8 +5,6 @@ const config = require("../../config.json");
 const emojis = require("../../api/emojis.json");
 const tips = require('../../tips.json');
 const wait = require('node:timers/promises').setTimeout;
-const voucher_codes = require("voucher-code-generator");
-const schema = require("../../database/game/receiptWithdraw");
 const moment = require("moment");
 
 module.exports = {
@@ -27,31 +25,6 @@ module.exports = {
     const { guild } = interaction;
         
     let amount = interaction.options.getString("amount");
-
-        
-    let codes = [];
-
-    let time = Date.now() + 86400000 * 4;
-        
-
-      const withdrawCode = voucher_codes.generate({
-        pattern: "#######",
-      });
-
-      const code = withdrawCode.toString().toUpperCase();
-
-      const find = await schema.findOne({
-        code: code,
-      });
-
-      if (!find) {
-        schema.create({
-          code: code,
-          expiresAt: time
-        });
-
-        codes.push(`${code}`);
-      }
         
     let userData =
       (await Profile.findOne({ id: user.id })) ||
@@ -80,19 +53,10 @@ module.exports = {
     userData.coins += amount;
     userData.save();
         
-    let receipt = new EmbedBuilder()
-    .setTitle("Receipt of withdrawn")
-    .setDescription(`You withdrawn ${config.emojis.currency}\`${amount.toLocaleString()}\` from the your bank account\n\n**Receipt ID:**\n\`${codes}\` `)
-    .setColor(config.colours.receipt)
-    .setFooter({ text: `Expires - ${moment(time).format("dddd, MMMM Do YYYY")}` })
-    .setTimestamp();
-
-    await interaction.user.send({ content: "Receipt for proof", embeds: [receipt] });
-        
     await interaction.reply({
       embeds: [
         embed
-          .setDescription(`You have withdrawn ${config.emojis.currency}\`${amount.toLocaleString()}\` from your bank account and you will receive a message in DMs soon`)
+          .setDescription(`You have withdrawn ${config.emojis.currency}\`${amount.toLocaleString()}\` from your bank account`)
           .setColor(config.colours.embed)
           .setTimestamp()
       ],

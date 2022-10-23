@@ -18,6 +18,7 @@ module.exports = {
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
     
     let random = Math.floor(Math.random() * 4);
+    let randomCoins = Math.floor(Math.random() * 15);
     
     const animal = animals[Math.floor(Math.random() * animals.length)]
     
@@ -29,6 +30,18 @@ module.exports = {
           .setColor(config.colours.error)
           .setDescription(`You don't have zoo\nYou need to buy zoo before you hunt.`)
           .setTimestamp(),
+        ]
+      });
+    }
+    
+    if (user && userData.coins < 15) {
+      return interaction.editReply({
+        embeds: [
+          new EmbedBuilder()
+         .setTitle("Error: not enough coins")
+         .setColor(config.colours.error)
+         .setDescription(`You don't have enough coins to hunt at least you need ${config.emojis.currency} 15.`)
+         .setTimestamp(),
         ]
       });
     }
@@ -57,6 +70,7 @@ module.exports = {
         userData.animal[animal.value] += random;
       }
       userData.cooldowns.hunt = Date.now() + ms("1m");
+      userData.coins -= randomCoins;
       userData.save();
       
       await interaction.editReply({
@@ -64,7 +78,7 @@ module.exports = {
           new EmbedBuilder()
           .setTitle("Hunting...!")
           .setColor(config.colours.work)
-          .setDescription(`You found **${random} ${animal.emoji}${animal.name}**`)
+          .setDescription(`You found **${random} ${animal.emoji}${animal.name}** and spent **${config.emojis.currency} ${randomCoins}**`)
           .setTimestamp(),
         ],
       });

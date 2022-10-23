@@ -48,8 +48,8 @@ module.exports = {
       } else {
         userData.cooldowns.chop = Date.now() + ms("3m");
       }
-      if (userData.health.axe.iron == 2) {
-        userData.health.axe.iron -= 2;
+      if (userData.health.axe.iron == 25) {
+        userData.health.axe.iron -= 25;
         userData.axe.iron -= 1;
       }
       userData.save();
@@ -67,10 +67,15 @@ module.exports = {
       
       let amount = Math.floor(Math.random() * 13) + 3;
       userData.resources.woods += amount;
+      userData.health.axe.stone += 1;
       if (user && premium.isPremium) {
         userData.cooldowns.chop = Date.now() + ms("20s");
       } else {
         userData.cooldowns.chop = Date.now() + ms("1m");
+      }
+      if (userData.health.axe.stone == 15) {
+        userData.health.axe.stone -= 15;
+        userData.axe.iron -= 1;
       }
       userData.save();
       

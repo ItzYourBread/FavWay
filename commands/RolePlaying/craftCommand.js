@@ -322,8 +322,7 @@ module.exports = {
         userData.resources.woods -= 2;
         userData.resources.ironBricks -= 1;
         userData.craftCount += 1;
-        userData.health.cutters = 10;
-        userData.items.cutter = true;
+        userData.items.cutters += 1;
         userData.save();
 
         await i.reply({

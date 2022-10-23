@@ -1,10 +1,8 @@
-const { ActionRowBuilder, Events, SelectMenuBuilder, ComponentType, Client } = require("discord.js");
+const { ActionRowBuilder, SelectMenuBuilder, ComponentType } = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const { Profile } = require("../../database/game/profile");
 const Discord = require("discord.js");
 const config = require("../../config.json");
-const emojis = require("../../api/emojis.json");
-const tips = require('../../tips.json');
 const wait = require('node:timers/promises').setTimeout;
 const resource = require("../../inventory/resources.json");
 const item = require("../../inventory/items.json");
@@ -131,13 +129,13 @@ module.exports = {
         if (i.customId === 'inventory') {
           await i.deferUpdate();
           if (i.values[0] === 'resources') {
-            await wait(500)
+            await wait(100);
             await i.editReply({ embeds: [resources], components: [row], fetchReply: true });
           } if (i.values[0] === 'items') {
-            await wait(500)
+            await wait(100);
             await i.editReply({ embeds: [items], components: [row], fetchReply: true });
           } if (i.values[0] === 'foods') {
-            await wait(500)
+            await wait(100);
             await i.editReply({ embeds: [foods], components: [row], fetchReply: true });
           } else {
             return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
