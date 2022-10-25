@@ -37,7 +37,7 @@ handler.loadCommands(client);
 handler.loadAdminCommands(client);
 
 require("./handlers/mongoose.js")(client);
-require("./server.js");
+//require("./server.js");
 
 // error handling
 process.on("unhandledRejection", (reason, promise) => {
@@ -45,10 +45,6 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 // client login
-  client.login(process.env.TOKEN);
+client.login(process.env.TOKEN);
 
-  printly(colour.green("Index Loaded 🟢"));
-
-module.exports = {
-  client: client
-}
+printly(colour.green("Index Loaded 🟢"));

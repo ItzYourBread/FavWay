@@ -12,6 +12,12 @@
     "value": "stones"
   },
   {
+    "name": "Wool",
+    "emoji": "wool",
+    "category": "Resource",
+    "value": "wools"
+  },
+  {
     "name": "Iron",
     "emoji": "iron",
     "category": "Resource",

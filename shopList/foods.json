@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Milk Bucket",
+    "emoji": "milkBucket",
+    "category": "Organic Food",
+    "price": "137",
+    "value": "milkBuckets",
+    "dbLine": "foods"
+  },
+  {
+    "name": "Cake",
+    "emoji": "cakeNormal",
+    "category": "Cake",
+    "price": "800",
+    "value": "cakeNormal",
+    "dbLine": "foods"
+  }
+]

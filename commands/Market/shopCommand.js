@@ -76,7 +76,7 @@ module.exports = {
             await wait(100);
             await i.editReply({ embeds: [items] });
           } else {
-            await i.reply(`This us not `)
+            return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
           }
         }
       }

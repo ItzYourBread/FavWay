@@ -19,12 +19,21 @@ module.exports = {
   category: "Utilities",
 
   run: async (client, interaction) => {
-    
+
     const { user } = interaction;
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
     userData.commandRans += 1;
     userData.save();
+
+    if (!client.shard >= 1) {
+      return interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("Unable to run")
+        ],
+      });
+    }
 
     await interaction.reply({
       embeds: [
@@ -40,49 +49,48 @@ module.exports = {
     let coins = 0;
     let crafts = 0;
 
-    const guildstotal = await client.shard.fetchClientValues('guilds.cache.size')
-    const userstotal = await client.shard.fetchClientValues('users.cache.size')
-    const channelstotal = await client.shard.fetchClientValues('channels.cache.size')
+    const guildstotal = await client.shard.fetchClientValues('guilds.cache.size');
+    const userstotal = await client.shard.fetchClientValues('users.cache.size');
+    const channelstotal = await client.shard.fetchClientValues('channels.cache.size');
 
     const uptimeDuration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
 
     const cpuCount = cpu.count();
-		let cpuUsagePercentage;
-		let driveInfo;
-		let memInfo;
-		let osInfo;
-		let processor;
-		await cpu.usage().then(cpuPercentage => {
-			cpuUsagePercentage = cpuPercentage;
-		});
-		await drive.info().then(info => {
-			driveInfo = info;
-		}).catch(err => {
-			driveInfo = {
-				totalGb: err.name,
-				usedGb: err.name,
-				freeGb: err.name,
-				usedPercentage: err.name,
-				freePercentage: err.name,
-			};
-		});
-		await mem.info().then(info => {
-			memInfo = info;
-		});
-		await os.oos().then(info => {
-			osInfo = info;
-		});
-		await si.cpu()
-			.then(data => processor = data)
-			.catch(error => console.error(error));
+    let cpuUsagePercentage;
+    let driveInfo;
+    let memInfo;
+    let osInfo;
+    let processor;
+    await cpu.usage().then(cpuPercentage => {
+      cpuUsagePercentage = cpuPercentage;
+    });
+    await drive.info().then(info => {
+      driveInfo = info;
+    }).catch(err => {
+      driveInfo = {
+        totalGb: err.name,
+        usedGb: err.name,
+        freeGb: err.name,
+        usedPercentage: err.name,
+        freePercentage: err.name,
+      };
+    });
+    await mem.info().then(info => {
+      memInfo = info;
+    });
+    await os.oos().then(info => {
+      osInfo = info;
+    });
+    await si.cpu()
+      .then(data => processor = data)
+      .catch(error => console.error(error));
 
     const users = await Profile.find();
-    for(let member of users){
+    for (let member of users) {
       runs += member.commandRans;
       coins += member.coins;
       crafts += member.craftCount;
     }
-    
     await interaction.editReply({
       embeds: [
         new EmbedBuilder()
@@ -92,7 +100,7 @@ module.exports = {
           .setFields(
             {
               name: 'General',
-              value: `** **\ **Servers:** ${guildstotal.toLocaleString()}\n  **Users:** ${userstotal.toLocaleString()}\n  **Channels:** ${channelstotal.toLocaleString()}\n** **`,
+              value: `** **\ **Shards:** ${client.shard.count}\n  **Servers:** ${guildstotal.toLocaleString()}\n  **Users:** ${userstotal.toLocaleString()}\n  **Channels:** ${channelstotal.toLocaleString()}\n** **`,
               inline: false
             },
             {
