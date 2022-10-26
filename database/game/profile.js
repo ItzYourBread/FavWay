@@ -17,6 +17,9 @@ const Profile = new mongoose.Schema({
     egg: { type: Date },
     daily: { type: Date }
   },
+  boost: {
+    cakeNormal: { type: Date }
+  },
   property: {
     zoo: { type: Boolean, default: false }
   },

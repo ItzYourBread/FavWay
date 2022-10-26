@@ -2,13 +2,13 @@
   {
     "name": "Basket",
     "emoji": "basket",
-    "value": "basket",
+    "value": "baskets",
     "category": "Carry"
   },
   {
     "name": "Cutter",
     "emoji": "cutter",
-    "value": "cutter",
+    "value": "cutters",
     "category": "Tool"
   },
   {

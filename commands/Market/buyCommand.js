@@ -108,27 +108,30 @@ module.exports = {
     });
     
     collector.on('collect', async i => {
-      (i.user.id === interaction.user.id)
-        if (i.customId === 'buyButton') {
-          await i.deferUpdate();
+      if (i.user.id !== interaction.user.id)
+      return i.reply({ 
+        content: `These buttons aren't for you!`, 
+        ephemeral: true 
+      });
+      
+      if (i.customId === 'buyButton') {
+        await i.deferUpdate();
 
-          userData.coins -= price;
-          userData[dbLine][value] += quantity;
-          userData.save();
+        userData.coins -= price;
+        userData[dbLine][value] += quantity;
+        userData.save();
           
-          await i.editReply({
-            embeds: [
-              new EmbedBuilder()
-              .setTitle(`Confirmation Successful`)
-              .setColor(config.colours.success)
-              .setDescription(`${user.username} successfully purchased **${quantity} ${config.emojis[emoji]}${name}**.`)
-              .setTimestamp(),
-            ],
-            components: [],
-          });
-        } else {
-          return i.reply({ content: `These buttons aren't for you!`, ephemeral: true });
-        }
+        await i.editReply({
+          embeds: [
+            new EmbedBuilder()
+            .setTitle(`Confirmation Successful`)
+            .setColor(config.colours.success)
+            .setDescription(`${user.username} successfully purchased **${quantity} ${config.emojis[emoji]}${name}**.`)
+            .setTimestamp(),
+          ],
+          components: [],
+        });
+      }
     });
   }
 }

@@ -6,6 +6,7 @@ const config = require("../../config.json");
 const wait = require('node:timers/promises').setTimeout;
 const resource = require("../../shopList/resources.json");
 const item = require("../../shopList/items.json");
+const food = require("../../shopList/foods.json")
 
 module.exports = {
   name: "shop",
@@ -18,6 +19,7 @@ module.exports = {
 
     let resourceList = "";
     let itemList = "";
+    let foodList = "";
 
     resource.map(el => {
         resourceList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.currency}${el.price}\n${el.category}\n\n`;
@@ -38,6 +40,15 @@ module.exports = {
     .setDescription(itemList)
     .setTimestamp();
 
+    food.map(el => {
+        foodList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.currency}${el.price}\n${el.category}\n\n`;
+    });
+    let foods = new EmbedBuilder()
+    .setTitle("Food's Shop")
+    .setColor(config.colours.embed)
+    .setDescription(foodList)
+    .setTimestamp();
+
     const row = new ActionRowBuilder()
     .addComponents(
       new SelectMenuBuilder()
@@ -53,6 +64,11 @@ module.exports = {
           label: "Items Shop",
           description: "Get some useful items from Items Shop",
           value: "itemsShop"
+        },
+        {
+          label: "Foods Shop",
+          description: "Get some foods from Food Shop",
+          value: "foodsShop"
         }
       ),
     );
@@ -75,6 +91,9 @@ module.exports = {
           } if (i.values[0] === 'itemsShop') {
             await wait(100);
             await i.editReply({ embeds: [items] });
+          } if (i.values[0] === 'foodsShop') {
+            await wait(100);
+            await i.editReply({ embeds: [foods] });
           } else {
             return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
           }

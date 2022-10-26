@@ -39,8 +39,12 @@ module.exports = {
     }
     
     if (user && userData.axe.iron >= 1) {
-      
-    let amount = Math.floor(Math.random() * 40) + 15;
+
+    if (user && userData.boost.cakeNormal > Date.now()) {
+      amount = Math.floor(Math.random() * 110) + 65;
+    } else {
+      amount = Math.floor(Math.random() * 40) + 15;
+    }
       userData.resources.woods += amount;
       userData.health.axe.iron += 1;
       if (user && premium.isPremium) {
@@ -65,7 +69,11 @@ module.exports = {
       });
     } else if (user && userData.axe.stone >= 1) {
       
-      let amount = Math.floor(Math.random() * 13) + 3;
+      if (user && userData.boost.cakeNormal > Date.now()) {
+        amount = Math.floor(Math.random() * 80) + 47;
+      } else {
+        amount = Math.floor(Math.random() * 13) + 3;
+      }
       userData.resources.woods += amount;
       userData.health.axe.stone += 1;
       if (user && premium.isPremium) {

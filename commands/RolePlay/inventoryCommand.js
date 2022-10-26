@@ -125,21 +125,22 @@ module.exports = {
     });
 
     collector.on('collect', async i => {
-      if (i.user.id === interaction.user.id) {
-        if (i.customId === 'inventory') {
-          await i.deferUpdate();
-          if (i.values[0] === 'resources') {
-            await wait(100);
-            await i.editReply({ embeds: [resources], components: [row], fetchReply: true });
-          } if (i.values[0] === 'items') {
-            await wait(100);
-            await i.editReply({ embeds: [items], components: [row], fetchReply: true });
-          } if (i.values[0] === 'foods') {
-            await wait(100);
-            await i.editReply({ embeds: [foods], components: [row], fetchReply: true });
-          } else {
-            return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
-          }
+      if (i.user.id !== interaction.user.id)
+      return i.reply({ 
+        content: `These SelectMenu aren't for you!`, 
+        ephemeral: true 
+      });
+      if (i.customId === 'inventory') {
+        await i.deferUpdate();
+        if (i.values[0] === 'resources') {
+          await wait(100);
+          await i.editReply({ embeds: [resources], components: [row], fetchReply: true });
+        } if (i.values[0] === 'items') {
+          await wait(100);
+          await i.editReply({ embeds: [items], components: [row], fetchReply: true });
+        } if (i.values[0] === 'foods') {
+          await wait(100);
+          await i.editReply({ embeds: [foods], components: [row], fetchReply: true });
         }
       }
     });
