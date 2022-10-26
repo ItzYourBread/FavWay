@@ -26,7 +26,8 @@ module.exports = {
       { name: 'Cent', value: 'cents' },
       { name: 'Iron Brick', value: 'ironBrick' },
       { name: 'Iron Ore', value: 'ironOre' },
-      { name: 'Stone', value: 'stone'}
+      { name: 'Stone', value: 'stone'},
+      { name: 'Stone Axe', value: 'stoneAxe' }
     ],
     }, {
       name: "amount",
@@ -67,6 +68,9 @@ module.exports = {
         }
         if (interaction.options.get('type').value === "stone") {
         userData.resources.stones += amount;
+        }
+        if (interaction.options.get('type').value === "stoneAxe") {
+          userData.axe.stone += amount;
         }
         userData.save();
 

@@ -2,7 +2,7 @@
   {
     "name": "Cake",
     "emoji": "cakeNormal",
-    "benifit": "Get more resources from working",
+    "benefit": "Get more resources from working",
     "boost": "15m",
     "value": "cakeNormal",
     "dbLine": "foods"
