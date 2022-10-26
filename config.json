@@ -40,11 +40,12 @@
           "stone": "<:stone:1033474289778823290>",
           "ironOre": "<:ironore:1033679889057984533>",
           "iron": "<:iron:1034060537883005018>",
-          "idleFurnace": "<:idlefurnace:1029782301376254063>",
-          "forge": "<:forge:1029782354711040000>",
-          "cutter": "<:cutter:1032360586144661575>",
+          "cutter": "<:cutter:1034894805383262300>",
           "wool": "<:wool:1032361992146653224>",
-          "cakeNormal": "🎂"
+          "cakeNormal": "<:cake:1034846156200624239>",
+          "bucket": "<:emptybucket:1034855126692790314>",
+          "basket": "<:basket:1034880386511155231>",
+          "milkBucket": "<:milkbucket:1034858765591257088>"
      },
     
      "database": {

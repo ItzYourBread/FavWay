@@ -5,6 +5,7 @@ const Profile = new mongoose.Schema({
   coins: { type: Number, default: 40 },
   cents: { type: Number, default: 0 },
   bank: { type: Number, default: 0 },
+  luck: { type: Number, default: 0 },
   commandRans: { type: Number, default: 0 },
   craftCount: { type: Number, default: 0 },
   bakeCount: { type: Number, default: 0 },
@@ -15,6 +16,7 @@ const Profile = new mongoose.Schema({
     milk: { type: Date },
     wool: { type: Date },
     egg: { type: Date },
+    pray: { type: Date },
     daily: { type: Date }
   },
   boost: {

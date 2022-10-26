@@ -82,7 +82,11 @@ module.exports = {
     });
 
     collector.on('collect', async i => {
-      if (i.user.id === interaction.user.id) {
+      if (i.user.id !== interaction.user.id)
+        return i.reply({ 
+          content: `These menu aren't for you!`, 
+          ephemeral: true 
+        });
         if (i.customId === 'menu') {
           await i.deferUpdate();
           if (i.values[0] === 'resourcesShop') {
@@ -94,11 +98,8 @@ module.exports = {
           } if (i.values[0] === 'foodsShop') {
             await wait(100);
             await i.editReply({ embeds: [foods] });
-          } else {
-            return i.reply({ content: `These menu aren't for you!`, ephemeral: true });
           }
         }
-      }
     });
   }
 }

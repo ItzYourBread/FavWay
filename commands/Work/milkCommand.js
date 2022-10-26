@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require("discord.js");
 const { Profile } = require("../../database/game/profile");
+const User = require("../../database/premium/user");
 const Discord = require("discord.js");
 const config = require("../../config.json");
 const emojis = require("../../api/emojis.json");
@@ -18,6 +19,9 @@ module.exports = {
 
     const { user } = interaction;
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
+    let premium = await User.findOne({
+      Id: interaction.user.id,
+    });
     //check for zoo 
     if (userData && !userData.property.zoo) {
       return interaction.reply({
@@ -44,17 +48,18 @@ module.exports = {
     }
     const duration = moment
         .duration(userData.cooldowns.milk - Date.now())
-        .format("m[m], s[s]");
+        .format("h[h], m[m], s[s]");
     // check cooldown
     if (userData.cooldowns.milk > Date.now())
       return interaction.reply({
         embeds: [
           new EmbedBuilder()
             .setTitle("Please be patient...")
-            .setColor(config.colours.work)
+            .setColor(config.colours.error)
             .setDescription(
               `⌛ You can get milk from cow again in **\`${duration}\`**`
-            ),
+            )
+            .setTimestamp(),
         ],
       });
     // check bucket
@@ -72,8 +77,12 @@ module.exports = {
     // milked
     if (userData && userData.animal.cow >= 1 && userData.items.buckets >= 1) {
 
-      userData.cooldowns.milk = Date.now() + ms("3m");
       userData.foods.milkBuckets += 1;
+      if (user && premium.isPremium) {
+        userData.cooldowns.milk = Date.now() + ms("2h");
+      } else {
+        userData.cooldowns.milk = Date.now() + ms("5h");
+      }
       userData.items.buckets -= 1;
       userData.save();
       
