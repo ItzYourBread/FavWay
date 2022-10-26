@@ -84,8 +84,13 @@ module.exports = {
         userData.save();
         
         await i.editReply({ 
-          content: `${config.emojis[emoji]}${name} has been used!`, 
-          ephemeral: true 
+          embeds: [
+            new EmbedBuilder()
+            .setColor(config.colours.success)
+            .setDescription(`You've eaten **${quantity} ${config.emojis[emoji]}${name}**.`)
+            .setTimestamp(),
+          ],
+          components: [],
         });
       }
     });

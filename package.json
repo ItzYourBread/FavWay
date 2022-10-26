@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm install --save --production && node sharding/index.js",
+    "start": "npm install --save --production && pm2 sharding/index.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
