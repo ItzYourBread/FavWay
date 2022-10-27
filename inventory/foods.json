@@ -3,18 +3,18 @@
     "name": "Cake",
     "emoji": "cakeNormal",
     "value": "cakeNormal",
-    "category": "food"
+    "category": "Food"
   },
   {
     "name": "Egg",
     "emoji": "egg",
     "value": "eggs",
-    "category": "food"
+    "category": "Food"
   },
   {
     "name": "Milk Bucket",
     "emoji": "milkBucket",
     "value": "milkBuckets",
-    "category": "food"
+    "category": "Food"
   }
 ]

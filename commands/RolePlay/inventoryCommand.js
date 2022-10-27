@@ -7,6 +7,7 @@ const wait = require('node:timers/promises').setTimeout;
 const resource = require("../../inventory/resources.json");
 const item = require("../../inventory/items.json");
 const food = require("../../inventory/foods.json");
+const crop = require("../../inventory/crops.json");
 
 module.exports = {
   name: "inventory",
@@ -22,9 +23,12 @@ module.exports = {
 
   run: async (client, interaction) => {
     await interaction.deferReply();
+    
     var inventoryRes = "";
     var inventoryFoods = "";
     var inventoryItems = "";
+    var inventoryCrops = "";
+      
     const user = interaction.options.getUser('user') || interaction.user;
     const { guild } = interaction;
 
@@ -65,7 +69,7 @@ module.exports = {
 
     food.map(el => {
       if (user && userData.foods[el.value] && userData.foods[el.value] >= 1) {
-        inventoryFoods += `${el.emoji}**${el.name}** — ${userData.foods[el.value]}\n${el.category}\n\n`;
+        inventoryFoods += `${config.emojis[el.emoji]}**${el.name}** — ${userData.foods[el.value]}\n${el.category}\n\n`;
       }
     });
     if (!inventoryFoods) {
@@ -76,6 +80,21 @@ module.exports = {
       .setColor(config.colours.embed)
       .setThumbnail(user.displayAvatarURL())
       .setDescription(inventoryFoods)
+      .setTimestamp();
+
+    crop.map(el => {
+      if (user && userData.crops[el.value] && userData.crops[el.value] >= 1) {
+        inventoryCrops += `${config.emojis[el.emoji]}**${el.name}** — ${userData.crops[el.value]}\n${el.category}\n\n`;
+      }
+    });
+    if (!inventoryFoods) {
+      inventoryCrops = `You don't have any foods!`;
+    }
+    let crops = new EmbedBuilder()
+      .setTitle(`${user.username}'s Inventory`)
+      .setColor(config.colours.embed)
+      .setThumbnail(user.displayAvatarURL())
+      .setDescription(inventoryCrops)
       .setTimestamp();
 
     const row = new ActionRowBuilder()
@@ -98,6 +117,11 @@ module.exports = {
               label: 'Foods',
               description: 'View your foods',
               value: 'foods',
+            },
+            {
+              label: 'Crops',
+              description: 'View your crops',
+              value: 'crops'
             }
           ),
       );
@@ -141,6 +165,9 @@ module.exports = {
         } if (i.values[0] === 'foods') {
           await wait(100);
           await i.editReply({ embeds: [foods], components: [row], fetchReply: true });
+        } if (i.values[0] === 'crops') {
+          await wait(100);
+          await i.editReply({ embeds: [crops], components: [row], fetchReply: true });
         }
       }
     });

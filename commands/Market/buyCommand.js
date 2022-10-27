@@ -8,6 +8,7 @@ const wait = require('node:timers/promises').setTimeout;
 const resourcesList = require("../../shopList/resources.json");
 const itemsList = require("../../shopList/items.json");
 const foodsList = require("../../shopList/foods.json");
+const cropsList = require("../../shopList/crops.json");
 
 const checkItem = function (items, search){
   if(items[0]){
@@ -18,6 +19,9 @@ const checkItem = function (items, search){
   }
   if(items[2]){
     return items[2][search];
+  }
+  if(items[3]){
+    return items[3][search];
   }
   return null;
 };
@@ -45,6 +49,12 @@ module.exports = {
     required: false,
     choices: foodsList
   }, {
+    name: "crops_shop",
+    description: "Select the crops you want to buy.",
+    type: ApplicationCommandOptionType.String,
+    required: false,
+    choices: cropsList
+  }, {
     name: "quantity",
     description: "How many of the item you want to buy.",
     type: ApplicationCommandOptionType.Number,
@@ -59,19 +69,23 @@ module.exports = {
     const userData = await Profile.findOne({ id: user.id }) || new Profile({ id: user.id })
 
     const quantity = interaction.options.getNumber("quantity") || 1;
-    const resources = interaction.options.getString("resources_shop", null);
+    
+    const resource = interaction.options.getString("resources_shop", null);
     const item_resource = interaction.options.getString("items_shop", null);
     const food_resource = interaction.options.getString("foods_shop", null);
-    const resource = resourcesList.find((item)=> {if(item.value === resources){return item;}});
-    const foods_resource = foodsList.find((item)=> {if(item.value === food_resource){return item;}});
-    const item_resources = itemsList.find((item)=> {if(item.value === item_resource){return item;}});
+    const crop_resource = interaction.options.getString("crops_shop", null);
+    
+    const resources = resourcesList.find((item)=> {if(item.value === resource){return item;}});
+    const foods_resources = foodsList.find((item)=> {if(item.value === food_resource){return item;}});
+    const items_resources = itemsList.find((item)=> {if(item.value === item_resource){return item;}});
+    const crops_resources = cropsList.find((item)=> {if(item.value === crop_resource){return item;}});
 
   
-    let price = quantity * Number(checkItem([resource, item_resources, foods_resource], "price"));
-    let value = checkItem([resource, item_resources, foods_resource], "value");
-    let name = checkItem([resource, item_resources, foods_resource], "name");
-    let emoji = checkItem([resource, item_resources, foods_resource], "emoji");
-    let dbLine = checkItem([resource, item_resources, foods_resource], "dbLine");
+    let price = quantity * Number(checkItem([resources, items_resources, foods_resources, crops_resources], "price"));
+    let value = checkItem([resources, items_resources, foods_resources, crops_resources], "value");
+    let name = checkItem([resources, items_resources, foods_resources, crops_resources], "name");
+    let emoji = checkItem([resources, items_resources, foods_resources, crops_resources], "emoji");
+    let dbLine = checkItem([resources, items_resources, foods_resources, crops_resources], "dbLine");
     
 
     if (userData.coins < price) {
