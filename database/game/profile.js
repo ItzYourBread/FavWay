@@ -45,6 +45,9 @@ const Profile = new mongoose.Schema({
     irons: { type: Number, default: 0 },
     wools: { type: Number, default: 0 }
   },
+  crops: {
+    wheats: { type: Number, default: 0 }
+  },
   foods: {
     milkBuckets: { type: Number, default: 0 },
     eggs: { type: Number, default: 0 },

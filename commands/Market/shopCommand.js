@@ -6,7 +6,8 @@ const config = require("../../config.json");
 const wait = require('node:timers/promises').setTimeout;
 const resource = require("../../shopList/resources.json");
 const item = require("../../shopList/items.json");
-const food = require("../../shopList/foods.json")
+const food = require("../../shopList/foods.json");
+const crop = require("../../shopList/crops.json");
 
 module.exports = {
   name: "shop",
@@ -20,6 +21,7 @@ module.exports = {
     let resourceList = "";
     let itemList = "";
     let foodList = "";
+    let cropList = "";
 
     resource.map(el => {
         resourceList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.currency}${el.price}\n${el.category}\n\n`;
@@ -49,6 +51,15 @@ module.exports = {
     .setDescription(foodList)
     .setTimestamp();
 
+    crop.map(el => {
+        cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.currency}${el.price}\n${el.category}\n\n`;
+    });
+    let crops = new EmbedBuilder()
+    .setTitle("Crops's Shop")
+    .setColor(config.colours.embed)
+    .setDescription(cropList)
+    .setTimestamp();
+
     const row = new ActionRowBuilder()
     .addComponents(
       new SelectMenuBuilder()
@@ -69,6 +80,11 @@ module.exports = {
           label: "Foods Shop",
           description: "Get some foods from Food Shop",
           value: "foodsShop"
+        },
+        {
+          label: "Crops Shop",
+          description: "Get some crops from Crops Shop",
+          value: "cropsShop"
         }
       ),
     );
@@ -98,6 +114,9 @@ module.exports = {
           } if (i.values[0] === 'foodsShop') {
             await wait(100);
             await i.editReply({ embeds: [foods] });
+          } if (i.values[0] === 'cropsShop') {
+            await wait(100);
+            await i.editReply({ embeds: [cropsShop] });
           }
         }
     });
