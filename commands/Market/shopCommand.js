@@ -116,7 +116,7 @@ module.exports = {
             await i.editReply({ embeds: [foods] });
           } if (i.values[0] === 'cropsShop') {
             await wait(100);
-            await i.editReply({ embeds: [cropsShop] });
+            await i.editReply({ embeds: [crops] });
           }
         }
     });
