@@ -2,6 +2,13 @@
   {
     "name": "Cream",
     "value": "creams",
-    "emoji": "cream"
+    "emoji": "cream",
+    "dbLine": "foods"
+  },
+  {
+    "name": "Butter",
+    "value": "butters",
+    "emoji": "butter",
+    "dbLine": "foods"
   }
 ]

@@ -23,7 +23,8 @@ const Profile = new mongoose.Schema({
     cakeNormal: { type: Date }
   },
   property: {
-    zoo: { type: Boolean, default: false }
+    zoo: { type: Boolean, default: false },
+    dairy: { type: Boolean, default: false }
   },
   animal: {
     cow: { type: Number, default: 0 },
@@ -52,6 +53,7 @@ const Profile = new mongoose.Schema({
     milkBuckets: { type: Number, default: 0 },
     eggs: { type: Number, default: 0 },
     butters: { type: Number, default: 0 },
+    creams: { type: Number, default: 0 },
     cakeNormal: { type: Number, default: 0 }
   },
   axe: {

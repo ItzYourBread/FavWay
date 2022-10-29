@@ -70,7 +70,7 @@ module.exports = {
               },
               {
                 name: 'Market',
-                value: '`market`, `buy woodworking`, `buy lapidary`, `buy tools`, `buy ore`, `buy foundry`',
+                value: '`sbop`, `buy`, `sell`',
                 inline: false
               },
               {
