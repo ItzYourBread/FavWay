@@ -3,8 +3,7 @@ const mongoose = require("mongoose")
 const Profile = new mongoose.Schema({
   id: { type: String, unique: true, required: true },
   coins: { type: Number, default: 40 },
-  cents: { type: Number, default: 0 },
-  bank: { type: Number, default: 0 },
+  gems: { type: Number, default: 200 },
   luck: { type: Number, default: 0 },
   commandRans: { type: Number, default: 0 },
   craftCount: { type: Number, default: 0 },

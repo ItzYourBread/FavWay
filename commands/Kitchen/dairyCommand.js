@@ -141,7 +141,7 @@ module.exports = {
         if (selected.value === 'creams') {
           if (user && userData.foods.milkBuckets < 1) {
             return i.followUp({
-              content: `You don't have enough Milk Buckets to make a Cream`,
+              content: `You don't have enough Milk Bucket to make a Cream`,
               ephemeral: true,
             });
           }
@@ -152,16 +152,54 @@ module.exports = {
               .setColor(config.colours.success)
               .setDescription(`**${config.emojis.cream}Cream** is making\nYou have to wait 25 seconds for the ${config.emojis.cream}**Cream**`)
             ],
+            components: [],
           });
+          await wait(15000);
+
+          userData.foods.milkBuckets -= 1;
+          userData.items.buckets += 1;
+          userData.save();
+          
           await i.editReply({
             embeds: [
               new EmbedBuilder()
                .setTitle("Creams")
                .setColor(config.colours.success)
-               .setDescription(`You have **${config.emojis.cream}Cream**!`)
+               .setDescription(`You have made **${config.emojis.cream}Cream**!`)
                .setTimestamp(),
             ],
             components: [],
+          });
+        }
+        if (selected.value === 'butters') {
+          if (user && userData.foods.milkBuckets < 2) {
+            return i.followUp({
+              content: `You don't have enough Milk Buckets to make a Butter`,
+              ephemeral: true,
+            });
+          }
+
+          await i.editReply({
+            embeds: [
+              new EmbedBuilder()
+              .setTitle("Dairy")
+              .setColor(config.colours.success)
+              .setDescription(`**${config.emojis.butter}Butter** is making\nYou have to wait 60 seconds for the ${config.emojis.butter}**Butter**`)
+              .setTimestamp(),
+            ],
+            components: [],
+          });
+
+          await wait(60000);
+
+          await i.editReply({
+            embeds: [
+              new EmbedBuilder()
+              .setTitle("Dairy")
+              .setColor(config.colours.success)
+              .setDescription(`You have made **${config.emojis.butter}Butter**!`)
+              .setTimestamp(),
+            ],
           });
         }
       }

@@ -27,16 +27,24 @@ module.exports = {
 
         userData.commandRans += 1;
         userData.save();
-      
-        if (userData.coins > 100000) {
-          status = "Being Rich!!";
+
+        if (user && userData.coins >= 50000000) {
+          status = "50 Millions OMG";
+        } else if (user && userData.coins >= 30000000) {
+          status = "30 Millions shit!";
+        } else if (user && userData.coins >= 10000000) {
+          status = "10 Millions noiceee..!";
+        } else if (user && userData.coins >= 500000) {
+          status = "Hmm kinda rich";
+        } else if (user && userData.coins >= 100000) {
+          status = "Good coins!"
         } else {
-          status = "Eh what a noob";
+          status = "Ehh what a poor guy";
         }
         
         const balance = new EmbedBuilder()
         .setTitle(`${user.username}'s Balance`)
-        .setDescription(`**Pocket:** ${config.emojis.currency} ${userData.coins.toLocaleString()}\n**Bank:** ${config.emojis.currency} ${userData.bank.toLocaleString()}\n**Cents:** ${config.emojis.currencyCents} ${userData.cents.toLocaleString()}`)
+        .setDescription(`**Coin:** ${config.emojis.currency} ${userData.coins.toLocaleString()}\n**Gem:** ${config.emojis.gem} ${userData.gems.toLocaleString()}`)
         .setColor(config.colours.embed)
         .setFooter({ text: `${status}`})
         
@@ -48,7 +56,7 @@ module.exports = {
             .setTitle("Command log")
             .setDescription(`**[Balance Command]** run by **${interaction.user.tag}**`)
             .addFields(
-                { name: "Value:", value: `**Pocket:** ${userData.coins.toLocaleString()}\n**Bank:** ${userData.bank.toLocaleString()}\n**Cents:** ${userData.cents.toLocaleString()}\n\n` },
+                { name: "Value:", value: `**Pocket:** ${userData.coins.toLocaleString()}\n**Bank:** ${userData.bank.toLocaleString()}\n\n` },
                 { name: "Guild:", value: `${guild.name}` }
             )
             .setTimestamp();
