@@ -154,9 +154,10 @@ module.exports = {
             ],
             components: [],
           });
-          await wait(15000);
+          await wait(25000);
 
           userData.foods.milkBuckets -= 1;
+          userData.foods.creams += 1;
           userData.items.buckets += 1;
           userData.save();
           

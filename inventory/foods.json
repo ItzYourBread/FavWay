@@ -16,5 +16,11 @@
     "emoji": "milkBucket",
     "value": "milkBuckets",
     "category": "Food"
+  },
+  {
+    "name": "Cream",
+    "emoji": "cream",
+    "value": "creams",
+    "category": "Food"
   }
 ]
