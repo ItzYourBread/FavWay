@@ -33,7 +33,7 @@ module.exports = {
         .addComponents(
           new ButtonBuilder()
             .setCustomId('buy')
-            .setLabel('Buy (25,000)')
+            .setLabel('Buy (27,000)')
             .setStyle(ButtonStyle.Success),
           new ButtonBuilder()
             .setCustomId(`cancel`)
@@ -49,6 +49,29 @@ module.exports = {
 
       var message = await interaction.reply({ embeds: [buyBakery], components: [BuyCancel] });
     }
+
+    const collector = message.createMessageComponentCollector({
+      filter: fn => fn,
+      componentType: ComponentType.Button,
+      time: 20000
+    });
+
+    collector.on('collect', async i => {
+      if (i.user.id !== interaction.user.id)
+        return i.reply({
+          content: `These Buttons aren't for you!`,
+          ephemeral: true
+        });
+      await i.deferUpdate();
+      if (i.customId === 'buy') {
+        if (user && userData.coins < 27000) {
+          return i.followUp({ 
+            content: "You don't have enough coins to buy **Bakery**!", 
+            ephemeral: true 
+          });
+        }
+      }
+    });
     
   }
 }
