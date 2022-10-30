@@ -22,5 +22,11 @@
     "emoji": "cream",
     "value": "creams",
     "category": "Food"
+  },
+  {
+    "name": "Butter",
+    "emoji": "butter",
+    "value": "butters",
+    "category": "Food"
   }
 ]

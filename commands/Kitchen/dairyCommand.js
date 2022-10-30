@@ -7,7 +7,6 @@ const { ms } = require("printly.js");
 const wait = require('node:timers/promises').setTimeout;
 const dairyList = require("../../kitchen/dairy.json");
 
-
 module.exports = {
   name: "dairy",
   description: "Make dairy today!",
@@ -192,6 +191,11 @@ module.exports = {
           });
 
           await wait(60000);
+
+          userData.foods.milkBuckets -= 2;
+          userData.foods.butters += 1;
+          userData.items.buckets += 2;
+          userData.save();
 
           await i.editReply({
             embeds: [
