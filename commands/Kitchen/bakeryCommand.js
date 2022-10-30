@@ -62,15 +62,46 @@ module.exports = {
           content: `These Buttons aren't for you!`,
           ephemeral: true
         });
-      await i.deferUpdate();
+
       if (i.customId === 'buy') {
+        await i.deferUpdate();
         if (user && userData.coins < 27000) {
-          return i.followUp({ 
+          await i.followUp({ 
             content: "You don't have enough coins to buy **Bakery**!", 
             ephemeral: true 
           });
         }
+
+        userData.coins -= 27000;
+        userData.property.bakery = true;
+        userData.save();
+
+        await i.editReply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle("Bakery Bought")
+              .setColor(config.colours.success)
+              .setDescription("You bought **Bakery**!\nRun the command again to see the Bakery.")
+              .setTimestamp()
+          ],
+          components: [],
+        });
       }
+      
+      if (i.customId === 'cancel') {
+        await i.deferUpdate();
+        await i.editReply({
+          embeds: [
+            new EmbedBuilder()
+              .setTitle("Buying cancelled")
+              .setColor(config.colours.error)
+              .setDescription(`Buying **Bakery** has been cancelled!`)
+              .setTimestamp(),
+          ],
+          components: [],
+        });
+      }
+      
     });
     
   }

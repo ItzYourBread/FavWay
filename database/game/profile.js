@@ -23,7 +23,8 @@ const Profile = new mongoose.Schema({
   },
   property: {
     zoo: { type: Boolean, default: false },
-    dairy: { type: Boolean, default: false }
+    dairy: { type: Boolean, default: false },
+    bakery: { type: Boolean, default: false }
   },
   animal: {
     cow: { type: Number, default: 0 },
