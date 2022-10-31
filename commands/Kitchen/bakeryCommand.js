@@ -50,6 +50,29 @@ module.exports = {
       var message = await interaction.reply({ embeds: [buyBakery], components: [BuyCancel] });
     }
 
+    if (user && userData.property.bakery) {
+      const make = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId('make')
+            .setLabel('Make 1')
+            .setStyle(ButtonStyle.Success),
+        );
+
+      if (selected.value === "cakeNormal") {
+        var message = await interaction.reply({
+          embeds: [
+            new EmbedBuilder()
+            .setTitle("Bakery")
+            .setColor(config.colours.embed)
+            .setDescription(`${config.emojis.cakeNormal}**Cake**\n\n**Recipe:**\n${userData.foods.eggs}/8 ${config.emojis.egg}**Egg**\n${userData.foods.creams}/2 ${config.emojis.cream}**Cream**\n${userData.foods.sugars}/1 ${config.emojis.sugar}**Sugar**\n${userData.crops.wheats}/35 ${config.emojis.wheat}**Wheat**`)
+            .setTimestamp(),
+          ],
+          components: [make],
+        });
+      }
+    }
+
     const collector = message.createMessageComponentCollector({
       filter: fn => fn,
       componentType: ComponentType.Button,
@@ -66,7 +89,7 @@ module.exports = {
       if (i.customId === 'buy') {
         await i.deferUpdate();
         if (user && userData.coins < 27000) {
-          await i.followUp({ 
+          return i.followUp({ 
             content: "You don't have enough coins to buy **Bakery**!", 
             ephemeral: true 
           });
@@ -101,7 +124,7 @@ module.exports = {
           components: [],
         });
       }
-      
+
     });
     
   }
