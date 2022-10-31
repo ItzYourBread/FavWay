@@ -1,19 +1,15 @@
-const mongoose = require('mongoose');
-const config = require('../config.json');
-const { colour } = require("printly.js");
+import mongoose from 'mongoose';
+import config from "./../config.json" assert {type: 'json'};
 
-function println() {
-  return console.log.apply(console, arguments)
-}
+mongoose.connect(config.database.mongoDB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('[Database] Connected')
+}).catch((err) => {
+  console.log('[Database] Unable to connect to MongoDB Database.\nError: ' + err)
+});
 
-module.exports = async () => {
-    mongoose.connect(config.database.mongoDB, {
-        useNewUrlParser: true,
-        keepAlive: true,
-        useUnifiedTopology: true
-    }).then(()=>{
-        println(colour.green(`\n[Database] Mongoose successfully connected to the server`))
-    }).catch((err) =>{
-        println(err)
-    });
-}
+export default {
+  mongoose: mongoose
+};
