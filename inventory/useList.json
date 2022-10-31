@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Cake",
+    "emoji": "cakeNormal",
+    "benefit": "Get more resources from working",
+    "boost": "15m",
+    "value": "cakeNormal",
+    "dbLine": "foods"
+  }
+]

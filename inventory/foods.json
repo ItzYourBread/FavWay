@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Cake",
+    "emoji": "cakeNormal",
+    "value": "cakeNormal",
+    "category": "Food"
+  },
+  {
+    "name": "Egg",
+    "emoji": "egg",
+    "value": "eggs",
+    "category": "Food"
+  },
+  {
+    "name": "Milk Bucket",
+    "emoji": "milkBucket",
+    "value": "milkBuckets",
+    "category": "Food"
+  },
+  {
+    "name": "Cream",
+    "emoji": "cream",
+    "value": "creams",
+    "category": "Food"
+  },
+  {
+    "name": "Butter",
+    "emoji": "butter",
+    "value": "butters",
+    "category": "Food"
+  }
+]

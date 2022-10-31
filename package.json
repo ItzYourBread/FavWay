@@ -1,0 +1,38 @@
+{
+  "name": "container",
+  "version": "0.1.0-alpha",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm install --save --production && pm2 sharding/index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "discord.js": "^14.3.0",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "express.js": "^1.0.0",
+    "fs": "^0.0.1-security",
+    "moment": "^2.29.4",
+    "moment-duration-format": "^2.3.2",
+    "mongoose": "^6.5.3",
+    "node-cron": "^3.0.2",
+    "node-fetch": "^2.6.7",
+    "node-os-utils": "^1.3.7",
+    "path": "^0.12.7",
+    "printly.js": "^1.4.7",
+    "quick.db": "^9.0.6",
+    "systeminformation": "^5.12.7",
+    "voucher-code-generator": "^1.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.16",
+    "nodemon": "^2.0.19"
+  }
+}

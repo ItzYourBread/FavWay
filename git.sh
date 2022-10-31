@@ -1,0 +1,1 @@
+git pull "https://NotRealArif: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@github.com/NotRealArif/FavWay.git" main

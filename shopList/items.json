@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Bucket",
+    "category": "Tool",
+    "emoji": "bucket",
+    "price": "45",
+    "value": "buckets",
+    "dbLine": "items"
+  },
+  {
+    "name": "Basket",
+    "category": "Container",
+    "emoji": "basket",
+    "price": "75",
+    "value": "baskets",
+    "dbLine": "items"
+  },
+  {
+    "name": "Cutter",
+    "category": "Tool",
+    "emoji": "cutter",
+    "price": "120",
+    "value": "cutters",
+    "dbLine": "items"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Wood",
+    "category": "Organic Material",
+    "emoji": "wood",
+    "price": "8",
+    "value": "woods",
+    "dbLine": "resources"
+  },
+  {
+    "name": "Stone",
+    "category": "Organic Material",
+    "emoji": "stone",
+    "price": "12",
+    "value": "stones",
+    "dbLine": "resources"
+  },
+  {
+    "name": "Wool",
+    "category": "Organic Material",
+    "emoji": "wool",
+    "price": "90",
+    "value": "wools",
+    "dbLine": "resources"
+  },
+  {
+    "name": "Iron Ore",
+    "category": "Mineral Material",
+    "emoji": "ironOre",
+    "price": "70",
+    "value": "ironOres",
+    "dbLine": "resources"
+  },
+  {
+    "name": "Iron",
+    "category": "Mineral Material",
+    "emoji": "iron",
+    "price": "120",
+    "value": "irons",
+    "dbLine": "resources"
+  }
+]

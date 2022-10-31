@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Basket",
+    "emoji": "basket",
+    "value": "baskets",
+    "category": "Carry"
+  },
+  {
+    "name": "Cutter",
+    "emoji": "cutter",
+    "value": "cutters",
+    "category": "Tool"
+  },
+  {
+    "name": "Bucket",
+    "emoji": "bucket",
+    "value": "buckets",
+    "category": "Container"
+  }
+]

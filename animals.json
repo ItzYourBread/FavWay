@@ -1,0 +1,24 @@
+{
+  "animals": [
+    {
+      "name": "Cow",
+      "emoji": "🐄",
+      "value": "cow"
+    },
+    {
+      "name": "Pig",
+      "emoji": "🐖",
+      "value": "pig"
+    },
+    {
+      "name": "Chicken",
+      "emoji": "🐓",
+      "value": "chicken"
+    },
+    {
+      "name": "Sheep",
+      "emoji": "🐑",
+      "value": "sheep"
+    }
+  ]
+}
