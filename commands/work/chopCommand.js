@@ -23,6 +23,7 @@ export default {
       
       userData.resources.woods += amount;
       userData.health.axe.iron += 1;
+      userData.commandRans += 1;
       if (userData.health.axe.iron == 25) {
         userData.health.axe.iron -= 25;
         userData.axe.iron -= 1;
@@ -46,6 +47,7 @@ export default {
       }
       userData.resources.woods += amount;
       userData.health.axe.stone += 1;
+      userData.commandRans += 1;
       if (userData.health.axe.stone == 15) {
         userData.health.axe.stone -= 15;
         userData.axe.iron -= 1;
@@ -61,7 +63,9 @@ export default {
         }],
       });
     } else {
-      return interaction.createMessage({
+      userData.commandRans += 1;
+      userData.save();
+      await interaction.createMessage({
         embeds: [{
           title: "Missing Axe",
           color: 0xff8d8d,
