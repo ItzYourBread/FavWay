@@ -1,5 +1,8 @@
 import { User } from "../../database/profile.js";
 import config from "../../config.json" assert { type: "json" };
+import { ms } from "printly.js";
+import moment from "moment";
+import "moment-duration-format";
 
 export default {
   data: {
@@ -14,10 +17,26 @@ export default {
     let amount = "";
     let amount2 = "";
 
+    const duration = moment 
+        .duration(userData.cooldowns.mine - Date.now())
+        .format("m[m], s[s]");
+
+    if (user && userData.cooldowns.mine > Date.now()) {
+      return interaction.createMessage({
+        embeds: [{
+          title: "take a break",
+          color: 0xff8d8d,
+          description: `You can mine again in \`${duration}\` `,
+          timestamp: new Date(),
+        }],
+      });
+    }
+
     if (user && userData.pickaxe.iron >= 1) {
       let amount = Math.floor(Math.random() * 40) + 15;
       let amount2 = Math.floor(Math.random() * 18) + 7;
-      
+
+      userData.cooldowns.mine = Date.now() + ms("3m");
       userData.resources.stones += amount;
       userData.resources.ironOres += amount2;
       userData.commandRans += 1;
@@ -39,7 +58,8 @@ export default {
     } else if (user && userData.pickaxe.stone >= 1) {
       
       let amount = Math.floor(Math.random() * 13) + 3;
-      
+
+      userData.cooldowns.mine = Date.now() + ms("1m");
       userData.resources.stones += amount;
       userData.commandRans += 1;
       userData.health.pickaxe.stone += 1;
