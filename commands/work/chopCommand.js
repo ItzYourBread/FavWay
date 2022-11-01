@@ -1,5 +1,8 @@
 import { User } from "../../database/profile.js";
 import config from "../../config.json" assert { type: "json" };
+import { ms } from "printly.js";
+import moment from "moment";
+import "moment-duration-format";
 
 export default {
   data: {
@@ -13,6 +16,21 @@ export default {
 
     let amount = "";
 
+    const duration = moment 
+        .duration(userData.cooldowns.chop - Date.now())
+        .format("m[m], s[s]");
+
+    if (user && userData.cooldowns.chop > Date.now()) {
+      return interaction.createMessage({
+        embeds: [{
+          title: "take a break",
+          color: 0xff8d8d,
+          description: `You can chop again in \`${duration}\` `,
+          timestamp: new Date()
+        }],
+      });
+    }
+
     if (user && userData.axe.iron >= 1) {
       
       if (user && userData.boost.cakeNormal > Date.now()) {
@@ -20,7 +38,7 @@ export default {
       } else {
       amount = Math.floor(Math.random() * 40) + 15;
       }
-      
+      userData.cooldowns.chop = Date.now() + ms("3m");
       userData.resources.woods += amount;
       userData.health.axe.iron += 1;
       userData.commandRans += 1;
@@ -44,6 +62,7 @@ export default {
       } else {
         amount = Math.floor(Math.random() * 13) + 3;
       }
+      userData.cooldowns.chop = Date.now() + ms("3m");
       userData.resources.woods += amount;
       userData.health.axe.stone += 1;
       userData.commandRans += 1;

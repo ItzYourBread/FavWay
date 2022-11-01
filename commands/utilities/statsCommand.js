@@ -8,7 +8,7 @@ export default {
   },
   run: async (client, interaction) => {
     
-    const { user } = interaction;
+    const { guild } = interaction;
 
     let loading = {
       title: "Loading",
@@ -16,21 +16,19 @@ export default {
       description: "You have to wait some minutes we are collecting data for you!\nPlease wait...",
       timestamp: new Date()
     }
-    await interaction.createMessage({ embeds: [loading] })
+    await interaction.createMessage({ embeds: [loading] });
 
     let stats = {
-      title: "Statistics",
       color: 0xcec6ff,
-      description: "Here is the faveWay statistic!",
       fields: [
         {
           name: "General",
-          value: "Eris testing!!",
+          value: `**Servers:** ${client.guilds.size}\n**Users:** ${client.guilds.get(id).members.map((m) => m.id).size.toLocaleString()}`,
           inline: false
         }
       ],
       timestamp: new Date()
     }
-    await interaction.editOriginalMessage({ embeds: [stats] })
+    await interaction.editOriginalMessage({ embeds: [stats] });
   }
 }
