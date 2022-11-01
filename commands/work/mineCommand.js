@@ -27,7 +27,7 @@ export default {
           title: "take a break",
           color: 0xff8d8d,
           description: `You can mine again in \`${duration}\` `,
-          timestamp: new Date(),
+          timestamp: new Date()
         }],
       });
     }
