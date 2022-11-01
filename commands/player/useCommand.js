@@ -46,6 +46,24 @@ export default {
     let boost = checkItem([useLists], "boost");
     let benefit = checkItem([useLists], "benefit");
 
-    console.log(value, name, emoji, dbLine, boost, benefit);
+    let confirmation = {
+      color: 0x00ff00,
+      description: `You want to use **${quantity} ${config.emojis[emoji]}${name}.**\n**Benefit:** ${benefit}.\n**Expire:** 15 minutes.\n\nAre you sure?`,
+      timestamp: new Date()
+    }
+
+    let buttons = {
+      type: 1,
+      components: [
+        {
+          type: 2,
+          label: `Confirm (${quantity})`,
+          style: 3,
+          custom_id: "confirm",
+        }
+      ]
+    }
+    
+    const message = await interaction.createMessage({ embeds: [confirmation], components: [buttons] });
   }
 }

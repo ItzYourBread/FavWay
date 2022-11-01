@@ -3,6 +3,6 @@
 It's a cute discord bot ever seen in my life
 
 
-# Credits
-NotRealArif
-Vanko
+# Developers
+1. NotRealArif
+2. Vanko
