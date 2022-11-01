@@ -32,9 +32,8 @@ export default {
       
       await interaction.createMessage({
         embeds: [{
-          title: "Chopped!",
           color: 0x8dff99,
-          description: `${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**`,
+          description: `${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**.`,
           timestamp: new Date()
         }],
       });
@@ -56,9 +55,8 @@ export default {
       
       await interaction.createMessage({
         embeds: [{
-          title: "Chopped!",
           color: 0x8dff99,
-          description: `${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**`,
+          description: `${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**.`,
           timestamp: new Date()
         }],
       });
@@ -69,7 +67,7 @@ export default {
         embeds: [{
           title: "Missing Axe",
           color: 0xff8d8d,
-          description: `You need axe to chop trees!\nType \`/shop\` to buy a axe.`,
+          description: `You need axe to chop trees!\nType \`/shop\` to buy a axe!`,
           timestamp: new Date()
         }],
       })
