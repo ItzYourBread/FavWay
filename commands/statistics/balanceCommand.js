@@ -7,7 +7,6 @@ export default {
     name: "balance",
     description: "Check your balance",
   },
-  
   run: async (client, interaction) => {
     
     const user = interaction.member;
