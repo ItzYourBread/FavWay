@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { ready } from "./events/ready.js";
+import { interactionCreate } from "./events/interactionCreate.js";
 
 import { loadCommands, commands } from "./handlers/commands.js";
 
@@ -51,6 +52,7 @@ client.on("ready", async () => {
 });
 */
 
+/*
 client.on("interactionCreate", async (interaction) => {
   if (interaction instanceof CommandInteraction) {
     for (let slashCommand of commands) {
@@ -61,11 +63,13 @@ client.on("interactionCreate", async (interaction) => {
     }
   }
 });
+*/
 
 export default client;
 
 // Events loader
 ready(client);
+interactionCreate(client);
 
 // handlers loader
 loadCommands(client);
