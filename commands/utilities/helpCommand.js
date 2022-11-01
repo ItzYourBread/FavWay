@@ -35,17 +35,12 @@ export default {
           },
           {
             name: 'Statistics',
-            value: '`inventory`, `zoo`, `profile`',
-            inline: false
-          },
-          {
-            name: 'Currency',
-            value: '`balance`, `deposit`, `withdraw`',
+            value: '`inventory`, `balance`, `zoo`, `profile`',
             inline: false
           },
           {
             name: 'Market',
-            value: '`sbop`, `buy`, `sell`',
+            value: '`shop`, `buy`, `sell`',
             inline: false
           },
           {
