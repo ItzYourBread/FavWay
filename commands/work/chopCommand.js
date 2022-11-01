@@ -37,6 +37,38 @@ export default {
           timestamp: new Date()
         }],
       });
+    } else if (user && userData.axe.stone >= 1) {
+
+      if (user && userData.boost.cakeNormal > Date.now()) {
+        amount = Math.floor(Math.random() * 80) + 47;
+      } else {
+        amount = Math.floor(Math.random() * 13) + 3;
+      }
+      userData.resources.woods += amount;
+      userData.health.axe.stone += 1;
+      if (userData.health.axe.stone == 15) {
+        userData.health.axe.stone -= 15;
+        userData.axe.iron -= 1;
+      }
+      userData.save();
+      
+      await interaction.createMessage({
+        embeds: [{
+          title: "Chopped!",
+          color: 0x8dff99,
+          description: `${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**`,
+          timestamp: new Date()
+        }],
+      });
+    } else {
+      return interaction.createMessage({
+        embeds: [{
+          title: "Missing Axe",
+          color: 0xff8d8d,
+          description: `You need axe to chop trees!\nType \`/shop\` to buy a axe.`,
+          timestamp: new Date()
+        }],
+      })
     }
     
   }
