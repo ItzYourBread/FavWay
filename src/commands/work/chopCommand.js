@@ -24,7 +24,7 @@ export default {
       return interaction.createMessage({
         embeds: [{
           title: "take a break",
-          color: 0xff8d8d,
+          color: Number(config.colours.error),
           description: `You can chop again in \`${duration}\` `,
           timestamp: new Date()
         }],
@@ -50,7 +50,7 @@ export default {
       
       await interaction.createMessage({
         embeds: [{
-          color: 0x8dff99,
+          color: Number(config.colours.success),
           description: `${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**.`,
           timestamp: new Date()
         }],
@@ -74,7 +74,7 @@ export default {
       
       await interaction.createMessage({
         embeds: [{
-          color: 0x8dff99,
+          color: Number(config.colours.success),
           description: `${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**.`,
           timestamp: new Date()
         }],
@@ -85,7 +85,7 @@ export default {
       await interaction.createMessage({
         embeds: [{
           title: "Missing Axe",
-          color: 0xff8d8d,
+          color: Number(config.colours.error),
           description: `You need axe to chop trees!\nType \`/shop\` to buy a axe!`,
           timestamp: new Date()
         }],

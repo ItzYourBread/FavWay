@@ -2,7 +2,7 @@
   "name": "favway",
   "version": "1.0.0",
   "description": "It's a cute discord bot ever seen in my life",
-  "main": "index.js",
+  "main": "./src/favway.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

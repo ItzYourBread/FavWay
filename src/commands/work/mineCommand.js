@@ -25,7 +25,7 @@ export default {
       return interaction.createMessage({
         embeds: [{
           title: "take a break",
-          color: 0xff8d8d,
+          color: Number(config.colours.error),
           description: `You can mine again in \`${duration}\` `,
           timestamp: new Date()
         }],
@@ -50,7 +50,7 @@ export default {
 
       await interaction.createMessage({
         embeds: [{
-          color: 0x8dff99,
+          color: Number(config.colours.success),
           description: `${user.username} found **${amount2} ${config.emojis.ironOre}Iron Ore** and **${amount} ${config.emojis.stone}Stone** from cave.`,
           timestamp: new Date()
         }],
@@ -72,7 +72,7 @@ export default {
 
       await interaction.createMessage({
         embeds: [{
-          color: 0x8dff99,
+          color: Number(config.colours.success),
           description: `${user.username} found **${amount} ${config.emojis.stone}Stone** from cave.`,
           timestamp: new Date()
         }],
@@ -83,7 +83,7 @@ export default {
       await interaction.createMessage({
         embeds: [{
           title: "Missing Pickaxe!",
-          color: 0xff8d8d,
+          color: Number(config.colours.error),
           description: `You need pickaxe for mining stones and ores\nType \`/shop\` to buy a pickaxe!`,
           timestamp: new Date()
         }],

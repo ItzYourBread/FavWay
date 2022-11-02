@@ -1,5 +1,7 @@
 import { Constants } from "eris";
 import config from "../../config.json" assert { type: "json" };
+import moment from "moment";
+import "moment-duration-format";
 
 export default {
   data: {
@@ -12,7 +14,7 @@ export default {
 
     let loading = {
       title: "Loading",
-      color: 0xcec6ff,
+      color: Number(config.colours.embed),
       description: "You have to wait some minutes we are collecting data for you!\nPlease wait...",
       timestamp: new Date()
     }
@@ -30,12 +32,26 @@ export default {
       channels = channels + client.guilds.get(b.id).channels.size;
     });
 
+    const uptime = moment
+      .duration(client.uptime)
+      .format(" D [days], H [hrs], m [mins], s [secs]");
+
     let stats = {
-      color: 0xcec6ff,
+      color: Number(config.colours.embed),
       fields: [
         {
           name: "General",
-          value: `**Servers:** \`${guilds}\`\n**Users:** \`${users}\`\n**Channels:** \`${channels}\` `,
+          value: `** ** \ **Servers:** \`${guilds}\`\n  **Users:** \`${users}\`\n  **Channels:** \`${channels}\`\n ** ** `,
+          inline: false
+        },
+        {
+          name: "FavWay",
+          value: `** ** \ Best info here \n** **`,
+          inline: false
+        },
+        {
+          name: "System",
+          value: `** ** \ **Uptime:** \`${uptime}\`\n ** **`,
           inline: false
         }
       ],
