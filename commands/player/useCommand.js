@@ -35,6 +35,9 @@ export default {
 
     const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
 
+    userData.commandRans += 1;
+    userData.save();
+
     const list = interaction.data.options[0].value || null;
     const quantity = interaction.data.options[1].value || 1;
     const useLists = useList.find((item)=> {if(item.value === list){return item;}});
@@ -47,7 +50,7 @@ export default {
     let benefit = checkItem([useLists], "benefit");
 
     let confirmation = {
-      color: 0x00ff00,
+      color: 0x8dff99,
       description: `You want to use **${quantity} ${config.emojis[emoji]}${name}.**\n**Benefit:** ${benefit}.\n**Expire:** 15 minutes.\n\nAre you sure?`,
       timestamp: new Date()
     }

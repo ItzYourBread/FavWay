@@ -28,7 +28,7 @@ export default {
 
     resource.map(el => {
       if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-        Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value]}\n${el.category}\n\n`;
+        Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
       }
     });
     if (!Rescoures) {
@@ -43,7 +43,7 @@ export default {
 
     item.map(el => {
       if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-        Items += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value]}\n${el.category}\n\n`;
+        Items += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
       }
     });
     if (!Items) {
@@ -58,7 +58,7 @@ export default {
 
     food.map(el => {
       if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-        Foods += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value]}\n${el.category}\n\n`;
+        Foods += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
       }
     });
     if (!Foods) {
@@ -73,7 +73,7 @@ export default {
 
     crop.map(el => {
       if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-        Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value]}\n${el.category}\n\n`;
+        Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
       }
     });
     if (!Crops) {
@@ -127,7 +127,7 @@ export default {
           flags: 64
         });
       if (i.data.custom_id === "menu") {
-        await i.deferUpdate();
+        await i.editParent();
         if (i.data.values[0] === "resources") {
           await wait(100);
           await i.editOriginalMessage({ embeds: [resources] });

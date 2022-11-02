@@ -7,8 +7,8 @@ export default {
     description: "Get FavWay stats",
   },
   run: async (client, interaction) => {
-    
-    const { guild } = interaction;
+
+    const { guild, member } = interaction;
 
     let loading = {
       title: "Loading",
@@ -18,12 +18,24 @@ export default {
     }
     await interaction.createMessage({ embeds: [loading] });
 
+    let users = 0;
+    let channels = 0;
+    let guilds = client.guilds.size;
+
+    client.guilds.find((b) => {
+      users = users + client.guilds.get(b.id).members.size;
+    });
+
+    client.guilds.find((b) => {
+      channels = channels + client.guilds.get(b.id).channels.size;
+    });
+
     let stats = {
       color: 0xcec6ff,
       fields: [
         {
           name: "General",
-          value: `**Servers:** ${client.guilds.size}\n**Users:** ${client.guilds.get(id).members.map((m) => m.id).size.toLocaleString()}`,
+          value: `**Servers:** \`${guilds}\`\n**Users:** \`${users}\`\n**Channels:** \`${channels}\` `,
           inline: false
         }
       ],

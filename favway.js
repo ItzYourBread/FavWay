@@ -1,5 +1,4 @@
 import { Client, Constants, CommandInteraction } from "eris";
-import Eris from "eris";
 import config from "./config.json" assert { type: 'json' };
 import { readdirSync } from "fs";
 import { colour } from "printly.js";
@@ -10,7 +9,7 @@ dotenv.config();
 import { ready } from "./events/ready.js";
 import { interactionCreate } from "./events/interactionCreate.js";
 
-import { loadCommands, commands } from "./handlers/commands.js";
+import { loadCommands } from "./handlers/commands.js";
 
 console.log(colour.blueBright("[System] Index loading..."));
 
