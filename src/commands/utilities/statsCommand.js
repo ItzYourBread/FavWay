@@ -10,16 +10,10 @@ export default {
   },
   run: async (client, interaction) => {
 
+    await interaction.defer();
+
     const { guild, member } = interaction;
-
-    let loading = {
-      title: "Loading",
-      color: Number(config.colours.embed),
-      description: "You have to wait some minutes we are collecting data for you!\nPlease wait...",
-      timestamp: new Date()
-    }
-    await interaction.createMessage({ embeds: [loading] });
-
+    
     let users = 0;
     let channels = 0;
     let guilds = client.guilds.size;
@@ -41,22 +35,22 @@ export default {
       fields: [
         {
           name: "General",
-          value: `** ** \ **Servers:** \`${guilds}\`\n  **Users:** \`${users}\`\n  **Channels:** \`${channels}\`\n ** ** `,
+          value: `** **\ **Servers:** \`${guilds}\`\n  **Users:** \`${users}\`\n  **Channels:** \`${channels}\`\n ** ** `,
           inline: false
         },
         {
           name: "FavWay",
-          value: `** ** \ Best info here \n** **`,
+          value: `** **\ Best info here \n** **`,
           inline: false
         },
         {
           name: "System",
-          value: `** ** \ **Uptime:** \`${uptime}\`\n ** **`,
+          value: `** **\ **Uptime:** \`${uptime}\`\n ** **`,
           inline: false
         }
       ],
       timestamp: new Date()
     }
-    await interaction.editOriginalMessage({ embeds: [stats] });
+    await interaction.createMessage({ embeds: [stats] });
   }
 }

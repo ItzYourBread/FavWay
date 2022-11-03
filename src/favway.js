@@ -14,7 +14,6 @@ import { loadCommands } from "./handlers/commands.js";
 console.log(colour.blueBright("[System] Index loading..."));
 
 const client = new Client(process.env.TOKEN, {
-  maxShards: 10,
   intents: [
     "guilds",
     "guildMessages",
