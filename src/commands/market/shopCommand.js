@@ -65,7 +65,6 @@ export default {
       components: [{
         type: 3,
         custom_id: "menu",
-        placeholder: "Explore more shops!",
         options: [
           {
             label: "Resources's Shop",
@@ -87,7 +86,10 @@ export default {
             description: "Here you can find all the crops from the Crop's Shop.",
             value: "crops"
           }
-        ]
+        ],
+        placeholder: "Explore more shops!",
+        min_values: 1,
+        max_values: 1
       }]
     }
 

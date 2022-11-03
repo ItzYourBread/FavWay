@@ -11,12 +11,13 @@ export default {
       type: 3,
       required: true,
       choices: [
-        { name: "Commands", value: "commands" },
-        { name: "Support", value: "support" }
+        { name: "Commands", value: "commands" }
+      //  { name: "Support", value: "support" }
       ]
     }],
   },
   run: async (client, interaction) => {
+   
     if (interaction.data.options[0].value === "commands") {
       let commands = {
         title: "Commands List",
@@ -61,7 +62,36 @@ export default {
         timestamp: new Date()
       }
 
-      await interaction.createMessage({ embeds: [support] });
+      let helpMenu = {
+        type: 1,
+        components: [{
+          type: 3,
+          custom_id: "helpMenu",
+          placeholder: "What do you need help with?",
+          options: [
+            {
+              label: "Something",
+              description: "Something you need help with",
+              value: "something"
+            }
+          ]
+        }]
+      }
+
+      await interaction.createMessage({ embeds: [support], components: [helpMenu] });
     }
+
+    client.on("interactionCreate", async (i) => {
+      if (i.member.id !== interaction.member.id)
+        return i.createMessage({
+          content: "This is not your menu!.",
+          flags: 64
+        });
+      await i.deferUpdate();
+      await i.createFollowup({ content: "Please check your dm!", flags: 64 });
+      if (i.data.values[0] === "something") {
+        console.log("clicked")
+      }
+    });
   }
 }

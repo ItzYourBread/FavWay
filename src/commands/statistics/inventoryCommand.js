@@ -92,7 +92,6 @@ export default {
       components: [{
         type: 3,
         custom_id: "menu",
-        placeholder: "Click for more",
         options: [
           {
             label: "Resources",
@@ -114,7 +113,10 @@ export default {
             description: "View your crops.",
             value: "crops"
           }
-        ]
+        ],
+        placeholder: "Click for more",
+        min_values: 1,
+        max_values: 4
       }]
     }
 
