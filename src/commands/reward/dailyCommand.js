@@ -1,4 +1,3 @@
-import { Constants } from "eris";
 import { User } from "../../database/profile.js";
 import { ms } from "printly.js";
 import moment from "moment";

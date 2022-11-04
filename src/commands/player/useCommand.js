@@ -1,6 +1,5 @@
 import { Constants } from "eris";
 import { User } from "../../database/profile.js";
-
 import config from "../../config.json" assert { type: "json" };
 import useList from "../../inventory/useList.json" assert { type: "json" };
 

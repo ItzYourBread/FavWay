@@ -1,4 +1,3 @@
-import { Constants } from "eris";
 import config from "../../config.json" assert { type: "json" };
 import resource from "../../shopList/resources.json" assert { type: "json" };
 import item from "../../shopList/items.json" assert { type: "json" };

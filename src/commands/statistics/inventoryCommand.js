@@ -1,4 +1,3 @@
-import { Constants } from "eris";
 import { User } from "../../database/profile.js";
 import config from "../../config.json" assert { type: "json" };
 import resource from "../../inventory/resources.json" assert { type: "json" };
@@ -26,11 +25,49 @@ export default {
     var Foods = "";
     var Crops = "";
 
-    resource.map(el => {
-      if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-        Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
-      }
-    });
+    if (user && userData.settings.compactMode) {
+      resource.map(el => {
+        if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
+          Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}`;
+        }
+      });
+      item.map(el => {
+        if (user && userData.items[el.value] && userData.items[el.value] >= 1) {
+          Items += `${config.emojis[el.emoji]}**${el.name}** : ${userData.items[el.value].toLocaleString()}\n`;
+        }
+      });
+      food.map(el => {
+        if (user && userData.foods[el.value] && userData.foods[el.value] >= 1) {
+          Foods += `${config.emojis[el.emoji]}**${el.name}** : ${userData.foods[el.value].toLocaleString()}\n`;
+        }
+      });
+      crop.map(el => {
+        if (user && userData.croos[el.value] && userData.crops[el.value] >= 1) {
+          Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.crops[el.value].toLocaleString()}\n`;
+        }
+      });
+    } else {
+      resource.map(el => {
+       if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
+          Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
+        }
+      });
+      item.map(el => {
+        if (user && userData.items[el.value] && userData.items[el.value] >= 1) {
+          Items += `${config.emojis[el.emoji]}**${el.name}** : ${userData.items[el.value].toLocaleString()}\n${el.category}\n\n`;
+        }
+      });
+      food.map(el => {
+        if (user && userData.foods[el.value] && userData.foods[el.value] >= 1) {
+          Foods += `${config.emojis[el.emoji]}**${el.name}** : ${userData.foods[el.value].toLocaleString()}\n${el.category}\n\n`;
+        }
+      });
+      crop.map(el => {
+        if (user && userData.crops[el.value] && userData.crops[el.value] >= 1) {
+          Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.crops[el.value].toLocaleString()}\n${el.category}\n\n`;
+        }
+      });
+    }
     if (!Rescoures) {
       Rescoures = `You don't have any resources!`;
     }
@@ -41,11 +78,6 @@ export default {
       timestamp: new Date()
     }
 
-    item.map(el => {
-      if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-        Items += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
-      }
-    });
     if (!Items) {
       Items = `You don't have any items!`;
     }
@@ -56,11 +88,7 @@ export default {
       timestamp: new Date()
     }
 
-    food.map(el => {
-      if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-        Foods += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
-      }
-    });
+    
     if (!Foods) {
       Foods = `You don't have any foods!`;
     }
@@ -71,11 +99,7 @@ export default {
       timestamp: new Date()
     }
 
-    crop.map(el => {
-      if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-        Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
-      }
-    });
+   
     if (!Crops) {
       Crops = `You don't have any crops!`;
     }
@@ -114,9 +138,8 @@ export default {
             value: "crops"
           }
         ],
-        placeholder: "Click for more",
         min_values: 1,
-        max_values: 4
+        max_values: 1
       }]
     }
 

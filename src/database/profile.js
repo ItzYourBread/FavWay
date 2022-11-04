@@ -80,6 +80,10 @@ const Profile = new mongoose.Schema({
       stone: { type: Number, default: 0 },
       iron: { type: Number, default: 0 }
     }
+  },
+  settings: {
+    compactMode: { type: Boolean, default: false },
+    dmMode: { type: Boolean, default: false }
   }
 })
 

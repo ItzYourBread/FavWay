@@ -1,4 +1,3 @@
-import { Constants } from "eris";
 import config from "../../config.json" assert { type: "json" };
 import moment from "moment";
 import "moment-duration-format";

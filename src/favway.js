@@ -29,7 +29,7 @@ const client = new Client(process.env.TOKEN, {
   ]
 });
 
-export default client;
+export { client };
 
 // Events loader
 ready(client);
