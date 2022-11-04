@@ -1,4 +1,5 @@
 import config from "../../config.json" assert { type: "json" };
+import { User } from "../../database/profile.js";
 import resource from "../../shopList/resources.json" assert { type: "json" };
 import item from "../../shopList/items.json" assert { type: "json" };
 import food from "../../shopList/foods.json" assert { type: "json" };
@@ -13,14 +14,43 @@ export default {
   },
   run: async (client, interaction) => {
 
+    const user = interaction.member;
+    const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
+
     var resourceList = "";
     var itemList = "";
     var foodList = "";
     var cropList = "";
 
-    resource.map(el => {
+    if (user && userData.settings.compactMode) {
+      resource.map(el => {
+        resourceList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n`;
+      });
+      item.map(el => {
+        itemList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n`;
+      });
+      food.map(el => {
+        foodList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n`;
+      });
+      crop.map(el => {
+        cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n`;
+      });
+    } else {
+      resource.map(el => {
         resourceList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
-    });
+      });
+      item.map(el => {
+        itemList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
+      });
+      food.map(el => {
+        foodList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
+      });
+      crops.map(el => {
+        cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
+      });
+    }
+
+    
     let resources = {
       title: "Resources's Shop",
       color: 0xcec6ff,
@@ -28,9 +58,7 @@ export default {
       timestamp: new Date()
     }
 
-    item.map(el => {
-        itemList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
-    });
+  
     let items = {
       title: "Item's Shop",
       color: 0xcec6ff,
@@ -38,9 +66,7 @@ export default {
       timestamp: new Date()
     }
 
-    food.map(el => {
-        foodList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
-    });
+   
     let foods = {
       title: "Food's Shop",
       color: 0xcec6ff,
@@ -48,9 +74,7 @@ export default {
       timestamp: new Date()
     }
 
-    crop.map(el => {
-        cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
-    });
+   
     let crops = {
       title: "Crop's Shop",
       color: 0xcec6ff,

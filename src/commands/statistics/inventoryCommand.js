@@ -42,7 +42,7 @@ export default {
         }
       });
       crop.map(el => {
-        if (user && userData.croos[el.value] && userData.crops[el.value] >= 1) {
+        if (user && userData.crops[el.value] && userData.crops[el.value] >= 1) {
           Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.crops[el.value].toLocaleString()}\n`;
         }
       });
@@ -68,6 +68,8 @@ export default {
         }
       });
     }
+
+    
     if (!Rescoures) {
       Rescoures = `You don't have any resources!`;
     }
