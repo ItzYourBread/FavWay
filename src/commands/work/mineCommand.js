@@ -39,7 +39,6 @@ export default {
       userData.cooldowns.mine = Date.now() + ms("3m");
       userData.resources.stones += amount;
       userData.resources.ironOres += amount2;
-      userData.commandRans += 1;
       userData.health.pickaxe.iron += 1;
       
       if (userData.health.pickaxe.iron == 25) {
@@ -61,7 +60,6 @@ export default {
 
       userData.cooldowns.mine = Date.now() + ms("1m");
       userData.resources.stones += amount;
-      userData.commandRans += 1;
       userData.health.pickaxe.stone += 1;
     
       if (userData.health.pickaxe.stone == 18) {
@@ -78,8 +76,6 @@ export default {
         }],
       });
     } else {
-      userData.commandRans += 1;
-      userData.save();
       await interaction.createMessage({
         embeds: [{
           title: "Missing Pickaxe!",

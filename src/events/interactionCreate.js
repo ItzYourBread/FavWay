@@ -10,24 +10,14 @@ export function interactionCreate(client, interaction) {
       for (let slashCommand of commands) {
         if (slashCommand.name === interaction.data.name) {
           await slashCommand.run(client, interaction)
+          const user = interaction.member;
+          const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
+          userData.commandRans += 1;
+          userData.save();
             break
         }
       }
     }
-  /*  if (interaction instanceof ComponentInteraction) {
-      if (interaction.data.component_type === 3 && interaction.data.custom_id === "inventorySelectMenu") {
-        if (interaction.member.id !== interaction.member.id) {
-          return interaction.createMessage({
-            content: "It's not your select menu!",
-            flags: 64
-          });
-        }
-
-        if (interaction.data.values[0] === "resources") {
-          await interaction.editOriginalMessage({ embeds: [resources] });
-        }
-      }
-    } */
   });
   console.log(colour.cyanBright("[Event] interactionCreate.js is loaded"));
 }

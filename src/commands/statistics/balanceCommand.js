@@ -10,9 +10,6 @@ export default {
     
     const user = interaction.member;
     const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
-
-    userData.commandRans += 1;
-    userData.save();
     
     let balance = {
       title: `${user.username}'s Balance`,

@@ -60,14 +60,14 @@ export default {
           type: 2,
           label: "Enable",
           style: 3,
-          custom_id: "enable",
+          custom_id: "settingsEnable",
           // disabled: check
         },
         {
           type: 2,
           label: "Disable",
           style: 4,
-          custom_id: "disable",
+          custom_id: "settingsDisable",
           // disabled: check2
         }
       ]
@@ -92,13 +92,13 @@ export default {
           await i.editOriginalMessage({ embeds: [dmMode], components: [menu, buttons] });
         }
       }
-      if (i.data.component_type === 2 && i.data.custom_id === "enable") {
+      if (i.data.component_type === 2 && i.data.custom_id === "settingsEnable") {
         await i.deferUpdate();
         userData.settings[value] = true;
         userData.save();
         await i.createFollowup({ content: `Successfully enabled ${name}`, flags: 64 });
       }
-      if (i.data.component_type === 2 && i.data.custom_id === "disable") {
+      if (i.data.component_type === 2 && i.data.custom_id === "settingsDisable") {
         await i.deferUpdate();
         userData.settings[value] = false;
         userData.save();
