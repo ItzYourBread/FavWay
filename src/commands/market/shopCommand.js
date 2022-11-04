@@ -45,7 +45,7 @@ export default {
       food.map(el => {
         foodList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
       });
-      crops.map(el => {
+      crop.map(el => {
         cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
       });
     }
