@@ -12,7 +12,10 @@ export default {
     const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
 
     var value = "compactMode";
-    var name = "Compact Mode"
+    var name = "Compact Mode";
+    
+    var check;
+    var check2;
 
     let compactMode = {
       title: "Compact mode",
@@ -32,7 +35,7 @@ export default {
       type: 1,
       components: [{
         type: 3,
-        custom_id: "menu",
+        custom_id: "settingsSelectMenu",
         options: [
           {
             label: "Compact mode",
@@ -57,13 +60,15 @@ export default {
           type: 2,
           label: "Enable",
           style: 3,
-          custom_id: "enable"
+          custom_id: "enable",
+          // disabled: check
         },
         {
           type: 2,
           label: "Disable",
           style: 4,
-          custom_id: "disable"
+          custom_id: "disable",
+          // disabled: check2
         }
       ]
    }
@@ -75,29 +80,29 @@ export default {
           content: "This is not your menu and buttons!.",
           flags: 64
         });
-      if (i.data.custom_id === "menu") {
+      if (i.data.component_type === 3 && i.data.custom_id === "settingsSelectMenu") {
         await i.deferUpdate();
         if (i.data.values[0] === "compactMode") {
           value = "compactMode";
           name = "Compact Mode";
-          await i.editOriginalMessage({ embeds: [compactMode] });
+          await i.editOriginalMessage({ embeds: [compactMode], components: [menu, buttons] });
         } if (i.data.values[0] === "dmMode") {
           value = "dmMode";
           name = "Dm Notification";
-          await i.editOriginalMessage({ embeds: [dmMode] });
+          await i.editOriginalMessage({ embeds: [dmMode], components: [menu, buttons] });
         }
       }
-      if (i.data.custom_id === "enable") {
+      if (i.data.component_type === 2 && i.data.custom_id === "enable") {
         await i.deferUpdate();
         userData.settings[value] = true;
         userData.save();
-        return i.createFollowup({ content: `Successfully enabled ${name}`, flags: 64 });
+        await i.createFollowup({ content: `Successfully enabled ${name}`, flags: 64 });
       }
-      if (i.data.custom_id === "disable") {
+      if (i.data.component_type === 2 && i.data.custom_id === "disable") {
         await i.deferUpdate();
         userData.settings[value] = false;
         userData.save();
-        return i.createFollowup({ content: `Successfully disabled ${name}`, flags: 64 });
+        await i.createFollowup({ content: `Successfully disabled ${name}`, flags: 64, });
       }
     });
   }

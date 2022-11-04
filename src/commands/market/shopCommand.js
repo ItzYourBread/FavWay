@@ -87,7 +87,7 @@ export default {
       type: 1,
       components: [{
         type: 3,
-        custom_id: "menu",
+        custom_id: "shopSelectMenu",
         options: [
           {
             label: "Resources's Shop",
@@ -119,12 +119,12 @@ export default {
     const message = await interaction.createMessage({ embeds: [resources], components: [menu] });
 
     client.on("interactionCreate", async (i) => {
+      if (i.data.component_type === 3 && i.data.custom_id === "shopSelectMenu") {
       if (i.member.id !== interaction.member.id)
         return i.createMessage({
           content: "This is not your menu!.",
           flags: 64
         });
-      if (i.data.custom_id === "menu") {
         await i.deferUpdate();
         if (i.data.values[0] === "resources") {
           await wait(100);

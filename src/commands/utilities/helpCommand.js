@@ -80,7 +80,7 @@ export default {
       await interaction.createMessage({ embeds: [support], components: [helpMenu] });
     }
 
-    client.on("interactionCreate", async (i) => {
+    /* client.on("interactionCreate", async (i) => {
       if (i.member.id !== interaction.member.id)
         return i.createMessage({
           content: "This is not your menu!.",
@@ -91,6 +91,6 @@ export default {
       if (i.data.values[0] === "something") {
         console.log("clicked")
       }
-    });
+    }); */
   }
 }
