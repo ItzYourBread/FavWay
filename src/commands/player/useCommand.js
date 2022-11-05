@@ -25,7 +25,7 @@ export default {
       name: "quantity",
       description: "How many??",
       type: Constants.ApplicationCommandOptionTypes.NUMBER,
-      required: false,
+      required: false
     }],
   },
   run: async (client, interaction) => {
@@ -50,6 +50,17 @@ export default {
         embeds: [{
           color: Number(config.colours.error),
           description: `You don't have **${config.emojis[emoji]}${name}**, make sure you have own the item before using it!`,
+          timestamp: new Date()
+        }],
+        flags: 64
+      });
+    }
+
+    if (user && userData[dbLine][value] > 1 && userData[dbLine][value] < quantity) {
+      return interaction.createMessage({
+        embeds: [{
+          color: Number(config.colours.error),
+          description: `You don't have **${quantity} ${emoji}${name}** in your inventory, You only have **${userData[dbLine][value]} ${emoji}${name}**`,
           timestamp: new Date()
         }],
         flags: 64

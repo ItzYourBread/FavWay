@@ -40,18 +40,19 @@ export default {
           {
             label: "Compact mode",
             description: "Compact mode is a way to show inventory and shop in a mini way!",
-            value: "compactMode"
+            value: "compactMode",
           },
           {
             label: "DM Notification",
             description: "DM Notifications is a way to get notify of crafting items time or expiration!",
-            value: "dmMode"
+            value: "dmMode",
           }
         ],
         min_values: 1,
         max_values: 1
       }]
     }
+    console.log(menu)
 
     let buttons = {
       type: 1,
@@ -85,11 +86,11 @@ export default {
         if (i.data.values[0] === "compactMode") {
           value = "compactMode";
           name = "Compact Mode";
-          await i.editOriginalMessage({ embeds: [compactMode], components: [menu, buttons] });
+          await i.editOriginalMessage({ embeds: [compactMode] });
         } if (i.data.values[0] === "dmMode") {
           value = "dmMode";
           name = "Dm Notification";
-          await i.editOriginalMessage({ embeds: [dmMode], components: [menu, buttons] });
+          await i.editOriginalMessage({ embeds: [dmMode] });
         }
       }
       if (i.data.component_type === 2 && i.data.custom_id === "settingsEnable") {

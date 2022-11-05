@@ -7,6 +7,7 @@ const Profile = new mongoose.Schema({
   gems: { type: Number, default: 200 },
   luck: { type: Number, default: 0 },
   commandRans: { type: Number, default: 0 },
+  lastTime: { type: Date },
   craftCount: { type: Number, default: 0 },
   bakeCount: { type: Number, default: 0 },
   cooldowns: {
