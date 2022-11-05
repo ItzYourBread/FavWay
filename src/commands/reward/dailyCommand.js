@@ -1,7 +1,8 @@
 import { User } from "../../database/profile.js";
 import { ms } from "printly.js";
-import moment from "moment";
 import config from "../../config.json" assert { type: "json" };
+import moment from "moment";
+import "moment-duration-format";
 
 export default {
   data: {
@@ -13,11 +14,17 @@ export default {
     const user = interaction.member;
     const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
 
+    const duration = moment
+        .duration(userData.cooldowns.daily - Date.now())
+        .format("h[h] m[m], s[s]");
+
     if (user && userData.cooldowns.daily > Date.now()) {
       return interaction.createMessage({
         embeds: [{
-          title: "You have already redeemed your daily reward today!",
-          color: 0xff8d8d
+          title: "Already Claimed!",
+          color: Number(config.colours.error),
+          description: `You have already claimed this daily reward today!\nWait ${duration} for next daily reward.`,
+          timestamp: new Date()
         }],
       });
     }
@@ -59,7 +66,7 @@ export default {
     } if (userData.prestige >= 25) {
       amount = "30000";
     } if (userData.prestige >= 10) {
-      amount = "20000";
+      amount = "15000";
     } if (userData.prestige >= 5) {
       amount = Math.floor(Math.random() * 600) + 270;
     } else {
