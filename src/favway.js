@@ -2,11 +2,11 @@ import { Client, Constants, CommandInteraction } from "eris";
 import config from "./config.json" assert { type: 'json' };
 import { readdirSync } from "fs";
 import { colour } from "printly.js";
-
 import dotenv from "dotenv";
 dotenv.config();
 
 import { ready } from "./events/ready.js";
+import { error } from "./events/error.js";
 import { interactionCreate } from "./events/interactionCreate.js";
 
 import { loadCommands } from "./handlers/commands.js";
@@ -33,6 +33,7 @@ export { client };
 
 // Events loader
 ready(client);
+error(client);
 interactionCreate(client);
 
 // handlers loader
