@@ -21,7 +21,7 @@ export default {
     if (user && userData.cooldowns.daily > Date.now()) {
       return interaction.createMessage({
         embeds: [{
-          title: "Already Claimed!",
+          title: "Already claimed!",
           color: Number(config.colours.error),
           description: `You have already claimed this daily reward today!\nWait ${duration} for next daily reward.`,
           timestamp: new Date()
@@ -73,8 +73,16 @@ export default {
       amount = Math.floor(Math.random() * 400) + 170;
     }
 
+    function DateUTC() {
+      const d = new Date, z = d.getTimezoneOffset();
+      d.setDate(d.getDate()+1); d.setHours(0); d.setSeconds(0); 
+      d.setMilliseconds(0); d.setMinutes(0+z);
+      return d.getTime()-Date.now();
+    }
+    let result = DateUTC();
+
     userData.coins += amount;
-    userData.cooldowns.daily = Date.now() + ms("20s");
+    userData.cooldowns.daily = Date.now() + result;
     userData.save();
     
     let reward = {
