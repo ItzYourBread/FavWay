@@ -34,6 +34,11 @@ export default {
             inline: false
           },
           {
+            name: `Player`,
+            value: '`settings`',
+            inline: false
+          },
+          {
             name: 'Statistics',
             value: '`inventory`, `balance`, `zoo`, `profile`',
             inline: false

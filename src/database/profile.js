@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const Profile = new mongoose.Schema({
   id: { type: String, unique: true, required: true },
+  prestige: { type: Number, default: 1 },
   coins: { type: Number, default: 40 },
   gems: { type: Number, default: 200 },
   luck: { type: Number, default: 0 },
