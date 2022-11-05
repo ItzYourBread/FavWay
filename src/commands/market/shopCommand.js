@@ -35,7 +35,8 @@ export default {
       crop.map(el => {
         cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n`;
       });
-    } else {
+    }
+    if (user && !userData.settings.compactMode) {
       resource.map(el => {
         resourceList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
       });
