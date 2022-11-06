@@ -14,11 +14,10 @@ const Profile = new mongoose.Schema({
     chop: { type: Date },
     mine: { type: Date },
     hunt: { type: Date },
-    milk: { type: Date },
-    wool: { type: Date },
-    egg: { type: Date },
-    pray: { type: Date },
     daily: { type: Date }
+  },
+  streaks: {
+    daily: { type: Number, default: 0 }
   },
   boost: {
     cakeNormal: { type: Date }
