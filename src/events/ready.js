@@ -2,6 +2,8 @@ import Eris from 'eris';
 import { colour } from "printly.js";
 import config from "../config.json" assert { type: "json" };
 
+import { loadAchievements } from "../handlers/achievements.js";
+
 let statusMessageID = "1037785678542557264";
 
 export function ready(client, message) {
@@ -31,6 +33,8 @@ export function ready(client, message) {
         console.log("refreshing");
       }, 10000);
     }
+    
+    loadAchievements(client);
   });
   console.log(colour.cyanBright("[Event] ready.js is loaded"));
 }

@@ -35,8 +35,6 @@ const Profile = new mongoose.Schema({
     sheep: { type: Number, default: 0 }
   },
   items: {
-    furnace: { type: Boolean, default: false },
-    forge: { type: Boolean, default: false },
     buckets: { type: Number, default: 0 },
     cutters: { type: Number, default: 0 },
     baskets: { type: Number, default: 0 }
@@ -68,8 +66,7 @@ const Profile = new mongoose.Schema({
     iron: { type: Number, default: 0 }
   },
   achievements: {
-    tinyPlayer: { type: Boolean, default: false },
-    firstCraft: { type: Boolean, default: false }
+    regularUser: { type: Boolean, default: false }
   },
   health: {
     cutter: { type: Number, default: 0 },

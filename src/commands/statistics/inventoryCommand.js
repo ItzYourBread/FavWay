@@ -4,8 +4,6 @@ import resource from "../../inventory/resources.json" assert { type: "json" };
 import item from "../../inventory/items.json" assert { type: "json" };
 import food from "../../inventory/foods.json" assert { type: "json" };
 import crop from "../../inventory/crops.json" assert { type: "json" };
-import Eris from "eris";
-
 import { setTimeout as wait } from "node:timers/promises";
 
 export default {
