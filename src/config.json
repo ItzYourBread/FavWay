@@ -24,7 +24,8 @@
          "embed": "0xcec6ff",
          "logger": "0xdfffd8",
          "error": "0xff8d8d",
-         "success": "0x8dff99"
+         "success": "0x8dff99",
+         "achievement": "0xffc65f"
     },
 
      "emojis": {
