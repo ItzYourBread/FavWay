@@ -27,7 +27,7 @@
     "name": "Axe",
     "category": "Tool",
     "emoji": "axe",
-    "price": "50",
+    "price": "780",
     "value": "axes",
     "dbLine": "items"
   },
@@ -35,7 +35,7 @@
     "name": "Pickaxe",
     "category": "Tool",
     "emoji": "pickaxe",
-    "price": "50",
+    "price": "1260",
     "value": "pickaxes",
     "dbLine": "items"
   }

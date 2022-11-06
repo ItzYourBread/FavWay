@@ -24,30 +24,30 @@ export default {
 
     if (user && userData.settings.compactMode) {
       resource.map(el => {
-        resourceList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n`;
+        resourceList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${Number(el.price).toLocaleString()}\n`;
       });
       item.map(el => {
-        itemList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n`;
+        itemList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${Number(el.price).toLocaleString()}\n`;
       });
       food.map(el => {
-        foodList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n`;
+        foodList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${Number(el.price).toLocaleString()}\n`;
       });
       crop.map(el => {
-        cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n`;
+        cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${Number(el.price).toLocaleString()}\n`;
       });
     }
     if (user && !userData.settings.compactMode) {
       resource.map(el => {
-        resourceList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
+        resourceList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${Number(el.price).toLocaleString()}\n${el.category}\n\n`;
       });
       item.map(el => {
-        itemList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
+        itemList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${Number(el.price).toLocaleString()}\n${el.category}\n\n`;
       });
       food.map(el => {
-        foodList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
+        foodList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${Number(el.price).toLocaleString()}\n${el.category}\n\n`;
       });
       crop.map(el => {
-        cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${el.price}\n${el.category}\n\n`;
+        cropList += `${config.emojis[el.emoji]}**${el.name}** : ${config.emojis.coin}${Number(el.price).toLocaleString()}\n${el.category}\n\n`;
       });
     }
 
