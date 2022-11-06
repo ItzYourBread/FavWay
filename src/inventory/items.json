@@ -16,5 +16,17 @@
     "emoji": "bucket",
     "value": "buckets",
     "category": "Container"
+  },
+  {
+    "name": "Axe",
+    "emoji": "axe",
+    "value": "axes",
+    "category": "Tool"
+  },
+  {
+    "name": "Pickaxe",
+    "emoji": "pickaxe",
+    "value": "pickaxes",
+    "category": "Tool"
   }
 ]

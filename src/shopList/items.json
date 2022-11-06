@@ -22,5 +22,21 @@
     "price": "120",
     "value": "cutters",
     "dbLine": "items"
+  },
+  {
+    "name": "Axe",
+    "category": "Tool",
+    "emoji": "axe",
+    "price": "50",
+    "value": "axes",
+    "dbLine": "items"
+  },
+  {
+    "name": "Pickaxe",
+    "category": "Tool",
+    "emoji": "pickaxe",
+    "price": "50",
+    "value": "pickaxes",
+    "dbLine": "items"
   }
 ]
