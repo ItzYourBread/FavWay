@@ -1,7 +1,6 @@
 import { User } from "../database/profile.js";
 import { colour } from "printly.js";
 import config from "../config.json" assert { type: "json" };
-import { setTimeout as wait } from "node:timers/promises";
 
 export function loadAchievements(client, message) {
   setInterval(() => {

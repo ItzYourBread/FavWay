@@ -3,6 +3,7 @@ import { colour } from "printly.js";
 import config from "../config.json" assert { type: "json" };
 
 import { loadAchievements } from "../handlers/achievements.js";
+import { loadQuest } from "../handlers/quest.js";
 
 let statusMessageID = "1037785678542557264";
 
@@ -35,6 +36,7 @@ export function ready(client, message) {
     }
     
     loadAchievements(client);
+    loadQuest(client);
   });
   console.log(colour.cyanBright("[Event] ready.js is loaded"));
 }
