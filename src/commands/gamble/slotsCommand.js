@@ -88,7 +88,8 @@ export default {
       userData.save();
     }
     if (amount > 1) {
-      winMessage = `You won **${config.emojis.coin}${amount}**! :D`;
+      winMessage = `You won **${config.emojis.coin}${amount}**! :D`
+      userData.gems += gems;
       userData.coins += amount;
       userData.save();
     }
