@@ -57,7 +57,7 @@ export default {
       rSlots.push(slots[2]);
       rSlots.push(slots[2]);
       rSlots.push(slots[2]);
-    } else if (rand<=25) {
+    } else if (rand<=40) {
       amount = bet * 3; // 20% and 3x
       rSlots.push(slots[1]);
       rSlots.push(slots[1]);
@@ -79,10 +79,7 @@ export default {
       rSlots.push(slots[slot1]);
 			rSlots.push(slots[slot2]);
 			rSlots.push(slots[slot3]);
-
-      userData.coins -= bet;
-      userData.save();
-    }
+   }
     
     let winMessage;
     if (amount == 0) {

@@ -14,7 +14,7 @@ export default {
     let quest = {
       title: `${user.username}'s Quest`,
       color: Number(config.colours.embed),
-      description: ``,
+      description: `You don't have any quest today!`,
       timestamp: new Date()
     }
     await interaction.createMessage({ embeds: [quest] });
