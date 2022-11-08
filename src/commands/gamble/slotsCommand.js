@@ -57,7 +57,7 @@ export default {
       rSlots.push(slots[2]);
       rSlots.push(slots[2]);
       rSlots.push(slots[2]);
-    } else if (rand<=40) {
+    } else if (rand<=25) {
       amount = bet * 3; // 20% and 3x
       rSlots.push(slots[1]);
       rSlots.push(slots[1]);
@@ -79,12 +79,15 @@ export default {
       rSlots.push(slots[slot1]);
 			rSlots.push(slots[slot2]);
 			rSlots.push(slots[slot3]);
+
+      userData.coins -= bet;
+      userData.save();
     }
     
     let winMessage;
-    if (amount < 1) {
+    if (amount == 0) {
       winMessage = `Sad to say you lost! :(`;
-      userData.coins -= amount;
+      userData.coins -= bet;
       userData.save();
     }
     if (amount > 1) {
