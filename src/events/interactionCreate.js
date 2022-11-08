@@ -1,8 +1,9 @@
 import { commands } from "../handlers/commands.js";
 import { CommandInteraction, ComponentInteraction } from "eris";
-import { colour } from "printly.js";
+import { colour, ms } from "printly.js";
 import { User } from "../database/profile.js";
 import config from "../config.json" assert { type: "json" };
+import { Collection } from "eris";
 
 export function interactionCreate(client, interaction) {
   client.on("interactionCreate", async (interaction) => {
@@ -15,7 +16,6 @@ export function interactionCreate(client, interaction) {
           userData.commandRans += 1;
           userData.lastTime = Date.now();
           userData.save();
-            break
         }
       }
     }

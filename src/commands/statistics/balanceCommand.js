@@ -1,15 +1,24 @@
 import { User } from "../../database/profile.js";
 import config from "../../config.json" assert { type: "json" };
+import { Constants } from "eris";
 
 export default {
   data: {
     name: "balance",
     description: "Check your balance",
+    options: [{
+      name: "user",
+      description: "Please enter a user.",
+      type: Constants.ApplicationCommandOptionTypes.USER,
+      required: false
+    }],
   },
   run: async (client, interaction) => {
     
-    const user = interaction.member;
-    const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
+    const user_id = interaction.data.options && interaction.data.options[0] ? interaction.data.options[0].value : interaction.member.id;
+    const userData = await User.findOne({ id: user_id }) || new User({ id: user.id });
+
+    let user = client.users.get(user_id);
     
     let balance = {
       title: `${user.username}'s Balance`,
