@@ -2,9 +2,10 @@ import { User } from "../../database/profile.js";
 import config from "../../config.json" assert { type: "json" };
 import { Constants } from "eris";
 import { setTimeout as wait } from "node:timers/promises";
+import random from "random-number-csprng";
 
-const slots = ["<:emoji_20:1039281159345029200>", "<:emoji_20:1039281175950278786>"];
-const loading = "<a:emoji_19:1039281105955721227><a:emoji_19:1039281105955721227><a:emoji_19:1039281105955721227>";
+const slots = ["<:slotsgem:1039472492915458050>", "<:slotsheart:1039468987119058946>", "<:slotsmilkbucket:1039473781435007016>"];
+const moving = "<a:slotsmoving:1039479281379721256>";
 
 export default {
   data: {
@@ -42,44 +43,73 @@ export default {
       embeds: [{
         title: `Slots`,
         color: Number(config.colours.embed),
-        description: `|⎯⎯⎯⎯|\n|${loading} |\n|⎯⎯⎯⎯|`,
+        description: `|⎯⎯⎯⎯|\n| ${moving + moving + moving}  |\n|⎯⎯⎯⎯|`,
         timestamp: new Date()
       }],
     });
-    
-    let number = [];
-    let amount = "";
-    let win;
-    for (let i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slots.length); }
 
-    if (number[0] == number[1] && number[1] == number[2])  {
-        amount = bet * 0.9;
-        win = true;
-    } else if (number[0] == number[1] || number[0] == number[2] || number[1] == number[2]) { 
-        amount = bet * 0.5;
-        win = true;
+    let rSlots = [];
+    let rand = await random(1,1000)/10;
+    let amount = 0;
+    if (rand<=20) {
+      amount = bet; // 1x
+      rSlots.push(slots[2]);
+      rSlots.push(slots[2]);
+      rSlots.push(slots[2]);
+    } else if (rand<=40) {
+      amount = bet * 3; // 3x
+      rSlots.push(slots[1]);
+      rSlots.push(slots[1]);
+      rSlots.push(slots[1]);
+    } else if (rand<=48.8) {
+      amount = bet * 5; // 5x
+      rSlots.push(slots[0]);
+      rSlots.push(slots[0]);
+      rSlots.push(slots[0]);
+    } else {
+      var slot1 = Math.floor(Math.random()*(slots.length-1));
+			var slot2 = Math.floor(Math.random()*(slots.length-1));
+			var slot3 = Math.floor(Math.random()*(slots.length-1));
+      if(slot3==slot1)
+        slot2 = (slot1+Math.ceil(Math.random()*(slots.length-2)))%(slots.length-1);
+      if(slot2==slots.length-2)
+				slot2++;
+      rSlots.push(slots[slot1]);
+			rSlots.push(slots[slot2]);
+			rSlots.push(slots[slot3]);
     }
     
-    if (win) {
-      await wait(3500);
-      await interaction.editOriginalMessage({
-        embeds: [{
-          title: `Slots`,
-          color: Number(config.colours.success),
-          description: `|⎯⎯⎯⎯|\n|${slots[number[0]]}${slots[number[1]]}${slots[number[2]]} |\n|⎯⎯⎯⎯|\nYou won **${config.emojis.coin}${amount.toLocaleString()}** and now you have **${config.emojis.coin}${userData.coins}**`,
-          timetamp: new Date()
-        }],
-      });
-    } else {
-      await wait(3400);
-      await interaction.editOriginalMessage({
-        embeds: [{
-          title: `Slots`,
-          color: Number(config.colours.error),
-          description: `|⎯⎯⎯⎯|\n|${slots[number[0]]}${slots[number[1]]}${slots[number[2]]} |\n|⎯⎯⎯⎯|\nSad to say but you lost **${config.emojis.coin}${amount.toLocaleString()}** :(`,
-          timeStamp: new Date()
-        }],
-      });
+    let winMessage = `You win ${amount.toLocaleString()}!`;
+    if (amount < 1) {
+      winMessage = `Sad to say you lost! :(`;
     }
+
+    await wait(2500);
+    await interaction.editOriginalMessage({
+      embeds: [{
+        title: `Slots`,
+        color: Number(config.colours.embed),
+        description: `|⎯⎯⎯⎯|\n| ${rSlots[0] + moving + moving}  |\n|⎯⎯⎯⎯|`,
+        timestamp: new Date()
+      }],
+    });
+    await wait(1200);
+    await interaction.editOriginalMessage({
+      embeds: [{
+        title: `Slots`,
+        color: Number(config.colours.embed),
+        description: `|⎯⎯⎯⎯|\n| ${rSlots[0] + moving + rSlots[2]}  |\n|⎯⎯⎯⎯|`,
+        timestamp: new Date()
+      }],
+    });
+    await wait(2000);
+    await interaction.editOriginalMessage({
+      embeds: [{
+        title: `Slots`,
+        color: Number(config.colours.embed),
+        description: `|⎯⎯⎯⎯|\n| ${rSlots[0] + rSlots[1] + rSlots[2]}  |\n|⎯⎯⎯⎯|\n${winMessage}`,
+        timestamp: new Date()
+      }],
+    });
   }
 }
