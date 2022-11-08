@@ -51,18 +51,20 @@ export default {
     let rSlots = [];
     let rand = await random(1,1000)/10;
     let amount = 0;
+    let gems = 0;
     if (rand<=20) {
-      amount = bet; // 1x
+      amount = bet; // 40% and 1x
       rSlots.push(slots[2]);
       rSlots.push(slots[2]);
       rSlots.push(slots[2]);
     } else if (rand<=40) {
-      amount = bet * 3; // 3x
+      amount = bet * 3; // 20% and 3x
       rSlots.push(slots[1]);
       rSlots.push(slots[1]);
       rSlots.push(slots[1]);
     } else if (rand<=48.8) {
-      amount = bet * 5; // 5x
+      amount = bet * 5; // 1% and 5x
+      gems = 50;
       rSlots.push(slots[0]);
       rSlots.push(slots[0]);
       rSlots.push(slots[0]);
@@ -79,9 +81,16 @@ export default {
 			rSlots.push(slots[slot3]);
     }
     
-    let winMessage = `You win ${amount.toLocaleString()}!`;
+    let winMessage;
     if (amount < 1) {
       winMessage = `Sad to say you lost! :(`;
+      userData.coins -= amount;
+      userData.save();
+    }
+    if (amount > 1) {
+      winMessage = `You won **${config.emojis.coin}${amount}**! :D`;
+      userData.coins += amount;
+      userData.save();
     }
 
     await wait(2500);
