@@ -4,7 +4,6 @@ import resource from "../../shopList/resources.json" assert { type: "json" };
 import item from "../../shopList/items.json" assert { type: "json" };
 import food from "../../shopList/foods.json" assert { type: "json" };
 import crop from "../../shopList/crops.json" assert { type: "json" };
-
 import { setTimeout as wait } from "node:timers/promises";
 
 export default {
@@ -123,7 +122,7 @@ export default {
       if (i.data.component_type === 3 && i.data.custom_id === "shopSelectMenu") {
       if (i.member.id !== interaction.member.id)
         return i.createMessage({
-          content: "This is not your menu!.",
+          content: "These select menu aren't for you",
           flags: 64
         });
         await i.deferUpdate();

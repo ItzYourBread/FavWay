@@ -21,11 +21,6 @@ const client = new Client(process.env.TOKEN, {
     "messageContent",
     "directMessages",
     "guildEmojis"
-  ],
-  partials: [
-    "message",
-    "channel",
-    "user"
   ]
 });
 

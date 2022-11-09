@@ -148,7 +148,7 @@ export default {
       if (i.data.component_type === 3 && i.data.custom_id === "inventorySelectMenu") {
       if (i.member.id !== interaction.member.id)
         return i.createMessage({
-          content: "This is not your menu!.",
+          content: "These select menu aren't for you",
           flags: 64
         });
         await i.deferUpdate();

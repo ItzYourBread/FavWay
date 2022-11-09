@@ -78,7 +78,7 @@ export default {
     client.on("interactionCreate", async (i) => {
       if (i.member.id !== interaction.member.id)
         return i.createMessage({
-          content: "This is not your menu and buttons!.",
+          content: "These buttons & select menu aren't for you",
           flags: 64
         });
       if (i.data.component_type === 3 && i.data.custom_id === "settingsSelectMenu") {

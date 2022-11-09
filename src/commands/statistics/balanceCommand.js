@@ -16,9 +16,8 @@ export default {
   run: async (client, interaction) => {
     
     const user_id = interaction.data.options && interaction.data.options[0] ? interaction.data.options[0].value : interaction.member.id;
-    const userData = await User.findOne({ id: user_id }) || new User({ id: user.id });
-
-    let user = client.users.get(user_id);
+    const user = await client.users.get(user_id);
+    const userData = await User.findOne({ id: user_id }) || new User({ id: user_id });
     
     let balance = {
       title: `${user.username}'s Balance`,
