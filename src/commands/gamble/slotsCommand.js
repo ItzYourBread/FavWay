@@ -13,7 +13,7 @@ export default {
     description: "Let's play with slots machine today!",
     options: [{
       name: "bet",
-      description: "Please enter your bet, 200 to 20,000",
+      description: "Please enter your bet, 150 to 150,000.",
       type: Constants.ApplicationCommandOptionTypes.INTEGER,
       required: true
     }],
@@ -25,7 +25,7 @@ export default {
 
     const bet = interaction.data.options[0].value;
 
-    if (bet < 200 || bet > 20000 ) {
+    if (bet < 150 || bet > 150000 ) {
       return interaction.createMessage({
         content: `You only can bet 200 to 20,000!`,
         flags: 64

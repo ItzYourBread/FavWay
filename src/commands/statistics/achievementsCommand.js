@@ -1,15 +1,23 @@
 import { User } from "../../database/profile.js";
 import config from "../../config.json" assert { type: "json" };
+import { Constants } from "eris";
 
 export default {
   data: {
     name: "achievements",
-    description: "View your achievements progress"
+    description: "View your achievements progress",
+    options: [{
+      name: "user",
+      description: "Please enter a user.",
+      type: Constants.ApplicationCommandOptionTypes.USER,
+      required: false
+    }],
   },
   run: async (client, interaction) => {
     
-    const user = interaction.member;
-    const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
+    const user_id = interaction.data.options && interaction.data.options[0] ? interaction.data.options[0].value : interaction.member.id;
+    const user = await client.users.get(user_id);
+    const userData = await User.findOne({ id: user_id }) || new User({ id: user_id });
 
     const regularUserProgressSize = Math.floor(userData.commandRans / 29);
     

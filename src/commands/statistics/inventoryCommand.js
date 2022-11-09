@@ -1,4 +1,5 @@
 import { User } from "../../database/profile.js";
+import { Constants } from "eris";
 import config from "../../config.json" assert { type: "json" };
 import resource from "../../inventory/resources.json" assert { type: "json" };
 import item from "../../inventory/items.json" assert { type: "json" };
@@ -9,19 +10,27 @@ import { setTimeout as wait } from "node:timers/promises";
 export default {
   data: {
     name: "inventory",
-    description: "Your awesome inventory!"
+    description: "Your awesome inventory!",
+    options: [{
+      name: "user",
+      description: "Please enter a user.",
+      type: Constants.ApplicationCommandOptionTypes.USER,
+      required: false
+    }]
   },
   run: async (client, interaction) => {
 
-    const user = interaction.member;
-    const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
-
+    const user_id = interaction.data.options && interaction.data.options[0] ? interaction.data.options[0].value : interaction.member.id;
+    const user = await client.users.get(user_id);
+    const userData = await User.findOne({ id: user_id }) || new User({ id: user_id });
+    const userDataSpector = await User.findOne({ id: interaction.member.id }) || new User({ id: interaction.member.id });
+    
     var Rescoures = "";
     var Items = "";
     var Foods = "";
     var Crops = "";
 
-    if (user && userData.settings.compactMode) {
+    if (userDataSpector.settings.compactMode) {
       resource.map(el => {
         if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
           Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n`;
@@ -43,7 +52,7 @@ export default {
         }
       });
     }
-    if (user && !userData.settings.compactMode) {
+    if (!userDataSpector.settings.compactMode) {
       resource.map(el => {
        if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
           Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;

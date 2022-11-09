@@ -30,62 +30,22 @@ export default {
         }],
       });
     }
-
-    if (user && userData.axe.iron >= 1) {
-      
-      if (user && userData.boost.cakeNormal > Date.now()) {
-      amount = Math.floor(Math.random() * 110) + 65;
-      } else {
-      amount = Math.floor(Math.random() * 40) + 15;
-      }
-      userData.cooldowns.chop = Date.now() + ms("3m");
-      userData.resources.woods += amount;
-      userData.health.axe.iron += 1;
-      if (userData.health.axe.iron == 25) {
-        userData.health.axe.iron -= 25;
-        userData.axe.iron -= 1;
-      }
-      userData.save();
-      
-      await interaction.createMessage({
+    
+    if (user && userData.items.axes < 1) {
+      return interaction.createMessage({
         embeds: [{
-          color: Number(config.colours.success),
-          description: `${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**.`,
-          timestamp: new Date()
-        }],
-      });
-    } else if (user && userData.axe.stone >= 1) {
-
-      if (user && userData.boost.cakeNormal > Date.now()) {
-        amount = Math.floor(Math.random() * 80) + 47;
-      } else {
-        amount = Math.floor(Math.random() * 13) + 3;
-      }
-      userData.cooldowns.chop = Date.now() + ms("3m");
-      userData.resources.woods += amount;
-      userData.health.axe.stone += 1;
-      if (userData.health.axe.stone == 15) {
-        userData.health.axe.stone -= 15;
-        userData.axe.iron -= 1;
-      }
-      userData.save();
-      
-      await interaction.createMessage({
-        embeds: [{
-          color: Number(config.colours.success),
-          description: `${user.username} has chopped a trees and got **${amount} ${config.emojis.wood}Woods**.`,
-          timestamp: new Date()
-        }],
-      });
-    } else {
-      await interaction.createMessage({
-        embeds: [{
-          title: "Missing Axe",
+          title: "Missing Axe!",
           color: Number(config.colours.error),
-          description: `You need axe to chop trees!\nType \`/shop\` to buy a axe!`,
+          description: "You need an axe to chop trees!",
           timestamp: new Date()
         }],
-      })
+      });
     }
+
+    let amount = "20";
+    if (userData.boost.cakeNormal > Date.now()) {
+      amount += 150;
+    }
+    console.log(amount)
   }
 }
