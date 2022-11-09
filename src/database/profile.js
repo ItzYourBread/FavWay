@@ -27,12 +27,9 @@ const Profile = new mongoose.Schema({
     dairy: { type: Boolean, default: false },
     bakery: { type: Boolean, default: false }
   },
-  animal: {
+  animals: {
     cow: { type: Number, default: 0 },
-    pig: { type: Number, default: 0 },
-    chicken: { type: Number, default: 0 },
-    sheep: { type: Number, default: 0 }
-  },
+ },
   items: {
     buckets: { type: Number, default: 0 },
     cutters: { type: Number, default: 0 },
