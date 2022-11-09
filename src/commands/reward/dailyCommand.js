@@ -23,7 +23,7 @@ export default {
         embeds: [{
           title: "Already claimed!",
           color: Number(config.colours.error),
-          description: `You have already claimed this daily reward today!\nWait ${duration} for next daily reward.`,
+          description: `You have already claimed today daily reward!\nWait ${duration} for next daily reward.`,
           timestamp: new Date()
         }],
       });

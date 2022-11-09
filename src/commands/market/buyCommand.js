@@ -83,7 +83,7 @@ export default {
           flags: 64
         });
       if (i.data.component_type === 2 && i.data.custom_id === "ShopCartPay") {
-        i.deferUpdate();
+        await i.deferUpdate();
         if (userData.coin < price) {
           return i.createMessage({
             content: `You don't have enough coins`,
