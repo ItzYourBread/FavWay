@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { ready } from "./events/ready.js";
+import { rawWS } from "./events/rawWS.js";
 import { error } from "./events/error.js";
 import { interactionCreate } from "./events/interactionCreate.js";
 
@@ -29,6 +30,7 @@ export { client };
 
 // Events loader
 ready(client);
+rawWS(client);
 error(client);
 interactionCreate(client);
 
