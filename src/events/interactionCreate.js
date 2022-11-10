@@ -10,13 +10,13 @@ export function interactionCreate(client, interaction) {
     if (interaction instanceof CommandInteraction) {
       for (let slashCommand of commands) {
         if (slashCommand.name === interaction.data.name) {
-          await slashCommand.run(client, interaction)
           const user = interaction.member;
           const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
           userData.commandRans += 1;
           userData.lastTime = Date.now();
           userData.save();
-          break
+          await slashCommand.run(client, interaction)
+            break;
         }
       }
     }
