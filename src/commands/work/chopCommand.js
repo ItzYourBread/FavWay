@@ -40,7 +40,7 @@ export default {
       });
     }
 
-    let amount = "20";
+    let amount = 20;
     let chopCooldown = ms("3m");
     if (userData.boost.cakeNormal > Date.now()) {
       amount += 150;
