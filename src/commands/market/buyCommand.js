@@ -41,8 +41,8 @@ export default {
     const user = interaction.member;
     const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
 
-    const shop_items = interaction.data.options[0] ? interaction.data.options[0].value : null;
-    const quantity = interaction.data.options[1] ? interaction.data.options[1].value : 1;
+    const shop_items = interaction.data.options && interaction.data.options[0] ? interaction.data.options[0].value : null;
+    const quantity = interaction.data.options && interaction.data.options[1] ? interaction.data.options[1].value : 1;
     const itemsList = buyList.find((items) => { if (items.value === shop_items) { return items; } });
 
     let price = quantity * Number(checkItem([itemsList], "price"));
