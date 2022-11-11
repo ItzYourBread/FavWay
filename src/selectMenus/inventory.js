@@ -19,7 +19,7 @@ export function inventory(client) {
     if (userData.settings.compactMode) {
       resource.map(el => {
         if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-          Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n`;
+          Resources += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n`;
         }
       });
       item.map(el => {
