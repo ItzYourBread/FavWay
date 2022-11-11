@@ -15,7 +15,10 @@ import { loadCommands } from "./handlers/commands.js";
 console.log(colour.blueBright("[System] Index loading..."));
 
 const client = new Client(process.env.TOKEN, {
-  restMode: false,
+  restMode: true,
+  allowedMentions: {
+    everyone: false,
+  },
   intents: [
     "guilds",
     "guildMessages",

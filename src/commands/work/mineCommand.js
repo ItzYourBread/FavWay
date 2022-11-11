@@ -40,20 +40,23 @@ export default {
     let rand = await random(1,1000)/10;
     let stoneAmount = 0;
     let ironOreAmount = 0;
-    let boost = 0;
     let mineCooldown = ms("3m")
+
+    let stoneBoost = 0;
+    let ironOreBoost = 0;
     if (userData.boost.cakeNormal > Date.now()) {
-      boost += 80;
+      stoneBoost += 65;
+      ironOreBoost += 35;
     }
     if (rand<=80) {
-      stoneAmount = Math.floor(Math.random() * 4) + 1 + boost;
+      stoneAmount = Math.floor(Math.random() * 4) + 1 + stoneBoost;
       items = `**${config.emojis.stone}Stone** ${stoneAmount}`
     } else if (rand<=90) {
-      stoneAmount = Math.floor(Math.random() * 8) + 1 + boost;
+      stoneAmount = Math.floor(Math.random() * 8) + 1 + stoneBoost;
       items = `**${config.emojis.stone}Stone** ${stoneAmount}`
     } else if (rand<=100) {
-      stoneAmount = Math.floor(Math.random() * 12) + 1 + boost;
-      ironOreAmount = Math.floor(Math.random() * 14) + 1 + boost;
+      stoneAmount = Math.floor(Math.random() * 12) + 1 + stoneBoost;
+      ironOreAmount = Math.floor(Math.random() * 14) + 1 + ironOreBoost;
       items = `**${config.emojis.stone}Stone** ${stoneAmount} and **${config.emojis.ironOre}Iron Ore** ${ironOreAmount}`
     }
 
