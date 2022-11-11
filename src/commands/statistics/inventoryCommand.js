@@ -153,7 +153,7 @@ export default {
 
     await interaction.createMessage({ embeds: [resources], components: [menu] });
 
-    client.on("interactionCreate", async (i) => {
+    /* client.on("interactionCreate", async (i) => {
       if (i.data.component_type === 3 && i.data.custom_id === "inventorySelectMenu") {
       if (i.member.id !== interaction.member.id)
         return i.createMessage({
@@ -175,6 +175,6 @@ export default {
           await i.editOriginalMessage({ embeds: [crops] });
         }
       }
-    }); 
+    }); */
   }
 }

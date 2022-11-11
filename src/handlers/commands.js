@@ -1,21 +1,16 @@
 import { readdirSync } from "fs";
-import path from "path";
 import { colour } from "printly.js";
 
 const commands = [];
 export { commands }
 
-const commandsPath = path.join('./src/commands');
-const commandsImport = path.join('..', 'commands');
-
 export function loadCommands(client) {
   client.on("ready", async () => {
-    const commandFolders = readdirSync(`${commandsPath}`);
+    const commandFolders = readdirSync(`./src/commands`);
     for (const folder of commandFolders) {
-      const commandFiles = readdirSync(`${commandsPath}/${folder}`)
-        .filter((file) => file.endsWith(".js"));
+      const commandFiles = readdirSync(`./src/commands/${folder}`).filter((file) => file.endsWith(".js"));
       for (const file of commandFiles) {
-        const slashCommandObject = await import(`${commandsImport}/${folder}/${file}`);
+        const slashCommandObject = await import(`../commands/${folder}/${file}`);
         if (slashCommandObject.default.data.name) {
           console.log(colour.cyanBright(`[Command] ${slashCommandObject.default.data.name} is loaded`));
         }
@@ -26,4 +21,7 @@ export function loadCommands(client) {
       }
     }
   });
+  setTimeout(() => {
+    console.log(colour.blueBright(`[System] ${commands.length} commands is loaded`));
+  }, 55000);
 }

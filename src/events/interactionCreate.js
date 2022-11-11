@@ -5,6 +5,8 @@ import { User } from "../database/profile.js";
 import config from "../config.json" assert { type: "json" };
 import { Collection } from "eris";
 
+import { inventory } from "../selectMenus/inventory.js";
+
 export function interactionCreate(client, interaction) {
   client.on("interactionCreate", async (interaction) => {
     if (interaction instanceof CommandInteraction) {
@@ -19,6 +21,9 @@ export function interactionCreate(client, interaction) {
             break;
         }
       }
+    }
+    if (interaction instanceof ComponentInteraction) {
+      inventory(client);
     }
   });
   console.log(colour.cyanBright("[Event] interactionCreate.js is loaded"));
