@@ -24,10 +24,10 @@ export default {
     const user = await client.users.get(user_id);
     const userData = await User.findOne({ id: user_id }) || new User({ id: user_id });
     
-    var Resources = "empty";
-    var Items = "empty";
-    var Foods = "empty";
-    var Crops = "empty";
+    var Resources = "";
+    var Items = "";
+    var Foods = "";
+    var Crops = "";
 
     resource.map(el => {
       if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
@@ -49,6 +49,19 @@ export default {
         Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.crops[el.value].toLocaleString()}\n`;
       }
     });
+
+    if (!Resources) {
+      Resources = "empty";
+    } 
+    if (!Items) {
+      Items = "empty";
+    } 
+    if (!Foods) {
+      Foods = "empty";
+    } 
+    if (!Crops) {
+      Crops = "empty";
+    }
 
     let inventory = {
       title: `${user.username}'s Inventory`,
