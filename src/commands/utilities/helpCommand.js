@@ -3,7 +3,7 @@ import config from "../../config.json" assert { type: "json" };
 export default {
   data: {
     name: "help",
-    description: "Help subcommands!"
+    description: "Help subcommands!",
   },
   run: async (client, interaction) => {
    

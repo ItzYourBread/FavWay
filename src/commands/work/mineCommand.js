@@ -40,21 +40,27 @@ export default {
     let rand = await random(1,1000)/10;
     let stoneAmount = 0;
     let ironOreAmount = 0;
+    let boost = 0;
+    let mineCooldown = ms("3m")
+    if (userData.boost.cakeNormal > Date.now()) {
+      boost += 80;
+    }
     if (rand<=80) {
-      stoneAmount = Math.floor(Math.random() * 4) + 1;
+      stoneAmount = Math.floor(Math.random() * 4) + 1 + boost;
       items = `**${config.emojis.stone}Stone** ${stoneAmount}`
     } else if (rand<=90) {
-      stoneAmount = Math.floor(Math.random() * 8) + 1;
+      stoneAmount = Math.floor(Math.random() * 8) + 1 + boost;
       items = `**${config.emojis.stone}Stone** ${stoneAmount}`
     } else if (rand<=100) {
-      stoneAmount = Math.floor(Math.random() * 12) + 1;;
-      ironOreAmount = Math.floor(Math.random() * 14) + 1;
+      stoneAmount = Math.floor(Math.random() * 12) + 1 + boost;
+      ironOreAmount = Math.floor(Math.random() * 14) + 1 + boost;
       items = `**${config.emojis.stone}Stone** ${stoneAmount} and **${config.emojis.ironOre}Iron Ore** ${ironOreAmount}`
     }
 
     userData.resources.stones += stoneAmount;
     userData.resources.ironOres += ironOreAmount;
     userData.health.pickaxe += 1;
+    userData.cooldowns.mine = Date.now() + mineCooldown;
     if (userData.health.pickaxe == 27) {
       userData.health.pickaxe -= 27;
       userData.items.pickaxe -= 1;
@@ -62,7 +68,7 @@ export default {
     userData.save();
     
     await interaction.createMessage({
-      content: `You found ${items} from mining!`
+      content: `You found ${items} from mining Happy work!`
     });
   }
 }

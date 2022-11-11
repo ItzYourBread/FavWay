@@ -1,9 +1,9 @@
 import config from "../../config.json" assert { type: "json" };
 import { User } from "../../database/profile.js";
-import resource from "../../shopList/resources.json" assert { type: "json" };
-import item from "../../shopList/items.json" assert { type: "json" };
-import food from "../../shopList/foods.json" assert { type: "json" };
-import crop from "../../shopList/crops.json" assert { type: "json" };
+import resource from "../../data/shopList/resources.json" assert { type: "json" };
+import item from "../../data/shopList/items.json" assert { type: "json" };
+import food from "../../data/shopList/foods.json" assert { type: "json" };
+import crop from "../../data/shopList/crops.json" assert { type: "json" };
 import { setTimeout as wait } from "node:timers/promises";
 
 export default {

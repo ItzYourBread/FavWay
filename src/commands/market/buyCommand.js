@@ -3,7 +3,7 @@ import { User } from "../../database/profile.js";
 import { setTimeout as wait } from "node:timers/promises";
 
 import config from "../../config.json" assert { type: "json" };
-import buyList from "../../shopList/buy.json" assert { type: "json" };
+import buyList from "../../data/shopList/buy.json" assert { type: "json" };
 
 export default {
   data: {

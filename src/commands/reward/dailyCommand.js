@@ -61,12 +61,12 @@ export default {
         {
           name: `Streak`,
           value: `${userData.streaks.daily.toLocaleString()}`,
-          inline: true
+          inline: false
         },
         {
           name: `Prestige`,
           value: `[${userData.prestige}]`,
-          inline: true
+          inline: false
         },
       ],
       timestamp: new Date()

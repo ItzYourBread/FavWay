@@ -39,7 +39,7 @@ loadCommands(client);
 
 // Database
 import "./handlers/mongoose.js";
-
+import "./server.js"
 
 process.on("unhandledRejection", (reason, promise) => {
   console.log("[FATAL] Possibly Unhandled Rejection at: Promise ", promise, " reason: ", reason.message);
