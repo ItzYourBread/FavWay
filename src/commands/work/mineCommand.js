@@ -3,6 +3,7 @@ import config from "../../config.json" assert { type: "json" };
 import { ms } from "printly.js";
 import moment from "moment";
 import "moment-duration-format";
+import random from "random-number-csprng";
 
 export default {
   data: {
@@ -13,9 +14,6 @@ export default {
 
     const user = interaction.member;
     const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
-
-    let amount = "";
-    let amount2 = "";
 
     const duration = moment 
         .duration(userData.cooldowns.mine - Date.now())
@@ -31,59 +29,40 @@ export default {
         }],
       });
     }
-
-    if (user && userData.pickaxe.iron >= 1) {
-      let amount = Math.floor(Math.random() * 40) + 15;
-      let amount2 = Math.floor(Math.random() * 18) + 7;
-
-      userData.cooldowns.mine = Date.now() + ms("3m");
-      userData.resources.stones += amount;
-      userData.resources.ironOres += amount2;
-      userData.health.pickaxe.iron += 1;
-      
-      if (userData.health.pickaxe.iron == 25) {
-        userData.health.pickaxe.iron -= 25;
-        userData.pickaxe.iron -= 1;
-      }
-      userData.save();
-
-      await interaction.createMessage({
-        embeds: [{
-          color: Number(config.colours.success),
-          description: `${user.username} found **${amount2} ${config.emojis.ironOre}Iron Ore** and **${amount} ${config.emojis.stone}Stone** from cave.`,
-          timestamp: new Date()
-        }],
-      });
-    } else if (user && userData.pickaxe.stone >= 1) {
-      
-      let amount = Math.floor(Math.random() * 13) + 3;
-
-      userData.cooldowns.mine = Date.now() + ms("1m");
-      userData.resources.stones += amount;
-      userData.health.pickaxe.stone += 1;
-    
-      if (userData.health.pickaxe.stone == 18) {
-        userData.health.pickaxe.stone -= 18;
-        userData.pickaxe.stone -= 1;
-      }
-      userData.save();
-
-      await interaction.createMessage({
-        embeds: [{
-          color: Number(config.colours.success),
-          description: `${user.username} found **${amount} ${config.emojis.stone}Stone** from cave.`,
-          timestamp: new Date()
-        }],
-      });
-    } else {
-      await interaction.createMessage({
-        embeds: [{
-          title: "Missing Pickaxe!",
-          color: Number(config.colours.error),
-          description: `You need pickaxe for mining stones and ores\nType \`/shop\` to buy a pickaxe!`,
-          timestamp: new Date()
-        }],
+    if (user && userData.items.pickaxes < 1) {
+      return interaction.createMessage({
+        content: `:x: You don't have pickaxe to mine!`,
+        flags: 64
       });
     }
+
+    let items = ``;
+    let rand = await random(1,1000)/10;
+    let stoneAmount = 0;
+    let ironOreAmount = 0;
+    if (rand<=80) {
+      stoneAmount = Math.floor(Math.random() * 4) + 1;
+      items = `**${config.emojis.stone}Stone** ${stoneAmount}`
+    } else if (rand<=90) {
+      stoneAmount = Math.floor(Math.random() * 8) + 1;
+      items = `**${config.emojis.stone}Stone** ${stoneAmount}`
+    } else if (rand<=100) {
+      stoneAmount = Math.floor(Math.random() * 12) + 1;;
+      ironOreAmount = Math.floor(Math.random() * 14) + 1;
+      items = `**${config.emojis.stone}Stone** ${stoneAmount} and **${config.emojis.ironOre}Iron Ore** ${ironOreAmount}`
+    }
+
+    userData.resources.stones += stoneAmount;
+    userData.resources.ironOres += ironOreAmount;
+    userData.health.pickaxe += 1;
+    if (userData.health.pickaxe == 27) {
+      userData.health.pickaxe -= 27;
+      userData.items.pickaxe -= 1;
+    }
+    userData.save();
+    
+    await interaction.createMessage({
+      content: `You found ${items} from mining!`
+    });
   }
 }

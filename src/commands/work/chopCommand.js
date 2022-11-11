@@ -31,12 +31,8 @@ export default {
     
     if (user && userData.items.axes < 1) {
       return interaction.createMessage({
-        embeds: [{
-          title: "Missing Axe!",
-          color: Number(config.colours.error),
-          description: "You need an axe to chop trees!",
-          timestamp: new Date()
-        }],
+        content: "You don't have any axes to chop!",
+        flags: 64
       });
     }
 
