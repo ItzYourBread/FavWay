@@ -24,10 +24,10 @@ export default {
     const user = await client.users.get(user_id);
     const userData = await User.findOne({ id: user_id }) || new User({ id: user_id });
     
-    var Resources = "";
-    var Items = "";
-    var Foods = "";
-    var Crops = "";
+    var Resources = "empty";
+    var Items = "empty";
+    var Foods = "empty";
+    var Crops = "empty";
 
     resource.map(el => {
       if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
