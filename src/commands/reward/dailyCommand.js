@@ -18,7 +18,7 @@ export default {
         .duration(userData.cooldowns.daily - Date.now())
         .format("h[h] m[m], s[s]");
 
-    /* if (user && userData.cooldowns.daily > Date.now()) {
+    if (user && userData.cooldowns.daily > Date.now()) {
       return interaction.createMessage({
         embeds: [{
           title: "Already claimed!",
@@ -27,7 +27,7 @@ export default {
           timestamp: new Date()
         }],
       });
-    } */
+    } 
 
     let streakResetMessage = "";
     if (Date.now() - userData.cooldowns.daily > 172800000) { // 172800000 = 2 days
