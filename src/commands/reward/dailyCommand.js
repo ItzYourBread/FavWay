@@ -18,7 +18,7 @@ export default {
         .duration(userData.cooldowns.daily - Date.now())
         .format("h[h] m[m], s[s]");
 
-    if (user && userData.cooldowns.daily > Date.now()) {
+    /* if (user && userData.cooldowns.daily > Date.now()) {
       return interaction.createMessage({
         embeds: [{
           title: "Already claimed!",
@@ -27,10 +27,12 @@ export default {
           timestamp: new Date()
         }],
       });
-    }
-    
-    if (Date.now() - userData.cooldowns.daily > 172800000) {
+    } */
+
+    let streakResetMessage = "";
+    if (Date.now() - userData.cooldowns.daily > 172800000) { // 172800000 = 2 days
       userData.streaks.daily -= userData.streaks.daily;
+      streakResetMessage += "Seens you didnt claimed your daily to daily, i reset your streak to 1 back!";
     }
     
     function DateUTC() {
@@ -56,7 +58,7 @@ export default {
     let reward = {
       title: "Daily claimed!",
       color: 0xcec6ff,
-      description: `${config.emojis.coin}${amount.toLocaleString()} has been added to your balance!`,
+      description: `+ ${amount.toLocaleString()} **${config.emojis.coin}Coin**\n+ 2 **${config.emojis.apple}Apple**`,
       fields: [
         {
           name: `Streak`,
@@ -72,6 +74,6 @@ export default {
       timestamp: new Date()
     }
 
-    await interaction.createMessage({ embeds: [reward] });
+    await interaction.createMessage({ content: `\ ${streakResetMessage}  \ `, embeds: [reward] });
   }
 }

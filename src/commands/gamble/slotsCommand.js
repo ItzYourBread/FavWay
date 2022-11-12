@@ -25,9 +25,9 @@ export default {
 
     const bet = interaction.data.options[0].value;
 
-    if (bet < 150 || bet > 150000 ) {
+    if (bet > 150000) {
       return interaction.createMessage({
-        content: `You only can bet 200 to 20,000!`,
+        content: "You can't bet more than 150,000.",
         flags: 64
       });
     }
