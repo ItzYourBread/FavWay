@@ -19,15 +19,14 @@ export default {
     const user = await client.users.get(user_id);
     const userData = await User.findOne({ id: user_id }) || new User({ id: user_id });
 
-    let regularUserProgressSize;
     let regularUserBarLength;
     let regularUserProgress;
     
-    if (user && userData.achievements.regularUser) {
+    if (userData.achievements.regularUser) {
       regularUserBarLength = `■■■■■■■■■■■■■■■■■`;
       regularUserProgress = `500`;
     } else {
-      regularUserProgressSize = Math.floor(userData.commandRans / 29);
+      regularUserBarLength = Math.floor(userData.commandRans / 29);
       regularUserProgress = userData.commandRans;
     }
    
