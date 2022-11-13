@@ -26,7 +26,7 @@ export default {
       regularUserBarLength = `■■■■■■■■■■■■■■■■■`;
       regularUserProgress = `500`;
     } else {
-      regularUserBarLength = Math.floor(userData.commandRans / 29);
+      regularUserBarLength = '■'.repeat(Math.floor(userData.commandRans / 29)) + '□'.repeat(17 - Math.floor(userData.commandRans / 29));;
       regularUserProgress = userData.commandRans;
     }
    
