@@ -36,7 +36,7 @@ export default {
       fields: [
         {
           name: "Regular User",
-          value: `${regularUserProgress}/500 Run Commands\n\`[${regularUserBarLength}]\`\n**Rewards:**\n${config.emojis.coin}20,000\nRegular User(title)`,
+          value: `${regularUserProgress}/500 Run Commands\n\`[${regularUserBarLength}]\`\n**Rewards:**\n20,000 ${config.emojis.coin}Coin\nRegular User(title)`,
           inline: true
         }
       ],

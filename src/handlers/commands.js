@@ -23,5 +23,5 @@ export function loadCommands(client) {
   });
   setTimeout(() => {
     console.log(colour.blueBright(`[System] ${commands.length} commands is loaded`));
-  }, 55000);
+  }, 65000);
 }
