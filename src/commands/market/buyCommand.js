@@ -26,16 +26,15 @@ export default {
     ],
   },
   run: async (client, interaction) => {
-    let price;
 
     const user = interaction.member;
     const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
 
     const shop_items = interaction.data.options[0].value;
     const quantity = interaction.data.options[1].value;
-    const itemsList = buyList.find((items) => { if (items.value === shop_items) { return items; } });//i lil back 1 min afk
+    const itemsList = buyList.find((items) => { if (items.value === shop_items) { return items; } });
 
-    price = quantity * Number(itemsList.price);
+    let price = quantity * Number(itemsList.price);
 
     if (userData.coins < price) {
       return inferaction.createFollowup({

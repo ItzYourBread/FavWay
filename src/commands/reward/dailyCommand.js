@@ -26,6 +26,7 @@ export default {
           description: `You have already claimed today daily reward!\nWait ${duration} for next daily reward.`,
           timestamp: new Date()
         }],
+        flags: 64
       });
     } 
 

@@ -13,7 +13,7 @@ export default {
     description: "Let's play with slots machine today!",
     options: [{
       name: "bet",
-      description: "Please enter your bet, 150 to 150,000.",
+      description: "Please enter your bet.",
       type: Constants.ApplicationCommandOptionTypes.INTEGER,
       required: true
     }],
