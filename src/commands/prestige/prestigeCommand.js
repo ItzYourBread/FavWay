@@ -38,10 +38,14 @@ export default {
       if (userData.prestige >= 100) {
         prestigeTier = `Silver`;
       } else if (userData.prestige >= 200) {
-        prestigeTier = `Gold `
+        prestigeTier = `Gold `;
       } else {
         prestigeTier = `Bronze`;
       }
+
+      let getXp = userData.prestige * 100;
+      let divide = getXp /= 17;
+      let xpBar = '■'.repeat(Math.floor(userData.xp / divide)) + '□'.repeat(17 - Math.floor(userData.xp / divide));
       
       let view = {
         title: `${user.username}'s Prestige`,
@@ -55,6 +59,11 @@ export default {
           {
             name: "Tier",
             value: `${prestigeTier}`,
+            inline: true
+          },
+          {
+            name: "Progress",
+            value: `${userData.xp}/${userData.prestige * 100}\n\`[${xpBar}]\` `,
             inline: true
           }
         ],
