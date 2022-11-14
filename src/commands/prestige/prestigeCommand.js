@@ -63,7 +63,7 @@ export default {
           },
           {
             name: "Progress",
-            value: `${userData.xp}/${userData.prestige * 100}\n\`[${xpBar}]\` `,
+            value: `${userData.xp}/${userData.prestige * 100} > ${userData.prestige + 1}\n\`[${xpBar}]\` `,
             inline: true
           }
         ],
