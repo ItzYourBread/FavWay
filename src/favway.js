@@ -16,8 +16,10 @@ console.log(colour.blueBright("[System] Index loading..."));
 
 const client = new Client(process.env.TOKEN, {
   restMode: true,
+  autoreconnect: true,
   allowedMentions: {
     everyone: false,
+    users: true
   },
   intents: [
     "guilds",

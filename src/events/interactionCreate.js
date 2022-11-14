@@ -12,6 +12,7 @@ export function interactionCreate(client, interaction) {
           const user = interaction.member;
           const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
           userData.commandRans += 1;
+          userData.xp += Math.floor(Math.random() * 5);
           userData.lastTime = Date.now();
           userData.save();
           await slashCommand.run(client, interaction)
