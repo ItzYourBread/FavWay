@@ -1,5 +1,11 @@
 [
   {
+    "name": "Apple",
+    "emoji": "apple",
+    "value": "apples",
+    "category": "Food"
+  },
+  {
     "name": "Cake",
     "emoji": "cakeNormal",
     "value": "cakeNormal",
