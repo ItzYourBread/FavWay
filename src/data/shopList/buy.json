@@ -80,6 +80,14 @@
     "dbLine": "items"
   },
   {
+    "name": "Apple",
+    "emoji": "apple",
+    "category": "Organic Food",
+    "price": "56",
+    "value": "apples",
+    "dbLine": "foods"
+  },
+  {
     "name": "Milk Bucket",
     "emoji": "milkBucket",
     "category": "Organic Food",
