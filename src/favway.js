@@ -19,8 +19,10 @@ const client = new Client(process.env.TOKEN, {
   autoreconnect: true,
   allowedMentions: {
     everyone: false,
-    users: true
+    users: true,
+    roles: true
   },
+  maxShards: 1,
   intents: [
     "guilds",
     "guildMessages",

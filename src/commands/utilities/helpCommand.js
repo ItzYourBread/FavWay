@@ -35,7 +35,7 @@ export default {
         fields: [
           {
             name: 'Utilities',
-            value: '`help`, `ping`, `stats`',
+            value: '`help commands`, `help tutorial`, `ping`, `stats`',
             inline: false
           },
           {
@@ -61,6 +61,11 @@ export default {
           {
             name: 'Work',
             value: '`chop`, `mine`, `hunt`, `fish`',
+            inline: false
+          },
+          {
+            name: 'Prestige',
+            value: '`prestige view`, `prestige reward`',
             inline: false
           }
         ],
