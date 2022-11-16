@@ -23,7 +23,6 @@ export function interactionCreate(client, interaction) {
                 content: `**Welcome to FavWay, ${user.username}!**\n**FavWay** is a another Discord to have fun with it, it's have roleplay system where users can play mini version of roleplay games.\n\n**FavWay Community**\nhttps://discord.gg/Ea4jrSSrjM`
               });
               await User.create({ id: user.id });
-              user
               console.info(`user: ${user.username} account has been created!`);
             } catch (err) {
               console.error(err);
