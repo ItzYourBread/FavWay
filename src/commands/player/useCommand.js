@@ -20,6 +20,7 @@ export default {
       description: "Which item do you want to use?",
       type: Constants.ApplicationCommandOptionTypes.STRING,
       required: true,
+      focused: true,
       choices: useList
     }, {
       name: "quantity",

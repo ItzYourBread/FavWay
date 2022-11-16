@@ -53,12 +53,12 @@ export default {
     let amount = 0;
     let gems = 0;
     if (rand<=10) {
-      amount = bet; // 40% and 1x
+      amount = bet; // 10% and 1x
       rSlots.push(slots[2]);
       rSlots.push(slots[2]);
       rSlots.push(slots[2]);
     } else if (rand<=15) {
-      amount = bet * 2; // 20% and 3x
+      amount = bet * 2; // 5% and 3x
       rSlots.push(slots[1]);
       rSlots.push(slots[1]);
       rSlots.push(slots[1]);

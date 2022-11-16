@@ -36,7 +36,8 @@ const Profile = new mongoose.Schema({
     cutters: { type: Number, default: 0 },
     baskets: { type: Number, default: 0 },
     axes: { type: Number, default: 0 },
-    pickaxes: { type: Number, default: 0 }
+    pickaxes: { type: Number, default: 0 },
+    dailyCrate: { type: Number, default: 0 }
   },
   resources: {
     woods: { type: Number, default: 0 },
