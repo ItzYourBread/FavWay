@@ -17,11 +17,16 @@ export function interactionCreate(client, interaction) {
           const user = interaction.member;
           const userData = await User.findOne({ id: user.id });
           const dmChannel = await client.getDMChannel(interaction.member.id);
-          if (userData) {
-            await client.createMessage(dmChannel.id, { 
-              content: `**Welcome to FavWay, ${user.username}!**`
-            });
-            await new User({ id: user.id });
+          if (!userData) {
+            try {
+              await client.createMessage(dmChannel.id, { 
+                content: `**Welcome to FavWay, ${user.username}!**\n**FavWay** is a another Discord to have fun with it, it's have roleplay system where users can play mini version of roleplay games.\n\n**FavWay Community**\nhttps://discord.gg/Ea4jrSSrjM`
+              });
+              await new User({ id: user.id });
+              console.info(`user: ${user.username} account has been created!`);
+            } catch (err) {
+              console.error(err);
+            }
           }
           userData.commandRans += 1;
           // userData.xp += Math.floor(Math.random() * 5);
