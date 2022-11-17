@@ -34,8 +34,6 @@ const client = new Client(process.env.TOKEN, {
 });
 export { client };
 
-
-
 // Events loader
 ready(client);
 rawWS(client);
