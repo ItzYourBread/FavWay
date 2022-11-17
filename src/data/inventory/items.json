@@ -28,5 +28,11 @@
     "emoji": "pickaxe",
     "value": "pickaxes",
     "category": "Tool"
+  },
+  {
+    "name": "Daily Crate",
+    "emoji": "dailyCrate",
+    "value": "dailyCrate",
+    "category": "Gift"
   }
 ]

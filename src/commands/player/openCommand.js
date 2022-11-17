@@ -30,12 +30,6 @@ export default {
             focused: true,
             choices: crateList
           },
-          {
-            name: "quantity",
-            description: "How many crates do you want to open?",
-            type: Constants.ApplicationCommandOptionTypes.NUMBER,
-            required: false
-          }
         ]
       }
     ],
@@ -71,9 +65,23 @@ export default {
       let gems = 0;
       let apples = 0;
       let normalCakes = 0;
+      let pickaxes = 0;
+      let axes = 0;
       let rand = await random(1,1000)/10;
       if (choice === "dailyCrate") {
         if (rand <= 20) {
+          // amount of items for database
+          coins = Math.floor(Math.random() * 530) + 1;
+          normalCakes = Math.floor(Math.random() * 3) + 1;
+          // items to show in embed
+          items += `+${coins} ${config.emojis.coin}**Coin**\n`;
+          items += `+${normalCakes} ${config.emojis.cakeNormal}**Cake**\n`;
+          // adding to user database
+          userData.coins += 530;
+          userData.foods.cakeNormal += normalCakes;
+          userData.items[crate.value] -= 1;
+          userData.save();
+        } else if (rand <= 40) {
           // amount of items for database
           coins = Math.floor(Math.random() * 700) + 1;
           normalCakes = Math.floor(Math.random() * 5) + 1;
@@ -88,16 +96,44 @@ export default {
           userData.foods.apple += apples;
           userData.items[crate.value] -= 1;
           userData.save();
-        } else if (rand <= 30) {
+        } else if (rand <= 55) {
           // amount of items for database
-          coins = Math.floor(Math.random() * 530) + 1;
-          normalCakes = Math.floor(Math.random() * 3) + 1;
+          coins = Math.floor(Math.random() * 700) + 1;
+          normalCakes = Math.floor(Math.random() * 5) + 1;
+          apples = Math.floor(Math.random() * 9) + 1;
+          pickaxes = Math.floor(Math.random() * 5) + 1;
           // items to show in embed
           items += `+${coins} ${config.emojis.coin}**Coin**\n`;
+          items += `+${pickaxes} ${config.emojis.pickaxe}**Pickaxe**\n`;
           items += `+${normalCakes} ${config.emojis.cakeNormal}**Cake**\n`;
+          items += `+${apples} ${config.emojis.apple}**Apple**\n`;
           // adding to user database
-          userData.coins += 530;
+          userData.coins += coins;
           userData.foods.cakeNormal += normalCakes;
+          userData.foods.apple += apples;
+          userData.items.pickaxes += pickaxes;
+          userData.items[crate.value] -= 1;
+          userData.save();
+        } else if (rand <= 68.8) {
+          // amount of items for database
+          coins = Math.floor(Math.random() * 700) + 1;
+          normalCakes = Math.floor(Math.random() * 5) + 1;
+          apples = Math.floor(Math.random() * 9) + 1;
+          pickaxes = Math.floor(Math.random() * 5) + 1;
+          axes = Math.floor(Math.random() * 5) + 1;
+          // items to show in embed
+          items += `+${coins} ${config.emojis.coin}**Coin**\n`;
+          items += `+${pickaxes} ${config.emojis.pickaxe}**Pickaxe**\n`;
+          items += `+${normalCakes} ${config.emojis.cakeNormal}**Cake**\n`;
+          items += `+${apples} ${config.emojis.apple}**Apple**\n`;
+          items += `+${axes} ${config.emojis.axe}**Axe**\n`;
+          // adding to user database
+          userData.coins += coins;
+          userData.foods.cakeNormal += normalCakes;
+          userData.foods.apple += apples;
+          userData.items.pickaxes += pickaxes;
+          userData.items.axes += axes;
+          userData.items[crate.value] -= 1;
           userData.save();
         } else {
           // items to show in embed
@@ -106,6 +142,7 @@ export default {
           // adding to user database
           userData.coins += 250;
           userData.foods.apples += 3;
+          userData.items[crate.value] -= 1;
           userData.save();
         }
       }
