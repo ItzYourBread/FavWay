@@ -1,4 +1,4 @@
-import { Client, Constants, CommandInteraction } from "eris";
+import { Client, Bucket, Constants, CommandInteraction } from "eris";
 import config from "./config.json" assert { type: 'json' };
 import { readdirSync } from "fs";
 import { colour } from "printly.js";
@@ -32,8 +32,9 @@ const client = new Client(process.env.TOKEN, {
     "guildEmojis"
   ]
 });
-
 export { client };
+
+
 
 // Events loader
 ready(client);
