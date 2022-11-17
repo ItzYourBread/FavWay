@@ -21,14 +21,11 @@ export default {
 
     if (user && userData.cooldowns.mine > Date.now()) {
       return interaction.createMessage({
-        embeds: [{
-          title: "take a break",
-          color: Number(config.colours.error),
-          description: `You can mine again in \`${duration}\` `,
-          timestamp: new Date()
-        }],
+        contenr: `You can mine again in ${duration}`,
+        flags: 64
       });
     }
+    
     if (user && userData.items.pickaxes < 1) {
       return interaction.createMessage({
         content: `:x: You don't have pickaxe to mine!`,

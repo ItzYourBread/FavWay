@@ -20,12 +20,8 @@ export default {
 
     if (user && userData.cooldowns.chop > Date.now()) {
       return interaction.createMessage({
-        embeds: [{
-          title: "take a break",
-          color: Number(config.colours.error),
-          description: `You can chop again in \`${duration}\` `,
-          timestamp: new Date()
-        }],
+        content:`You can chop again in ${duration}`,
+        flags: 64
       });
     }
     
