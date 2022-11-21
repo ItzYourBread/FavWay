@@ -35,7 +35,7 @@ export default {
     const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
 
     const list = interaction.data.options[0].value;
-    const quantity = interaction.data.options && interaction.data.options[1] ? interaction.data.options[0].value : 1;
+    const quantity = interaction.data.options && interaction.data.options[1] ? interaction.data.options[1].value : 1;
     
     const useLists = useList.find((item)=> {if(item.value === list){return item;}});
 

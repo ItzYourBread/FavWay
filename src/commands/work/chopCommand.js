@@ -31,12 +31,14 @@ export default {
         flags: 64
       });
     }
-
-    let woodAmount = 20;
+    
+    let woodAmount = 0;
     let chopCooldown = ms("3m");
+    let woodBoost = 0;
     if (userData.boost.cakeNormal > Date.now()) {
-      woodAmount += 150;
+      woodBoost += 75;
     }
+    woodAmount += Math.floor(Math.random() * 18) + 1 + woodBoost;
 
     userData.resources.woods += woodAmount;
     userData.health.axe += 1;
@@ -47,7 +49,7 @@ export default {
     }
     userData.save();
     await interaction.createMessage({
-      content: `You got ${woodAmount} from chopping Happy work!`
+      content: `You got ${woodAmount} ${config.emojis.wood}**Wood** from chopping Happy work!`
     });
   }
 }

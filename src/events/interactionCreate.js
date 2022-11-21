@@ -1,5 +1,5 @@
 import { commands } from "../handlers/commands.js";
-import { CommandInteraction, ComponentInteraction, AutocompleteInteraction } from "eris";
+import { CommandInteraction, ComponentInteraction } from "eris";
 import { colour, ms } from "printly.js";
 import { User } from "../database/profile.js";
 import config from "../config.json" assert { type: "json" };
@@ -32,14 +32,9 @@ export function interactionCreate(client, interaction) {
             break;
         }
       }
-    } 
-    /* else if (interaction instanceof AutocompleteInteraction) {
-      for (let slashCommand of commands) {
-        if (slashCommand.name === interaction.data.name) {
-          await slashCommand.autocomplete(client, interaction)
-        }
-      }
-    } */
+    } else if (interaction instanceof ComponentInteraction) {
+      
+    }
   });
   console.log(colour.cyanBright("[Event] interactionCreate.js is loaded"));
 }

@@ -1,90 +1,119 @@
 import config from "../../config.json" assert { type: "json" };
-import tutorialCommandsList from "../../data/commandList.json" assert { type: "json" };
+import { setTimeout as wait } from "node:timers/promises";
 
 export default {
   data: {
     name: "help",
-    description: "Help subcommands!",
-    options: [
-      {
-        name: "commands",
-        description: "Get full list of commands!",
-        type: 1
-      },
-      {
-        name: "tutorial",
-        description: "Get tutorial of all commands!",
-        type: 1,
-        options: [{
-          name: "command",
-          description: "Select a command which you need tutorial of that command! (e.g. 'ping')",
-          type: 3,
-          required: true,
-          choices: tutorialCommandsList
-        }],
-      }
-    ],
+    description: "Helpline!",
   },
   run: async (client, interaction) => {
 
-    if (interaction.data.options[0].name === "commands") {
-      let commands = {
-        title: "Commands List",
-        color: Number(config.colours.embed),
-        description: `Help! here is our list of commands, if you still need help join our [discord server](https://discord.gg/Ea4jrSSrjM) and be part of our community today.`,
-        fields: [
+    let commands = {
+      title: "FavWay Commands",
+      color: Number(config.colours.embed),
+      fields: [
+        {
+          name: "🐣__Animal__",
+          value: "Comming soon...",
+          inline: false
+        },
+        {
+          name: "🎗__Social__",
+          value: "`profile`",
+          inline: false
+        },
+        {
+          name: "🎲__Gamble__",
+          value: "`slots`",
+          inline: false
+        },
+        {
+          name: "💰__Currency__",
+          value: "`balance`, `inventory`, `daily`, `use`",
+          inline: false
+        },
+        {
+          name: "🛒__Market__",
+          value: "`shop`"
+        },
+        {
+          name: "👷‍♂️__Work__",
+          value: "`chop`, `mine`",
+          inline: false
+        },
+        {
+          name: "🎙__Utilities__",
+          value: "`help`, `ping`, `settings`",
+          inline: false
+        }
+      ],
+      timestamp: new Date()
+    }
+    let rules = {
+      title: "FavWay Rules",
+      color: Number(config.colours.embed),
+      description: `\n
+      Not following these rules result in a permanent or temporary ban and account reset!\n
+      \n1. using multiple accounts for any reason is a violation of the rules.
+      \n2. do not use any exploits or any bug to gain unfair advantage of the bot.
+      \n3. do not trade items for actual money for FavWay items.
+      \n`,
+      timestamp: new Date()
+    }
+
+    let helpMenu = {
+      type: 1,
+      components: [{
+        type: 3,
+        custom_id: "helpMenu",
+        options: [
           {
-            name: 'Utilities',
-            value: '`help commands`, `help tutorial`, `ping`, `stats`',
-            inline: false
+            label: "What are the commands?",
+            value: "commandsList"
           },
           {
-            name: 'Reward',
-            value: '`daily`',
-            inline: false
-          },
-          {
-            name: `Player`,
-            value: '`settings`',
-            inline: false
-          },
-          {
-            name: 'Statistics',
-            value: '`inventory`, `balance`, `zoo`, `profile`',
-            inline: false
-          },
-          {
-            name: 'Market',
-            value: '`shop`, `buy`, `sell`',
-            inline: false
-          },
-          {
-            name: 'Work',
-            value: '`chop`, `mine`, `hunt`, `fish`',
-            inline: false
-          },
-          {
-            name: 'Prestige',
-            value: '`prestige view`, `prestige reward`',
-            inline: false
+            label: "What are the rules?",
+            value: "rulesList"
           }
         ],
-        timestamp: new Date()
-      }
-        await interaction.createMessage({ embeds: [commands] });
-      
-    } else if (interaction.data.options[0].name === "tutorial") {
-      
-      let choice = interaction.data.options[0].options[0].value;
-      const tutorialList = tutorialCommandsList.find((items) => { if (items.value === choice) { return items; } });
-      
-      let tutorial = {
-        title: "Tutorial",
-        color: Number(config.colours.embed),
-        description: `**Name:** ${tutorialList.command}\n**Type:** ${tutorialList.type}\n**Usage:** ${tutorialList.tutorial}`,
-        timestamp: new Date()
-      }
-        await interaction.createMessage({ embeds: [tutorial] });
+        placeholder: "Frequently Asked Questions.",
+        min_values: 1,
+        max_values: 1
+      }]
     }
+
+    let helpButtons = {
+      type: 1,
+      components: [
+        {
+          type: 2,
+          label: "Support",
+          style: 5,
+          url: "https://discord.gg/Ea4jrSSrjM"
+        }
+      ]
+    }
+    await interaction.createMessage({ embeds: [commands], components: [helpMenu, helpButtons] });
+
+    client.on("interactionCreate", async (i) => {
+      if (i.data.component_type === 3 && i.data.custom_id === "helpMenu") {
+        if (i.member.id !== interaction.member.id)
+          return i.createMessage({
+            content: "These select menu aren't for you",
+            flags: 64
+          });
+        await i.deferUpdate();
+        switch (i.data.values[0]) {
+            case "commandsList":
+                await i.editOriginalMessage({ embeds: [commands] })
+                  break;
+            case "rulesList":
+                await i.editOriginalMessage({ embeds: [rules] })
+                  break;
+          default:
+            return
+        }
+      }
+    });
   }
 }

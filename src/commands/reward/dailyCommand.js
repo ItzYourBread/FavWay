@@ -18,7 +18,7 @@ export default {
         .duration(userData.cooldowns.daily - Date.now())
         .format("h[h] m[m], s[s]");
 
-    if (user && userData.cooldowns.daily > Date.now()) {
+    /* if (user && userData.cooldowns.daily > Date.now()) {
       return interaction.createMessage({
         embeds: [{
           title: "Already claimed!",
@@ -28,12 +28,14 @@ export default {
         }],
         flags: 64
       });
-    } 
+    } */
 
     let streakResetMessage = "";
     if (Date.now() - userData.cooldowns.daily > 172800000) { // 172800000 = 2 days
-      userData.streaks.daily -= userData.streaks.daily;
+      userData.streaks.daily = 1;
       streakResetMessage += "Seens you didnt claimed your daily to daily, i reset your streak to 1 back!";
+    } else {
+      userData.streaks.daily += 1;
     }
     
     function DateUTC() {
@@ -45,14 +47,17 @@ export default {
     let result = DateUTC();
 
     let amount = 350;
+    let prestigeBonus = 0;
     let streak = userData.streaks.daily + 1;
     const streakBonus = Math.round((0.7 * amount) * streak);
     if (streak > 1) {
-      amount = amount + streakBonus;
+      amount += amount + streakBonus;
+    }
+    if (userData.prestige > 1) {
+      prestigeBonus += Math.floor(Math.random() * 500) + 100;
     }
 
-    userData.coins += amount;
-    userData.streaks.daily += 1;
+    userData.coins += amount + prestigeBonus;
     userData.cooldowns.daily = Date.now() + result;
     userData.save();
     
@@ -62,13 +67,18 @@ export default {
       description: `+ ${amount.toLocaleString()} **${config.emojis.coin}Coin**\n+ 2 **${config.emojis.apple}Apple**`,
       fields: [
         {
+          name: "Prestige bonus",
+          value: `${prestigeBonus.toLocaleString()}`,
+          inline: true
+        },
+        {
           name: `Streak`,
           value: `${userData.streaks.daily.toLocaleString()}`,
           inline: false
         },
         {
-          name: `Prestige`,
-          value: `[${userData.prestige}]`,
+          name: `Next daily`,
+          value: `<t:${Math.floor(userData.cooldowns.daily / 1000) + 3600}:R>`,
           inline: false
         },
       ],

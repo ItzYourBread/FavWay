@@ -31,8 +31,7 @@ export function ready(client, message) {
             statusMessageID, 
             { embeds: [status] }
           );
-        console.log("refreshing");
-      }, 10000);
+      }, 120000);
     }
     
     loadAchievements(client);

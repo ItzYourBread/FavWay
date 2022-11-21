@@ -33,12 +33,11 @@ export default {
       });
     }
 
-    let items = ``;
+    let items = "";
     let rand = await random(1,1000)/10;
     let stoneAmount = 0;
     let ironOreAmount = 0;
     let mineCooldown = ms("3m")
-
     let stoneBoost = 0;
     let ironOreBoost = 0;
     if (userData.boost.cakeNormal > Date.now()) {
