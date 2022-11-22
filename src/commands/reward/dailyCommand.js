@@ -37,14 +37,8 @@ export default {
     } else {
       userData.streaks.daily += 1;
     }
-    
-    function DateUTC() {
-      const d = new Date, z = d.getTimezoneOffset();
-      d.setDate(d.getDate()+1); d.setHours(0); d.setSeconds(0); 
-      d.setMilliseconds(0); d.setMinutes(0+z);
-      return d.getTime()-Date.now();
-    }
-    let result = DateUTC();
+
+    var dailyReset = new Date();
 
     let amount = 350;
     let prestigeBonus = 0;
@@ -58,7 +52,9 @@ export default {
     }
 
     userData.coins += amount + prestigeBonus;
-    userData.cooldowns.daily = Date.now() + result;
+    userData.foods.apples += 2;
+    userData.items.dailyCrate += 1;
+    userData.cooldowns.daily = dailyReset.setUTCHours(23,59,59,999);;
     userData.save();
     
     let reward = {
