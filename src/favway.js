@@ -1,3 +1,21 @@
+console.clear();
+console.log("                                                                     ");
+console.log("                                                                     ");
+console.log("    ,---,.                               .---.                       ");
+console.log("  ,'  .' |                              /. ./|                       ");
+console.log(",---.'   |                          .--'.  ' ;                       ");
+console.log("|   |   .'               .---.     /__./ \\ : |                       ");
+console.log(":   :  :    ,--.--.    /.  ./| .--'.  '   \\' .  ,--.--.        .--,  ");
+console.log(":   |  |-, /       \\ .-' . ' |/___/ \\ |    ' ' /       \\     /_ ./|  ");
+console.log("|   :  ;/|.--.  .-. /___/ \\: |;   \\  \\;      :.--.  .-. | , ' , ' :  ");
+console.log("|   |   .' \\__\\/: . .   \\  ' . \\   ;  `      | \\__\\/: . ./___/ \\: |  ");
+console.log("'   :  '   ,\" .--.; |\\   \\   '  .   \\    .\\  ; ,\" .--.; | .  \\  ' |  ");
+console.log("|   |  |  /  /  ,.  | \\   \\      \\   \\   ' \\ |/  /  ,.  |  \\  ;   :  ");
+console.log("|   :  \\ ;  :   .'   \\ \\   \\ |    :   '  |--\";  :   .'   \\  \\  \\  ;  ");
+console.log("|   | ,' |  ,     .-./  '---\"      \\   \\ ;   |  ,     .-./   :  \\  \\ ");
+console.log("`----'    `--`---'                  '---\"     `--`---'        \\  ' ; ");
+console.log("                                                               `--`  ");
+
 import { Client, Bucket, Constants, CommandInteraction } from "eris";
 import config from "./config.json" assert { type: 'json' };
 import { readdirSync } from "fs";
