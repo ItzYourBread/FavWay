@@ -29,7 +29,7 @@ export default {
         },
         {
           name: "💰__Currency__",
-          value: "`balance`, `inventory`, `daily`, `use`",
+          value: "`balance`, `inventory`, `daily`, `use`, `open`, `quest`",
           inline: false
         },
         {
