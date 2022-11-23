@@ -24,6 +24,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { ready } from "./events/ready.js";
+import { shardReady } from "./events/shardReady.js";
 import { rawWS } from "./events/rawWS.js";
 import { error } from "./events/error.js";
 import { interactionCreate } from "./events/interactionCreate.js";
@@ -35,6 +36,9 @@ console.log(colour.blueBright("[System] Index loading..."));
 const client = new Client(process.env.TOKEN, {
   restMode: true,
   autoreconnect: true,
+  firstShardID: 0,
+  lastShardID: 0,
+  maxShards: 0,
   allowedMentions: {
     everyone: false,
     users: true,
@@ -53,6 +57,7 @@ export { client };
 
 // Events loader
 ready(client);
+shardReady(client);
 rawWS(client);
 error(client);
 interactionCreate(client);
