@@ -20,8 +20,6 @@ export default {
   },
   run: async (client, interaction) => {
 
-    await interaction.createMessage({ content: "Loading..." });
-
     const user_id = interaction.data.options && interaction.data.options[0] ? interaction.data.options[0].value : interaction.member.id;
     const user = await client.users.get(user_id);
     const userData = await User.findOne({ id: user_id }) || new User({ id: user_id });
@@ -153,7 +151,7 @@ export default {
       }]
     }
 
-    const message = await interaction.editOriginalMessage({ embeds: [resources], components: [menu] });
+    const message = await interaction.createMessage({ embeds: [resources], components: [menu] });
 
     client.on("interactionCreate", async (i) => {
       if (i.data.component_type === 3 && i.data.custom_id === "inventorySelectMenu") {
