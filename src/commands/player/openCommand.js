@@ -2,11 +2,14 @@ import { Constants } from "eris";
 import { User } from "../../database/profile.js";
 import config from "../../config.json" assert { type: "json" };
 import { setTimeout as wait } from "node:timers/promises";
-import crateList from "../../data/crateList.json" assert { type: "json" };
 import random from "random-number-csprng";
 
+// crates
+import DailyCrateJson from "../../data/crates/daily.json" assert { type: "json" };
+
+
 export function checkItem(items, search) {
-  if(items[0]){
+  if (items[0]) {
     return items[0][search];
   }
   return null;
@@ -27,8 +30,7 @@ export default {
             description: "What crate do you want to open?",
             type: Constants.ApplicationCommandOptionTypes.STRING,
             required: true,
-            focused: true,
-            choices: crateList
+            choices: DailyCrateJson
           },
         ]
       }
@@ -40,17 +42,17 @@ export default {
       const choice = interaction.data.options[0].options[0].value;
       const user = interaction.member;
       const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
-      
-      const crate = crateList.find((item)=> {if(item.value === choice){return item;}});
+
+      const crate = DailyCrateJson.find((item) => { if (item.value === choice) { return item; } });
       let name = checkItem([crate], "name");
       let value = checkItem([crate], "value");
 
-      if (userData.items[crate.value] < 1) {
+      /* if (userData.items[crate.value] < 1) {
         return interaction.createMessage({
           content: `You don't have ${name}, make sure you have that crate own before opening!`,
           flags: 64
         });
-      }
+      } */
 
       let opening = {
         title: `Opening ${name}`,
@@ -60,101 +62,34 @@ export default {
       }
       await interaction.createMessage({ embeds: [opening] });
 
-      let items = "";
-      let coins = 0;
-      let gems = 0;
-      let apples = 0;
-      let normalCakes = 0;
-      let pickaxes = 0;
-      let axes = 0;
-      let rand = await random(1,1000)/10;
+      let wing = "";
       if (choice === "dailyCrate") {
-        if (rand <= 20) {
-          // amount of items for database
-          coins = Math.floor(Math.random() * 530) + 1;
-          normalCakes = Math.floor(Math.random() * 3) + 1;
-          // items to show in embed
-          items += `+${coins} ${config.emojis.coin}**Coin**\n`;
-          items += `+${normalCakes} ${config.emojis.cakeNormal}**Cake**\n`;
-          // adding to user database
-          userData.coins += 530;
-          userData.foods.cakeNormal += normalCakes;
-          userData.items[crate.value] -= 1;
-          userData.save();
-        } else if (rand <= 40) {
-          // amount of items for database
-          coins = Math.floor(Math.random() * 700) + 1;
-          normalCakes = Math.floor(Math.random() * 5) + 1;
-          apples = Math.floor(Math.random() * 9) + 1;
-          // items to show in embed
-          items += `+${coins} ${config.emojis.coin}**Coin**\n`;
-          items += `+${normalCakes} ${config.emojis.cakeNormal}**Cake**\n`;
-          items += `+${apples} ${config.emojis.apple}**Apple**\n`;
-          // adding to user database
-          userData.coins += coins;
-          userData.foods.cakeNormal += normalCakes;
-          userData.foods.apple += apples;
-          userData.items[crate.value] -= 1;
-          userData.save();
-        } else if (rand <= 55) {
-          // amount of items for database
-          coins = Math.floor(Math.random() * 700) + 1;
-          normalCakes = Math.floor(Math.random() * 5) + 1;
-          apples = Math.floor(Math.random() * 9) + 1;
-          pickaxes = Math.floor(Math.random() * 5) + 1;
-          // items to show in embed
-          items += `+${coins} ${config.emojis.coin}**Coin**\n`;
-          items += `+${pickaxes} ${config.emojis.pickaxe}**Pickaxe**\n`;
-          items += `+${normalCakes} ${config.emojis.cakeNormal}**Cake**\n`;
-          items += `+${apples} ${config.emojis.apple}**Apple**\n`;
-          // adding to user database
-          userData.coins += coins;
-          userData.foods.cakeNormal += normalCakes;
-          userData.foods.apple += apples;
-          userData.items.pickaxes += pickaxes;
-          userData.items[crate.value] -= 1;
-          userData.save();
-        } else if (rand <= 68.8) {
-          // amount of items for database
-          coins = Math.floor(Math.random() * 700) + 1;
-          normalCakes = Math.floor(Math.random() * 5) + 1;
-          apples = Math.floor(Math.random() * 9) + 1;
-          pickaxes = Math.floor(Math.random() * 5) + 1;
-          axes = Math.floor(Math.random() * 5) + 1;
-          // items to show in embed
-          items += `+${coins} ${config.emojis.coin}**Coin**\n`;
-          items += `+${pickaxes} ${config.emojis.pickaxe}**Pickaxe**\n`;
-          items += `+${normalCakes} ${config.emojis.cakeNormal}**Cake**\n`;
-          items += `+${apples} ${config.emojis.apple}**Apple**\n`;
-          items += `+${axes} ${config.emojis.axe}**Axe**\n`;
-          // adding to user database
-          userData.coins += coins;
-          userData.foods.cakeNormal += normalCakes;
-          userData.foods.apple += apples;
-          userData.items.pickaxes += pickaxes;
-          userData.items.axes += axes;
-          userData.items[crate.value] -= 1;
-          userData.save();
-        } else {
-          // items to show in embed
-          items += `+250 ${config.emojis.coin}**Coin**\n`;
-          items += `+3 ${config.emojis.apple}**Apple**\n`;
-          // adding to user database
-          userData.coins += 250;
-          userData.foods.apples += 3;
-          userData.items[crate.value] -= 1;
-          userData.save();
+        for (let i = 0; i < DailyCrateJson[0]["wings"].length; i++) {
+          let e = DailyCrateJson[0]["wings"][i];
+          if (e["isEnable"]) {
+            let rand = await random(e["min"], e["max"]);
+            console.log(rand)
+            if (rand > 0) {
+              if (e.dbLine > 0) {
+                userData[e["dbLine"][0]][e["dbLine"][1]] += rand;
+              } else {
+                userData[e["dbLine"][0]][e["dbLine"][1]] += rand;
+              }
+              wing += `+${rand} ${config.emojis[e["emoji"]]}**${e["name"]}**\n`;
+            }
+          }
         }
+        userData.save()
       }
-
       let opened = {
         title: `Opened ${name}`,
         color: Number(config.colours.embed),
-        description: `${items}`,
+        description: `${wing}`,
         timestamp: new Date()
       }
       await wait(2000);
       await interaction.editOriginalMessage({ embeds: [opened] });
+      wing = "";
     }
   }
 }
