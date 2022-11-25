@@ -1,32 +1,18 @@
 [
   {
-    "name": "Daily Crate",
-    "value": "dailyCrate",
-    "wings": [
-      {
-        "percentage": 50,
-        "name": "Cake",
-        "emoji": "cakeNormal",
-        "dbLine": [
-          "foods",
-          "cakeNormal"
-        ],
-        "min": 2,
-        "max": 5,
-        "isEnable": true
-      },
-      {
-        "percentage": 100,
-        "name": "Apple",
-        "emoji": "apple",
-        "dbLine": [
-          "foods",
-          "apples"
-        ],
-        "min": 3,
-        "max": 10,
-        "isEnable": true
-      }
-    ]
+    "name": "Apple",
+    "emoji": "apple",
+    "value": "apples",
+    "dbLine": "foods",
+    "min": 2,
+    "max": 9
+  },
+  {
+    "name": "Cake",
+    "emoji": "cakeNormal",
+    "value": "cakeNormal",
+    "dbLine": "foods",
+    "min": 3,
+    "max": 7
   }
 ]

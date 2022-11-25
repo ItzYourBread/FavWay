@@ -3,8 +3,11 @@ import { User } from "../../database/profile.js";
 import config from "../../config.json" assert { type: "json" };
 import { setTimeout as wait } from "node:timers/promises";
 import random from "random-number-csprng";
+import getRandomItem from "../../structures/getRandomItem.js";
+import getRandomNumber from "../../structures/getRandomNumber.js";
 
 // crates
+import crateList from "../../data/crateList.json" assert { type: "json" };
 import DailyCrateJson from "../../data/crates/daily.json" assert { type: "json" };
 
 
@@ -30,7 +33,7 @@ export default {
             description: "What crate do you want to open?",
             type: Constants.ApplicationCommandOptionTypes.STRING,
             required: true,
-            choices: DailyCrateJson
+            choices: crateList
           },
         ]
       }
@@ -43,7 +46,7 @@ export default {
       const user = interaction.member;
       const userData = await User.findOne({ id: user.id }) || new User({ id: user.id });
 
-      const crate = DailyCrateJson.find((item) => { if (item.value === choice) { return item; } });
+      const crate = crateList.find((item) => { if (item.value === choice) { return item; } });
       let name = checkItem([crate], "name");
       let value = checkItem([crate], "value");
 
@@ -62,34 +65,23 @@ export default {
       }
       await interaction.createMessage({ embeds: [opening] });
 
-      let wing = "";
+      let item = "";
+      let coins = 0;
       if (choice === "dailyCrate") {
-        for (let i = 0; i < DailyCrateJson[0]["wings"].length; i++) {
-          let e = DailyCrateJson[0]["wings"][i];
-          if (e["isEnable"]) {
-            let rand = await random(e["min"], e["max"]);
-            console.log(rand)
-            if (rand > 0) {
-              if (e.dbLine > 0) {
-                userData[e["dbLine"][0]][e["dbLine"][1]] += rand;
-              } else {
-                userData[e["dbLine"][0]][e["dbLine"][1]] += rand;
-              }
-              wing += `+${rand} ${config.emojis[e["emoji"]]}**${e["name"]}**\n`;
-            }
-          }
-        }
-        userData.save()
+        let randomItem = getRandomItem(DailyCrateJson);
+        let randomAmount = getRandomNumber(randomItem.min, randomItem.max);
+        item += `+${randomAmount} **${config.emojis[randomItem.emoji]}${randomItem.name}**`
       }
+      
       let opened = {
         title: `Opened ${name}`,
         color: Number(config.colours.embed),
-        description: `${wing}`,
+        description: `${item}`,
         timestamp: new Date()
       }
       await wait(2000);
       await interaction.editOriginalMessage({ embeds: [opened] });
-      wing = "";
+      item = "";
     }
   }
 }
