@@ -2,7 +2,7 @@
   "name": "favway",
   "version": "1.0.0",
   "description": "It's a cute discord bot ever seen in my life",
-  "main": "src/favway.js",
+  "main": "./src/favway.js",
   "scripts": {
     "start": "node src/favway.js"
   },
@@ -20,7 +20,8 @@
     "mongoose": "^6.7.0",
     "node-fetch": "^3.2.6",
     "printly.js": "^1.5.0",
-    "random-number-csprng": "^1.0.2"
+    "random-number-csprng": "^1.0.2",
+    "stubby.ts": "^1.1.0"
   },
   "repository": {
     "type": "git",

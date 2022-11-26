@@ -3,8 +3,7 @@ import { User } from "../../database/profile.js";
 import config from "../../config.json" assert { type: "json" };
 import { setTimeout as wait } from "node:timers/promises";
 import random from "random-number-csprng";
-import getRandomItem from "../../structures/getRandomItem.js";
-import getRandomNumber from "../../structures/getRandomNumber.js";
+import { RandomArray, RandomNumber } from "stubby.ts";
 
 // crates
 import crateList from "../../data/crateList.json" assert { type: "json" };
@@ -68,8 +67,8 @@ export default {
       let item = "";
       let coins = 0;
       if (choice === "dailyCrate") {
-        let randomItem = getRandomItem(DailyCrateJson);
-        let randomAmount = getRandomNumber(randomItem.min, randomItem.max);
+        let randomItem = RandomArray(DailyCrateJson);
+        let randomAmount = RandomNumber(randomItem.min, randomItem.max);
         item += `+${randomAmount} **${config.emojis[randomItem.emoji]}${randomItem.name}**`
       }
       
