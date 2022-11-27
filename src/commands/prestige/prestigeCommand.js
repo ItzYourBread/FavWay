@@ -23,7 +23,7 @@ export default {
         name: "reward",
         description: "Explore prestige reward and know!",
         type: 1,
-      }
+      },
     ],
   },
   run: async (client, interaction) => {
