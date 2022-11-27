@@ -1,15 +1,15 @@
 import Eris from 'eris';
-import { colour } from "printly.js";
-import config from "../config.json" assert { type: "json" };
+import { colour } from 'printly.js';
+import config from '../config.json' assert { type: 'json' };
 
-import { loadAchievements } from "../handlers/achievements.js";
-import { loadQuest } from "../handlers/quest.js";
+import { loadAchievements } from '../handlers/achievements.js';
+import { loadQuest } from '../handlers/quest.js';
 
-let statusMessageID = "1037785678542557264";
+let statusMessageID = '1037785678542557264';
 
 export function ready(client, message) {
-  client.on("ready", async () => {
-    client.editStatus("online", { name: "FavWay", type: 0 });
+  client.on('ready', async () => {
+    client.editStatus('online', { name: 'FavWay', type: 0 });
     console.log(colour.greenBright(`[Discord API] ${client.user.username} is now connected to Discord!`));
 
     if (config.webhooks.status.mode) {
@@ -18,24 +18,21 @@ export function ready(client, message) {
           color: Number(config.colours.embed),
           fields: [
             {
-              name: "Status",
+              name: 'Status',
               value: `**FavWay** is now online!`,
-              inline: true
-            }
+              inline: true,
+            },
           ],
-          timestamp: new Date()
-        }
-          client.editWebhookMessage(
-            config.webhooks.status.id, 
-            config.webhooks.status.token, 
-            statusMessageID, 
-            { embeds: [status] }
-          );
+          timestamp: new Date(),
+        };
+        client.editWebhookMessage(config.webhooks.status.id, config.webhooks.status.token, statusMessageID, {
+          embeds: [status],
+        });
       }, 120000);
     }
-    
+
     loadAchievements(client);
     loadQuest(client);
   });
-  console.log(colour.cyanBright("[Event] ready.js is loaded"));
+  console.log(colour.cyanBright('[Event] ready.js is loaded'));
 }

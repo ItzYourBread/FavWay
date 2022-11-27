@@ -1,81 +1,93 @@
-import { User } from "../../database/profile.js";
-import { Constants } from "eris";
-import config from "../../config.json" assert { type: "json" };
-import resource from "../../data/inventory/resources.json" assert { type: "json" };
-import item from "../../data/inventory/items.json" assert { type: "json" };
-import food from "../../data/inventory/foods.json" assert { type: "json" };
-import crop from "../../data/inventory/crops.json" assert { type: "json" };
-import { setTimeout as wait } from "node:timers/promises";
+import { User } from '../../database/profile.js';
+import { Constants } from 'eris';
+import config from '../../config.json' assert { type: 'json' };
+import resource from '../../data/inventory/resources.json' assert { type: 'json' };
+import item from '../../data/inventory/items.json' assert { type: 'json' };
+import food from '../../data/inventory/foods.json' assert { type: 'json' };
+import crop from '../../data/inventory/crops.json' assert { type: 'json' };
+import { setTimeout as wait } from 'node:timers/promises';
 
 export default {
   data: {
-    name: "inventory",
-    description: "Your awesome inventory!",
-    options: [{
-      name: "user",
-      description: "Please enter a user.",
-      type: Constants.ApplicationCommandOptionTypes.USER,
-      required: false
-    }]
+    name: 'inventory',
+    description: 'Your awesome inventory!',
+    options: [
+      {
+        name: 'user',
+        description: 'Please enter a user.',
+        type: Constants.ApplicationCommandOptionTypes.USER,
+        required: false,
+      },
+    ],
   },
   run: async (client, interaction) => {
-
-    const user_id = interaction.data.options && interaction.data.options[0] ? interaction.data.options[0].value : interaction.member.id;
+    const user_id =
+      interaction.data.options && interaction.data.options[0]
+        ? interaction.data.options[0].value
+        : interaction.member.id;
     const user = await client.users.get(user_id);
-    const userData = await User.findOne({ id: user_id }) || new User({ id: user_id });
-    const userDataSpector = await User.findOne({ id: interaction.member.id }) || new User({ id: interaction.member.id });
-    
-    var Rescoures = "";
-    var Items = "";
-    var Foods = "";
-    var Crops = "";
+    const userData = (await User.findOne({ id: user_id })) || new User({ id: user_id });
+    const userDataSpector =
+      (await User.findOne({ id: interaction.member.id })) || new User({ id: interaction.member.id });
+
+    var Rescoures = '';
+    var Items = '';
+    var Foods = '';
+    var Crops = '';
 
     if (userDataSpector.settings.compactMode) {
-      resource.map(el => {
+      resource.map((el) => {
         if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
           Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n`;
         }
       });
-      item.map(el => {
+      item.map((el) => {
         if (user && userData.items[el.value] && userData.items[el.value] >= 1) {
           Items += `${config.emojis[el.emoji]}**${el.name}** : ${userData.items[el.value].toLocaleString()}\n`;
         }
       });
-      food.map(el => {
+      food.map((el) => {
         if (user && userData.foods[el.value] && userData.foods[el.value] >= 1) {
           Foods += `${config.emojis[el.emoji]}**${el.name}** : ${userData.foods[el.value].toLocaleString()}\n`;
         }
       });
-      crop.map(el => {
+      crop.map((el) => {
         if (user && userData.crops[el.value] && userData.crops[el.value] >= 1) {
           Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.crops[el.value].toLocaleString()}\n`;
         }
       });
     }
     if (!userDataSpector.settings.compactMode) {
-      resource.map(el => {
-       if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
-          Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${el.category}\n\n`;
+      resource.map((el) => {
+        if (user && userData.resources[el.value] && userData.resources[el.value] >= 1) {
+          Rescoures += `${config.emojis[el.emoji]}**${el.name}** : ${userData.resources[el.value].toLocaleString()}\n${
+            el.category
+          }\n\n`;
         }
       });
-      item.map(el => {
+      item.map((el) => {
         if (user && userData.items[el.value] && userData.items[el.value] >= 1) {
-          Items += `${config.emojis[el.emoji]}**${el.name}** : ${userData.items[el.value].toLocaleString()}\n${el.category}\n\n`;
+          Items += `${config.emojis[el.emoji]}**${el.name}** : ${userData.items[el.value].toLocaleString()}\n${
+            el.category
+          }\n\n`;
         }
       });
-      food.map(el => {
+      food.map((el) => {
         if (user && userData.foods[el.value] && userData.foods[el.value] >= 1) {
-          Foods += `${config.emojis[el.emoji]}**${el.name}** : ${userData.foods[el.value].toLocaleString()}\n${el.category}\n\n`;
+          Foods += `${config.emojis[el.emoji]}**${el.name}** : ${userData.foods[el.value].toLocaleString()}\n${
+            el.category
+          }\n\n`;
         }
       });
-      crop.map(el => {
+      crop.map((el) => {
         if (user && userData.crops[el.value] && userData.crops[el.value] >= 1) {
-          Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.crops[el.value].toLocaleString()}\n${el.category}\n\n`;
+          Crops += `${config.emojis[el.emoji]}**${el.name}** : ${userData.crops[el.value].toLocaleString()}\n${
+            el.category
+          }\n\n`;
         }
       });
     }
 
-    
     if (!Rescoures) {
       Rescoures = `You don't have any resources!`;
     }
@@ -83,8 +95,8 @@ export default {
       title: `${user.username}'s Inventory`,
       color: 0xcec6ff,
       description: `${Rescoures}`,
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    };
 
     if (!Items) {
       Items = `You don't have any items!`;
@@ -93,10 +105,9 @@ export default {
       title: `${user.username}'s Inventory`,
       color: 0xcec6ff,
       description: `${Items}`,
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    };
 
-    
     if (!Foods) {
       Foods = `You don't have any foods!`;
     }
@@ -104,10 +115,9 @@ export default {
       title: `${user.username}'s Inventory`,
       color: 0xcec6ff,
       description: `${Foods}`,
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    };
 
-   
     if (!Crops) {
       Crops = `You don't have any crops!`;
     }
@@ -115,66 +125,73 @@ export default {
       title: `${user.username}'s Inventory`,
       color: 0xcec6ff,
       description: `${Crops}`,
-      timestamp: new Date()
-    }
-
+      timestamp: new Date(),
+    };
 
     let menu = {
       type: 1,
-      components: [{
-        type: 3,
-        custom_id: "inventorySelectMenu",
-        options: [
-          {
-            label: "Resources",
-            description: "View your resources.",
-            value: "resources"
-          },
-          {
-            label: "Items",
-            description: "View your items.",
-            value: "items"
-          },
-          {
-            label: "Foods",
-            description: "View your foods.",
-            value: "foods"
-          },
-          {
-            label: "Crops",
-            description: "View your crops.",
-            value: "crops"
-          }
-        ],
-        min_values: 1,
-        max_values: 1
-      }]
-    }
+      components: [
+        {
+          type: 3,
+          custom_id: 'inventorySelectMenu',
+          options: [
+            {
+              label: 'Resources',
+              description: 'View your resources.',
+              value: 'resources',
+            },
+            {
+              label: 'Items',
+              description: 'View your items.',
+              value: 'items',
+            },
+            {
+              label: 'Foods',
+              description: 'View your foods.',
+              value: 'foods',
+            },
+            {
+              label: 'Crops',
+              description: 'View your crops.',
+              value: 'crops',
+            },
+          ],
+          min_values: 1,
+          max_values: 1,
+        },
+      ],
+    };
 
-    const message = await interaction.createMessage({ embeds: [resources], components: [menu] });
+    const message = await interaction.createMessage({
+      embeds: [resources],
+      components: [menu],
+    });
 
-    client.on("interactionCreate", async (i) => {
-      if (i.data.component_type === 3 && i.data.custom_id === "inventorySelectMenu") {
-      if (i.member.id !== interaction.member.id)
-        return i.createMessage({
-          content: "These select menu aren't for you",
-          flags: 64
-        });
+    client.on('interactionCreate', async (i) => {
+      if (i.data.component_type === 3 && i.data.custom_id === 'inventorySelectMenu') {
+        if (i.member.id !== interaction.member.id)
+          return i.createMessage({
+            content: "These select menu aren't for you",
+            flags: 64,
+          });
         await i.deferUpdate();
-        if (i.data.values[0] === "resources") {
+        if (i.data.values[0] === 'resources') {
           await wait(100);
           await i.editOriginalMessage({ embeds: [resources] });
-        } if (i.data.values[0] === "items") {
+        }
+        if (i.data.values[0] === 'items') {
           await wait(100);
           await i.editOriginalMessage({ embeds: [items] });
-        } if (i.data.values[0] === "foods") {
+        }
+        if (i.data.values[0] === 'foods') {
           await wait(100);
           await i.editOriginalMessage({ embeds: [foods] });
-        } if (i.data.values[0] === "crops") {
+        }
+        if (i.data.values[0] === 'crops') {
           await wait(100);
           await i.editOriginalMessage({ embeds: [crops] });
         }
       }
-    }); 
-  }
-}
+    });
+  },
+};
