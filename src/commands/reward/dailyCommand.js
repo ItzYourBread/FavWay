@@ -29,12 +29,12 @@ export default {
         }
 
         let streakReset = false;
-		let didntClaimed = "";
+        let didntClaimed = '';
         if (Date.now() - userData.cooldowns.daily > 172800000) {
             // 172800000 = 2 days
             userData.streaks.daily = 1;
             streakReset = true;
-			didntClaimed = userData.cooldowns.daily;
+            didntClaimed = userData.cooldowns.daily;
         } else {
             userData.streaks.daily += 1;
         }

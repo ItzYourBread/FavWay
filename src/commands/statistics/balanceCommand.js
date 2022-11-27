@@ -29,9 +29,9 @@ export default {
             color: Number(config.colours.embed),
             description: `**Coin:** ${
                 config.emojis.coin
-            }${userData.coins.toLocaleString()}\n**Gem:** ${
+            }\`${userData.coins.toLocaleString()}\` \n**Gem:** ${
                 config.emojis.gem
-            }${userData.gems.toLocaleString()}`,
+            }\`${userData.gems.toLocaleString()}\` \n**Networth:** comming soon. `,
             timestamp: new Date(),
         };
 
