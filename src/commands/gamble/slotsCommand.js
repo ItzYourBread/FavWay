@@ -19,7 +19,7 @@ export default {
             {
                 name: 'bet',
                 description: 'Please enter your bet.',
-                type: Constants.ApplicationCommandOptionTypes.INTEGER,
+                type: Constants.ApplicationCommandOptionTypes.NUMBER,
                 required: true,
             },
         ],

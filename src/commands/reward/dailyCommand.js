@@ -29,10 +29,12 @@ export default {
         }
 
         let streakReset = false;
+		let didntClaimed = "";
         if (Date.now() - userData.cooldowns.daily > 172800000) {
             // 172800000 = 2 days
             userData.streaks.daily = 1;
             streakReset = true;
+			didntClaimed = userData.cooldowns.daily;
         } else {
             userData.streaks.daily += 1;
         }
@@ -61,7 +63,9 @@ export default {
             color: 0xcec6ff,
             description: `+${amount.toLocaleString()} **${
                 config.emojis.coin
-            }Coin**\n+2 **${config.emojis.apple}Apple**`,
+            }Coin**\n+2 **${config.emojis.apple}Apple** \n+1 **${
+                config.emojis.dailyCrate
+            }Daily Crate**`,
             fields: [
                 {
                     name: 'Prestige bonus',
@@ -92,7 +96,7 @@ export default {
                     {
                         color: Number(config.colours.embed),
                         description: `Your daily streak has been reset, seem you didn't claimed daily reward from <t:${
-                            Math.floor(userData.cooldowns.daily / 1000) + 3600
+                            Math.floor(didntClaimed / 1000) + 3600
                         }:R>`,
                     },
                 ],
