@@ -1,20 +1,52 @@
 console.clear();
-console.log('                                                                     ');
-console.log('                                                                     ');
-console.log('    ,---,.                               .---.                       ');
-console.log("  ,'  .' |                              /. ./|                       ");
-console.log(",---.'   |                          .--'.  ' ;                       ");
-console.log("|   |   .'               .---.     /__./ \\ : |                       ");
-console.log(":   :  :    ,--.--.    /.  ./| .--'.  '   \\' .  ,--.--.        .--,  ");
-console.log(":   |  |-, /       \\ .-' . ' |/___/ \\ |    ' ' /       \\     /_ ./|  ");
-console.log("|   :  ;/|.--.  .-. /___/ \\: |;   \\  \\;      :.--.  .-. | , ' , ' :  ");
-console.log("|   |   .' \\__\\/: . .   \\  ' . \\   ;  `      | \\__\\/: . ./___/ \\: |  ");
-console.log("'   :  '   ,\" .--.; |\\   \\   '  .   \\    .\\  ; ,\" .--.; | .  \\  ' |  ");
-console.log("|   |  |  /  /  ,.  | \\   \\      \\   \\   ' \\ |/  /  ,.  |  \\  ;   :  ");
-console.log("|   :  \\ ;  :   .'   \\ \\   \\ |    :   '  |--\";  :   .'   \\  \\  \\  ;  ");
-console.log("|   | ,' |  ,     .-./  '---\"      \\   \\ ;   |  ,     .-./   :  \\  \\ ");
-console.log("`----'    `--`---'                  '---\"     `--`---'        \\  ' ; ");
-console.log('                                                               `--`  ');
+console.log(
+    '                                                                     '
+);
+console.log(
+    '                                                                     '
+);
+console.log(
+    '    ,---,.                               .---.                       '
+);
+console.log(
+    "  ,'  .' |                              /. ./|                       "
+);
+console.log(
+    ",---.'   |                          .--'.  ' ;                       "
+);
+console.log(
+    "|   |   .'               .---.     /__./ \\ : |                       "
+);
+console.log(
+    ":   :  :    ,--.--.    /.  ./| .--'.  '   \\' .  ,--.--.        .--,  "
+);
+console.log(
+    ":   |  |-, /       \\ .-' . ' |/___/ \\ |    ' ' /       \\     /_ ./|  "
+);
+console.log(
+    "|   :  ;/|.--.  .-. /___/ \\: |;   \\  \\;      :.--.  .-. | , ' , ' :  "
+);
+console.log(
+    "|   |   .' \\__\\/: . .   \\  ' . \\   ;  `      | \\__\\/: . ./___/ \\: |  "
+);
+console.log(
+    "'   :  '   ,\" .--.; |\\   \\   '  .   \\    .\\  ; ,\" .--.; | .  \\  ' |  "
+);
+console.log(
+    "|   |  |  /  /  ,.  | \\   \\      \\   \\   ' \\ |/  /  ,.  |  \\  ;   :  "
+);
+console.log(
+    "|   :  \\ ;  :   .'   \\ \\   \\ |    :   '  |--\";  :   .'   \\  \\  \\  ;  "
+);
+console.log(
+    "|   | ,' |  ,     .-./  '---\"      \\   \\ ;   |  ,     .-./   :  \\  \\ "
+);
+console.log(
+    "`----'    `--`---'                  '---\"     `--`---'        \\  ' ; "
+);
+console.log(
+    '                                                               `--`  '
+);
 
 import { Client, Bucket, Constants, CommandInteraction } from 'eris';
 import config from './config.json' assert { type: 'json' };
@@ -34,17 +66,24 @@ import { loadCommands } from './handlers/commands.js';
 console.log(colour.blueBright('[System] Index loading...'));
 
 const client = new Client(process.env.TOKEN, {
-  restMode: true,
-  autoreconnect: true,
-  firstShardID: 0,
-  lastShardID: 0,
-  maxShards: 0,
-  allowedMentions: {
-    everyone: false,
-    users: true,
-    roles: true,
-  },
-  intents: ['guilds', 'guildMessages', 'guildMembers', 'messageContent', 'directMessages', 'guildEmojis'],
+    restMode: true,
+    autoreconnect: true,
+    firstShardID: 0,
+    lastShardID: 0,
+    maxShards: 0,
+    allowedMentions: {
+        everyone: false,
+        users: true,
+        roles: true,
+    },
+    intents: [
+        'guilds',
+        'guildMessages',
+        'guildMembers',
+        'messageContent',
+        'directMessages',
+        'guildEmojis',
+    ],
 });
 export { client };
 
@@ -63,7 +102,12 @@ import './handlers/mongoose.js';
 import './server.js';
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.log('[FATAL] Possibly Unhandled Rejection at: Promise ', promise, ' reason: ', reason.message);
+    console.log(
+        '[FATAL] Possibly Unhandled Rejection at: Promise ',
+        promise,
+        ' reason: ',
+        reason.message
+    );
 });
 
 client.connect();
