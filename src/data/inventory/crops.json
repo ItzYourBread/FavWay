@@ -1,8 +1,8 @@
 [
-  {
-    "name": "Wheat",
-    "category": "Crop",
-    "emoji": "wheat",
-    "value": "wheats"
-  }
+    {
+        "name": "Wheat",
+        "category": "Crop",
+        "emoji": "wheat",
+        "value": "wheats"
+    }
 ]

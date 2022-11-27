@@ -1,38 +1,38 @@
 [
-  {
-    "name": "Basket",
-    "emoji": "basket",
-    "value": "baskets",
-    "category": "Carry"
-  },
-  {
-    "name": "Cutter",
-    "emoji": "cutter",
-    "value": "cutters",
-    "category": "Tool"
-  },
-  {
-    "name": "Bucket",
-    "emoji": "bucket",
-    "value": "buckets",
-    "category": "Container"
-  },
-  {
-    "name": "Axe",
-    "emoji": "axe",
-    "value": "axes",
-    "category": "Tool"
-  },
-  {
-    "name": "Pickaxe",
-    "emoji": "pickaxe",
-    "value": "pickaxes",
-    "category": "Tool"
-  },
-  {
-    "name": "Daily Crate",
-    "emoji": "dailyCrate",
-    "value": "dailyCrate",
-    "category": "Gift"
-  }
+    {
+        "name": "Basket",
+        "emoji": "basket",
+        "value": "baskets",
+        "category": "Carry"
+    },
+    {
+        "name": "Cutter",
+        "emoji": "cutter",
+        "value": "cutters",
+        "category": "Tool"
+    },
+    {
+        "name": "Bucket",
+        "emoji": "bucket",
+        "value": "buckets",
+        "category": "Container"
+    },
+    {
+        "name": "Axe",
+        "emoji": "axe",
+        "value": "axes",
+        "category": "Tool"
+    },
+    {
+        "name": "Pickaxe",
+        "emoji": "pickaxe",
+        "value": "pickaxes",
+        "category": "Tool"
+    },
+    {
+        "name": "Daily Crate",
+        "emoji": "dailyCrate",
+        "value": "dailyCrate",
+        "category": "Gift"
+    }
 ]

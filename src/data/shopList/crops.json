@@ -1,10 +1,10 @@
 [
-  {
-    "name": "Wheat",
-    "category": "Crop",
-    "price": "7",
-    "emoji": "wheat",
-    "value": "wheats",
-    "dbLine": "crops"
-  }
+    {
+        "name": "Wheat",
+        "category": "Crop",
+        "price": "7",
+        "emoji": "wheat",
+        "value": "wheats",
+        "dbLine": "crops"
+    }
 ]

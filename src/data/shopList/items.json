@@ -1,42 +1,42 @@
 [
-  {
-    "name": "Bucket",
-    "category": "Tool",
-    "emoji": "bucket",
-    "price": "45",
-    "value": "buckets",
-    "dbLine": "items"
-  },
-  {
-    "name": "Basket",
-    "category": "Container",
-    "emoji": "basket",
-    "price": "75",
-    "value": "baskets",
-    "dbLine": "items"
-  },
-  {
-    "name": "Cutter",
-    "category": "Tool",
-    "emoji": "cutter",
-    "price": "120",
-    "value": "cutters",
-    "dbLine": "items"
-  },
-  {
-    "name": "Axe",
-    "category": "Tool",
-    "emoji": "axe",
-    "price": "780",
-    "value": "axes",
-    "dbLine": "items"
-  },
-  {
-    "name": "Pickaxe",
-    "category": "Tool",
-    "emoji": "pickaxe",
-    "price": "1260",
-    "value": "pickaxes",
-    "dbLine": "items"
-  }
+    {
+        "name": "Bucket",
+        "category": "Tool",
+        "emoji": "bucket",
+        "price": "45",
+        "value": "buckets",
+        "dbLine": "items"
+    },
+    {
+        "name": "Basket",
+        "category": "Container",
+        "emoji": "basket",
+        "price": "75",
+        "value": "baskets",
+        "dbLine": "items"
+    },
+    {
+        "name": "Cutter",
+        "category": "Tool",
+        "emoji": "cutter",
+        "price": "120",
+        "value": "cutters",
+        "dbLine": "items"
+    },
+    {
+        "name": "Axe",
+        "category": "Tool",
+        "emoji": "axe",
+        "price": "780",
+        "value": "axes",
+        "dbLine": "items"
+    },
+    {
+        "name": "Pickaxe",
+        "category": "Tool",
+        "emoji": "pickaxe",
+        "price": "1260",
+        "value": "pickaxes",
+        "dbLine": "items"
+    }
 ]

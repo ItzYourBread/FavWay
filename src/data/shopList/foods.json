@@ -1,26 +1,26 @@
 [
-  {
-    "name": "Apple",
-    "emoji": "apple",
-    "category": "Organic Food",
-    "price": "56",
-    "value": "apples",
-    "dbLine": "foods"
-  },
-  {
-    "name": "Milk Bucket",
-    "emoji": "milkBucket",
-    "category": "Organic Food",
-    "price": "137",
-    "value": "milkBuckets",
-    "dbLine": "foods"
-  },
-  {
-    "name": "Cake",
-    "emoji": "cakeNormal",
-    "category": "Bakery Food",
-    "price": "970",
-    "value": "cakeNormal",
-    "dbLine": "foods"
-  }
+    {
+        "name": "Apple",
+        "emoji": "apple",
+        "category": "Organic Food",
+        "price": "56",
+        "value": "apples",
+        "dbLine": "foods"
+    },
+    {
+        "name": "Milk Bucket",
+        "emoji": "milkBucket",
+        "category": "Organic Food",
+        "price": "137",
+        "value": "milkBuckets",
+        "dbLine": "foods"
+    },
+    {
+        "name": "Cake",
+        "emoji": "cakeNormal",
+        "category": "Bakery Food",
+        "price": "970",
+        "value": "cakeNormal",
+        "dbLine": "foods"
+    }
 ]

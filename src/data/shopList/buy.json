@@ -1,114 +1,114 @@
 [
-  {
-    "name": "Wood",
-    "category": "Organic Material",
-    "emoji": "wood",
-    "price": "8",
-    "value": "woods",
-    "dbLine": "resources"
-  },
-  {
-    "name": "Stone",
-    "category": "Organic Material",
-    "emoji": "stone",
-    "price": "12",
-    "value": "stones",
-    "dbLine": "resources"
-  },
-  {
-    "name": "Wool",
-    "category": "Organic Material",
-    "emoji": "wool",
-    "price": "90",
-    "value": "wools",
-    "dbLine": "resources"
-  },
-  {
-    "name": "Iron Ore",
-    "category": "Mineral Material",
-    "emoji": "ironOre",
-    "price": "70",
-    "value": "ironOres",
-    "dbLine": "resources"
-  },
-  {
-    "name": "Iron",
-    "category": "Mineral Material",
-    "emoji": "iron",
-    "price": "120",
-    "value": "irons",
-    "dbLine": "resources"
-  },
-  {
-    "name": "Bucket",
-    "category": "Tool",
-    "emoji": "bucket",
-    "price": "45",
-    "value": "buckets",
-    "dbLine": "items"
-  },
-  {
-    "name": "Basket",
-    "category": "Container",
-    "emoji": "basket",
-    "price": "75",
-    "value": "baskets",
-    "dbLine": "items"
-  },
-  {
-    "name": "Cutter",
-    "category": "Tool",
-    "emoji": "cutter",
-    "price": "120",
-    "value": "cutters",
-    "dbLine": "items"
-  },
-  {
-    "name": "Axe",
-    "category": "Tool",
-    "emoji": "axe",
-    "price": "780",
-    "value": "axes",
-    "dbLine": "items"
-  },
-  {
-    "name": "Pickaxe",
-    "category": "Tool",
-    "emoji": "pickaxe",
-    "price": "1260",
-    "value": "pickaxes",
-    "dbLine": "items"
-  },
-  {
-    "name": "Apple",
-    "emoji": "apple",
-    "category": "Organic Food",
-    "price": "56",
-    "value": "apples",
-    "dbLine": "foods"
-  },
-  {
-    "name": "Milk Bucket",
-    "emoji": "milkBucket",
-    "category": "Organic Food",
-    "price": "137",
-    "value": "milkBuckets",
-    "dbLine": "foods"
-  },
-  {
-    "name": "Cake",
-    "emoji": "cakeNormal",
-    "category": "Cake",
-    "price": "970",
-    "value": "cakeNormal",
-    "dbLine": "foods"
-  },
-  {
-    "name": "Wheat",
-    "category": "Crop",
-    "price": "7",
-    "emoji": "wheat",
-    "value": "wheats",
-    "dbLine": "crops"
-  }
+    {
+        "name": "Wood",
+        "category": "Organic Material",
+        "emoji": "wood",
+        "price": "8",
+        "value": "woods",
+        "dbLine": "resources"
+    },
+    {
+        "name": "Stone",
+        "category": "Organic Material",
+        "emoji": "stone",
+        "price": "12",
+        "value": "stones",
+        "dbLine": "resources"
+    },
+    {
+        "name": "Wool",
+        "category": "Organic Material",
+        "emoji": "wool",
+        "price": "90",
+        "value": "wools",
+        "dbLine": "resources"
+    },
+    {
+        "name": "Iron Ore",
+        "category": "Mineral Material",
+        "emoji": "ironOre",
+        "price": "70",
+        "value": "ironOres",
+        "dbLine": "resources"
+    },
+    {
+        "name": "Iron",
+        "category": "Mineral Material",
+        "emoji": "iron",
+        "price": "120",
+        "value": "irons",
+        "dbLine": "resources"
+    },
+    {
+        "name": "Bucket",
+        "category": "Tool",
+        "emoji": "bucket",
+        "price": "45",
+        "value": "buckets",
+        "dbLine": "items"
+    },
+    {
+        "name": "Basket",
+        "category": "Container",
+        "emoji": "basket",
+        "price": "75",
+        "value": "baskets",
+        "dbLine": "items"
+    },
+    {
+        "name": "Cutter",
+        "category": "Tool",
+        "emoji": "cutter",
+        "price": "120",
+        "value": "cutters",
+        "dbLine": "items"
+    },
+    {
+        "name": "Axe",
+        "category": "Tool",
+        "emoji": "axe",
+        "price": "780",
+        "value": "axes",
+        "dbLine": "items"
+    },
+    {
+        "name": "Pickaxe",
+        "category": "Tool",
+        "emoji": "pickaxe",
+        "price": "1260",
+        "value": "pickaxes",
+        "dbLine": "items"
+    },
+    {
+        "name": "Apple",
+        "emoji": "apple",
+        "category": "Organic Food",
+        "price": "56",
+        "value": "apples",
+        "dbLine": "foods"
+    },
+    {
+        "name": "Milk Bucket",
+        "emoji": "milkBucket",
+        "category": "Organic Food",
+        "price": "137",
+        "value": "milkBuckets",
+        "dbLine": "foods"
+    },
+    {
+        "name": "Cake",
+        "emoji": "cakeNormal",
+        "category": "Cake",
+        "price": "970",
+        "value": "cakeNormal",
+        "dbLine": "foods"
+    },
+    {
+        "name": "Wheat",
+        "category": "Crop",
+        "price": "7",
+        "emoji": "wheat",
+        "value": "wheats",
+        "dbLine": "crops"
+    }
 ]

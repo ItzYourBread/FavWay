@@ -1,16 +1,16 @@
 [
-  {
-    "name": "help command",
-    "value": "helpCommands",
-    "command": "</help commands:0>",
-    "type": "Application SubCommand",
-    "tutorial": "Use `/help commands` to see a list of all commands."
-  },
-  {
-    "name": "help tutorial",
-    "value": "helpTutorial",
-    "command": "</help tutorial:0>",
-    "type": "Application SubCommand",
-    "tutorial": "Use `/help tutorial <command>` to see every command usage and tutorial it's make your FavWay journey more easy enjoy! :)"
-  }
+    {
+        "name": "help command",
+        "value": "helpCommands",
+        "command": "</help commands:0>",
+        "type": "Application SubCommand",
+        "tutorial": "Use `/help commands` to see a list of all commands."
+    },
+    {
+        "name": "help tutorial",
+        "value": "helpTutorial",
+        "command": "</help tutorial:0>",
+        "type": "Application SubCommand",
+        "tutorial": "Use `/help tutorial <command>` to see every command usage and tutorial it's make your FavWay journey more easy enjoy! :)"
+    }
 ]

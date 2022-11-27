@@ -1,32 +1,32 @@
 [
-  {
-    "name": "Wood",
-    "emoji": "wood",
-    "category": "Resource",
-    "value": "woods"
-  },
-  {
-    "name": "Stone",
-    "emoji": "stone",
-    "category": "Resource",
-    "value": "stones"
-  },
-  {
-    "name": "Wool",
-    "emoji": "wool",
-    "category": "Resource",
-    "value": "wools"
-  },
-  {
-    "name": "Iron",
-    "emoji": "iron",
-    "category": "Resource",
-    "value": "irons"
-  },
-  {
-    "name": "Iron Ore",
-    "emoji": "ironOre",
-    "category": "Resource",
-    "value": "ironOres"
-  }
+    {
+        "name": "Wood",
+        "emoji": "wood",
+        "category": "Resource",
+        "value": "woods"
+    },
+    {
+        "name": "Stone",
+        "emoji": "stone",
+        "category": "Resource",
+        "value": "stones"
+    },
+    {
+        "name": "Wool",
+        "emoji": "wool",
+        "category": "Resource",
+        "value": "wools"
+    },
+    {
+        "name": "Iron",
+        "emoji": "iron",
+        "category": "Resource",
+        "value": "irons"
+    },
+    {
+        "name": "Iron Ore",
+        "emoji": "ironOre",
+        "category": "Resource",
+        "value": "ironOres"
+    }
 ]

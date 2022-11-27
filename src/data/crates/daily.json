@@ -1,18 +1,18 @@
 [
-  {
-    "name": "Apple",
-    "emoji": "apple",
-    "value": "apples",
-    "dbLine": "foods",
-    "min": 2,
-    "max": 9
-  },
-  {
-    "name": "Cake",
-    "emoji": "cakeNormal",
-    "value": "cakeNormal",
-    "dbLine": "foods",
-    "min": 3,
-    "max": 7
-  }
+    {
+        "name": "Apple",
+        "emoji": "apple",
+        "value": "apples",
+        "dbLine": "foods",
+        "min": 2,
+        "max": 9
+    },
+    {
+        "name": "Cake",
+        "emoji": "cakeNormal",
+        "value": "cakeNormal",
+        "dbLine": "foods",
+        "min": 3,
+        "max": 7
+    }
 ]
