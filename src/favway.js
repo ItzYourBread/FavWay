@@ -48,7 +48,8 @@ console.log(
     '                                                               `--`  '
 );
 
-import { Client, Bucket, Constants, CommandInteraction } from 'eris';
+
+import { Client } from 'eris';
 import config from './config.json' assert { type: 'json' };
 import { readdirSync } from 'fs';
 import { colour } from 'printly.js';
@@ -63,8 +64,8 @@ import { interactionCreate } from './events/interactionCreate.js';
 
 import { loadCommands } from './handlers/commands.js';
 
-console.log(colour.blueBright('[System] Index loading...'));
 
+console.log(colour.blueBright('[System] Index loading...'));
 const client = new Client(process.env.TOKEN, {
     restMode: true,
     autoreconnect: true,
@@ -82,7 +83,7 @@ const client = new Client(process.env.TOKEN, {
         'guildMembers',
         'messageContent',
         'directMessages',
-        'guildEmojis',
+        'guildEmojis'
     ],
 });
 export { client };

@@ -230,19 +230,27 @@ export default {
                 await i.deferUpdate();
                 if (i.data.values[0] === 'resources') {
                     await wait(100);
-                    await i.editOriginalMessage({ embeds: [resources] });
+                    await i.editOriginalMessage({
+                        embeds: [resources],
+                    });
                 }
                 if (i.data.values[0] === 'items') {
                     await wait(100);
-                    await i.editOriginalMessage({ embeds: [items] });
+                    await i.editOriginalMessage({
+                        embeds: [items],
+                    });
                 }
                 if (i.data.values[0] === 'foods') {
                     await wait(100);
-                    await i.editOriginalMessage({ embeds: [foods] });
+                    await i.editOriginalMessage({
+                        embeds: [foods],
+                    });
                 }
                 if (i.data.values[0] === 'crops') {
                     await wait(100);
-                    await i.editOriginalMessage({ embeds: [crops] });
+                    await i.editOriginalMessage({
+                        embeds: [crops],
+                    });
                 }
             }
         });

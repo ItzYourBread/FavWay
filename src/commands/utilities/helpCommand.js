@@ -112,10 +112,14 @@ export default {
                 await i.deferUpdate();
                 switch (i.data.values[0]) {
                     case 'commandsList':
-                        await i.editOriginalMessage({ embeds: [commands] });
+                        await i.editOriginalMessage({
+                            embeds: [commands],
+                        });
                         break;
                     case 'rulesList':
-                        await i.editOriginalMessage({ embeds: [rules] });
+                        await i.editOriginalMessage({
+                            embeds: [rules],
+                        });
                         break;
                     default:
                         return;

@@ -54,11 +54,11 @@ export default {
             let value = checkItem([crate], 'value');
 
             /* if (userData.items[crate.value] < 1) {
-        return interaction.createMessage({
-          content: `You don't have ${name}, make sure you have that crate own before opening!`,
-          flags: 64
-        });
-      } */
+                return interaction.createMessage({
+                    content: `You don't have ${name}, make sure you have that crate own before opening!`,
+                    flags: 64,
+                });
+            } */
 
             let opening = {
                 title: `Opening ${name}`,
@@ -85,7 +85,9 @@ export default {
                 timestamp: new Date(),
             };
             await wait(2000);
-            await interaction.editOriginalMessage({ embeds: [opened] });
+            await interaction.editOriginalMessage({
+                embeds: [opened],
+            });
             item = '';
         }
     },

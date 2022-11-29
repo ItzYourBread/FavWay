@@ -15,7 +15,9 @@ export function interactionCreate(client, interaction) {
             for (let slashCommand of commands) {
                 if (slashCommand.name === interaction.data.name) {
                     const user = interaction.member;
-                    const userData = await User.findOne({ id: user.id });
+                    const userData = await User.findOne({
+                        id: user.id,
+                    });
                     const dmChannel = await client.getDMChannel(
                         interaction.member.id
                     );
@@ -23,7 +25,9 @@ export function interactionCreate(client, interaction) {
                         await client.createMessage(dmChannel.id, {
                             content: `**Welcome to FavWay, ${user.username}!**\n**FavWay** is a another Discord to have fun with it, it's have roleplay system where users can play mini version of roleplay games.\n\n**FavWay Community**\nhttps://discord.gg/Ea4jrSSrjM`,
                         });
-                        await User.create({ id: user.id });
+                        await User.create({
+                            id: user.id,
+                        });
                         console.info(
                             `user: ${user.username} account has been created!`
                         );

@@ -98,12 +98,16 @@ export default {
                 if (i.data.values[0] === 'compactMode') {
                     value = 'compactMode';
                     name = 'Compact Mode';
-                    await i.editOriginalMessage({ embeds: [compactMode] });
+                    await i.editOriginalMessage({
+                        embeds: [compactMode],
+                    });
                 }
                 if (i.data.values[0] === 'dmMode') {
                     value = 'dmMode';
                     name = 'Dm Notification';
-                    await i.editOriginalMessage({ embeds: [dmMode] });
+                    await i.editOriginalMessage({
+                        embeds: [dmMode],
+                    });
                 }
             }
             if (
