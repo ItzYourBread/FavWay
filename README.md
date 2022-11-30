@@ -3,9 +3,9 @@ we stop developing this bot because no one gonna use this not expect legends and
 
 
 note:
-1. You can view code.
-2. You can get idea.
-3. You can take some codes.
+1. You can view the code.
+2. You can get some issues fixed from this repository.
+3. You can take some codes for your projects.
 # Developers
 1. NotRealArif.
 2. Vanko.
