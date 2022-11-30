@@ -7,17 +7,17 @@
 
     "webhooks": {
         "status": {
-            "id": "1037784550010519582",
-            "token": "54hnwYYlaefiurAKwn08e2g5IhmVH6XionIa50SadN8EQvz3d3V3009X3amqZPKHGwOs",
+            "id": "id...",
+            "token": "Token...",
             "mode": false
         }
     },
 
     "bot": {
-        "name": "FavWay",
-        "inviteLink": "https://discord.com/api/oauth2/authorize?client_id=943855772415193118&permissions=8&scope=bot%20applications.commands",
-        "clientID": "943855772415193118",
-        "clientSecret": "3z2FFc0KJbhbtowSBFgYHRPW_ck113Nc"
+        "name": "your choose of name",
+        "inviteLink": "do",
+        "clientID": "do",
+        "clientSecret": "do"
     },
 
     "colours": {
@@ -52,7 +52,7 @@
     },
 
     "database": {
-        "mongoDB": "mongodb+srv://Sweet:djarif100@sweet-mongo.qvysg.mongodb.net/?retryWrites=true&w=majority"
+        "mongoDB": "link..."
     },
 
     "links": {
